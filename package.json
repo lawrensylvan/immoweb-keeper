@@ -1,19 +1,32 @@
 {
-  "name": "immoweb-keep",
-  "version": "1.0.0",
-  "description": "",
+  "name": "immoweb-keeper",
+  "version": "0.1.0",
+  "description": "Create your own long term database of Immoweb photos and metadata based on criterias",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./index.js",
+    "test": "node ./index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lawrensylvan/immoweb-keeper.git"
+  },
+  "keywords": [
+    "immoweb",
+    "scraper",
+    "webscraper",
+    "estate"
+  ],
+  "author": "Laurent Sylvain Vleminckx",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://github.com/lawrensylvan/immoweb-keeper#readme",
   "dependencies": {
     "jsdom": "^16.2.2",
+    "lodash": "^4.17.15",
     "moment": "^2.26.0"
   },
   "devDependencies": {
+    "eslint": "^7.1.0",
     "mongodb": "^3.5.8"
   }
 }

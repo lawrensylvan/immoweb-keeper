@@ -1,87 +1,185 @@
-const https = require('https')
-const { JSDOM } = require('jsdom')
-const moment = require('moment')
+const _  = require('lodash')
 const fs = require('fs')
 const Path = require('path')
+const https = require('https')
+const moment = require('moment')
+const { JSDOM } = require('jsdom')
 const MongoClient = require('mongodb').MongoClient
 
 const CONFIG_FILE = './config.json'
-const LAST_RUN_DATE_FILE = './lastRunDate.txt'
 
-routine()
+mainRoutine()
 
 /**
- * Main routine : expects the config file to be present
+ * Main routine : expect the config file to be present
  */
-async function routine() {
-    const lastRun = await fetchLastRunDate()
-    const imageRepositoryPath = await fetchImageRepositoryPath()
-    const mongodbUrl = await fetchMongoDBUrl()
-    const db = await connectDB(mongodbUrl)
+async function mainRoutine() {
     
-    // read immoweb search queries from config.json
-    const searchQueries = (await fetchSearchQueries()).map(q => ({...q, orderBy: 'newest'}))
-    
-    for(let searchQuery of searchQueries) {
-        console.info('Processing next query...')
-        let page = 1
-        let noNewEstate = false
-        while(!noNewEstate) {
-            const searchQueryAtPage = {...searchQuery, orderBy: 'newest', page: page}
-            const url = buildURLFromSearchQuery(searchQueryAtPage)
-            const searchResultsData = await parseImmowebSearchResultsPage(url)
-            if(searchResultsData.length === 0) {
-                console.info('Reached end of all results for that query !')
-                break
-            }
-            const immowebCodes = searchResultsData.map(r => r.id)
-            console.info(`Downloading estates of page ${page} : ${immowebCodes}...`)
-            for(let immowebCode of immowebCodes) {
-                const estateData = await parseImmowebEstatePage(immowebCode)
-                // test if the estate last modif date is earlier than the last time this script has runned 
-                // since we are browsing results by lastModifDate desc, it would mean we reached the end of new/updated estates
-                const lastModif = moment(estateData.publication.lastModificationDate, 'YYYY-MM-DDThh:mm:ss.SSS')
-                if(lastRun && lastModif.isBefore(lastRun)) {
-                    console.info('Reached end of new/updated results for that query !')
-                    noNewEstate = true
-                    break
-                }
-                // the estate is either still unknown by the db or has been updated since then
-                // save the images to the repo (only the new ones, doesn't check for difference inside image file)
-                const imageURLs = estateData.media.pictures.map(p => p.largeUrl || p.mediumUrl || p.smallUrl)
-                for(let i in imageURLs) {
-                    const imageURL = imageURLs[i]
-                    const fileName = Path.basename(imageURL.replace(/\?[^\/]*$/, ''))
-                    const outputPath = `${imageRepositoryPath}/${immowebCode}/${fileName}`
-                    await downloadFile(imageURL, outputPath)
-                    estateData.media.pictures[i] = fileName
-                }
-                // save the estate JSON to as a new document in the db (we might have multiple docs with same immoweb code)
-                await saveEstateData(estateData, db)
-                process.stdout.write('.')
-            }
-            process.stdout.write('\n\r')
-            page++
-        }
+    // Read config file
+    let {imageRepository, mongoDBUrl, searchURLs, searchQueries} = await readConfig()
+    if((!searchURLs || searchURLs.length === 0) && (!searchQueries || searchQueries.length === 0)) {
+        console.error('No search URL or query specified !')
+        process.exit(1)
     }
-    console.log('End.')
+    if(!mongoDBUrl) {
+        console.error('No MongoDB url specified !')
+        process.exit(1)
+    }
+    if(!imageRepository) {
+        console.warn('No image repository specified : will use current directory')
+        imageRepository = './images'
+    }
+
+    // Initialize db connection and image repository
+
+    if(!fs.existsSync(imageRepository)) {
+        console.info(`Creating image repository`)
+        await fs.promises.mkdir(imageRepository, {recursive: true})
+    }
+
+    const db = await connectDB(mongoDBUrl)
+    
+    // Convert JSON queries to searchURLs and mixing everything
+    const queriesURLs = (searchURLs ? searchURLs : []).concat(searchQueries ? searchQueries.map(q=>buildURLFromQuery(q)) : [])
+    
+    //const queries = searchURLs.map(u => Url.parse(u,true).query).concat(searchQueries)
+    
+    let estatesUpdatedCount = 0
+    let imagesDownloaded = 0
+
+    for(let queryURL of queriesURLs) {
+        // Load first page of results to get page count and normalized url
+        //const queryURL = buildURLFromQuery({...query, orderBy: 'newest', page: 1})
+        const {normalizedQuery, normalizedQueryURL, totalResultCount} = await parseResultsPage(queryURL)
+
+        // Get last time at which this search's results were saved
+        //const normalizedQueryURL = buildURLFromQuery(normalizedQuery)
+        const dbQuery = await db.collection('queries').findOne({url: normalizedQueryURL})
+        const lastRun = dbQuery ? moment(dbQuery.lastRun) : null
+        const nextLastRun = new Date()
+
+        const pageCount = Math.ceil(totalResultCount / 30)
+        const pageNumbers = _.range(1, pageCount+1)//.reverse()
+        
+        console.info(`Will save ${totalResultCount} results (${pageCount} pages) for url : ${queryURL}`)
+        for(let page of pageNumbers) {
+            //const queryAtPage = {...normalizedQuery, orderBy: 'newest', page}
+            //const queryURL = buildURLFromQuery(queryAtPage)
+            const queryURL = `${normalizedQueryURL}&orderBy=newest&page=${page}`
+            const {results} = await parseResultsPage(queryURL)
+            if(results.length === 0) {
+                console.info(`It seems that page ${page} of results is not there anymore...`)
+                break // if reverse() is uncommented, should be continue
+            }
+            const immowebCodes = results.map(r => r.id)
+            console.info(`Processing these immoweb codes of page ${page} : ${immowebCodes}...`)
+            let noNewEstate = false
+            for(let immowebCode of immowebCodes) {
+                try {
+                    // estateData.publication.lastModificationDate = string "2020-05-30T16:35:25.607+0000"
+                    const estateData = await parseEstatePage(immowebCode)
+                    const fetchDate = new Date()
+                    // test if the estate last modif date is earlier than the last time this script has runned 
+                    // since we are browsing results by lastModifDate desc, it would mean we reached the end of new/updated estates
+                    const lastModif = parseImmowebDate(estateData.publication.lastModificationDate, 'YYYY-MM-DDThh:mm:ss.SSS')
+                    // lastModif = moment : 2020-05-30T16:56:08.770+0000 (with date : Sat May 30 2020 16:56:08 GMT+0200)
+                    if(lastRun && lastModif.isBefore(lastRun)) {
+                        console.debug('(reached end of new/updated results for that search)')
+                        noNewEstate = true
+                        break
+                    }
+                    // at this point, the estate is either still unknown by the db or has been updated since then
+                    
+                    // double check with modification date of what we have in db (in case of just-added estate)
+                    const dbEstate = await db.collection('estates').find({immowebCode}).limit(1).toArray()
+                    if(dbEstate.length > 0 && moment(dbEstate[0].lastModificationDate).isSame(lastModif) ) {
+                        console.debug('(the modification date is the same !)')
+                        continue
+                    }
+                    // save the images to the repo (only the new ones, doesn't check for difference inside image file)
+                    const imageURLs = estateData.media.pictures.map(p => p.largeUrl || p.mediumUrl || p.smallUrl)
+                    const imageNames = []
+                    for(let imageURL of imageURLs) {
+                        const fileName = Path.basename(imageURL.replace(/\?[^/]*$/, ''))
+                        const outputPath = `${imageRepository}/${immowebCode}/${fileName}`
+                        if(!fs.existsSync(outputPath)) {
+                            await downloadFile(imageURL, outputPath)
+                            imagesDownloaded++
+                        }
+                        imageNames.push(fileName)
+                    }
+                    /* Option 1 : wrap the raw data in an object along with computed normalized properties */
+                    // save the estate JSON as a new document in the db (we might have multiple docs with same immoweb code)
+                    const [long, lat] = [_.get(estateData, 'property.location.longitude'), _.get(estateData, 'property.location.latitude')]
+                    await db.collection('estates').insertOne({
+                        immowebCode,
+                        fetchDate,
+                        lastModificationDate: lastModif.toDate(),
+                        creationDate: parseImmowebDate(_.get(estateData, 'publication.creationDate')).toDate(),
+                        expirationDate: parseImmowebDate(_.get(estateData, 'publication.expirationDate')).toDate(),
+                        ...(long && lat && {geolocation: [long, lat]}),
+                        images: imageNames,
+                        rawMetadata: estateData
+                    })
+                    estatesUpdatedCount++
+
+                    process.stdout.write('.')
+                } catch(error) {
+                    console.error(`Error while processing immoweb code ${immowebCode} !`)
+                }
+            }
+            if(noNewEstate) break
+            process.stdout.write('\n\r')
+        }
+        
+        // Save this query's last run date to db
+        if(dbQuery) {
+            await db.collection('queries').updateOne({url: dbQuery.url},
+                { $set: {
+                    'lastRun': new Date()
+                }
+            })
+        } else {
+            await db.collection('queries').insertOne({
+                url: normalizedQueryURL,
+                lastRun: nextLastRun,
+                criteria: normalizedQuery,
+            })
+        }
+        
+    }
+    console.log(`${estatesUpdatedCount} estates inserted or updated in the database and ${imagesDownloaded} images downloaded :-)`)
     process.exit(0)
 }
 
-function buildURLFromSearchQuery(searchQuery) {
+function buildURLFromQuery(searchQuery) {
     const criterias = Object.keys(searchQuery).map(c => c + '=' + searchQuery[c])
     return encodeURI(`https://www.immoweb.be/en/search/?${criterias.join('&')}`)
 }
 
-async function parseImmowebSearchResultsPage(searchPageURL) {
-    const html = await fetchHTMLFromURL(searchPageURL)
-    const dom = new JSDOM(html)
-    const json = dom.window.document.querySelector('iw-search').getAttribute(':results')
-    const results = JSON.parse(json)
-    return results
+function parseImmowebDate(string) {
+    return moment(string, 'YYYY-MM-DDThh:mm:ss.SSS')
 }
 
-async function parseImmowebEstatePage(immowebCode) {
+async function parseResultsPage(searchPageURL) {
+    for(let retries = 0; retries < 3; ++retries) {
+        try {
+            const html = await fetchHTMLFromURL(searchPageURL)
+            const dom = new JSDOM(html)
+            const iwsearch = dom.window.document.querySelector('iw-search')
+            return {
+                normalizedQuery:    JSON.parse(iwsearch.getAttribute(':criteria')),
+                normalizedQueryURL: dom.window.document.querySelector('meta[property="og:url"]').getAttribute('content'),
+                totalResultCount:   JSON.parse(iwsearch.getAttribute(':result-count')),
+                results:            JSON.parse(iwsearch.getAttribute(':results'))
+            }
+        } catch(err) {
+            console.error(`Error when fetching results page : ${err} -> retrying...`)
+        }
+    }
+}
+
+async function parseEstatePage(immowebCode) {
     const estateURL = `https://www.immoweb.be/en/classified/${immowebCode}`
     const html = await fetchHTMLFromURL(estateURL)
     const dom = new JSDOM(html)
@@ -91,41 +189,12 @@ async function parseImmowebEstatePage(immowebCode) {
 }
 
 /**
- *  Last run date access (./lastRunDate.txt)
- */
-
-async function fetchLastRunDate() {
-    if(!fs.existsSync(LAST_RUN_DATE_FILE)) return null
-    const date = await fs.promises.readFile(LAST_RUN_DATE_FILE)
-    return moment(date, 'YYYY-MM-DD HH:mm:ss')
-}
-
-async function updateLastRunDate() {
-    const date = moment().format('YYYY-MM-DDThh:mm:ss.SSSZ')
-    await fs.promises.writeFile(LAST_RUN_DATE_FILE, date)
-}
-
-/**
  *  Config file access (./config.json)
  */
 
-async function fetchMongoDBUrl() {
+async function readConfig() {
     const config = await fs.promises.readFile(CONFIG_FILE)
-    return JSON.parse(config).mongoDBUrl
-}
-
-async function fetchSearchQueries() {
-    const config = await fs.promises.readFile(CONFIG_FILE)
-    return JSON.parse(config).searchQueries
-}
-
-async function fetchImageRepositoryPath() {
-    const config = await fs.promises.readFile(CONFIG_FILE)
-    const path = JSON.parse(config).imagesRepository
-    if(!fs.existsSync(path)) {
-        await fs.promises.mkdir(path, {recursive: true})
-    }
-    return path
+    return JSON.parse(config)
 }
 
 /**
@@ -133,16 +202,13 @@ async function fetchImageRepositoryPath() {
  */
 
 async function connectDB(url) {
-    const client = await MongoClient.connect(`${url}/immoweb`, {useNewUrlParser:true}) // the db included in the url is created if not yet
+    const client = await MongoClient.connect(`${url}/immoweb`, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }) // the db included in the url is created if not yet
     const db = client.db()
     return db
 }
-
-async function saveEstateData(estateData, db) {
-    const collection = db.collection('estates')
-    return await collection.insertOne(estateData)
-}
-
 /**
  * GET file download and html download utilities 
  */
@@ -152,7 +218,6 @@ async function downloadFile(url, outputPath) {
     if(!fs.existsSync(dir)) {
         await fs.promises.mkdir(dir, {recursive: true})
     }
-    if(fs.existsSync(outputPath)) return
     const file = fs.createWriteStream(outputPath)
     return new Promise((resolve, reject) => {
         https.get(url, res => {
@@ -187,9 +252,13 @@ async function fetchHTMLFromURL(url) {
                 res.on('end', () => {
                     resolve(html)
                 })
-            } else if(res.statusCode === 302) {
+            } else if(res.statusCode === 302) { // redirection
                 const newurl = res.headers.location
                 fetchHTMLFromURL(newurl).then(value => resolve(value))
+            } else if(res.statusCode === 404) {
+                reject('Error 404')
+            } else {
+                reject(`Unexpected status code : ${res.statusCode}`)
             }
         }).on('error', e => {
             reject(e.message)
