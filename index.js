@@ -26,7 +26,7 @@ async function mainRoutine() {
         process.exit(1)
     }
     if(!imageRepository) {
-        console.warn('No image repository specified : will use current directory')
+        console.info('No image repository specified : will use current directory')
         imageRepository = './images'
     }
 
@@ -40,7 +40,8 @@ async function mainRoutine() {
     const db = await connectDB(mongoDBUrl)
     
     // Convert JSON queries to searchURLs and mixing everything
-    const queriesURLs = (searchURLs ? searchURLs : []).concat(searchQueries ? searchQueries.map(q=>buildURLFromQuery(q)) : [])
+    const queriesURLs = (searchURLs ? searchURLs : [])
+        .concat(searchQueries ? searchQueries.map(q=>buildURLFromQuery(q)) : [])
     
     //const queries = searchURLs.map(u => Url.parse(u,true).query).concat(searchQueries)
     
@@ -48,31 +49,36 @@ async function mainRoutine() {
     let imagesDownloaded = 0
 
     for(let queryURL of queriesURLs) {
+        console.info()
+        console.info(`****************************************************************`)
+        console.info(`Search query : ${queryURL}`)
+
         // Load first page of results to get page count and normalized url
         //const queryURL = buildURLFromQuery({...query, orderBy: 'newest', page: 1})
         const {normalizedQuery, normalizedQueryURL, totalResultCount} = await parseResultsPage(queryURL)
-
+        
         // Get last time at which this search's results were saved
         //const normalizedQueryURL = buildURLFromQuery(normalizedQuery)
         const dbQuery = await db.collection('queries').findOne({url: normalizedQueryURL})
         const lastRun = dbQuery ? moment(dbQuery.lastRun) : null
         const nextLastRun = new Date()
+        console.info(`Last run for this query was on ${lastRun}`)
 
         const pageCount = Math.ceil(totalResultCount / 30)
         const pageNumbers = _.range(1, pageCount+1)//.reverse()
         
-        console.info(`Will save ${totalResultCount} results (${pageCount} pages) for url : ${queryURL}`)
+        console.info(`Will process up to ${totalResultCount} results (${pageCount} pages)`)
         for(let page of pageNumbers) {
             //const queryAtPage = {...normalizedQuery, orderBy: 'newest', page}
             //const queryURL = buildURLFromQuery(queryAtPage)
             const queryURL = `${normalizedQueryURL}&orderBy=newest&page=${page}`
             const {results} = await parseResultsPage(queryURL)
             if(results.length === 0) {
-                console.info(`It seems that page ${page} of results is not there anymore...`)
+                console.warn(`Page ${page} is not there anymore : will stop here`)
                 break // if reverse() is uncommented, should be continue
             }
             const immowebCodes = results.map(r => r.id)
-            console.info(`Processing these immoweb codes of page ${page} : ${immowebCodes}...`)
+            console.info(`Page ${page} : will process these immoweb codes : ${immowebCodes}`)
             let noNewEstate = false
             for(let immowebCode of immowebCodes) {
                 try {
@@ -84,7 +90,7 @@ async function mainRoutine() {
                     const lastModif = parseImmowebDate(estateData.publication.lastModificationDate, 'YYYY-MM-DDThh:mm:ss.SSS')
                     // lastModif = moment : 2020-05-30T16:56:08.770+0000 (with date : Sat May 30 2020 16:56:08 GMT+0200)
                     if(lastRun && lastModif.isBefore(lastRun)) {
-                        console.debug('(reached end of new/updated results for that search)')
+                        console.info(' (reached end of results)')
                         noNewEstate = true
                         break
                     }
@@ -93,7 +99,7 @@ async function mainRoutine() {
                     // double check with modification date of what we have in db (in case of just-added estate)
                     const dbEstate = await db.collection('estates').find({immowebCode}).limit(1).toArray()
                     if(dbEstate.length > 0 && moment(dbEstate[0].lastModificationDate).isSame(lastModif) ) {
-                        console.debug('(the modification date is the same !)')
+                        console.debug(`Skipping estate ${immowebCode} (same modification date as in database)`)
                         continue
                     }
                     // save the images to the repo (only the new ones, doesn't check for difference inside image file)
@@ -174,7 +180,7 @@ async function parseResultsPage(searchPageURL) {
                 results:            JSON.parse(iwsearch.getAttribute(':results'))
             }
         } catch(err) {
-            console.error(`Error when fetching results page : ${err} -> retrying...`)
+            console.error(`Retrying after error when fetching results page : ${err}`)
         }
     }
 }
