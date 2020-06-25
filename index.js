@@ -44,10 +44,6 @@ async function mainRoutine() {
         .concat(searchQueries ? searchQueries.map(q=>buildURLFromQuery(q)) : [])
     
     //const queries = searchURLs.map(u => Url.parse(u,true).query).concat(searchQueries)
-    
-    let estatesUpdatedCount = 0
-    let imagesDownloaded = 0
-
     for(let queryURL of queriesURLs) {
         console.info()
         console.info(`****************************************************************`)
@@ -66,6 +62,10 @@ async function mainRoutine() {
 
         const pageCount = Math.ceil(totalResultCount / 30)
         const pageNumbers = _.range(1, pageCount+1)//.reverse()
+
+        let newEstateCount = 0
+        let updatedEstateCount = 0
+        let downloadedImageCount = 0
         
         console.info(`Will process up to ${totalResultCount} results (${pageCount} pages)`)
         for(let page of pageNumbers) {
@@ -110,7 +110,7 @@ async function mainRoutine() {
                         const outputPath = `${imageRepository}/${immowebCode}/${fileName}`
                         if(!fs.existsSync(outputPath)) {
                             await downloadFile(imageURL, outputPath)
-                            imagesDownloaded++
+                            downloadedImageCount++
                         }
                         imageNames.push(fileName)
                     }
@@ -127,7 +127,8 @@ async function mainRoutine() {
                         images: imageNames,
                         rawMetadata: estateData
                     })
-                    estatesUpdatedCount++
+                    if(dbEstate.length > 0) updatedEstateCount++
+                    else newEstateCount++
 
                     process.stdout.write('.')
                 } catch(error) {
@@ -152,9 +153,10 @@ async function mainRoutine() {
                 criteria: normalizedQuery,
             })
         }
+
+        console.info(`${newEstateCount} new estates saved, ${updatedEstateCount} estates updated ans ${downloadedImageCount} images downloaded`)
         
     }
-    console.log(`${estatesUpdatedCount} estates inserted or updated in the database and ${imagesDownloaded} images downloaded :-)`)
     process.exit(0)
 }
 
