@@ -58,7 +58,7 @@ async function mainRoutine() {
         const dbQuery = await db.collection('queries').findOne({url: normalizedQueryURL})
         const lastRun = dbQuery ? moment(dbQuery.lastRun) : null
         const nextLastRun = new Date()
-        console.info(`Last run for this query was on ${lastRun}`)
+        console.info(lastRun ? `Last run for this query was on ${lastRun}` : `This is the first run for this query`)
 
         const pageCount = Math.ceil(totalResultCount / 30)
         const pageNumbers = _.range(1, pageCount+1)//.reverse()
