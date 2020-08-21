@@ -154,7 +154,7 @@ async function mainRoutine() {
             })
         }
 
-        console.info(`${newEstateCount} new estates saved, ${updatedEstateCount} estates updated ans ${downloadedImageCount} images downloaded`)
+        console.info(`${newEstateCount} new estates saved, ${updatedEstateCount} estates updated and ${downloadedImageCount} images downloaded`)
         
     }
     process.exit(0)
