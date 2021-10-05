@@ -1,12 +1,15 @@
 const _  = require('lodash')
 const fs = require('fs')
 const Path = require('path')
-const https = require('https')
+const https = require('follow-redirects').https
 const moment = require('moment')
 const { JSDOM } = require('jsdom')
 const MongoClient = require('mongodb').MongoClient
+const needle = require('needle')
 
 const CONFIG_FILE = './config.json'
+
+needle.defaults({follow: 3 })
 
 mainRoutine()
 
@@ -37,7 +40,10 @@ async function mainRoutine() {
         await fs.promises.mkdir(imageRepository, {recursive: true})
     }
 
-    const db = await connectDB(mongoDBUrl)
+    const db = await connectDB(mongoDBUrl).catch(() => {
+        console.error('Unable to connect to your mongodb database. Please make sure that the mongo daemon is running.')
+        process.exit(1)
+    })
     
     // Convert JSON queries to searchURLs and mixing everything
     const queriesURLs = (searchURLs ? searchURLs : [])
@@ -159,7 +165,7 @@ async function mainRoutine() {
     }
     process.exit(0)
 }
-
+ 
 function buildURLFromQuery(searchQuery) {
     const criterias = Object.keys(searchQuery).map(c => c + '=' + searchQuery[c])
     return encodeURI(`https://www.immoweb.be/en/search/?${criterias.join('&')}`)
@@ -172,8 +178,8 @@ function parseImmowebDate(string) {
 async function parseResultsPage(searchPageURL) {
     for(let retries = 0; retries < 3; ++retries) {
         try {
-            const html = await fetchHTMLFromURL(searchPageURL)
-            const dom = new JSDOM(html)
+            const html = await needle('get', searchPageURL)
+            const dom = new JSDOM(html.body)
             const iwsearch = dom.window.document.querySelector('iw-search')
             return {
                 normalizedQuery:    JSON.parse(iwsearch.getAttribute(':criteria')),
@@ -189,8 +195,8 @@ async function parseResultsPage(searchPageURL) {
 
 async function parseEstatePage(immowebCode) {
     const estateURL = `https://www.immoweb.be/en/classified/${immowebCode}`
-    const html = await fetchHTMLFromURL(estateURL)
-    const dom = new JSDOM(html)
+    const html = await needle('get', estateURL)
+    const dom = new JSDOM(html.body)
     const scripts = [...dom.window.document.querySelectorAll('script')]
     const script = scripts.filter(s => s.textContent.includes('window.classified = {"'))[0]
     return JSON.parse(script.textContent.replace(/window\.classified = ({.*});/gm, '$1'))
@@ -240,41 +246,6 @@ async function downloadFile(url, outputPath) {
         })
     })
 }
-
-async function fetchHTMLFromURL(url) {
-    if(url.startsWith('https://')) url = url.substring(8)
-    const [host, ...path] = url.split('/')
-
-    return new Promise((resolve,reject) => {
-        https.get({
-            host: host,
-            port: 443,
-            path: '/' + path.join('/'),
-            method: 'GET'
-        }, res => {
-            if(res.statusCode === 200) {
-                let html = ''
-                res.on('data', data => {
-                    html += data
-                })
-                res.on('end', () => {
-                    resolve(html)
-                })
-            } else if(res.statusCode === 302) { // redirection
-                const newurl = res.headers.location
-                fetchHTMLFromURL(newurl).then(value => resolve(value))
-            } else if(res.statusCode === 404) {
-                reject('Error 404')
-            } else {
-                reject(`Unexpected status code : ${res.statusCode}`)
-            }
-        }).on('error', e => {
-            reject(e.message)
-        })
-    })
-
-}
-
 
 /**
  * TODO :

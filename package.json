@@ -21,9 +21,11 @@
   "license": "GPL-3.0-or-later",
   "homepage": "https://github.com/lawrensylvan/immoweb-keeper#readme",
   "dependencies": {
+    "follow-redirects": "^1.14.4",
     "jsdom": "^16.2.2",
     "lodash": "^4.17.15",
-    "moment": "^2.26.0"
+    "moment": "^2.26.0",
+    "needle": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^7.1.0",
