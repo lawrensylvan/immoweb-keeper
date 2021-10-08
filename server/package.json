@@ -4,8 +4,8 @@
   "description": "Create your own long term database of Immoweb photos and metadata based on criterias",
   "main": "index.js",
   "scripts": {
-    "routine": "node index.js 2>&1 | tee ./logs/$(date '+%Y.%m.%d-%H.%M.%S').log",
-    "start": "node ./index.js"
+    "routine": "mongod & node ./server/routine.js 2>&1 | tee ./logs/$(date '+%Y.%m.%d-%H.%M.%S').log",
+    "start": "node ./routine.js"
   },
   "repository": {
     "type": "git",
@@ -21,14 +21,20 @@
   "license": "GPL-3.0-or-later",
   "homepage": "https://github.com/lawrensylvan/immoweb-keeper#readme",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
     "follow-redirects": "^1.14.4",
+    "graphql": "^15.6.1",
     "jsdom": "^16.2.2",
     "lodash": "^4.17.19",
     "moment": "^2.26.0",
+    "mongoose": "^6.0.10",
     "needle": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^7.1.0",
-    "mongodb": "^3.5.8"
+    "mongodb": "^3.7.2"
   }
 }

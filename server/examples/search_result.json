@@ -1,0 +1,113 @@
+{
+    "id": 8603759,
+    "cluster": {
+        "minPrice": null,
+        "maxPrice": null,
+        "minRoom": null,
+        "maxRoom": null,
+        "minSurface": null,
+        "maxSurface": null,
+        "projectInfo": null,
+        "bedroomRange": "",
+        "surfaceRange": ""
+    },
+    "customerLogoUrl": "https://static.immoweb.be/logos/2974521.gif?cache=2018220803087",
+    "customerName": "Capitalis",
+    "flags": {
+        "main": null,
+        "secondary": [],
+        "percentSold": null
+    },
+    "media": {
+        "pictures": [
+            {
+                "smallUrl": null,
+                "mediumUrl": "https://static.immoweb.be/photos/0/8/6/0/3/7/5/9/M_8603759_1.jpg?cache=20200211050452",
+                "largeUrl": "https://static.immoweb.be/photos/0/8/6/0/3/7/5/9/8603759_1.jpg?cache=20200211050452",
+                "isVertical": false
+            },
+            {
+                "smallUrl": null,
+                "mediumUrl": "https://static.immoweb.be/photos/0/8/6/0/3/7/5/9/M_8603759_2.jpg?cache=20200211050452",
+                "largeUrl": "https://static.immoweb.be/photos/0/8/6/0/3/7/5/9/8603759_2.jpg?cache=20200211050452",
+                "isVertical": false
+            },
+            {
+                "smallUrl": null,
+                "mediumUrl": "https://static.immoweb.be/photos/0/8/6/0/3/7/5/9/M_8603759_3.jpg?cache=20200211050452",
+                "largeUrl": "https://static.immoweb.be/photos/0/8/6/0/3/7/5/9/8603759_3.jpg?cache=20200211050452",
+                "isVertical": false
+            }
+        ]
+    },
+    "property": {
+        "type": "HOUSE",
+        "subtype": "APARTMENT_BLOCK",
+        "title": "2 appartements reconnus en très bel état !",
+        "bedroomCount": 3,
+        "location": {
+            "country": "Belgique",
+            "region": "Bruxelles",
+            "province": "Bruxelles",
+            "district": "Bruxelles",
+            "locality": "Schaerbeek",
+            "postalCode": "1030",
+            "street": null,
+            "number": null,
+            "box": null,
+            "propertyName": null,
+            "floor": null,
+            "latitude": null,
+            "longitude": null,
+            "approximated": null,
+            "regionCode": "BRUSSELS",
+            "type": null,
+            "hasSeaView": null,
+            "pointsOfInterest": null,
+            "placeName": null
+        },
+        "netHabitableSurface": 210,
+        "landSurface": 63,
+        "roomCount": null
+    },
+    "publication": {
+        "publisherId": null,
+        "visualisationOption": "XL",
+        "size": "xl"
+    },
+    "transaction": {
+        "certificateLogoUrl": null,
+        "certificate": null,
+        "type": "FOR_SALE",
+        "rental": null,
+        "sale": {
+            "lifeAnnuity": null,
+            "hasStartingPrice": null,
+            "oldPrice": null,
+            "price": 320000,
+            "pricePerSqm": null,
+            "publicSale": null,
+            "toBuild": null,
+            "vatType": null
+        }
+    },
+    "priceType": null,
+    "price": {
+        "type": "residential_sale",
+        "mainValue": 320000,
+        "alternativeValue": null,
+        "additionalValue": null,
+        "oldValue": null,
+        "minRangeValue": null,
+        "maxRangeValue": null,
+        "mainDisplayPrice": "320 000 €",
+        "alternativeDisplayPrice": "",
+        "oldDisplayPrice": null,
+        "shortDisplayPrice": "320K €",
+        "accessibilityPrice": "320000€",
+        "label": "Prix",
+        "language": "fr"
+    },
+    "isBookmarked": false,
+    "has360Tour": null
+}

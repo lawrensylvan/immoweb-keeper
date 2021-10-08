@@ -4,8 +4,8 @@ const Path = require('path')
 const https = require('follow-redirects').https
 const moment = require('moment')
 const { JSDOM } = require('jsdom')
-const MongoClient = require('mongodb').MongoClient
 const needle = require('needle')
+const MongoClient = require('mongodb')
 
 const CONFIG_FILE = './config.json'
 
@@ -223,6 +223,7 @@ async function connectDB(url) {
     const db = client.db()
     return db
 }
+
 /**
  * GET file download and html download utilities 
  */
