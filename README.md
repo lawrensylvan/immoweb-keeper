@@ -19,7 +19,7 @@ You are then free to analyse the long-term market trends, such as the evolution 
 Go to the project directory using terminal & run
 
 ```sh
-npm install
+npm run routine
 ```
 
 ### Create a config.json file
@@ -94,7 +94,7 @@ Here is the root structure of a document in the *estates* collection of the *imm
     immowebCode,          // The Immoweb code of the real estate item
     fetchDate,            // The current date
     lastModificationDate, // The last modification date from the immoweb metadata (converted to standard date)
-    creationDate,         // The creaiont date from the immoweb metadata (converted to standard date)
+    creationDate,         // The creation date from the immoweb metadata (converted to standard date)
     expirationDate,       // The expiration date from the immoweb metadata (converted to standard date)
     geolocation,          // The location information if available from the immoweb metadata (converted to [longitude, latitude])
     images,               // The image file names (just have to add the image repo path + immoweb code folders to get the real file location) 

@@ -6,8 +6,8 @@ const moment = require('moment')
 const { JSDOM } = require('jsdom')
 const needle = require('needle')
 const MongoClient = require('mongodb')
-
-const CONFIG_FILE = './config.json'
+const result = require('dotenv').config({ path: 'config.env' })  
+const config = require('./config.json')
 
 needle.defaults({follow: 3 })
 
@@ -19,13 +19,9 @@ mainRoutine()
 async function mainRoutine() {
     
     // Read config file
-    let {imageRepository, mongoDBUrl, searchURLs, searchQueries} = await readConfig()
+    let {imageRepository, searchURLs, searchQueries} = config
     if((!searchURLs || searchURLs.length === 0) && (!searchQueries || searchQueries.length === 0)) {
         console.error('No search URL or query specified !')
-        process.exit(1)
-    }
-    if(!mongoDBUrl) {
-        console.error('No MongoDB url specified !')
         process.exit(1)
     }
     if(!imageRepository) {
@@ -40,7 +36,10 @@ async function mainRoutine() {
         await fs.promises.mkdir(imageRepository, {recursive: true})
     }
 
-    const db = await connectDB(mongoDBUrl).catch(() => {
+    const mongoDbURL = process.env.MONGODB_URL
+    const mongoDbDatabase = process.env.MONGODB_DATABASE
+    console.dir(mongoDbURL)
+    const db = await connectDB(mongoDbURL, mongoDbDatabase).catch(() => {
         console.error('Unable to connect to your mongodb database. Please make sure that the mongo daemon is running.')
         process.exit(1)
     })
@@ -215,8 +214,8 @@ async function readConfig() {
  *  MongoDB access (estates)
  */
 
-async function connectDB(url) {
-    const client = await MongoClient.connect(`${url}/immoweb`, {
+async function connectDB(uri, database) {
+    const client = await MongoClient.connect(`${uri}/${database}`, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }) // the db included in the url is created if not yet

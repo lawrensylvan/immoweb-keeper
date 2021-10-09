@@ -1,3 +1,5 @@
+.DS_STORE
+
 # params.json (includes not encrypted credentials)
 config.json
 
