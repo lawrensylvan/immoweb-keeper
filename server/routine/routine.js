@@ -6,8 +6,8 @@ const moment = require('moment')
 const { JSDOM } = require('jsdom')
 const needle = require('needle')
 const MongoClient = require('mongodb')
-const result = require('dotenv').config({ path: 'config.env' })  
 const config = require('./config.json')
+require('dotenv').config({ path: 'config.env' })  
 
 needle.defaults({follow: 3 })
 

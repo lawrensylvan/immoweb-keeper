@@ -2,10 +2,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "routine": "node routine/routine.js | tee ./logs/$(date '+%Y.%m.%d-%H.%M.%S').log" 
+    "dev": "nodemon --ignore routine index.js",
+    "routine": "node routine/routine.js | tee ./logs/$(date '+%Y.%m.%d-%H.%M.%S').log"
   },
   "dependencies": {
-    "antd": "^4.16.13",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",

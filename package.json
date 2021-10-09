@@ -17,7 +17,7 @@
   "homepage": "https://github.com/lawrensylvan/immoweb-keeper#readme",
   "scripts": {
     "routine": "cd server && npm run routine",
-    "server": "cd server && npm start",
+    "server": "cd server && npm run dev",
     "client": "cd client && npm start"
   }
 }
