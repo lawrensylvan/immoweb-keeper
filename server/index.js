@@ -21,6 +21,11 @@ const {schema} = require('./schema')
 const expressGraphQl = require('express-graphql')
 app.use('/graphql',	expressGraphQl.graphqlHTTP({schema,  graphiql: true}))
 
+// Serve static photos
+const path = require('path')
+const dir = path.join(__dirname, 'routine/images') // TODO : remove absolute path
+app.use(express.static(dir))
+
 // Run server
 const port = process.env.PORT || 5000
 app.listen(port, () => {

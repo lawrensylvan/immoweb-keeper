@@ -1,34 +1,39 @@
-import _ from 'lodash'
-import { Table } from 'antd'
+import { Tabs, Empty, Spin, Result } from 'antd'
+import GridResults from './GridResults'
+import MapResults from './MapResults'
+import TableResults from './TableResults'
+
+const estateDecorator = estate => ({
+    ...estate,
+    displayPrice: estate.price.toLocaleString('fr-BE') + ' €',
+    displayZipCode: estate.locality + ' (' + estate.zipCode + ')'
+})
 
 export default function ResultViewer({results}) {
     
     const {loading, error, data} = results
 
+    const estates = data?.estates.map(estateDecorator)
+
+    if(error) return <Result status={error.networkError.statusCode === 500 ? '500' : 'error'} />
+
+    if(!estates && !loading) return <Empty description="Start playing with the filters !" />
+
+    if(!estates && loading) return <Spin/>
+
     return (
         <div className='ResultViewer'>
-
-            {loading && <p>Loading...</p>}
-
-            {error && <p>Error !</p>}
-
-            <Table dataSource={data?.estates} rowKey="id" loading={loading} sortDirections={['ascend', 'descend']} columns={[
-                {
-                    title: 'Immoweb Code', dataIndex: 'immowebCode', key: 'immowebCode'
-                },
-                {
-                    title: 'Zip code', dataIndex: 'zipCode', key: 'zipCode',
-                    filters: _.uniq(data?.estates.map(e => e.zipCode))
-                              .map(z => ({text: `${data?.estates.filter(e => e.zipCode === z)[0].locality} (${z})`, value: z})),
-                    onFilter: (value, record) => record.zipCode === value
-                },
-                {
-                    title: 'Price', dataIndex: 'price', key: 'price',
-                    sorter: (a, b) => a.price - b.price,
-                    defaultSortOrder: 'ascend'
-                },
-            ]} />
-
+            <Tabs defaultActiveKey="1">
+                <Tabs.TabPane tab="Grid results" key="1">
+                    <GridResults estates={estates} />
+                </Tabs.TabPane>
+                <Tabs.TabPane tab="Map results" key="2">
+                    <MapResults estates={estates} />
+                </Tabs.TabPane>
+                <Tabs.TabPane tab="Table result" key="3">
+                    <TableResults estates={estates} />
+                </Tabs.TabPane>
+            </Tabs>
         </div>
     )
 }

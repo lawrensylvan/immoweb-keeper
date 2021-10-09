@@ -1,5 +1,5 @@
 import { useLazyQuery, gql } from '@apollo/client'
-import { Button } from 'antd'
+import { Button, Layout } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import 'antd/dist/antd.css'
 import ResultViewer from './ResultViewer'
@@ -15,16 +15,22 @@ export default function Search() {
                 price
                 zipCode
                 locality
+                images
             }
         }
     `)
 
     return (
-        <div className="Search">
+        <div className="SearchPage">
 
-            <Button onClick={() => fetchEstates()}>Search<SearchOutlined /></Button>
-
-            <ResultViewer results={{loading, error, data}} />
+            <Layout>
+                <Layout.Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+                    <Button onClick={() => fetchEstates()}>Search<SearchOutlined /></Button>
+                </Layout.Header>
+                <Layout.Content style={{marginTop: '80px'}}>
+                    <ResultViewer results={{loading, error, data}} />
+                </Layout.Content>
+            </Layout>
             
         </div>
     )

@@ -6,22 +6,24 @@ const { EstateModel } = require('./model')
 const EstateType = new GraphQLObjectType({
     name: 'Estate',
     fields: {
-        id: 			{type: GraphQLID },
-        immowebCode: 	{type: GraphQLString },
-		price: 			{type: GraphQLInt},
-		zipCode:		{type: GraphQLInt},
-		locality:		{type: GraphQLString}
+        id: 				{type: GraphQLID },
+        immowebCode: 		{type: GraphQLString },
+		price: 				{type: GraphQLInt},
+		shortDisplayPrice:	{type: GraphQLString},
+		zipCode:			{type: GraphQLInt},
+		locality:			{type: GraphQLString},
+		images:				{type: GraphQLList(GraphQLString)}
     }
 })
 
 const estateMongooseToGraphQLMapper = estates => {
-	console.dir(estates[0])
 	return estates.map(estate => ({
-		id: 			estate.id,
-		immowebCode: 	estate.immowebCode,
-		price: 			(!estate.rawMetadata || !estate.rawMetadata.price) ? 100 : estate.rawMetadata.price.mainValue,
-		zipCode:		estate.rawMetadata.property.location.postalCode,
-		locality:		estate.rawMetadata.property.location.locality
+		id: 				estate.id,
+		immowebCode: 		estate.immowebCode,
+		price: 				(!estate.rawMetadata || !estate.rawMetadata.price) ? 100 : estate.rawMetadata.price.mainValue,
+		zipCode:			estate.rawMetadata.property.location.postalCode,
+		locality:			estate.rawMetadata.property.location.locality,
+		images:				estate.images
 	}))
 }
 
