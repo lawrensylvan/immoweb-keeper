@@ -15,7 +15,13 @@ export default function ResultViewer({results}) {
 
     const estates = data?.estates.map(estateDecorator)
 
-    if(error) return <Result status={error.networkError.statusCode === 500 ? '500' : 'error'} />
+    if(error) {
+        console.dir(error)
+        if(error.networkError.statusCode === 400) {
+            return <Result title="Error 400 received from server !" subTitle={error.networkError.result.errors[0].message} status="error" />
+        }
+        return <Result subTitle={error.stackTrace} status={error.networkError.statusCode === 500 ? '500' : 'error'} />
+    }
 
     if(!estates && !loading) return <Empty description="Start playing with the filters !" />
 

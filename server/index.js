@@ -17,7 +17,7 @@ mongoose.connect(mongoDbURL + '/' + mongoDbDatabase)
         .catch(err => console.error('ⓧ Got error : ' + err))
 
 // Activate GraphQL endpoints
-const {schema} = require('./schema')
+const {schema} = require('./graphql')
 const expressGraphQl = require('express-graphql')
 app.use('/graphql',	expressGraphQl.graphqlHTTP({schema,  graphiql: true}))
 

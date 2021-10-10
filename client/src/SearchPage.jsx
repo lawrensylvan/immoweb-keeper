@@ -1,15 +1,15 @@
 import { useLazyQuery, gql } from '@apollo/client'
-import { Button, Layout } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
+import { Layout } from 'antd'
 import 'antd/dist/antd.css'
+import SearchFilters from './SearchFilters'
 import ResultViewer from './ResultViewer'
 
 export default function Search() {
 
-    // Load all estates
-    const [fetchEstates, { loading, error, data, refetch }] = useLazyQuery(gql`
-        query estates {
-            estates {
+    // Load estates with active filters
+    const [fetchEstates, { loading, error, data }] = useLazyQuery(gql`
+        query estates($priceRange: [Int]!) {
+            estates(priceRange: $priceRange) {
                 id
                 immowebCode
                 price
@@ -24,10 +24,10 @@ export default function Search() {
         <div className="SearchPage">
 
             <Layout>
-                <Layout.Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-                    <Button onClick={() => fetchEstates()}>Search<SearchOutlined /></Button>
+                <Layout.Header style={{ position: 'fixed', zIndex: 1, width: '100%', backgroundColor: 'floralwhite', minHeight: '90px' }}>
+                    <SearchFilters fetchEstates={fetchEstates} />
                 </Layout.Header>
-                <Layout.Content style={{marginTop: '80px'}}>
+                <Layout.Content style={{marginTop: '90px', paddingLeft: '20px'}}>
                     <ResultViewer results={{loading, error, data}} />
                 </Layout.Content>
             </Layout>
