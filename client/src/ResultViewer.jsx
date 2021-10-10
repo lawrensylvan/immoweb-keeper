@@ -1,4 +1,5 @@
 import { Tabs, Empty, Spin, Result } from 'antd'
+import moment from 'moment'
 import GridResults from './GridResults'
 import MapResults from './MapResults'
 import TableResults from './TableResults'
@@ -6,7 +7,8 @@ import TableResults from './TableResults'
 const estateDecorator = estate => ({
     ...estate,
     displayPrice: estate.price.toLocaleString('fr-BE') + ' €',
-    displayZipCode: estate.locality + ' (' + estate.zipCode + ')'
+    displayZipCode: estate.locality + ' (' + estate.zipCode + ')',
+    displayCreationDate: moment(estate.creationDate).format('DD MMM YYYY') + ' (' + moment(estate.creationDate).fromNow() + ')'
 })
 
 export default function ResultViewer({results}) {
@@ -16,11 +18,10 @@ export default function ResultViewer({results}) {
     const estates = data?.estates.map(estateDecorator)
 
     if(error) {
-        console.dir(error)
-        if(error.networkError.statusCode === 400) {
-            return <Result title="Error 400 received from server !" subTitle={error.networkError.result.errors[0].message} status="error" />
-        }
-        return <Result subTitle={error.stackTrace} status={error.networkError.statusCode === 500 ? '500' : 'error'} />
+        return <Result
+            title={error.message}
+            subTitle={error?.networkError?.result?.errors[0]?.message || ''}
+            status={[500, 404, 403].includes(error?.networkError?.statusCode) ? error.networkError.statusCode : 'error'} />
     }
 
     if(!estates && !loading) return <Empty description="Start playing with the filters !" />
@@ -36,7 +37,7 @@ export default function ResultViewer({results}) {
                 <Tabs.TabPane tab="Map results" key="2">
                     <MapResults estates={estates} />
                 </Tabs.TabPane>
-                <Tabs.TabPane tab="Table result" key="3">
+                <Tabs.TabPane tab="Table results" key="3">
                     <TableResults estates={estates} />
                 </Tabs.TabPane>
             </Tabs>

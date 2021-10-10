@@ -21,6 +21,11 @@ export default function TableResults({estates}) {
                     sorter: (a, b) => a.price - b.price,
                     defaultSortOrder: 'ascend'
                 },
+                {
+                    title: 'Online since', dataIndex: 'displayCreationDate', key: 'creationDate',
+                    sorter: (a, b) => a.creationDate - b.creationDate,
+                    defaultSortOrder: 'descend'
+                },
             ]} />
 
         </div>

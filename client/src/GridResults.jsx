@@ -47,7 +47,7 @@ export default function GridResults({estates}) {
                             <Card.Meta
                                 avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                                 title={estate.locality}
-                                description="Il y a 3 jours"
+                                description={estate.displayCreationDate}
                             />
                         </Card>
                     </List.Item>

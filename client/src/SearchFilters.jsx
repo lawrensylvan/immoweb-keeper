@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { Button, Slider, Space } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import _ from 'lodash'

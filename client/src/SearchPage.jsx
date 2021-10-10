@@ -16,6 +16,7 @@ export default function Search() {
                 zipCode
                 locality
                 images
+                creationDate
             }
         }
     `)
