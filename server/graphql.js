@@ -33,11 +33,12 @@ function estateMongooseToGraphQLMapper(estates) {
 /* What arguments are accepted from the client and how they are compared against the MongoDB data ? */
 
 const estateGraphQLArgsToMongooseMapping = {
-	id:				v => ({key: 'id'										, value: v								}),
-	immowebCode:	v => ({key: 'immowebCode'								, value: v								}),
-	priceRange: 	v => ({key: 'rawMetadata.price.mainValue'				, value: {$gte: v[0], $lte: v[1]}		}),
-	zipCodes: 		v => ({key:	'rawMetadata.property.location.postalCode'	, value: {$in: v}						}),
-	onlyWithGarden:	v => ({key:	'rawMetadata.property.hasGarden'			, value: v || null						})
+	id:				v => ({key: 'id'										, value: v							}),
+	immowebCode:	v => ({key: 'immowebCode'								, value: v							}),
+	priceRange: 	v => ({key: 'rawMetadata.price.mainValue'				, value: {$gte: v[0], $lte: v[1]}	}),
+	zipCodes: 		v => ({key:	'rawMetadata.property.location.postalCode'	, value: {$in: v}					}),
+	onlyWithGarden:	v => ({key:	'rawMetadata.property.hasGarden'			, value: v || null					}),
+	minGardenArea:	v => ({key:	'rawMetadata.property.gardenSurface'		, value: {$gte: v}					}),
 }
 
 function estateGraphQLToMongooseMapper(args) {
@@ -62,9 +63,10 @@ const schema = new GraphQLSchema({
 				type: GraphQLList(EstateType),
 				args: {
 					immowebCode: 	{type: GraphQLInt },
-					priceRange: 	{type:GraphQLList(GraphQLInt)},
-					zipCodes: 		{type:GraphQLList(GraphQLInt)},
-					onlyWithGarden: {type: GraphQLBoolean}
+					priceRange: 	{type: GraphQLList(GraphQLInt)},
+					zipCodes: 		{type: GraphQLList(GraphQLInt)},
+					onlyWithGarden: {type: GraphQLBoolean},
+					minGardenArea:	{type: GraphQLInt}
 				},
 				resolve: (root, args) => {
 					return EstateModel

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { List, Card, Avatar, Pagination, Image, Skeleton } from 'antd'
-import { EditOutlined, ExpandAltOutlined, HeartOutlined } from '@ant-design/icons'
+import { List, Card, Avatar, Pagination, Image, Skeleton, Popover } from 'antd'
+import { CopyOutlined, EditOutlined, ExpandAltOutlined, HeartOutlined } from '@ant-design/icons'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const ImageGallery = ({immowebCode, images}) => {
     const fullURLs = images.map(i => `http://localhost:5000/${immowebCode}/${i}`)
@@ -36,12 +37,18 @@ export default function GridResults({estates}) {
                 pagination={<Pagination defaultPageSize={12} pageSize={12} showSizeChanger={false} simple={true} />}
                 dataSource={estates} renderItem={estate => (
                     <List.Item>
-                        <Card title={estate.displayPrice} hoverable
+                        <Card title={estate.displayPrice}  hoverable
                             cover={<ImageGallery immowebCode={estate.immowebCode} images={estate.images} />}
                             actions={[
                                 <HeartOutlined key="heart" />,
                                 <ExpandAltOutlined key="expand" />,
                                 <EditOutlined key="edit" />,
+                                <Popover trigger="hover" content={estate.immowebCode}>
+                                    <CopyToClipboard text={estate.immowebCode}>
+                                        <CopyOutlined key="copy" />
+                                    </CopyToClipboard>
+                                </Popover>
+                                
                             ]}
                         >
                             <Card.Meta
