@@ -36,7 +36,7 @@ export default function GridResults({estates}) {
                 pagination={<Pagination defaultPageSize={12} pageSize={12} showSizeChanger={false} simple={true} />}
                 dataSource={estates} renderItem={estate => (
                     <List.Item>
-                        <Card title={estate.displayPrice}
+                        <Card title={estate.displayPrice} hoverable
                             cover={<ImageGallery immowebCode={estate.immowebCode} images={estate.images} />}
                             actions={[
                                 <HeartOutlined key="heart" />,

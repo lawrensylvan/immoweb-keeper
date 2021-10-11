@@ -26,7 +26,7 @@ export default function ResultViewer({results}) {
 
     if(!estates && !loading) return <Empty description="Start playing with the filters !" />
 
-    if(!estates && loading) return <Spin/>
+    if(!estates && loading) return <Spin />
 
     return (
         <div className='ResultViewer'>

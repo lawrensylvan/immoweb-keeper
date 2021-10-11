@@ -1,8 +1,8 @@
-const { GraphQLID, GraphQLString, GraphQLList, GraphQLSchema, GraphQLNonNull, GraphQLObjectType, GraphQLInt } = require('graphql')
+const { GraphQLID, GraphQLString, GraphQLList, GraphQLSchema, GraphQLNonNull, GraphQLObjectType, GraphQLInt, GraphQLBoolean } = require('graphql')
 const { GraphQLDateTime } = require('graphql-iso-date')
 const { EstateModel } = require('./mongoose')
 
-/* GraphQL types */
+/* What does the data returned to the client look like ?  */
 
 const estateFields = {
 	id: 			{type: GraphQLID },
@@ -16,6 +16,8 @@ const estateFields = {
 
 const EstateType = new GraphQLObjectType({name: 'Estate', fields: estateFields})
 
+/* How to fill each fields to be returned to the client from the MongoDB structure ? */
+
 function estateMongooseToGraphQLMapper(estates) {
 	return estates.map(estate => ({
 		id: 				estate.id,
@@ -28,11 +30,14 @@ function estateMongooseToGraphQLMapper(estates) {
 	}))
 }
 
+/* What arguments are accepted from the client and how they are compared against the MongoDB data ? */
+
 const estateGraphQLArgsToMongooseMapping = {
 	id:				v => ({key: 'id'										, value: v								}),
 	immowebCode:	v => ({key: 'immowebCode'								, value: v								}),
 	priceRange: 	v => ({key: 'rawMetadata.price.mainValue'				, value: {$gte: v[0], $lte: v[1]}		}),
-	zipCode: 		v => ({key:	'rawMetadata.property.location.postalCode'	, value: v								})
+	zipCodes: 		v => ({key:	'rawMetadata.property.location.postalCode'	, value: {$in: v}						}),
+	onlyWithGarden:	v => ({key:	'rawMetadata.property.hasGarden'			, value: v || null						})
 }
 
 function estateGraphQLToMongooseMapper(args) {
@@ -56,13 +61,14 @@ const schema = new GraphQLSchema({
 			estates: {
 				type: GraphQLList(EstateType),
 				args: {
-					immowebCode: { type: GraphQLInt },
-					priceRange: { type:GraphQLList(GraphQLInt) },
-					zipCode: {type: GraphQLInt}
+					immowebCode: 	{type: GraphQLInt },
+					priceRange: 	{type:GraphQLList(GraphQLInt)},
+					zipCodes: 		{type:GraphQLList(GraphQLInt)},
+					onlyWithGarden: {type: GraphQLBoolean}
 				},
-				resolve: (root, args, context, info) => {
+				resolve: (root, args) => {
 					return EstateModel
-						 	.find(estateGraphQLToMongooseMapper(args))
+							.find(estateGraphQLToMongooseMapper(args))
 							.transform(estateMongooseToGraphQLMapper).exec()
 				}
 			},
@@ -72,19 +78,19 @@ const schema = new GraphQLSchema({
 				args: {
 					id: { type: GraphQLNonNull(GraphQLID) }
 				},
-				resolve: (root, args, context, info) => {
+				resolve: (root, args) => {
 					return EstateModel
 							.findById(args.id)
 							.transform(estateMongooseToGraphQLMapper).exec()
 				}
 			},
-      		// Get estates by immoweb code
+			// Get estates by immoweb code
 			estatesByImmowebCode: {
 				type: GraphQLList(EstateType),
 				args: { 
 					immowebCode: { type: GraphQLInt } 
 				},
-				resolve: (root, args, context, info) => {
+				resolve: (root, args) => {
 					return EstateModel
 							.find(args)
 							.transform(estateMongooseToGraphQLMapper).exec()
@@ -101,7 +107,7 @@ const schema = new GraphQLSchema({
 				args: {
 					immowebCode: { type: GraphQLInt }
 				},
-				resolve: (root, args, context, info) => {
+				resolve: (root, args) => {
 					let estate = new EstateModel(args)
 					return estate.save()
 				}
