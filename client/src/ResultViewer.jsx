@@ -8,7 +8,7 @@ const estateDecorator = estate => ({
     ...estate,
     displayPrice: estate.price.toLocaleString('fr-BE') + ' €',
     displayZipCode: estate.locality + ' (' + estate.zipCode + ')',
-    displayCreationDate: moment(estate.creationDate).format('DD MMM YYYY') + ' (' + moment(estate.creationDate).fromNow() + ')'
+    displayModificationDate: moment(estate.modificationDate).format('DD MMM YYYY') + ' (' + moment(estate.modificationDate).fromNow() + ')'
 })
 
 export default function ResultViewer({results}) {

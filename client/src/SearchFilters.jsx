@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Slider, Space, Switch, Select, Divider, notification, BackTop, Dropdown, Menu, InputNumber } from 'antd'
+import { Button, Slider, Space, Switch, Select, Divider, notification, BackTop, Dropdown, Menu, InputNumber, Popover } from 'antd'
 import { SearchOutlined, AimOutlined, EuroOutlined, ReloadOutlined, DeleteOutlined } from '@ant-design/icons'
 import _ from 'lodash'
 import Text from 'antd/lib/typography/Text'
@@ -9,7 +9,7 @@ export default function SearchFilters({fetchEstates}) {
     const [isFirstSearch, setFirstSearch] = useState(true)
     const [shouldDisplayGardenArea, setshouldDisplayGardenArea] = useState(false)
 
-    const [priceRange, setPriceRange] = useState([0, 500000])
+    const [priceRange, setPriceRange] = useState([0, 1000000])
     const [zipCodes, setZipCodes] = useState([])
     const [onlyWithGarden, setOnlyWithGarden] = useState(false)
     const [minGardenArea, setMinGardenArea] = useState(0)
@@ -25,10 +25,10 @@ export default function SearchFilters({fetchEstates}) {
                 <Space>
                     <EuroOutlined/>
                     <Slider value={priceRange} onChange={bounds => setPriceRange(bounds)}
-                            range={{draggableTrack:true}} max={500000} step={10000}
-                            marks={_.range(0, 500000, 100000).reduce((acc, n) => ({...acc, [n]: ''}), {})}
+                            range={{draggableTrack:true}} max={1000000} step={10000}
+                            marks={_.range(0, 1000000, 100000).reduce((acc, n) => ({...acc, [n]: ''}), {})}
                             tooltipVisible style={{width: '15vw'}}
-                            tipFormatter={n => Math.ceil(n/1000) + 'k€'}
+                            tipFormatter={n => n >= 1000000 ? Math.ceil(n/1000000) + 'M€' : n < 1000 ? n + '€' : Math.ceil(n/1000) + 'k€'}
                             />
                 </Space>
 
@@ -48,9 +48,8 @@ export default function SearchFilters({fetchEstates}) {
                 <Divider type="vertical" />
                 
                 {/* GARDEN */}
-                <Dropdown arrow visible={shouldDisplayGardenArea} overlay={
-                    <Menu onMouseLeave={() => setshouldDisplayGardenArea(false)} >
-                        <Menu.Item>
+                <Popover arrow visible={shouldDisplayGardenArea} content={
+                    <div onMouseLeave={() => setshouldDisplayGardenArea(false)}>
                             <Space>
                                 ≥
                                 <InputNumber style={{width:'64px'}} autoFocus
@@ -64,9 +63,8 @@ export default function SearchFilters({fetchEstates}) {
                                     <DeleteOutlined/>
                                 </Button>
                             </Space>
-                            <Text type="secondary" style={{display:'block', fontSize: '12px'}}>(or no garden area specified)</Text>
-                        </Menu.Item>
-                    </Menu>
+                            {/*<Text type="secondary" style={{display:'block', fontSize: '12px'}}>(or no garden area specified)</Text>*/}
+                    </div>
                 }>  
 
                     <Switch value={onlyWithGarden}
@@ -76,7 +74,7 @@ export default function SearchFilters({fetchEstates}) {
                             checkedChildren={minGardenArea > 0 ? `✓ 🌳 garden ≥${minGardenArea}m²` : '✓ with garden 🌳'}
                     />
 
-                </Dropdown>
+                </Popover>
 
                 <Divider type="vertical" />
 

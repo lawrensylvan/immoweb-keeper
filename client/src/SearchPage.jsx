@@ -16,7 +16,11 @@ export default function Search() {
                 zipCode
                 locality
                 images
-                creationDate
+                modificationDate
+                hasGarden
+                gardenArea
+                agencyLogo
+                agencyName
             }
         }
     `)

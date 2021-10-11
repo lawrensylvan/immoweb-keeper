@@ -13,7 +13,22 @@ const estateSchema = new mongoose.Schema({
     rawMetadata: {
         id                      : Number,
         cluster                 : Object,           // always null ?
-        customers               : Array,    // TODO
+        customers               : [{
+            id                      : Number,
+            type                    : String,
+            email                   : String,
+            logoUrl                 : String,
+            phoneNumber             : String,
+            mobileNumber            : String,
+            name                    : String,
+            website                 : String,
+            location                : Object, //TODO
+            ipiNo                   : String,
+            isOwner                 : Boolean,
+            contactHoursMobile      : String,
+            contactHoursLandline    : String,
+            salesRepresentative     : String
+        }],
         premiumProjectPage      : Object,   // TODO
         flags                   : Object,   // TODO
         media                   : Object,   // TODO

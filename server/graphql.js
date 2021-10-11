@@ -5,13 +5,18 @@ const { EstateModel } = require('./mongoose')
 /* What does the data returned to the client look like ?  */
 
 const estateFields = {
-	id: 			{type: GraphQLID },
-	immowebCode: 	{type: GraphQLString },
-	price: 			{type: GraphQLInt},
-	zipCode:		{type: GraphQLInt},
-	locality:		{type: GraphQLString},
-	images:			{type: GraphQLList(GraphQLString)},
-	creationDate:	{type: GraphQLDateTime}
+	id: 				{type: GraphQLID },
+	immowebCode: 		{type: GraphQLString },
+	price: 				{type: GraphQLInt},
+	zipCode:			{type: GraphQLInt},
+	locality:			{type: GraphQLString},
+	images:				{type: GraphQLList(GraphQLString)},
+	creationDate:		{type: GraphQLDateTime},
+	modificationDate:	{type: GraphQLDateTime},
+	hasGarden:			{type: GraphQLBoolean},
+	gardenArea:			{type: GraphQLInt},
+	agencyName:			{type: GraphQLString},
+	agencyLogo:			{type: GraphQLString}
 }
 
 const EstateType = new GraphQLObjectType({name: 'Estate', fields: estateFields})
@@ -26,7 +31,12 @@ function estateMongooseToGraphQLMapper(estates) {
 		zipCode:			estate.rawMetadata.property.location.postalCode,
 		locality:			estate.rawMetadata.property.location.locality,
 		images:				estate.images,
-		creationDate:		estate.creationDate
+		creationDate:		estate.creationDate,
+		modificationDate:	estate.lastModificationDate,
+		hasGarden:			estate.rawMetadata.property.hasGarden,
+		gardenArea:			estate.rawMetadata.property.gardenSurface,
+		agencyName:			estate.rawMetadata.customers[0].name,
+		agencyLogo:			estate.rawMetadata.customers[0].logoUrl
 	}))
 }
 
@@ -38,7 +48,7 @@ const estateGraphQLArgsToMongooseMapping = {
 	priceRange: 	v => ({key: 'rawMetadata.price.mainValue'				, value: {$gte: v[0], $lte: v[1]}	}),
 	zipCodes: 		v => ({key:	'rawMetadata.property.location.postalCode'	, value: {$in: v}					}),
 	onlyWithGarden:	v => ({key:	'rawMetadata.property.hasGarden'			, value: v || null					}),
-	minGardenArea:	v => ({key:	'rawMetadata.property.gardenSurface'		, value: {$gte: v}					}),
+	minGardenArea:	v => ({key:	'rawMetadata.property.gardenSurface'		, value: {$gte: v}				 	}), // TODO : include gardens without area
 }
 
 function estateGraphQLToMongooseMapper(args) {
