@@ -1,4 +1,4 @@
-const { GraphQLID, GraphQLString, GraphQLList, GraphQLSchema, GraphQLNonNull, GraphQLObjectType, GraphQLInt, GraphQLBoolean } = require('graphql')
+const { GraphQLID, GraphQLString, GraphQLList, GraphQLSchema, GraphQLNonNull, GraphQLObjectType, GraphQLInt, GraphQLBoolean, GraphQLFloat } = require('graphql')
 const { GraphQLDateTime } = require('graphql-iso-date')
 const { EstateModel } = require('./mongoose')
 
@@ -16,7 +16,8 @@ const estateFields = {
 	hasGarden:			{type: GraphQLBoolean},
 	gardenArea:			{type: GraphQLInt},
 	agencyName:			{type: GraphQLString},
-	agencyLogo:			{type: GraphQLString}
+	agencyLogo:			{type: GraphQLString},
+	geolocation:		{type: GraphQLList(GraphQLFloat)}
 }
 
 const EstateType = new GraphQLObjectType({name: 'Estate', fields: estateFields})
@@ -36,7 +37,8 @@ function estateMongooseToGraphQLMapper(estates) {
 		hasGarden:			estate.rawMetadata.property.hasGarden,
 		gardenArea:			estate.rawMetadata.property.gardenSurface,
 		agencyName:			estate.rawMetadata.customers[0].name,
-		agencyLogo:			estate.rawMetadata.customers[0].logoUrl
+		agencyLogo:			estate.rawMetadata.customers[0].logoUrl,
+		geolocation:		estate.geolocation
 	}))
 }
 

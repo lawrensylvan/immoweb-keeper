@@ -3,7 +3,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon --ignore routine index.js",
-    "routine": "node routine/routine.js | tee ./logs/$(date '+%Y.%m.%d-%H.%M.%S').log"
+    "routine": "node routine/routine.js | tee ./routine/logs/$(date '+%Y.%m.%d-%H.%M.%S').log"
   },
   "dependencies": {
     "cors": "^2.8.5",

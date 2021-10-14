@@ -21,6 +21,7 @@ export default function Search() {
                 gardenArea
                 agencyLogo
                 agencyName
+                geolocation
             }
         }
     `)

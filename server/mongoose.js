@@ -8,7 +8,7 @@ const estateSchema = new mongoose.Schema({
     lastModificationDate    : Date,
     creationDate            : Date,
     expirationDate          : Date,
-    geoLocation             : [Number],
+    geolocation             : [Number],
     images                  : [String],
     rawMetadata: {
         id                      : Number,

@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import { Button, Slider, Space, Switch, Select, Divider, notification, BackTop, Dropdown, Menu, InputNumber, Popover } from 'antd'
+import { Button, Slider, Space, Switch, Select, Divider, notification, BackTop, InputNumber, Popover } from 'antd'
 import { SearchOutlined, AimOutlined, EuroOutlined, ReloadOutlined, DeleteOutlined } from '@ant-design/icons'
 import _ from 'lodash'
-import Text from 'antd/lib/typography/Text'
 
 export default function SearchFilters({fetchEstates}) {
 
     const [isFirstSearch, setFirstSearch] = useState(true)
     const [shouldDisplayGardenArea, setshouldDisplayGardenArea] = useState(false)
 
-    const [priceRange, setPriceRange] = useState([0, 1000000])
+    const [priceRange, setPriceRange] = useState([900000, 1000000])
     const [zipCodes, setZipCodes] = useState([])
     const [onlyWithGarden, setOnlyWithGarden] = useState(false)
     const [minGardenArea, setMinGardenArea] = useState(0)
@@ -67,7 +66,7 @@ export default function SearchFilters({fetchEstates}) {
                     </div>
                 }>  
 
-                    <Switch value={onlyWithGarden}
+                    <Switch checked={onlyWithGarden}
                             onChange={b => {setOnlyWithGarden(b); setshouldDisplayGardenArea(b)}}
                             onMouseEnter={() => setshouldDisplayGardenArea(onlyWithGarden)}
                             unCheckedChildren={'🌳 with garden ?'}

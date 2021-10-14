@@ -24,21 +24,21 @@ export default function ResultViewer({results}) {
             status={[500, 404, 403].includes(error?.networkError?.statusCode) ? error.networkError.statusCode : 'error'} />
     }
 
-    if(!estates && !loading) return <Empty description="Start playing with the filters !" />
+    //if(!estates && !loading) return <Empty description="Start playing with the filters !" />
 
-    if(!estates && loading) return <Spin />
+    //if(!estates && loading) return <Spin />
 
     return (
         <div className='ResultViewer'>
             <Tabs defaultActiveKey="1">
                 <Tabs.TabPane tab="Grid results" key="1">
-                    <GridResults estates={estates} />
+                    <GridResults estates={estates} isLoading={loading} />
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="Map results" key="2">
-                    <MapResults estates={estates} />
+                    <MapResults estates={estates} isLoading={loading} />
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="Table results" key="3">
-                    <TableResults estates={estates} />
+                    <TableResults estates={estates} isLoading={loading} />
                 </Tabs.TabPane>
             </Tabs>
         </div>

@@ -2,12 +2,12 @@ import _ from 'lodash'
 import { Table } from 'antd'
 import moment from 'moment'
 
-export default function TableResults({estates}) {
-    console.log(typeof estates[0].modificationDate)
+export default function TableResults({estates, isLoading}) {
+
     return (
         <div className='TableResults'>
 
-            <Table dataSource={estates} rowKey="id" size="small" sortDirections={['ascend', 'descend']} columns={[
+            <Table dataSource={estates} rowKey="id" size="small" loading={isLoading} sortDirections={['ascend', 'descend']} columns={[
                 {
                     title: '♯ Immoweb Code', dataIndex: 'immowebCode', key: 'immowebCode'
                 },
