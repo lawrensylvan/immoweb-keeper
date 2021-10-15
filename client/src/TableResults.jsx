@@ -12,6 +12,10 @@ export default function TableResults({estates, isLoading}) {
                     title: '♯ Immoweb Code', dataIndex: 'immowebCode', key: 'immowebCode'
                 },
                 {
+                    title: '⌖ Street', dataIndex: 'street', key: 'street',
+                    sorter: (a, b) => a.street - b.street
+                },
+                {
                     title: '⌖ Zip code', dataIndex: 'displayZipCode', key: 'zipCode',
                     filters: _.uniq(estates?.map(e => e.zipCode))
                               .map(z => ({text: `${estates.filter(e => e.zipCode === z)[0].locality} (${z})`, value: z})),

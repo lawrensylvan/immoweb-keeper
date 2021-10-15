@@ -17,7 +17,11 @@ const estateFields = {
 	gardenArea:			{type: GraphQLInt},
 	agencyName:			{type: GraphQLString},
 	agencyLogo:			{type: GraphQLString},
-	geolocation:		{type: GraphQLList(GraphQLFloat)}
+	geolocation:		{type: GraphQLList(GraphQLFloat)},
+	street:				{type: GraphQLString},
+	isAuction:			{type: GraphQLBoolean},
+	isSold:				{type: GraphQLBoolean},
+	isUnderOption:		{type: GraphQLBoolean}
 }
 
 const EstateType = new GraphQLObjectType({name: 'Estate', fields: estateFields})
@@ -38,7 +42,11 @@ function estateMongooseToGraphQLMapper(estates) {
 		gardenArea:			estate.rawMetadata.property.gardenSurface,
 		agencyName:			estate.rawMetadata.customers[0].name,
 		agencyLogo:			estate.rawMetadata.customers[0].logoUrl,
-		geolocation:		estate.geolocation
+		geolocation:		estate.geolocation,
+		street:				estate.rawMetadata.property.location.street,
+		isAuction:			estate.rawMetadata.flags.isPublicSale,
+		isSold:				estate.rawMetadata.flags.isSoldOrRented,
+		isUnderOption:		estate.rawMetadata.flags.isUnderOption
 	}))
 }
 
@@ -50,7 +58,8 @@ const estateGraphQLArgsToMongooseMapping = {
 	priceRange: 	v => ({key: 'rawMetadata.price.mainValue'				, value: {$gte: v[0], $lte: v[1]}	}),
 	zipCodes: 		v => ({key:	'rawMetadata.property.location.postalCode'	, value: {$in: v}					}),
 	onlyWithGarden:	v => ({key:	'rawMetadata.property.hasGarden'			, value: v || null					}),
-	minGardenArea:	v => ({key:	'rawMetadata.property.gardenSurface'		, value: {$gte: v}				 	}), // TODO : include gardens without area
+	minGardenArea:	v => ({key:	'rawMetadata.property.gardenSurface'		, value: {$gte: v}				 	}), // TODO : include gardens without area -> needs refactor
+	// TODO : onlyStillAvailable filter -> needs to refactor this method which is not flexible enough
 }
 
 function estateGraphQLToMongooseMapper(args) {
@@ -58,7 +67,16 @@ function estateGraphQLToMongooseMapper(args) {
 	for(let propName in estateGraphQLArgsToMongooseMapping) {
 		if(args[propName] !== undefined) {
 			const {key, value} = estateGraphQLArgsToMongooseMapping[propName](args[propName])
-			result[key] = value
+			if(result[key] !== undefined) {
+				if(result['$and'] !== undefined) {
+					result['$and'].push({[key]: value})
+				} else {
+					result['$and'] = [{[key]: result[key]}, {[key]: value}]
+					result[key] = undefined
+				}
+			} else {
+				result[key] = value
+			}
 		}
 	}
 	return result

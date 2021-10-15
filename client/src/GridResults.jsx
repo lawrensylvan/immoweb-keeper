@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-import { List, Card, Avatar, Pagination, Image, Skeleton, Popover, Tag, Dropdown, Menu } from 'antd'
-import { CopyOutlined, EditOutlined, ExpandAltOutlined, HeartOutlined } from '@ant-design/icons'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
+import React from 'react'
+import { List, Pagination } from 'antd'
 import EstateCard from './EstateCard'
 
 export default function GridResults({estates, isLoading}) {
@@ -16,7 +14,6 @@ export default function GridResults({estates, isLoading}) {
                     </List.Item>
                 )}
             />
-
         </div>
     )
 }

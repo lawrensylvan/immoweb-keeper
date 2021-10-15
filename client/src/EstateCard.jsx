@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { List, Card, Avatar, Pagination, Image, Skeleton, Popover, Tag, Dropdown, Menu } from 'antd'
+import { Card, Avatar, Image, Skeleton, Popover, Tag, Dropdown, Menu } from 'antd'
 import { CopyOutlined, EditOutlined, ExpandAltOutlined, HeartOutlined } from '@ant-design/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
@@ -37,7 +37,12 @@ export default function EstateCard({estate}) {
         <div className='EstateCard' >
             <Card title={estate.displayPrice} hoverable
                 cover={<ImageGallery immowebCode={estate.immowebCode} images={estate.images} />}
-                extra={estate.hasGarden ? (<Tag color="lime">✓ 🌳 {estate.gardenArea || '?'}m²</Tag>) : null}
+                extra={<>
+                    {estate.hasGarden ? <Tag color="lime">✓ 🌳 {estate.gardenArea || '?'}m²</Tag> : null}
+                    {estate.isAuction ? <Tag color="orange">🔨 auction</Tag> : null}
+                    {estate.isSold ? <Tag color="red">😡 sold</Tag> : null}
+                    {estate.isUnderOption ? <Tag color="red">😡 option</Tag> : null}
+                </>}
                 actions={[
                     <HeartOutlined key="heart" />,
                     <ExpandAltOutlined key="expand" />,
@@ -63,7 +68,7 @@ export default function EstateCard({estate}) {
             >
                 <Card.Meta
                     avatar={estate.agencyName ? <Popover content={estate.agencyName}><Avatar src={estate.agencyLogo} /></Popover> : null}
-                    title={estate.locality}
+                    title={estate.street ? `${estate.street}, ${estate.locality}` : estate.locality}
                     description={estate.displayModificationDate}
                 />
             </Card>

@@ -8,7 +8,7 @@ export default function SearchFilters({fetchEstates}) {
     const [isFirstSearch, setFirstSearch] = useState(true)
     const [shouldDisplayGardenArea, setshouldDisplayGardenArea] = useState(false)
 
-    const [priceRange, setPriceRange] = useState([900000, 1000000])
+    const [priceRange, setPriceRange] = useState([300000, 600000])
     const [zipCodes, setZipCodes] = useState([])
     const [onlyWithGarden, setOnlyWithGarden] = useState(false)
     const [minGardenArea, setMinGardenArea] = useState(0)
@@ -23,12 +23,13 @@ export default function SearchFilters({fetchEstates}) {
                 {/* PRICE RANGE */}
                 <Space>
                     <EuroOutlined/>
-                    <Slider value={priceRange} onChange={bounds => setPriceRange(bounds)}
-                            range={{draggableTrack:true}} max={1000000} step={10000}
-                            marks={_.range(0, 1000000, 100000).reduce((acc, n) => ({...acc, [n]: ''}), {})}
-                            tooltipVisible style={{width: '15vw'}}
-                            tipFormatter={n => n >= 1000000 ? Math.ceil(n/1000000) + 'M€' : n < 1000 ? n + '€' : Math.ceil(n/1000) + 'k€'}
-                            />
+                    <Slider min={0} max={1010000} step={10000}
+                            value={priceRange.map(n => n === null ? 1010000 : n)}
+                            onChange={bounds => setPriceRange(bounds.map(n => n === 1010000 ? null : n))}
+                            marks={_.range(0, 1010000, 100000).reduce((acc, n) => ({...acc, [n]: ''}), {})}
+                            range={{draggableTrack:true}} style={{width: '25vw'}} tooltipVisible
+                            tipFormatter={n => n > 1000000 ? '∞' : n === 1000000 ? Math.ceil(n/1000000) + 'M€' : n < 1000 ? n + '€' : Math.ceil(n/1000) + 'k€'}
+                    />
                 </Space>
 
                 <Divider type="vertical" />
@@ -90,7 +91,8 @@ export default function SearchFilters({fetchEstates}) {
                         ...filters,
                         zipCodes: zipCodes.length ? zipCodes : undefined,
                         onlyWithGarden: onlyWithGarden || undefined,
-                        minGardenArea: minGardenArea > 0 ? minGardenArea : undefined
+                        minGardenArea: minGardenArea > 0 ? minGardenArea : undefined,
+                        priceRange: priceRange[1] ? priceRange : [priceRange[0], 1000000000]
                     }})
                     setFirstSearch(false)
                 }}>

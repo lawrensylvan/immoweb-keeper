@@ -9,7 +9,10 @@ export default function Search() {
     // Load estates with active filters
     const [fetchEstates, { loading, error, data }] = useLazyQuery(gql`
         query estates($priceRange: [Int]!, $zipCodes: [Int], $onlyWithGarden: Boolean, $minGardenArea: Int) {
-            estates(priceRange: $priceRange, zipCodes: $zipCodes, onlyWithGarden: $onlyWithGarden, minGardenArea: $minGardenArea) {
+            estates(priceRange: $priceRange, 
+                    zipCodes: $zipCodes,
+                    onlyWithGarden: $onlyWithGarden,
+                    minGardenArea: $minGardenArea) {
                 id
                 immowebCode
                 price
@@ -22,6 +25,10 @@ export default function Search() {
                 agencyLogo
                 agencyName
                 geolocation
+                street
+                isAuction
+                isSold
+                isUnderOption
             }
         }
     `)

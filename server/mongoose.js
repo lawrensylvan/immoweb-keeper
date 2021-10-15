@@ -30,7 +30,26 @@ const estateSchema = new mongoose.Schema({
             salesRepresentative     : String
         }],
         premiumProjectPage      : Object,   // TODO
-        flags                   : Object,   // TODO
+        flags                   : {
+            isPublicSale            : Boolean,
+            isNewClassified         : Boolean,
+            isNewPrice              : Boolean,
+            isNewlyBuilt            : Boolean,
+            isNotarySale            : Boolean,
+            isLifeAnnuitySale       : Boolean,
+            adQuality               : String,
+            date                    : String,
+            priceSqm                : Number,
+            price                   : Number,
+            default                 : Object,   // null ?
+            isSoldOrRented          : Boolean,
+            isLowEnergy             : Boolean,
+            percentSold             : Number,
+            isPassiveHouse          : Boolean,
+            isNewRealEstateProject  : Boolean,
+            isAnInteractiveSale     : Boolean,
+            isUnderOption           : Boolean
+        },
         media                   : Object,   // TODO
         property                : {
             type                    : String,
