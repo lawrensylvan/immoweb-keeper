@@ -67,7 +67,7 @@ async function processQuery(queryURL) {
     const {normalizedQuery, normalizedQueryURL, totalResultCount} = await parseResultsPage(queryURL)
     
     // Get last time at which this search's results were saved
-    const dbQuery = await db.collection('queries').findOne({url: normalizedQueryURL})
+    const dbQuery = await db.collection('queries').findOne({criteria: normalizedQuery})
     const lastRunDate = dbQuery ? moment(dbQuery.lastRun) : null
     const nextLastRunDate = new Date()
     console.info(lastRunDate ? `Last run for this query was on ${lastRunDate}` : `This is the first run for this query`)
