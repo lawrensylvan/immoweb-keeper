@@ -40,6 +40,7 @@ export default function SearchFilters({fetchEstates}) {
                     <Select value={zipCodes} onChange={v => setZipCodes(v)}
                             mode="multiple" placeholder="Select localities" style={{ width: '300px' }}
                             optionLabelProp="label" optionFilterProp={"children"} showArrow allowClear>
+                        <Select.Option value={1000} label="Bruxelles">1000 · Bruxelles</Select.Option>
                         <Select.Option value={1030} label="Schaerbeek">1030 · Schaerbeek</Select.Option>
                         <Select.Option value={1140} label="Evere">1140 · Evere</Select.Option>
                     </Select>

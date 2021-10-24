@@ -1,4 +1,4 @@
-import { Tabs, Empty, Spin, Result } from 'antd'
+import { Tabs, Result } from 'antd'
 import moment from 'moment'
 import GridResults from './GridResults'
 import MapResults from './MapResults'

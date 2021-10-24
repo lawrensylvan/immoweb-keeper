@@ -6,6 +6,7 @@ const moment = require('moment')
 const { JSDOM } = require('jsdom')
 const needle = require('needle')
 const MongoClient = require('mongodb')
+const ObjectId  = MongoClient.ObjectID;
 const config = require('./config.json')
 require('dotenv').config({ path: 'config.env' })
 
@@ -15,6 +16,8 @@ const RESULTS_PER_PAGE = 30
 
 let imageRepository
 let db
+const today = moment().format('YYYY-MM-DD')
+const yesterday = moment().add(-1, 'day')
 
 mainRoutine()
 
@@ -26,15 +29,18 @@ async function initDBAndImageRepository() {
         imageRepository = './images'
     } else imageRepository = config.imageRepository
     if(!fs.existsSync(imageRepository)) {
-        console.info(`Creating image repository`)
+        console.info('Creating image repository')
         await fs.promises.mkdir(imageRepository, {recursive: true})
     }
 
     // Initialize db connection
-    db = await connectDB(process.env.MONGODB_URL, process.env.MONGODB_DATABASE).catch(() => {
-        console.error('Unable to connect to your mongodb database. Please make sure that the mongo daemon is running.')
+    try {
+        console.log(process.env.MONGODB_URL)
+        db = await connectDB(process.env.MONGODB_URL, process.env.MONGODB_DATABASE)
+    } catch(error) {
+        console.error('Unable to connect to your mongodb database : ' + error)
         process.exit(1)
-    })
+    }
 
 }
 
@@ -67,8 +73,18 @@ async function processQuery(queryURL) {
     const {normalizedQuery, normalizedQueryURL, totalResultCount} = await parseResultsPage(queryURL)
     
     // Get last time at which this search's results were saved
-    const dbQuery = await db.collection('queries').findOne({criteria: normalizedQuery})
-    const lastRunDate = dbQuery ? moment(dbQuery.lastRun) : null
+    let dbQuery = await db.collection('queries').findOne({criteria: normalizedQuery})
+    if(!dbQuery) {
+        const id = await db.collection('queries').insertOne({
+            url: normalizedQueryURL,
+            criteria: normalizedQuery,
+            lastRun: null,
+            allRunDates: null
+        })
+        dbQuery = await db.collection('queries').findOne({ _id : ObjectId(id) })
+    }
+
+    const lastRunDate = moment(dbQuery.lastRun)
     const nextLastRunDate = new Date()
     console.info(lastRunDate ? `Last run for this query was on ${lastRunDate}` : `This is the first run for this query`)
 
@@ -79,37 +95,44 @@ async function processQuery(queryURL) {
     console.info(`Will process up to ${totalResultCount} results (${pageCount} pages)`)
     let newEstateCount = 0
     let updatedEstateCount = 0
+    let shouldOnlyCollectImmowebCodes = false
+    let seenImmowebCodes = []
     for(let page of pageNumbers) {
-        const result = await processPage(normalizedQueryURL, page, lastRunDate)
+        const result = await processPage(normalizedQueryURL, page, shouldOnlyCollectImmowebCodes, lastRunDate, dbQuery._id)
+        seenImmowebCodes.push(...result.immowebCodes)
         newEstateCount += result.newEstateCount
         updatedEstateCount += result.updatedEstateCount
-        if(!result.shouldContinue) break
+        if(!result.shouldContinue) shouldOnlyCollectImmowebCodes = true
     }
     
     // Update the query last run date + all run dates list (or persist the new query)
     if(dbQuery) {
         await db.collection('queries').updateOne({url: dbQuery.url},
             { $set: {
-                'lastRun': nextLastRunDate,
-                'allRunDates': computeNewAllRunDates(dbQuery.allRunDates)
+                lastRun: nextLastRunDate,
+                allRunDates: computeNewAllRunDates(dbQuery.allRunDates)
             }
         })
-    } else {
-        await db.collection('queries').insertOne({
-            url: normalizedQueryURL,
-            lastRun: nextLastRunDate,
-            allRunDates: [moment(nextLastRunDate).format('YYYY-MM-DD')],
-            criteria: normalizedQuery
-        })
     }
+
+    // Check for estates in the db that were not seen in Immoweb anymore to put a disappearanceDate
+    
+    const allImmowebCodes = (await db.collection('estates')
+                                     .find({
+                                         queryId: dbQuery._id,
+                                         disappearanceDate: null
+                                     }).toArray())
+                            .map(e => e.immowebCode)
+    
+    const notSeenImmowebCodes = _.difference(allImmowebCodes, seenImmowebCodes)
+
+    await db.collection('estates').updateMany({ immowebCode: { $in: seenImmowebCodes} }, { $set: { lastSeen: today } })
+    await db.collection('estates').updateMany({ immowebCode: { $in: notSeenImmowebCodes} }, { $set: { disappearanceDate: today } })
 
     console.info(`${newEstateCount} new estates saved, ${updatedEstateCount} estates updated`)
 }
 
 function computeNewAllRunDates(allRunDates) {
-    const today = moment().format('YYYY-MM-DD')
-    const yesterday = moment().add(-1, 'day').format('YYYY-MM-DD')
-    
     // [] or null
     if(!allRunDates) {
         return [today]
@@ -142,7 +165,7 @@ function computeNewAllRunDates(allRunDates) {
 }
 
 // Load all estate data of that result page and returns the new and updated estate count + whether we should stop browsing more pages or not
-async function processPage(url, pageNumber, lastRunDate) {
+async function processPage(url, pageNumber, shouldOnlyCollectImmowebCodes, lastRunDate, queryId) {
     
     // Sort results from newest to oldest to be able to stop as soon as we encounter an estate with no updates
     const queryURL = `${url}&orderBy=newest&page=${pageNumber}`    
@@ -153,6 +176,10 @@ async function processPage(url, pageNumber, lastRunDate) {
     }
     
     const immowebCodes = results.map(r => r.id)
+    if(shouldOnlyCollectImmowebCodes) {
+        return {newEstateCount: 0, updatedEstateCount: 0, shouldContinue: false, immowebCodes}
+    }
+
     console.info(`Page ${pageNumber} : will process these immoweb codes : ${immowebCodes}`)
     
     let newEstateCount = 0
@@ -160,7 +187,7 @@ async function processPage(url, pageNumber, lastRunDate) {
     let shouldContinue = true
     for(let immowebCode of immowebCodes) {
         try {
-            const {wasPersisted, isUpdate, reachedEnd} = await processEstate(immowebCode, lastRunDate)
+            const {wasPersisted, isUpdate, reachedEnd} = await processEstate(immowebCode, lastRunDate, queryId)
             if(reachedEnd) {
                 shouldContinue = false
                 break
@@ -175,11 +202,11 @@ async function processPage(url, pageNumber, lastRunDate) {
     }
     
     process.stdout.write('\n\r')
-    return {newEstateCount, updatedEstateCount, shouldContinue}
+    return {newEstateCount, updatedEstateCount, shouldContinue, immowebCodes}
 }
 
 // Load estate data from immoweb (returns if the estate was persisted in db, if it was an update instead of an insert, and if we reached the end of results)
-async function processEstate(immowebCode, lastRunDate) {
+async function processEstate(immowebCode, lastRunDate, queryId) {
     const estateData = await parseEstatePage(immowebCode) // estateData.publication.lastModificationDate => string "2020-05-30T16:35:25.607+0000"
     const fetchDate = new Date()
     // test if the estate last modif date is earlier than the last time this script has runned 
@@ -213,6 +240,7 @@ async function processEstate(immowebCode, lastRunDate) {
     const [long, lat] = [_.get(estateData, 'property.location.longitude'), _.get(estateData, 'property.location.latitude')]
     await db.collection('estates').insertOne({
         immowebCode,
+        queryId,
         fetchDate,
         lastModificationDate: lastModif.toDate(),
         creationDate: parseImmowebDate(_.get(estateData, 'publication.creationDate')).toDate(),

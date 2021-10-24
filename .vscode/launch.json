@@ -14,7 +14,7 @@
             "runtimeExecutable": "${env:NVM_BIN}/npm", //change this to your npm path
             "runtimeArgs": [
                 "run-script",
-                "start",
+                "routine",
                 "--",
                 "--inspect-brk=9229"
             ],
