@@ -1,5 +1,6 @@
 {
   "main": "index.js",
+  "version": "0.2.0",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon --ignore routine index.js",

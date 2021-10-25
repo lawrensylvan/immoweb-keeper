@@ -1,6 +1,5 @@
-import { Card, Drawer, Popover, Tooltip } from 'antd'
-import { useRef, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, CircleMarker, Circle } from 'react-leaflet'
+import { useState } from 'react'
+import { MapContainer, TileLayer, CircleMarker } from 'react-leaflet'
 import EstateCard from './EstateCard'
 
 export default function MapResults({estates}) {
