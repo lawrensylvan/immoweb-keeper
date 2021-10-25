@@ -9,12 +9,14 @@ Save your favorite Immoweb.be search results forever in your MongoDB database an
 * [Context](#context)
 * [How to use](#how-to-use)
   + [Requirements](#requirements)
-  + [Download dependencies](#download-dependencies)
-  + [Create a config.json file](#create-a-configjson-file)
-  + [Run to download search results](#run-to-download-search-results)
+  + [Setup config](#setup-config)
+  + [Run download routine](#run-download-routine)
+  + [Run visualisation page](#run-visualisation-page)
+* [Data model](#data-model)
+  + [Collection `estates`](#collection--estates-)
+    - [Subdocument `rawMetadata`](#subdocument--rawmetadata-)
 * [How does it work ?](#how-does-it-work--)
-* [Data structure](#data-structure)
-* [In progress...](#in-progress)
+* [Work in progress...](#work-in-progress)
 
 ## Context
 
