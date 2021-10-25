@@ -129,7 +129,7 @@ async function processQuery(queryURL) {
     await db.collection('estates').updateMany({ immowebCode: { $in: seenImmowebCodes} }, { $set: { lastSeen: today } })
     await db.collection('estates').updateMany({ immowebCode: { $in: notSeenImmowebCodes} }, { $set: { disappearanceDate: today } })
 
-    console.info(`${newEstateCount} new estates saved, ${updatedEstateCount} estates updated`)
+    console.info(`${newEstateCount} new estates saved, ${updatedEstateCount} estates updated, ${notSeenImmowebCodes.length} estates disappeared`)
 }
 
 function computeNewAllRunDates(allRunDates) {
