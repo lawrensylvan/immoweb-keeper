@@ -1,12 +1,15 @@
 {
-  "main": "index.js",
+  "main": "src/index.js",
   "version": "0.2.0",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon --ignore routine index.js",
+    "start": "node src/index.js",
+    "dev": "nodemon --ignore routine src/index.js",
     "routine": "node routine/routine.js | tee ./routine/logs/$(date '+%Y.%m.%d-%H.%M.%S').log"
   },
   "dependencies": {
+    "@graphql-tools/graphql-file-loader": "^7.3.1",
+    "@graphql-tools/load": "^7.4.0",
+    "@graphql-tools/schema": "^8.3.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",

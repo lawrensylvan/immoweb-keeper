@@ -4,7 +4,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import SearchPage from './SearchPage'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',
+  uri: `http://localhost:${process.env.REACT_APP_PORT || 5000}/graphql`,
   cache: new InMemoryCache()
 })
 

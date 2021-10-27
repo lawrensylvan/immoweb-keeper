@@ -1,0 +1,34 @@
+scalar Date
+
+type Estate {
+    id:                 ID!
+    immowebCode:        String!
+    price:              Int
+    zipCode:            Int
+    locality:           String
+    images:             [String]
+    creationDate:       Date!
+    modificationDate:   Date!
+    hasGarden:          Boolean
+    gardenArea:         Int
+    agencyName:         String
+    agencyLogo:         String
+    geolocation:        [Float]
+    street:             String
+    isAuction:          Boolean
+    isSold:             Boolean
+    isUnderOption:      Boolean
+}
+
+type Query {
+    
+    estates(
+        immowebCode: Int
+        priceRange: [Int]
+        zipCodes: [Int]
+        onlyWithGarden: Boolean
+        minGardenArea: Int
+    ): [Estate]
+
+    estatesByImmowebCode(immowebCode: Int): Estate
+}

@@ -7,7 +7,7 @@ const { JSDOM } = require('jsdom')
 const needle = require('needle')
 const MongoClient = require('mongodb')
 const ObjectId  = MongoClient.ObjectID;
-const config = require('./config.json')
+const config = require('../config.json')
 require('dotenv').config({ path: 'config.env' })
 
 needle.defaults({follow: 3 })

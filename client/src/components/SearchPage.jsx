@@ -1,5 +1,5 @@
 import { useLazyQuery, gql } from '@apollo/client'
-import { Layout } from 'antd'
+import { Layout,  } from 'antd'
 import 'antd/dist/antd.css'
 import SearchFilters from './SearchFilters'
 import ResultViewer from './ResultViewer'
@@ -32,7 +32,7 @@ export default function Search() {
             }
         }
     `)
-
+    
     return (
         <div className="SearchPage">
 

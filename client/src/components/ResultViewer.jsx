@@ -20,8 +20,10 @@ export default function ResultViewer({results}) {
     if(error) {
         return <Result
             title={error.message}
-            subTitle={error?.networkError?.result?.errors[0]?.message || ''}
-            status={[500, 404, 403].includes(error?.networkError?.statusCode) ? error.networkError.statusCode : 'error'} />
+            subTitle={error?.networkError?.result?.errors[0]?.message || error.stack}
+            status={[500, 404, 403].includes(error?.networkError?.statusCode)
+                ? error.networkError.statusCode
+                : 'error'} />
     }
 
     //if(!estates && !loading) return <Empty description="Start playing with the filters !" />
