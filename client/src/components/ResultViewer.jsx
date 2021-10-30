@@ -7,6 +7,7 @@ import TableResults from './TableResults'
 const estateDecorator = estate => ({
     ...estate,
     displayPrice: (estate.isAuction ? 'from ' : '') + estate.price.toLocaleString('fr-BE') + ' €',
+    priceHistory: estate.priceHistory?.map(e => ({...e, price: e.price.toLocaleString('fr-BE') + ' €'})),
     displayZipCode: estate.locality + ' (' + estate.zipCode + ')',
     displayModificationDate: moment(estate.modificationDate).format('DD MMM YYYY') + ' (' + moment(estate.modificationDate).fromNow() + ')'
 })

@@ -7,6 +7,7 @@ const estateSchema = new mongoose.Schema({
     lastModificationDate                        : Date,
     creationDate                                : Date,
     expirationDate                              : Date,
+    disappearanceDate                           : Date,
     geolocation                                 : [Number],
     images                                      : [String],
 

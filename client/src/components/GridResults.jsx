@@ -10,7 +10,7 @@ export default function GridResults({estates, isLoading}) {
                 pagination={<Pagination defaultPageSize={12} pageSize={12} showSizeChanger={false} simple={true} />}
                 dataSource={estates} renderItem={estate => (
                     <List.Item>
-                        <EstateCard estate={estate} key={estate.id} />
+                        <EstateCard estate={estate} key={estate.immowebCode} />
                     </List.Item>
                 )}
             />

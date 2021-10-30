@@ -7,7 +7,7 @@ export default function TableResults({estates, isLoading}) {
     return (
         <div className='TableResults'>
 
-            <Table dataSource={estates} rowKey="id" size="small" loading={isLoading} sortDirections={['ascend', 'descend']} columns={[
+            <Table dataSource={estates} rowKey="immowebCode" size="small" loading={isLoading} sortDirections={['ascend', 'descend']} columns={[
                 {
                     title: '♯ Immoweb Code', dataIndex: 'immowebCode', key: 'immowebCode'
                 },

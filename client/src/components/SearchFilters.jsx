@@ -12,7 +12,8 @@ export default function SearchFilters({fetchEstates}) {
     const [zipCodes, setZipCodes] = useState([])
     const [onlyWithGarden, setOnlyWithGarden] = useState(false)
     const [minGardenArea, setMinGardenArea] = useState(0)
-
+    const [immowebCode, setImmowebCode] = useState(null)
+    
     const filters = { priceRange, zipCodes, onlyWithGarden }
 
     return (
@@ -38,7 +39,7 @@ export default function SearchFilters({fetchEstates}) {
                 <Space>
                     <AimOutlined/>
                     <Select value={zipCodes} onChange={v => setZipCodes(v)}
-                            mode="multiple" placeholder="Select localities" style={{ width: '300px' }}
+                            mode="multiple" placeholder="Select localities" style={{ width: '230px' }}
                             optionLabelProp="label" optionFilterProp={"children"} showArrow allowClear>
                         <Select.Option value={1000} label="Bruxelles">1000 · Bruxelles</Select.Option>
                         <Select.Option value={1030} label="Schaerbeek">1030 · Schaerbeek</Select.Option>
@@ -77,6 +78,11 @@ export default function SearchFilters({fetchEstates}) {
 
                 </Popover>
 
+                {/* IMMOWEB CODE */}
+                <InputNumber style={{width:'110px'}} controls={false}
+                    value={immowebCode} onChange={v => setImmowebCode(v)} placeholder="#immoweb"
+                />
+
                 <Divider type="vertical" />
 
                 {/* SUBMIT */}
@@ -92,8 +98,9 @@ export default function SearchFilters({fetchEstates}) {
                         ...filters,
                         zipCodes: zipCodes.length ? zipCodes : undefined,
                         onlyWithGarden: onlyWithGarden || undefined,
-                        minGardenArea: minGardenArea > 0 ? minGardenArea : undefined,
-                        priceRange: priceRange[1] ? priceRange : [priceRange[0], 1000000000]
+                        minGardenArea: onlyWithGarden && minGardenArea > 0 ? minGardenArea : undefined,
+                        priceRange: priceRange[1] ? priceRange : [priceRange[0], 1000000000],
+                        immowebCode: immowebCode || undefined
                     }})
                     setFirstSearch(false)
                 }}>

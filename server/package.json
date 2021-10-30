@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon --ignore routine src/index.js",
-    "routine": "node routine/routine.js | tee ./routine/logs/$(date '+%Y.%m.%d-%H.%M.%S').log"
+    "routine": "node routine/src/routine.js | tee ./routine/logs/$(date '+%Y.%m.%d-%H.%M.%S').log"
   },
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^7.3.1",
