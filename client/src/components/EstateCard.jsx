@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Card, Avatar, Image, Skeleton, Popover, Tag, Dropdown, Menu } from 'antd'
+import { Card, Avatar, Image, Skeleton, Popover, Tag, Dropdown, Menu, Timeline, Space } from 'antd'
 import { CopyOutlined, EditOutlined, ExpandAltOutlined, HeartOutlined } from '@ant-design/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import moment from 'moment'
 
 const ImageGallery = ({immowebCode, images}) => {
     const fullURLs = images.map(i => `http://localhost:5000/${immowebCode}/${i}`)
@@ -32,11 +33,39 @@ const ImageGallery = ({immowebCode, images}) => {
 }
 
 export default function EstateCard({estate}) {
+    
+    // TODO : display this component somewhere
+    const PriceHistory = () => estate.priceHistory && (
+        <Timeline mode="left">
+            {estate.priceHistory.map(h => (
+                <Timeline.Item label={moment(h.date).format('DD/MM')}>
+                    {h.price}
+                </Timeline.Item>
+            ))}
+        </Timeline>
+    )
+
+    const PriceInfo = () => {
+        if(estate.priceHistory) {
+            return  <Space>
+                        <span style={{textDecorationLine: 'line-through'}}>
+                            {estate.priceHistory[0].price}
+                        </span>
+                        {estate.displayPrice}
+                    </Space>
+        } else {
+            return estate.displayPrice
+        }
+    }
 
     return (
         <div className='EstateCard' >
-            <Card title={estate.displayPrice} hoverable
+            <Card hoverable
+
+                title={<PriceInfo/>}
+                
                 cover={<ImageGallery immowebCode={estate.immowebCode} images={estate.images} />}
+
                 extra={<>
                     {estate.hasGarden ? <Tag color="lime">✓ 🌳 {estate.gardenArea || '?'}m²</Tag> : null}
                     {estate.isAuction ? <Tag color="orange">🔨 auction</Tag> : null}
