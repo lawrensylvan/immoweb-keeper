@@ -89,7 +89,7 @@ function mapFiltersToMongo(f) {
 	if(f.onlyWithGarden) {
 		r.push({'rawMetadata.property.hasGarden': f.onlyWithGarden})
 		if(f.minGardenArea) {
-			r.push('rawMetadata.property.gardenSurface', f.minGardenArea)
+			r.push({'rawMetadata.property.gardenSurface': {$gte: f.minGardenArea} })
 		}
 	}
 
