@@ -1,60 +1,25 @@
-import { useLazyQuery, gql } from '@apollo/client'
-import { Layout,  } from 'antd'
+import React from 'react'
+import { Layout } from 'antd'
 import 'antd/dist/antd.css'
+import { useSearch, SearchContext } from '../state/useSearch'
 import SearchFilters from './SearchFilters'
 import ResultViewer from './ResultViewer'
 
-export default function Search() {
+export default function SearchPage() {
 
-    // Load estates with active filters
-    const [fetchEstates, { loading, error, data }] = useLazyQuery(gql`
-        query estates(
-            $priceRange: [Int]!,
-            $zipCodes: [Int],
-            $onlyWithGarden: Boolean,
-            $minGardenArea: Int,
-            $immowebCode: Int) {
-            estates(priceRange: $priceRange, 
-                    zipCodes: $zipCodes,
-                    onlyWithGarden: $onlyWithGarden,
-                    minGardenArea: $minGardenArea,
-                    immowebCode: $immowebCode) {
-                immowebCode
-                price
-                zipCode
-                locality
-                images
-                modificationDate
-                hasGarden
-                gardenArea
-                agencyLogo
-                agencyName
-                geolocation
-                street
-                isAuction
-                isSold
-                isUnderOption
-                priceHistory {
-                    price
-                    date
-                }
-            }
-        }
-    `)
-    
     return (
-        <div className="SearchPage">
 
+        <SearchContext.Provider value={useSearch()}>
             <Layout>
                 <Layout.Header style={{ position: 'fixed', zIndex: 1, width: '100%', backgroundColor: 'floralwhite', minHeight: '90px' }}>
-                    <SearchFilters fetchEstates={fetchEstates} />
+                    <SearchFilters/>
                 </Layout.Header>
                 <Layout.Content style={{marginTop: '90px', paddingLeft: '20px'}} >
-                    <ResultViewer results={{loading, error, data}} />
+                    <ResultViewer/>
                 </Layout.Content>
             </Layout>
+        </SearchContext.Provider>
             
-        </div>
     )
 
 }

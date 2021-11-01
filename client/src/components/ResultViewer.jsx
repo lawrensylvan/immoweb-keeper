@@ -1,8 +1,12 @@
-import { Tabs, Result } from 'antd'
+import { Tabs, Result, Space, Select } from 'antd'
 import moment from 'moment'
 import GridResults from './GridResults'
 import MapResults from './MapResults'
 import TableResults from './TableResults'
+import { SearchResultStatus, SearchContext } from '../state/useSearch'
+import { useContext } from 'react'
+
+const { Option, OptGroup } = Select
 
 const estateDecorator = estate => ({
     ...estate,
@@ -12,13 +16,11 @@ const estateDecorator = estate => ({
     displayModificationDate: moment(estate.modificationDate).format('DD MMM YYYY') + ' (' + moment(estate.modificationDate).fromNow() + ')'
 })
 
-export default function ResultViewer({results}) {
+export default function ResultViewer() {
     
-    const {loading, error, data} = results
+    const { searchStatus, searchResults, resultSorter, setSorter, error } = useContext(SearchContext)
 
-    const estates = data?.estates.map(estateDecorator)
-
-    if(error) {
+    if(searchStatus === SearchResultStatus.ERROR) {
         return <Result
             title={error.message}
             subTitle={error?.networkError?.result?.errors[0]?.message || error.stack}
@@ -27,23 +29,49 @@ export default function ResultViewer({results}) {
                 : 'error'} />
     }
 
-    //if(!estates && !loading) return <Empty description="Start playing with the filters !" />
+    const isLoading = searchStatus === SearchResultStatus.LOADING
 
-    //if(!estates && loading) return <Spin />
+    const estates = searchResults?.map(estateDecorator)
+
+    const SortSelector = ({field, order}) => (
+        <Space style={{marginLeft: '30px'}}>
+            <Select allowClear placeholder="sort results by..." style={{minWidth: '200px'}}
+                    value={field + '-' + order}
+                    onChange={v => {
+                        if(v === undefined) return
+                        const [field, order] = v.split('-')
+                        setSorter({field, order})
+                    }} >
+                <OptGroup label="💰 Price">
+                    <Option value="price-asc">💰↑ cheapest</Option>
+                    <Option value="price-desc">💰↓ most expensive</Option>
+                </OptGroup>
+                <OptGroup label="🏡 ↔ Area">
+                    <Option value="gardenArea-desc">🌳↓ biggest gardens</Option>
+                    <Option value="area-desc">🏠↓ biggest living area</Option>
+                </OptGroup>
+                <OptGroup label="📅 Dates">
+                    <Option value="lastModificationDate-desc">📅↓ modified recently</Option>
+                    <Option value="creationDate-asc">📅↑ oldest (online since)</Option>
+                    <Option value="disappearanceDate-desc">📅↓ disappeared recently</Option>
+                </OptGroup>
+            </Select>
+            {estates && <span style={{fontStyle: 'italic'}}>({estates.length} results)</span>}
+        </Space>
+    )
 
     return (
-        <div className='ResultViewer'>
-            <Tabs defaultActiveKey="1">
+            <Tabs defaultActiveKey={1} 
+                  tabBarExtraContent={{right: <SortSelector field={resultSorter.field} order={resultSorter.order} />}}>
                 <Tabs.TabPane tab="Grid results" key="1">
-                    <GridResults estates={estates} isLoading={loading} />
+                    <GridResults estates={estates} isLoading={isLoading} />
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="Map results" key="2">
-                    <MapResults estates={estates} isLoading={loading} />
+                    <MapResults estates={estates} isLoading={isLoading} />
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="Table results" key="3">
-                    <TableResults estates={estates} isLoading={loading} />
+                    <TableResults estates={estates} isLoading={isLoading} />
                 </Tabs.TabPane>
             </Tabs>
-        </div>
     )
 }

@@ -1,0 +1,4 @@
+/* Additional content at the right of tabs should be aligned left */
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap {
+    flex: none;
+}

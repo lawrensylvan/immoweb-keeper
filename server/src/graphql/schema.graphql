@@ -9,12 +9,24 @@ type Query {
         onlyWithGarden:     Boolean
         minGardenArea:      Int
         onlyStillAvailable: Boolean
+        orderBy:            OrderByInput
     ): [Estate]
 
     estateByImmowebCode(
         immowebCode: Int
     ): Estate
     
+}
+
+input OrderByInput {
+  field: String
+  order: SortOrder
+}
+
+enum SortOrder {
+  asc
+  desc
+  none
 }
 
 type Estate {

@@ -35,7 +35,7 @@ const ImageGallery = ({immowebCode, images}) => {
 export default function EstateCard({estate}) {
     
     // TODO : display this component somewhere
-    const PriceHistory = () => estate.priceHistory && (
+    /*const PriceHistory = () => estate.priceHistory && (
         <Timeline mode="left">
             {estate.priceHistory.map(h => (
                 <Timeline.Item label={moment(h.date).format('DD/MM')}>
@@ -43,7 +43,7 @@ export default function EstateCard({estate}) {
                 </Timeline.Item>
             ))}
         </Timeline>
-    )
+    )*/
 
     const PriceInfo = () => {
         if(estate.priceHistory) {

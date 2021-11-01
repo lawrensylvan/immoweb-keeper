@@ -6,13 +6,17 @@ module.exports = {
 
 	Query: {
 
-		// Find all estates applying filters (only most recent version of each estate)
+		// Find all estates applying filters and sorter
 		estates: (_, args) => EstateModel
 								.aggregate([
+									// apply filter
 									{ $match: {$and: mapFiltersToMongo(args)} },
+									// keep most recent version for each immowebCode
 									{ $sort: { immowebCode: 1, lastModificationDate: -1 } },
 									{ $group: { _id: "$immowebCode", doc: { $first : "$$ROOT"}} },
-									{ $replaceRoot: { newRoot: '$doc'} }
+									{ $replaceRoot: { newRoot: '$doc'} },
+									// apply sorter
+									{ $sort: mapSorterToMongo(args) }
 								])
 								.exec(),
 	
@@ -99,8 +103,27 @@ function mapFiltersToMongo(f) {
 		r.push({'e.disappearanceDate': null})
 	}
 
-	console.dir(r)
 	return r
+}
+
+function mapSorterToMongo({orderBy}) {
+
+	const basicFieldMapping = {
+		price: 					'rawMetadata.price.mainValue',
+		gardenArea: 			'rawMetadata.property.gardenSurface',
+		livingArea: 			'rawMetadata.property.netHabitableSurface',
+		lastModificationDate:	'lastModificationDate',
+		creationDate: 			'creationDate',
+		disappearanceDate: 		'disappearanceDate',
+	}
+
+	const sortOrderMapping = {
+		'desc': -1,
+		'none': 0,
+		'asc': 1
+	}
+	console.dir({ [basicFieldMapping[orderBy.field]]: sortOrderMapping[orderBy.order] })
+	return { [basicFieldMapping[orderBy.field]]: sortOrderMapping[orderBy.order] }
 }
 
 /* Legacy (neater mappers, but not flexible enough) 

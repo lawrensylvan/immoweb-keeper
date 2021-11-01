@@ -35,7 +35,6 @@ async function initDBAndImageRepository() {
 
     // Initialize db connection
     try {
-        console.log(process.env.MONGODB_URL)
         db = await connectDB(process.env.MONGODB_URL, process.env.MONGODB_DATABASE)
     } catch(error) {
         console.error('Unable to connect to your mongodb database : ' + error)
