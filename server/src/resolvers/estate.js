@@ -98,9 +98,10 @@ function mapFiltersToMongo(f) {
 	}
 
 	if(f.onlyStillAvailable) {
-		r.push({'e.rawMetadata.flags.isPublicSale': null})
-		r.push({'e.rawMetadata.flags.isSoldOrRented': null})
-		r.push({'e.disappearanceDate': null})
+		r.push({'rawMetadata.flags.isPublicSale': null})
+		r.push({'rawMetadata.flags.isSoldOrRented': null})
+		r.push({'disappearanceDate': null})
+	}
 	}
 
 	return r
