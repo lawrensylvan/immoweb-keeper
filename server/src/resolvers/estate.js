@@ -16,7 +16,7 @@ module.exports = {
 									{ $group: { _id: "$immowebCode", doc: { $first : "$$ROOT"}} },
 									{ $replaceRoot: { newRoot: '$doc'} },
 									// apply sorter
-									{ $sort: mapSorterToMongo(args) }
+									{ $sort: args.orderBy ? mapSorterToMongo(args) : {price: 1} }
 								])
 								.exec(),
 	
@@ -102,6 +102,12 @@ function mapFiltersToMongo(f) {
 		r.push({'rawMetadata.flags.isSoldOrRented': null})
 		r.push({'disappearanceDate': null})
 	}
+
+	if(f.freeText) {
+		r.push({$or: [
+			//{'rawMetadata.property.description': {$regex: f.freeText}},
+			{'rawMetadata.property.location.street': {$regex: new RegExp(f.freeText, "i")}}
+		]})
 	}
 
 	return r

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Button, Slider, Space, Switch, Select, Divider, BackTop, InputNumber, Popover, Typography } from 'antd'
 import { SearchOutlined, AimOutlined, EuroOutlined, ReloadOutlined, DeleteOutlined } from '@ant-design/icons'
 import _ from 'lodash'
-import { SearchContext, SearchResultStatus } from '../state/useSearch'
+import { SearchContext, SearchResultStatus } from '../hooks/useSearch'
 
 const { Text } = Typography
 
@@ -15,7 +15,9 @@ export default function SearchFilters({fetchEstates}) {
         zipCodes,
         onlyWithGarden,
         minGardenArea,
-        immowebCode
+        immowebCode,
+        onlyStillAvailable,
+        freeText
     } = searchFilters
 
     const [shouldDisplayGardenArea, setShouldDisplayGardenArea] = useState(false)
@@ -37,7 +39,7 @@ export default function SearchFilters({fetchEstates}) {
                     />
                 </Space>
 
-                <Divider type="vertical" />
+            <Space style={{display: 'flex', flexDirection: 'column'}}>
 
                 {/* ZIP CODES */}
                 <Space>
@@ -51,8 +53,15 @@ export default function SearchFilters({fetchEstates}) {
                     </Select>
                 </Space>
 
-                <Divider type="vertical" />
-                
+                {/* FREE TEXT */}
+                <Space>
+                    <FileSearchOutlined/>
+                    <Input value={freeText || ''} onChange={e => setFilter('freeText', e.target.value)}
+                            placeholder="free search" style={{ width: '230px' }}
+                            allowClear />
+                </Space>
+
+            </Space>
                 {/* GARDEN */}
                 <Popover arrow visible={shouldDisplayGardenArea} content={
                     <div onMouseLeave={() => setShouldDisplayGardenArea(false)}>

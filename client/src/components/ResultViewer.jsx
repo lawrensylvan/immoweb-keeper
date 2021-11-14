@@ -3,7 +3,7 @@ import moment from 'moment'
 import GridResults from './GridResults'
 import MapResults from './MapResults'
 import TableResults from './TableResults'
-import { SearchResultStatus, SearchContext } from '../state/useSearch'
+import { SearchResultStatus, SearchContext } from '../hooks/useSearch'
 import { useContext } from 'react'
 
 const { Option, OptGroup } = Select

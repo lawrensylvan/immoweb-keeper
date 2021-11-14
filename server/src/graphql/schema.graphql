@@ -9,6 +9,7 @@ type Query {
         onlyWithGarden:     Boolean
         minGardenArea:      Int
         onlyStillAvailable: Boolean
+        freeText:           String
         orderBy:            OrderByInput
     ): [Estate]
 

@@ -6,11 +6,11 @@ import _ from 'lodash'
 export const SearchContext = React.createContext()
 
 export const SearchResultStatus = {
-    NO_SEARCH: 'NO_SEARCH',
+    NO_SEARCH:  'NO_SEARCH',
     NO_RESULTS: 'NO_RESULTS',
-    ERROR: 'ERROR',
-    LOADING: 'LOADING',
-    READY: 'READY'
+    ERROR:      'ERROR',
+    LOADING:    'LOADING',
+    READY:      'READY'
 }
 
 export const useSearch = () => {
@@ -21,13 +21,14 @@ export const useSearch = () => {
 
     const [searchFilters, setSearchFilters] = useState({
         priceRange: [0, 500000],
-        zipCodes: [1000, 1030, 1140],
+        zipCodes: [1030, 1140],
         onlyWithGarden: false,
         minGardenArea: undefined,
-        immowebCode: undefined
+        immowebCode: undefined,
+        freeText: undefined
     })
 
-    const [resultSorter, setResultSorter] = useState({field: 'price', order: 'desc'})
+    const [resultSorter, setResultSorter] = useState({field: 'lastModificationDate', order: 'desc'})
 
     // Load estates with active filters
     const [fetch, { loading, error, data }] = useLazyQuery(gql`
@@ -37,6 +38,7 @@ export const useSearch = () => {
             $onlyWithGarden: Boolean,
             $minGardenArea: Int,
             $immowebCode: Int,
+            $freeText: String
             $orderBy: OrderByInput
         ) {
 
@@ -45,6 +47,7 @@ export const useSearch = () => {
                     onlyWithGarden: $onlyWithGarden,
                     minGardenArea: $minGardenArea,
                     immowebCode: $immowebCode,
+                    freeText: $freeText,
                     orderBy: $orderBy) {
                 immowebCode
                 price
@@ -71,23 +74,25 @@ export const useSearch = () => {
 
     // Fetch estates with search filter
     const fetchResults = (searchFilters, resultSorter) => {
-
+        
         clearTimeout(interval.current)
 
         notification.open({
-            message: 'Search ongoing...' + resultSorter.field + ' ' + resultSorter.order,
-            description: JSON.stringify(searchFilters),
-            duration: 1
+            message: 'Search ongoing...',
+            description: JSON.stringify(searchFilters) + ' by ' + resultSorter.field + ' (' + resultSorter.order + ')',
+            placement: 'bottomLeft',
+            duration: 5
         })
 
-        const {priceRange, zipCodes, onlyWithGarden, minGardenArea, immowebCode} = searchFilters
+        const {priceRange, zipCodes, onlyWithGarden, minGardenArea, immowebCode, freeText} = searchFilters
 
         fetch({ variables: {
             ...searchFilters,
-            zipCodes: zipCodes.length ? zipCodes : undefined,
+            priceRange: priceRange?.[1] ? priceRange : priceRange?.[0] ? [priceRange[0], 99999999] : [0, 99999999],
+            zipCodes: zipCodes?.length ? zipCodes : undefined,
+            freeText: freeText === "" ? undefined : freeText,
             onlyWithGarden: onlyWithGarden || undefined,
             minGardenArea: onlyWithGarden && minGardenArea > 0 ? minGardenArea : undefined,
-            priceRange: priceRange[1] ? priceRange : [priceRange[0], 1000000000],
             immowebCode: immowebCode || undefined,
 
             orderBy: resultSorter
@@ -120,7 +125,7 @@ export const useSearch = () => {
     const clearFilters = () => {
         if(searchFilters !== {}) {
             setSearchFilters({})
-            fetchResultsLater(searchFilters, {})
+            fetchResultsLater(searchFilters, resultSorter)
         }
     }
 
@@ -137,7 +142,7 @@ export const useSearch = () => {
         clearFilters,
         resultSorter,
         setSorter,
-        fetchResults,
+        fetchResults: () => fetchResults(searchFilters, resultSorter),
         searchResults: data?.estates,
         searchStatus: loading               ?   SearchResultStatus.LOADING
                     : error                 ?   SearchResultStatus.ERROR
