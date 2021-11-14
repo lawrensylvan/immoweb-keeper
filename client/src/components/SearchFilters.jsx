@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
-import { Button, Slider, Space, Switch, Select, Divider, BackTop, InputNumber, Popover, Typography } from 'antd'
-import { SearchOutlined, AimOutlined, EuroOutlined, ReloadOutlined, DeleteOutlined } from '@ant-design/icons'
+import { Button, Slider, Space, Switch, Select, Divider, InputNumber, Popover, Typography, Input } from 'antd'
+import { SearchOutlined, AimOutlined, EuroOutlined, ReloadOutlined, DeleteOutlined, FileSearchOutlined, ClearOutlined, CodepenOutlined, ArrowsAltOutlined, NumberOutlined } from '@ant-design/icons'
 import _ from 'lodash'
 import { SearchContext, SearchResultStatus } from '../hooks/useSearch'
 
@@ -8,7 +8,7 @@ const { Text } = Typography
 
 export default function SearchFilters({fetchEstates}) {
 
-    const { searchFilters, setFilter, fetchResults, searchStatus } = useContext(SearchContext)
+    const { searchFilters, setFilter, clearFilters, fetchResults, searchStatus } = useContext(SearchContext)
     
     const {
         priceRange,
@@ -23,21 +23,19 @@ export default function SearchFilters({fetchEstates}) {
     const [shouldDisplayGardenArea, setShouldDisplayGardenArea] = useState(false)
     
     return (
-        <div className="SearchFilters" style={{display: 'flex'}}>
-            <BackTop />
-            <Space size="large">
+        <Space size="medium" style={{display: 'flex', justifyContent: 'space-evenly', alignContent: 'center'}}>
 
-                {/* PRICE RANGE */}
-                <Space>
-                    <EuroOutlined/>
-                    <Slider min={0} max={1010000} step={10000}
-                            value={priceRange.map(n => n === null ? 1010000 : n)}
-                            onChange={bounds => setFilter('priceRange', bounds.map(n => n === 1010000 ? null : n))}
-                            marks={_.range(0, 1010000, 100000).reduce((acc, n) => ({...acc, [n]: ''}), {})}
-                            range={{draggableTrack:true}} style={{width: '25vw'}} tooltipVisible
-                            tipFormatter={n => n > 1000000 ? '∞' : n === 1000000 ? Math.ceil(n/1000000) + 'M€' : n < 1000 ? n + '€' : Math.ceil(n/1000) + 'k€'}
-                    />
-                </Space>
+            {/* PRICE RANGE */}
+            <Space>
+                <EuroOutlined/>
+                <Slider min={0} max={1010000} step={10000}
+                        value={(priceRange || [0, 1010000]).map(n => n === null ? 1010000 : n)}
+                        onChange={bounds => setFilter('priceRange', bounds.map(n => n === 1010000 ? null : n))}
+                        marks={_.range(0, 1010000, 100000).reduce((acc, n) => ({...acc, [n]: ''}), {})}
+                        range={{draggableTrack:true}} style={{width: '25vw'}} tooltipVisible
+                        tipFormatter={n => n > 1000000 ? '∞' : n === 1000000 ? Math.ceil(n/1000000) + 'M€' : n < 1000 ? n + '€' : Math.ceil(n/1000) + 'k€'}
+                />
+            </Space>
 
             <Space style={{display: 'flex', flexDirection: 'column'}}>
 
@@ -47,9 +45,9 @@ export default function SearchFilters({fetchEstates}) {
                     <Select value={zipCodes} onChange={v => setFilter('zipCodes', v)}
                             mode="multiple" placeholder="Select localities" style={{ width: '230px' }}
                             optionLabelProp="label" optionFilterProp={"children"} showArrow allowClear>
-                        <Select.Option value={1000} label="Bruxelles">1000 · Bruxelles</Select.Option>
-                        <Select.Option value={1030} label="Schaerbeek">1030 · Schaerbeek</Select.Option>
-                        <Select.Option value={1140} label="Evere">1140 · Evere</Select.Option>
+                        <Select.Option value={1000} label="1000">1000 · Bruxelles</Select.Option>
+                        <Select.Option value={1030} label="1030">1030 · Schaerbeek</Select.Option>
+                        <Select.Option value={1140} label="1140">1140 · Evere</Select.Option>
                     </Select>
                 </Space>
 
@@ -62,14 +60,17 @@ export default function SearchFilters({fetchEstates}) {
                 </Space>
 
             </Space>
+
+            <Space style={{display: 'flex', flexDirection: 'column' }}>
+
                 {/* GARDEN */}
                 <Popover arrow visible={shouldDisplayGardenArea} content={
                     <div onMouseLeave={() => setShouldDisplayGardenArea(false)}>
                             <Space>
                                 ≥
                                 <InputNumber style={{width:'64px'}} autoFocus
-                                             min={0} max={999} step={10}
-                                             value={minGardenArea} onChange={v => setFilter('minGardenArea', v) }
+                                            min={0} max={999} step={10}
+                                            value={minGardenArea} onChange={v => setFilter('minGardenArea', v) }
                                 />
                                 m²
                                 <Button shape="circle" type="dashed"
@@ -83,6 +84,7 @@ export default function SearchFilters({fetchEstates}) {
                 }>  
 
                     <Switch checked={onlyWithGarden}
+                            style={{minWidth: '150px'}}
                             onChange={b => {setFilter('onlyWithGarden', b); setShouldDisplayGardenArea(b) }}
                             onMouseEnter={() => setShouldDisplayGardenArea(onlyWithGarden)}
                             unCheckedChildren={'🌳 with garden ?'}
@@ -91,22 +93,66 @@ export default function SearchFilters({fetchEstates}) {
 
                 </Popover>
 
-                {/* IMMOWEB CODE */}
-                <InputNumber style={{width:'110px'}} controls={false}
-                    value={immowebCode} onChange={v => setFilter('immowebCode', v)} placeholder="#immoweb"
+                {/* ONLY AVAILABLE */}
+                <Switch checked={onlyStillAvailable}
+                        style={{minWidth: '150px'}}
+                        onChange={b => {setFilter('onlyStillAvailable', b)}}
+                        unCheckedChildren={'only still available ?'}
+                        checkedChildren={'✓ only still available !'}
                 />
 
-                <Divider type="vertical" />
+            </Space>
 
-                {/* SUBMIT */}
-                <Button onClick={() => fetchResults()}>
-                    {searchStatus === SearchResultStatus.NO_SEARCH
-                        ? <Space>Search <SearchOutlined /></Space>
-                        : <Space>Refresh <ReloadOutlined /></Space>
-                    }
-                </Button>
+            <Space style={{display: 'flex', flexDirection: 'column' }}>
+
+                {/* IMMOWEB CODE */}
+                <Space>
+                    <NumberOutlined />
+                    <InputNumber style={{width:'132px'}} controls={false}
+                        value={immowebCode} onChange={v => setFilter('immowebCode', v)} placeholder="immoweb code"
+                    />
+                </Space>
+                
+                <Space>
+                    {/* BEDROOM COUNT */}
+                    <Space>
+                        <CodepenOutlined />
+                        <InputNumber style={{width:'48px'}} controls={false}
+                            value={0} onChange={v => setFilter('bedroomCount', v)}
+                        /> 
+                    </Space>
+                    
+                    {/* LIVING AREA */}
+                    <Space>
+                        <ArrowsAltOutlined />
+                        <InputNumber style={{width:'54px'}} controls={false}
+                            value={0} onChange={v => setFilter('livingArea', v)}
+                            formatter={t => t + ' m²'}
+                        />
+                    </Space>
+                </Space>
                 
             </Space>
-        </div>
+
+            <Divider type="vertical" />
+
+            <Space style={{display: 'flex', flexDirection: 'column'}}>
+
+                {/* CLEAR */}    
+                <Button onClick={() => clearFilters()} style={{width: '100px'}}>
+                    <Space>Clear all<ClearOutlined/></Space>
+                </Button>
+
+                {/* SUBMIT */}
+                <Button onClick={() => fetchResults()} style={{width: '100px'}}>
+                    {searchStatus === SearchResultStatus.NO_SEARCH
+                        ? <Space>Search <SearchOutlined/></Space>
+                        : <Space>Refresh <ReloadOutlined/></Space>
+                    }
+                </Button>
+
+            </Space>
+            
+        </Space>
     )
 }
