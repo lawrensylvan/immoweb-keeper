@@ -47,6 +47,8 @@ module.exports = {
 		isAuction:			e => e.rawMetadata.flags.isPublicSale || false,
 		isSold:				e => e.rawMetadata.flags.isSoldOrRented || false,
 		isUnderOption:		e => e.rawMetadata.flags.isUnderOption || false,
+		livingArea:			e => e.rawMetadata.property.netHabitableSurface,
+		bedroomCount:		e => e.rawMetadata.property.bedroomCount,
 
 		// price history across all versions (only if price was changed at least once)
 		priceHistory:		async e => {
@@ -97,9 +99,17 @@ function mapFiltersToMongo(f) {
 		}
 	}
 
+	if(f.minLivingArea) {
+		r.push({'rawMetadata.property.netHabitableSurface': {$gte: f.minLivingArea} })
+	}
+
+	if(f.minBedroomCount) {
+		r.push({'rawMetadata.property.bedroomCount': {$gte: f.minBedroomCount} })
+	}
+
 	if(f.onlyStillAvailable) {
-		r.push({'rawMetadata.flags.isPublicSale': null})
-		r.push({'rawMetadata.flags.isSoldOrRented': null})
+		r.push({'$or': [{'rawMetadata.flags.isPublicSale': false}, {'rawMetadata.flags.isPublicSale': null}]})
+		r.push({'$or': [{'rawMetadata.flags.isSoldOrRented': false}, {'rawMetadata.flags.isSoldOrRented': null}]})
 		r.push({'disappearanceDate': null})
 	}
 

@@ -8,8 +8,10 @@ type Query {
         zipCodes:           [Int]
         onlyWithGarden:     Boolean
         minGardenArea:      Int
+        minLivingArea:      Int
         onlyStillAvailable: Boolean
         freeText:           String
+        minBedroomCount:    Int
         orderBy:            OrderByInput
     ): [Estate]
 
@@ -49,6 +51,8 @@ type Estate {
     isAuction:          Boolean
     isSold:             Boolean
     isUnderOption:      Boolean
+    livingArea:         Int
+    bedroomCount:       Int
 }
 
 type PriceHistory {

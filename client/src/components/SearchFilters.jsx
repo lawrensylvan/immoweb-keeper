@@ -17,7 +17,9 @@ export default function SearchFilters({fetchEstates}) {
         minGardenArea,
         immowebCode,
         onlyStillAvailable,
-        freeText
+        freeText,
+        minLivingArea,
+        minBedroomCount
     } = searchFilters
 
     const [shouldDisplayGardenArea, setShouldDisplayGardenArea] = useState(false)
@@ -108,7 +110,7 @@ export default function SearchFilters({fetchEstates}) {
                 {/* IMMOWEB CODE */}
                 <Space>
                     <NumberOutlined />
-                    <InputNumber style={{width:'132px'}} controls={false}
+                    <InputNumber style={{width:'151px'}} controls={false}
                         value={immowebCode} onChange={v => setFilter('immowebCode', v)} placeholder="immoweb code"
                     />
                 </Space>
@@ -118,15 +120,16 @@ export default function SearchFilters({fetchEstates}) {
                     <Space>
                         <CodepenOutlined />
                         <InputNumber style={{width:'48px'}} controls={false}
-                            value={0} onChange={v => setFilter('bedroomCount', v)}
+                            value={minBedroomCount || 0} onChange={v => setFilter('minBedroomCount', v)}
                         /> 
                     </Space>
                     
                     {/* LIVING AREA */}
                     <Space>
                         <ArrowsAltOutlined />
-                        <InputNumber style={{width:'54px'}} controls={false}
-                            value={0} onChange={v => setFilter('livingArea', v)}
+                        <InputNumber style={{width:'73px'}}
+                            value={minLivingArea || 0} onChange={v => setFilter('minLivingArea', v)}
+                            min={0} max={1000} step={25}
                             formatter={t => t + ' m²'}
                         />
                     </Space>

@@ -25,7 +25,9 @@ export const useSearch = () => {
         onlyWithGarden: false,
         minGardenArea: undefined,
         immowebCode: undefined,
-        freeText: undefined
+        freeText: undefined,
+        minLivingArea: 0,
+        minBedroomCount: 0
     })
 
     const [resultSorter, setResultSorter] = useState({field: 'lastModificationDate', order: 'desc'})
@@ -35,17 +37,24 @@ export const useSearch = () => {
         query estates(
             $priceRange: [Int],
             $zipCodes: [Int],
+            $freeText: String,
             $onlyWithGarden: Boolean,
             $minGardenArea: Int,
-            $immowebCode: Int,
-            $freeText: String
+            $minLivingArea: Int,
+            $minBedroomCount: Int,
+            $onlyStillAvailable: Boolean
+            $immowebCode: Int,            
             $orderBy: OrderByInput
         ) {
 
             estates(priceRange: $priceRange, 
                     zipCodes: $zipCodes,
+                    freeText: $freeText,
                     onlyWithGarden: $onlyWithGarden,
                     minGardenArea: $minGardenArea,
+                    minLivingArea: $minLivingArea,
+                    minBedroomCount: $minBedroomCount,
+                    onlyStillAvailable: $onlyStillAvailable
                     immowebCode: $immowebCode,
                     freeText: $freeText,
                     orderBy: $orderBy) {
@@ -64,6 +73,8 @@ export const useSearch = () => {
                 isAuction
                 isSold
                 isUnderOption
+                livingArea
+                bedroomCount
                 priceHistory {
                     price
                     date
@@ -77,26 +88,40 @@ export const useSearch = () => {
         
         clearTimeout(interval.current)
 
-        notification.open({
-            message: 'Search ongoing...',
-            description: JSON.stringify(searchFilters) + ' by ' + resultSorter.field + ' (' + resultSorter.order + ')',
-            placement: 'bottomLeft',
-            duration: 5
-        })
+        const {
+            priceRange,
+            zipCodes,
+            freeText,
+            onlyWithGarden,
+            minGardenArea,
+            minLivingArea,
+            minBedroomCount,
+            onlyStillAvailable,
+            immowebCode
+        } = searchFilters
 
-        const {priceRange, zipCodes, onlyWithGarden, minGardenArea, immowebCode, freeText} = searchFilters
-
-        fetch({ variables: {
+        const variables = {
             ...searchFilters,
             priceRange: priceRange?.[1] ? priceRange : priceRange?.[0] ? [priceRange[0], 99999999] : [0, 99999999],
             zipCodes: zipCodes?.length ? zipCodes : undefined,
             freeText: freeText === "" ? undefined : freeText,
             onlyWithGarden: onlyWithGarden || undefined,
             minGardenArea: onlyWithGarden && minGardenArea > 0 ? minGardenArea : undefined,
+            minLivingArea: minLivingArea > 0 ? minLivingArea : undefined,
+            minBedroomCount: minBedroomCount > 0 ? minBedroomCount : undefined,
+            onlyStillAvailable: onlyStillAvailable || undefined,
             immowebCode: immowebCode || undefined,
-
             orderBy: resultSorter
-        }})
+        }
+
+        notification.open({
+            message: 'Search ongoing...',
+            description: <pre>{JSON.stringify(variables, null, 2)}</pre>,
+            placement: 'bottomLeft',
+            duration: 5
+        })
+
+        fetch({ variables })
 
         setFirstSearch(false)
     }
@@ -125,7 +150,7 @@ export const useSearch = () => {
     const clearFilters = () => {
         if(searchFilters !== {}) {
             setSearchFilters({})
-            fetchResultsLater(searchFilters, resultSorter)
+            fetchResultsLater({}, resultSorter)
         }
     }
 

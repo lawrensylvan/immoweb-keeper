@@ -100,6 +100,15 @@ export default function EstateCard({estate}) {
                     title={estate.street ? `${estate.street}, ${estate.locality}` : estate.locality}
                     description={estate.displayModificationDate}
                 />
+
+                <Card.Meta style={{paddingTop: '12px'}}
+                    description={
+                    <>
+                        {estate.livingArea ? <Tag color="default">🏠↔ {estate.livingArea}m²</Tag> : null}
+                        {estate.bedroomCount ? <Tag color="geekblue">🛏 x{estate.bedroomCount}</Tag> : null}
+                    </>}    
+                />
+
             </Card>
         </div>
     )
