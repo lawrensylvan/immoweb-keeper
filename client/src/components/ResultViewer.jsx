@@ -35,7 +35,7 @@ export default function ResultViewer() {
 
     const SortSelector = ({field, order}) => (
         <Space style={{marginLeft: '30px'}}>
-            <Select allowClear placeholder="sort results by..." style={{minWidth: '200px'}}
+            <Select placeholder="sort results by..." style={{minWidth: '200px'}}
                     value={field + '-' + order}
                     onChange={v => {
                         if(v === undefined) return
@@ -43,20 +43,20 @@ export default function ResultViewer() {
                         setSorter({field, order})
                     }} >
                 <OptGroup label="💰 Price">
-                    <Option value="price-asc">💰↑ cheapest</Option>
-                    <Option value="price-desc">💰↓ most expensive</Option>
+                    <Option value="price-ascend">💰↑ cheapest</Option>
+                    <Option value="price-descend">💰↓ most expensive</Option>
                 </OptGroup>
                 <OptGroup label="🏡 ↔ Area">
-                    <Option value="gardenArea-desc">🌳↓ biggest gardens</Option>
-                    <Option value="area-desc">🏠↓ biggest living area</Option>
+                    <Option value="gardenArea-descend">🌳↓ biggest gardens</Option>
+                    <Option value="livingArea-descend">🏠↓ biggest living area</Option>
                 </OptGroup>
                 <OptGroup label="📅 Dates">
-                    <Option value="lastModificationDate-desc">📅↓ modified recently</Option>
-                    <Option value="creationDate-asc">📅↑ oldest (online since)</Option>
-                    <Option value="disappearanceDate-desc">📅↓ disappeared recently</Option>
+                    <Option value="modificationDate-descend">📅↓ modified recently</Option>
+                    <Option value="creationDate-ascend">📅↑ oldest (online since)</Option>
+                    <Option value="disappearanceDate-descend">📅↓ disappeared recently</Option>
                 </OptGroup>
             </Select>
-            {estates && <span style={{fontStyle: 'italic'}}>({estates.length} results)</span>}
+            {estates && <span style={{fontStyle: 'italic'}}>({estates.length} result{estates.length >= 2 && 's'})</span>}
         </Space>
     )
 

@@ -27,8 +27,8 @@ input OrderByInput {
 }
 
 enum SortOrder {
-  asc
-  desc
+  ascend
+  descend
   none
 }
 

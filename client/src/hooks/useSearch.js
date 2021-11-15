@@ -30,7 +30,7 @@ export const useSearch = () => {
         minBedroomCount: 0
     })
 
-    const [resultSorter, setResultSorter] = useState({field: 'lastModificationDate', order: 'desc'})
+    const [resultSorter, setResultSorter] = useState({field: 'modificationDate', order: 'descend'})
 
     // Load estates with active filters
     const [fetch, { loading, error, data }] = useLazyQuery(gql`

@@ -135,9 +135,9 @@ function mapSorterToMongo({orderBy}) {
 	}
 
 	const sortOrderMapping = {
-		'desc': -1,
+		'descend': -1,
 		'none': 0,
-		'asc': 1
+		'ascend': 1
 	}
 	console.dir({ [basicFieldMapping[orderBy.field]]: sortOrderMapping[orderBy.order] })
 	return { [basicFieldMapping[orderBy.field]]: sortOrderMapping[orderBy.order] }
