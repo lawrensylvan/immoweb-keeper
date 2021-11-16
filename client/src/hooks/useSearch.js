@@ -73,6 +73,7 @@ export const useSearch = () => {
                 isAuction
                 isSold
                 isUnderOption
+                description
                 livingArea
                 bedroomCount
                 priceHistory {

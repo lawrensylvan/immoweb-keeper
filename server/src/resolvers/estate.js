@@ -47,6 +47,9 @@ module.exports = {
 		isAuction:			e => e.rawMetadata.flags.isPublicSale || false,
 		isSold:				e => e.rawMetadata.flags.isSoldOrRented || false,
 		isUnderOption:		e => e.rawMetadata.flags.isUnderOption || false,
+		description:		e => e.rawMetadata.property.alternativeDescriptions
+									? e.rawMetadata.property.alternativeDescriptions.fr || e.rawMetadata.property.description
+									: e.rawMetadata.property.description,
 		livingArea:			e => e.rawMetadata.property.netHabitableSurface,
 		bedroomCount:		e => e.rawMetadata.property.bedroomCount,
 

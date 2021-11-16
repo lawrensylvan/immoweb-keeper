@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { Card, Avatar, Image, Skeleton, Popover, Tag, Dropdown, Menu, Timeline, Space } from 'antd'
-import { CopyOutlined, EditOutlined, ExpandAltOutlined, HeartOutlined } from '@ant-design/icons'
+import { Card, Avatar, Image, Skeleton, Popover, Tag, Dropdown, Menu, Space } from 'antd'
+import { CopyOutlined, EditOutlined, FontSizeOutlined, HeartOutlined } from '@ant-design/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import moment from 'moment'
 
 const ImageGallery = ({immowebCode, images}) => {
     const fullURLs = images.map(i => `http://localhost:5000/${immowebCode}/${i}`)
@@ -74,7 +73,13 @@ export default function EstateCard({estate}) {
                 </>}
                 actions={[
                     <HeartOutlined key="heart" />,
-                    <ExpandAltOutlined key="expand" />,
+
+                    <Popover trigger="hover" content={
+                            <div style={{maxWidth: '300px', fontSize: '0.8em', fontStyle: 'italic', color: '#3f6ea7'}}>
+                                {estate.description || 'No description available'}
+                            </div>} >
+                        <FontSizeOutlined key="more" />
+                    </Popover>,
 
                     <Dropdown overlay={
                         <Menu>
