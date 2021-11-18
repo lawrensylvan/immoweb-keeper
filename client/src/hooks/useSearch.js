@@ -56,7 +56,6 @@ export const useSearch = () => {
                     minBedroomCount: $minBedroomCount,
                     onlyStillAvailable: $onlyStillAvailable
                     immowebCode: $immowebCode,
-                    freeText: $freeText,
                     orderBy: $orderBy) {
                 immowebCode
                 price
@@ -70,6 +69,7 @@ export const useSearch = () => {
                 agencyName
                 geolocation
                 street
+                streetNumber
                 isAuction
                 isSold
                 isUnderOption

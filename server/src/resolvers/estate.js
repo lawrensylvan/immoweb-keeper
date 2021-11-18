@@ -51,6 +51,7 @@ module.exports = {
 									? e.rawMetadata.property.alternativeDescriptions.fr || e.rawMetadata.property.description
 									: e.rawMetadata.property.description,
 		livingArea:			e => e.rawMetadata.property.netHabitableSurface,
+		streetNumber:		e => e.rawMetadata.property.location.number,
 		bedroomCount:		e => e.rawMetadata.property.bedroomCount,
 
 		// price history across all versions (only if price was changed at least once)
@@ -132,9 +133,10 @@ function mapSorterToMongo({orderBy}) {
 		price: 					'rawMetadata.price.mainValue',
 		gardenArea: 			'rawMetadata.property.gardenSurface',
 		livingArea: 			'rawMetadata.property.netHabitableSurface',
-		lastModificationDate:	'lastModificationDate',
+		modificationDate:		'lastModificationDate',
 		creationDate: 			'creationDate',
 		disappearanceDate: 		'disappearanceDate',
+		street:					'rawMetadata.property.location.street'
 	}
 
 	const sortOrderMapping = {

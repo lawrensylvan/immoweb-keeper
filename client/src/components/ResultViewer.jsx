@@ -12,7 +12,8 @@ const estateDecorator = estate => ({
     ...estate,
     displayPrice: (estate.isAuction ? 'from ' : '') + estate.price.toLocaleString('fr-BE') + ' €',
     priceHistory: estate.priceHistory?.map(e => ({...e, price: e.price.toLocaleString('fr-BE') + ' €'})),
-    displayZipCode: estate.locality + ' (' + estate.zipCode + ')',
+    displayStreetAndNumber: estate.street ? estate.street + ' ' + estate.streetNumber : '',
+    displayZipCode: estate.zipCode + ' ' + estate.locality,
     displayModificationDate: moment(estate.modificationDate).format('DD MMM YYYY') + ' (' + moment(estate.modificationDate).fromNow() + ')'
 })
 

@@ -53,6 +53,7 @@ type Estate {
     isUnderOption:      Boolean
     description:        String
     livingArea:         Int
+    streetNumber:       String
     bedroomCount:       Int
 }
 
