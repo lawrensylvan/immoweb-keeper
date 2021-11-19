@@ -194,7 +194,7 @@ async function processPage(url, pageNumber, shouldOnlyCollectImmowebCodes, lastR
             if(!wasPersisted) {
                 continue
             }
-            isUpdate ? newEstateCount++ : updatedEstateCount++
+            isUpdate ? updatedEstateCount++ : newEstateCount++
         } catch(error) {
             console.error(`Error while processing immoweb code ${immowebCode} !`)
         }
