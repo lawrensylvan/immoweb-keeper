@@ -19,9 +19,11 @@ export default function MapResults({estates}) {
     return (
         <div className='MapResults' style={{display: 'flex', justifyContent: 'center', position: 'relative'}}>
 
-            <div style={{position: 'absolute', left: `100px`, top: `100px`, zIndex: '10000'}}>
-                {selectedEstate && <EstateCard estate={selectedEstate} />}
+            {selectedEstate &&
+            <div style={{position: 'absolute', left: 120, top: 50, zIndex: 1000}}>
+                <EstateCard estate={selectedEstate} />
             </div>
+            }
 
             <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{width: '90%', height: '75vh'}} >
             
