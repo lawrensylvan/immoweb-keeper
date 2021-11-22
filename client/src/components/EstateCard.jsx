@@ -67,9 +67,9 @@ export default function EstateCard({estate}) {
 
                 extra={<>
                     {estate.hasGarden ? <Tag color="lime">✓ 🌳 {estate.gardenArea || '?'}m²</Tag> : null}
-                    {estate.isAuction ? <Tag color="orange">🔨 auction</Tag> : null}
-                    {estate.isSold ? <Tag color="red">😡 sold</Tag> : null}
-                    {estate.isUnderOption ? <Tag color="red">😡 option</Tag> : null}
+                    {estate.isAuction ? <Tag color="orange">$↥ auction</Tag> : null}
+                    {estate.isSold ? <Tag color="red">😠 sold</Tag> : null}
+                    {estate.isUnderOption ? <Tag color="red">😤 option</Tag> : null}
                 </>}
                 actions={[
                     <HeartOutlined key="heart" />,
@@ -100,9 +100,14 @@ export default function EstateCard({estate}) {
                     
                 ]}
             >
+
                 <Card.Meta
                     avatar={estate.agencyName ? <Popover content={estate.agencyName}><Avatar src={estate.agencyLogo} /></Popover> : null}
-                    title={estate.street ? `${estate.street}, ${estate.locality}` : estate.locality}
+                    title={
+                        estate.street 
+                            ? <span>{estate.street} {estate.streetNumber}<br/><small>{estate.zipCode + ' ' + estate.locality}</small></span>
+                            : estate.zipCode + ' ' + estate.locality
+                    }
                     description={estate.displayModificationDate}
                 />
 
