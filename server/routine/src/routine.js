@@ -17,7 +17,7 @@ const RESULTS_PER_PAGE = 30
 let imageRepository
 let db
 const today = moment().format('YYYY-MM-DD')
-const yesterday = moment().add(-1, 'day')
+const yesterday = moment().add(-1, 'day').format('YYYY-MM-DD')
 
 mainRoutine()
 
