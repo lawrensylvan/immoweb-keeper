@@ -5,8 +5,14 @@ import SearchPage from './SearchPage'
 import '../styles.css'
 
 const client = new ApolloClient({
-  uri: `http://localhost:${process.env.REACT_APP_PORT || 5000}/graphql`,
-  cache: new InMemoryCache()
+    uri: `http://localhost:${process.env.REACT_APP_PORT || 5000}/graphql`,
+    cache: new InMemoryCache({
+      typePolicies: {
+            Estate: {
+                keyFields: ["immowebCode"]
+            }
+        }
+    })
 })
 
 const App = () => {
