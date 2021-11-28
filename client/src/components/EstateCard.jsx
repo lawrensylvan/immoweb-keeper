@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Card, Avatar, Image, Skeleton, Popover, Tag, Dropdown, Menu, Space } from 'antd'
-import { CopyOutlined, EditOutlined, FontSizeOutlined, HeartOutlined } from '@ant-design/icons'
+import { CopyOutlined, EditOutlined, FontSizeOutlined, HeartOutlined, HeartTwoTone } from '@ant-design/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { gql, useMutation } from '@apollo/client'
 
 const ImageGallery = ({immowebCode, images}) => {
     const fullURLs = images.map(i => `http://localhost:5000/${immowebCode}/${i}`)
@@ -57,6 +58,23 @@ export default function EstateCard({estate}) {
         }
     }
 
+    const [markAsLiked] = useMutation(gql`
+        mutation markAsLiked($immowebCode: Int!, $isLiked: Boolean) {
+            markAsLiked(immowebCode: $immowebCode, isLiked: $isLiked)
+        }
+    `, {
+        variables: {immowebCode: estate.immowebCode},
+        // TODO: if the mutation returned the id and the isLiked flag directly, this option wouldn't be needed as cache would be auto updated
+        update: (cache, { data }) => {
+            cache.modify({
+                id: cache.identify(estate),
+                fields: {
+                    isLiked: () => data.markAsLiked
+                }
+            })
+        }
+    })
+
     return (
         <div className='EstateCard' >
             <Card hoverable
@@ -72,7 +90,10 @@ export default function EstateCard({estate}) {
                     {estate.isUnderOption ? <Tag color="red">😤 option</Tag> : null}
                 </>}
                 actions={[
-                    <HeartOutlined key="heart" />,
+                    
+                    estate.isLiked
+                        ? <HeartTwoTone  onClick={() => markAsLiked({variables: {isLiked: false}})} key="heart" twoToneColor="red"  />
+                        : <HeartOutlined onClick={() => markAsLiked({variables: {isLiked: true}})}  key="heart"  />,
 
                     <Popover trigger="hover" content={
                             <div style={{maxWidth: '300px', fontSize: '0.8em', fontStyle: 'italic', color: '#3f6ea7'}}>

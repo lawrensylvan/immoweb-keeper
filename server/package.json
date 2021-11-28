@@ -17,6 +17,7 @@
     "follow-redirects": "^1.14.4",
     "graphql": "^15.6.1",
     "graphql-iso-date": "^3.6.1",
+    "graphql-tag": "^2.12.6",
     "jsdom": "^16.2.2",
     "lodash": "^4.17.19",
     "moment": "^2.26.0",

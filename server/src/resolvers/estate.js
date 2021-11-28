@@ -1,4 +1,6 @@
 const { EstateModel } = require('../models/estates')
+const { UserModel } = require('../models/users')
+const gql = require('graphql-tag')
 
 /* GraphQL queries and mutations */
 
@@ -7,18 +9,33 @@ module.exports = {
 	Query: {
 
 		// Find all estates applying filters and sorter
-		estates: (_, args) => EstateModel
-								.aggregate([
-									// apply filter
-									{ $match: {$and: mapFiltersToMongo(args)} },
-									// keep most recent version for each immowebCode
-									{ $sort: { immowebCode: 1, lastModificationDate: -1 } },
-									{ $group: { _id: "$immowebCode", doc: { $first : "$$ROOT"}} },
-									{ $replaceRoot: { newRoot: '$doc'} },
-									// apply sorter
-									{ $sort: args.orderBy ? mapSorterToMongo(args) : {price: 1} }
-								])
-								.exec(),
+		estates: async (obj, args, context) => {
+
+            const estates = await EstateModel
+                .aggregate([
+                    // apply filter
+                    { $match: {$and: await mapFiltersToMongo(args)} },
+                    // keep most recent version for each immowebCode
+                    { $sort: { immowebCode: 1, lastModificationDate: -1 } },
+                    { $group: { _id: "$immowebCode", doc: { $first : "$$ROOT"}} },
+                    { $replaceRoot: { newRoot: '$doc'} },
+                    // apply sorter
+                    { $sort: args.orderBy ? mapSorterToMongo(args) : {price: 1} }
+                ])
+                .exec()
+            
+            // lazy load user's liked and selected items if isLiked field is requested
+            // TODO : consider if there is a cleaner way of fetching it (from the field resolver but with a single query)
+            const query = gql`${context.body.query}`
+            const selectedFields = query.definitions[0].selectionSet.selections[0].selectionSet.selections
+            if(selectedFields.some(e => e.name.value === 'isLiked')) {
+                const user = await UserModel.findOne({name: 'lawrensylvan'}).exec() // TODO : take username from context
+                user.likedEstates
+                return estates.map(e => ({...e, isLiked: user.likedEstates.includes(e.immowebCode)}))
+            } else {
+                return estates
+            }
+        },
 	
 		// Find the most recent version of an estate from its immowebCode
 		estateByImmowebCode: (_, {immowebCode}) => EstateModel
@@ -27,6 +44,18 @@ module.exports = {
 														.limit(1).exec()
 		
 	},
+
+    Mutation: {
+        markAsLiked: async (_, {immowebCode, isLiked}) => {
+            if(isLiked === false) {
+                await UserModel.updateOne({name: 'lawrensylvan'}, {$pull: {likedEstates: immowebCode}}) // TODO : take user from context
+            }
+            else {
+                await UserModel.updateOne({name: 'lawrensylvan'}, {$push: {likedEstates: immowebCode}}) // TODO : take user from context
+            }
+            return isLiked
+        }
+    },
 
 	Estate: {
 		

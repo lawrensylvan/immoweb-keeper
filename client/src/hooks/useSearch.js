@@ -76,6 +76,7 @@ export const useSearch = () => {
                 description
                 livingArea
                 bedroomCount
+                isLiked
                 priceHistory {
                     price
                     date

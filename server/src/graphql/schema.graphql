@@ -51,13 +51,21 @@ type Estate {
     isAuction:          Boolean
     isSold:             Boolean
     isUnderOption:      Boolean
-    description:        String
-    livingArea:         Int
-    streetNumber:       String
-    bedroomCount:       Int
+    isLiked:            Boolean
 }
 
 type PriceHistory {
     date:   Date!
     price:  Int                      
+}
+
+
+type Mutation {
+
+    markAsLiked(
+        immowebCode: Int!
+        isLiked: Boolean
+    ): Boolean
+
+
 }
