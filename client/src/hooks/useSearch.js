@@ -77,6 +77,7 @@ export const useSearch = () => {
                 livingArea
                 bedroomCount
                 isLiked
+                isVisited
                 priceHistory {
                     price
                     date
@@ -169,7 +170,7 @@ export const useSearch = () => {
         clearFilters,
         resultSorter,
         setSorter,
-        fetchResults: () => fetchResults(searchFilters, resultSorter),
+        fetchResults: (customFilters, customSorter) => fetchResults(customFilters || searchFilters, customSorter || resultSorter),
         searchResults: data?.estates,
         searchStatus: loading               ?   SearchResultStatus.LOADING
                     : error                 ?   SearchResultStatus.ERROR
