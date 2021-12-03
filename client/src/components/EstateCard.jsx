@@ -104,10 +104,10 @@ export default function EstateCard({estate}) {
 
                     <Dropdown overlay={
                         <Menu>
-                            <Menu.Item>Mark as sold</Menu.Item>
-                            <Menu.Item>Mark as duplicate</Menu.Item>
-                            <Menu.Item>Add final price</Menu.Item>
-                            <Menu.Item>Correct field</Menu.Item>
+                            <Menu.Item key="sold">Mark as sold</Menu.Item>
+                            <Menu.Item key="duplicate">Mark as duplicate</Menu.Item>
+                            <Menu.Item key="price">Add final price</Menu.Item>
+                            <Menu.Item key="edit">Correct field</Menu.Item>
                         </Menu>
                     }>
                         <EditOutlined key="edit" />
