@@ -2,6 +2,8 @@ const { EstateModel } = require('../models/estates')
 const { UserModel } = require('../models/users')
 const gql = require('graphql-tag')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const { UserInputError } = require('apollo-server-express')
 
 /* GraphQL queries and mutations */
 
@@ -53,6 +55,25 @@ module.exports = {
             return UserModel.create({name: name, password: hash})
         },
     
+        login: async (parent, {name, password}, {SECRET}) => {
+            const user = await UserModel.findOne({name})
+            if(!user) {
+                throw new UserInputError(`No such user '${name}'`)
+            }
+            const isValid = await bcrypt.compare(password, user.password)
+            if(!isValid) {
+                throw new UserInputError(`Invalid password for user '${name}'`)
+            }
+            
+            const token = jwt.sign(
+                {user: {name: user.name}},
+                SECRET,
+                {expiresIn: '1y'}
+            )
+            
+            return token
+        },
+
         markAsLiked: async (parent, {immowebCode, isLiked}, {user}) => {
             if(isLiked === false) {
                 await UserModel.updateOne({name: 'lawrensylvan'}, {$pull: {likedEstates: immowebCode}}) // TODO : take user from context

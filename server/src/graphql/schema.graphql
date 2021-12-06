@@ -68,10 +68,11 @@ type User {
 type Mutation {
 
     register(name: String!, password: String!): User
+    login(name: String!, password: String!): String
+
     markAsLiked(
         immowebCode: Int!
         isLiked: Boolean
     ): Boolean
-
 
 }
