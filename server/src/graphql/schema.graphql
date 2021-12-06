@@ -59,9 +59,15 @@ type PriceHistory {
     price:  Int                      
 }
 
+type User {
+    name:           String!
+    likedEstates:   [Estate]
+    visitedEstates: [Estate]
+}
 
 type Mutation {
 
+    register(name: String!, password: String!): User
     markAsLiked(
         immowebCode: Int!
         isLiked: Boolean

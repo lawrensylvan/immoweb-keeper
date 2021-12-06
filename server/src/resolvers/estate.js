@@ -1,6 +1,7 @@
 const { EstateModel } = require('../models/estates')
 const { UserModel } = require('../models/users')
 const gql = require('graphql-tag')
+const bcrypt = require('bcrypt')
 
 /* GraphQL queries and mutations */
 
@@ -46,7 +47,13 @@ module.exports = {
 	},
 
     Mutation: {
-        markAsLiked: async (_, {immowebCode, isLiked}) => {
+
+        register: async (parent, {name, password}) => {
+            const hash = await bcrypt.hash(password, 12)
+            return UserModel.create({name: name, password: hash})
+        },
+    
+        markAsLiked: async (parent, {immowebCode, isLiked}, {user}) => {
             if(isLiked === false) {
                 await UserModel.updateOne({name: 'lawrensylvan'}, {$pull: {likedEstates: immowebCode}}) // TODO : take user from context
             }
