@@ -12,12 +12,19 @@ type Query {
         onlyStillAvailable: Boolean
         freeText:           String
         minBedroomCount:    Int
+        onlyLiked:          Boolean
         orderBy:            OrderByInput
     ): [Estate]
 
     estateByImmowebCode(
         immowebCode: Int
     ): Estate
+
+    users: [User]
+
+    userByName(
+        name: String
+    ): User
     
 }
 
@@ -33,30 +40,44 @@ enum SortOrder {
 }
 
 type Estate {
-    immowebCode:        String!
+    
+    immowebCode:        Int!
+
+    description:        String
+    images:             [String]
+
     price:              Int
     priceHistory:       [PriceHistory]
+
+    geolocation:        [Float]
     zipCode:            Int
     locality:           String
-    images:             [String]
-    creationDate:       Date!
-    modificationDate:   Date!
-    disappearanceDate:  Date
+    street:             String
+    streetNumber:       String
+    
+    bedroomCount:       Int
     hasGarden:          Boolean
     gardenArea:         Int
-    agencyName:         String
-    agencyLogo:         String
-    geolocation:        [Float]
-    street:             String
+    livingArea:         Int
+
+    creationDate:       Date!
+    modificationDate:   Date!
+    disappearanceDate:  Date    
+
     isAuction:          Boolean
     isSold:             Boolean
     isUnderOption:      Boolean
+
+    agencyName:         String
+    agencyLogo:         String    
+    
     isLiked:            Boolean
+
 }
 
 type PriceHistory {
     date:   Date!
-    price:  Int                      
+    price:  Int
 }
 
 type User {

@@ -1,8 +1,13 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
+import MainLayout from './MainLayout'
+import LoginScreen from './LoginScreen'
 import SearchPage from './SearchPage'
+import LikedEstates from './LikedEstates'
+import { BrowserRouter, Navigate, Route, Routes, Outlet } from 'react-router-dom'
 import '../styles.css'
+import Logout from './Logout'
 
 const httpLink = createHttpLink({
     uri: `http://localhost:${process.env.REACT_APP_PORT || 5000}/graphql`
@@ -32,11 +37,29 @@ function PrivateOutlet() {
     return isAuthenticated ? <Outlet/> : <Navigate to="/login" />
 }
 
-        <Route exact path='/'>
-          <SearchPage />
-        </Route>
-    </ApolloProvider>
-  )
-}
+export default function App() {
 
-export default App
+    return (
+        <ApolloProvider client={client}>
+            <BrowserRouter>
+                <Routes>
+
+                    <Route path="login" element={<LoginScreen/>}/>
+                    
+                    <Route path="logout" element={<Logout/>}/>
+
+                    <Route path="/" element={<PrivateOutlet/>}>
+                        <Route element={<MainLayout/>}>
+                            <Route path="explore" index element={<SearchPage/>} />
+                            <Route path="liked-estates" element={<LikedEstates/>} />
+                        </Route>
+                    </Route>
+
+                    <Route path="*" element={<Navigate to="/explore"/>}/>
+
+                </Routes>
+            </BrowserRouter>
+        </ApolloProvider>
+    )
+
+}

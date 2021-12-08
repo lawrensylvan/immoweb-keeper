@@ -12,12 +12,12 @@ module.exports = {
 	Query: {
 
 		// Find all estates applying filters and sorter
-		estates: async (obj, args, context) => {
-
+		estates: async (parent, args, context) => {
+            console.dir(context)
             const estates = await EstateModel
                 .aggregate([
                     // apply filter
-                    { $match: {$and: await mapFiltersToMongo(args)} },
+                    { $match: {$and: await mapFiltersToMongo(args, context)} },
                     // keep most recent version for each immowebCode
                     { $sort: { immowebCode: 1, lastModificationDate: -1 } },
                     { $group: { _id: "$immowebCode", doc: { $first : "$$ROOT"}} },
@@ -29,12 +29,15 @@ module.exports = {
             
             // lazy load user's liked and selected items if isLiked field is requested
             // TODO : consider if there is a cleaner way of fetching it (from the field resolver but with a single query)
-            const query = gql`${context.body.query}`
+            const query = gql`${context.query}`
             const selectedFields = query.definitions[0].selectionSet.selections[0].selectionSet.selections
             if(selectedFields.some(e => e.name.value === 'isLiked')) {
-                const user = await UserModel.findOne({name: 'lawrensylvan'}).exec() // TODO : take username from context
-                user.likedEstates
-                return estates.map(e => ({...e, isLiked: user.likedEstates.includes(e.immowebCode)}))
+                if(!context.user) throw new Error('Cannot fetch liked estates since no user is logged in')
+                const user = await UserModel.findOne({name: context.user.name}).exec()
+                return estates.map(e => ({
+                    ...e,
+                    isLiked: user.likedEstates.includes(e.immowebCode)
+                }))
             } else {
                 return estates
             }
@@ -45,6 +48,12 @@ module.exports = {
 														.find({immowebCode})
 														.sort({lastModificationDate: -1})
 														.limit(1).exec()
+
+		/* Find all users
+		users: () => UserModel.find().exec(),
+
+		// Find a user by name
+		userByName: (_, {name}) => UserModel.findOne({name}).exec()*/
 		
 	},
 
@@ -76,15 +85,35 @@ module.exports = {
 
         markAsLiked: async (parent, {immowebCode, isLiked}, {user}) => {
             if(isLiked === false) {
-                await UserModel.updateOne({name: 'lawrensylvan'}, {$pull: {likedEstates: immowebCode}}) // TODO : take user from context
+                await UserModel.updateOne({name: user.name}, {$pull: {likedEstates: immowebCode}})
             }
             else {
-                await UserModel.updateOne({name: 'lawrensylvan'}, {$push: {likedEstates: immowebCode}}) // TODO : take user from context
+                await UserModel.updateOne({name: user.name}, {$push: {likedEstates: immowebCode}})
             }
             return isLiked
         }
     },
 
+	/*User: {
+		name:				u => u.name,
+		likedEstates:		u => EstateModel.aggregate([
+									// apply filter
+									{ $match: {immowebCode: {$in: u.likedEstates}} },
+									// keep most recent version for each immowebCode
+									{ $sort: { immowebCode: 1, lastModificationDate: -1 } },
+									{ $group: { _id: "$immowebCode", doc: { $first : "$$ROOT"}} },
+									{ $replaceRoot: { newRoot: '$doc'} }
+								]).exec(),
+		visitedEstates:		u => EstateModel.aggregate([
+									// apply filter
+									{ $match: {immowebCode: {$in: u.visitedEstates}} },
+									// keep most recent version for each immowebCode
+									{ $sort: { immowebCode: 1, lastModificationDate: -1 } },
+									{ $group: { _id: "$immowebCode", doc: { $first : "$$ROOT"}} },
+									{ $replaceRoot: { newRoot: '$doc'} }
+								]).exec()
+	},
+    */
 	Estate: {
 		
 		immowebCode: 		e => e.immowebCode,
@@ -125,15 +154,17 @@ module.exports = {
 									.exec()
 			const history = result.filter( (e,i,a) => i === a.findIndex(e2 => e.price === e2.price) )
 			return history.length >= 2 ? history : null
-		}
+		},
 
-	}
+        isLiked: e => e.isLiked
+
+	},
 
 }
 
 /* What arguments are accepted from the client and how they are compared against the MongoDB data ? */
 
-function mapFiltersToMongo(f) {
+async function mapFiltersToMongo(f, context) {
 	let r = []
 
 	if(f.immowebCode) {
@@ -176,10 +207,17 @@ function mapFiltersToMongo(f) {
 
 	if(f.freeText) {
 		r.push({$or: [
-			//{'rawMetadata.property.description': {$regex: f.freeText}},
+			{'rawMetadata.customers[0].name': {$regex: new RegExp(f.freeText, "i")}},
+			{'rawMetadata.property.description': {$regex: new RegExp(f.freeText, "i")}},
 			{'rawMetadata.property.location.street': {$regex: new RegExp(f.freeText, "i")}}
 		]})
 	}
+
+    if(f.onlyLiked) {
+        if(!context.user) throw new Error('Cannot fetch liked estates since no user is logged in')
+        const user = await UserModel.findOne({name: context.user.name}).exec()
+        r.push({immowebCode: {$in: user.likedEstates}})
+    }
 
 	return r
 }
@@ -201,39 +239,6 @@ function mapSorterToMongo({orderBy}) {
 		'none': 0,
 		'ascend': 1
 	}
-	console.dir({ [basicFieldMapping[orderBy.field]]: sortOrderMapping[orderBy.order] })
-	return { [basicFieldMapping[orderBy.field]]: sortOrderMapping[orderBy.order] }
+	
+    return { [basicFieldMapping[orderBy.field]]: sortOrderMapping[orderBy.order] }
 }
-
-/* Legacy (neater mappers, but not flexible enough) 
-
-const estateArgsToMongoMapper = {
-	immowebCode:	v => ({key: 'immowebCode'								, value: v								}),
-	priceRange: 	v => ({key: 'rawMetadata.price.mainValue'				, value: {$gte: v[0], $lte: v[1]}		}),
-	zipCodes: 		v => ({key:	'rawMetadata.property.location.postalCode'	, value: {$in: v.map(e=>e.toString())}	}),
-	onlyWithGarden:	v => ({key:	'rawMetadata.property.hasGarden'			, value: v || null						}),
-	minGardenArea:	v => ({key:	'rawMetadata.property.gardenSurface'		, value: {$gte: v}				 		}), // TODO : include gardens without area -> needs refactor
-	// TODO : onlyStillAvailable filter -> needs to refactor this method which is not flexible enough
-}
-
-function estateToMongoMapper(args) {
-	let result = {}
-	for(let propName in estateArgsToMongoMapper) {
-		if(args[propName] !== undefined) {
-			const {key, value} = estateArgsToMongoMapper[propName](args[propName])
-			if(result[key] !== undefined) {
-				if(result['$and'] !== undefined) {
-					result['$and'].push({[key]: value})
-				} else {
-					result['$and'] = [{[key]: result[key]}, {[key]: value}]
-					result[key] = undefined
-				}
-			} else {
-				result[key] = value
-			}
-		}
-	}
-	console.dir(result)
-	return result
-}
-*/

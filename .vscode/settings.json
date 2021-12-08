@@ -1,6 +1,8 @@
 {
     "editor.fontFamily": "Fira Code",
     "editor.fontLigatures": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
     "breadcrumbs.enabled": true,
     "window.zoomLevel": 0
 }

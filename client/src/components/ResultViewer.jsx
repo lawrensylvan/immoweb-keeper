@@ -62,7 +62,7 @@ export default function ResultViewer() {
     )
 
     return (
-            <Tabs defaultActiveKey={1} 
+            <Tabs defaultActiveKey={1} className="resultTab"
                   tabBarExtraContent={{right: <SortSelector field={resultSorter.field} order={resultSorter.order} />}}>
                 <Tabs.TabPane tab="Grid results" key="1">
                     <GridResults estates={estates} isLoading={isLoading} />

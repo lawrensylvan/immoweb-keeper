@@ -1,4 +1,19 @@
 /* Additional content at the right of tabs should be aligned left */
-.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap {
+.resultTab.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap {
     flex: none;
+}
+
+.mainLayout.ant-layout {
+    flex-direction: row;
+}
+
+.custom .ant-input, .custom .ant-input-password {
+    background-color: #f2f2f2;
+    color: black;
+    border: none;
+    border-radius: 5px; 
+}
+
+.custom .ant-input::placeholder, .custom .ant-input-password::placeholder {
+    color: lightgray;
 }
