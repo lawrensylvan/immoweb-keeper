@@ -38,7 +38,7 @@ export default function MapResults({estates}) {
                 {estates?.filter(e => e.geolocation?.length === 2).map(e => 
                     <CircleMarker center={[e.geolocation[1], e.geolocation[0]]} radius={6}
                                   pathOptions={{ color: selectedEstate === e ? 'blue' : 'pink' }}
-                                  eventHandlers={{click: (event) => setSelectedEstate(e)}} />
+                                  eventHandlers={{click: (event) => setSelectedEstate(e)}} key={e.immowebCode} />
                 )}
             </MapContainer>
         </div>
