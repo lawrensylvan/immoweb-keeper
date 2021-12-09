@@ -8,11 +8,13 @@ import LikedEstates from './LikedEstates'
 import { BrowserRouter, Navigate, Route, Routes, Outlet } from 'react-router-dom'
 import '../styles.css'
 import Logout from './Logout'
+import useAuth from '../hooks/useAuth'
 
 const httpLink = createHttpLink({
     uri: `http://localhost:${process.env.REACT_APP_PORT || 5000}/graphql`
 })
 
+// Add user token in request header
 const authLink = setContext((_, { headers }) => ({
     headers: {
         ...headers,
@@ -31,31 +33,30 @@ const client = new ApolloClient({
     })
 })
 
-function PrivateOutlet() {
-    const token = localStorage.getItem('token')
-    const isAuthenticated = token && token !== 'null' && token !== 'undefined'
-    return isAuthenticated ? <Outlet/> : <Navigate to="/login" />
-}
+const DEFAULT_PAGE = "/explore/advanced-search"
 
 export default function App() {
+
+    const [{token, userName}, setToken] = useAuth()
 
     return (
         <ApolloProvider client={client}>
             <BrowserRouter>
                 <Routes>
 
-                    <Route path="login" element={<LoginScreen/>}/>
+                    <Route path="login" element={<LoginScreen setToken={setToken} />}/>
                     
                     <Route path="logout" element={<Logout/>}/>
 
-                    <Route path="/" element={<PrivateOutlet/>}>
-                        <Route element={<MainLayout/>}>
-                            <Route path="explore" index element={<SearchPage/>} />
-                            <Route path="liked-estates" element={<LikedEstates/>} />
+                    <Route path="/" element={token ? <Outlet/> : <Navigate to="/login" />}>
+                        <Route element={<MainLayout userName={userName}/>}>
+                            <Route path="explore/advanced-search" element={<SearchPage/>} />
+                            <Route path="flagged-items/liked-estates" element={<LikedEstates/>} />
+                            <Route path="" element={<Navigate to={DEFAULT_PAGE} />} />
                         </Route>
                     </Route>
 
-                    <Route path="*" element={<Navigate to="/explore"/>}/>
+                    <Route path="*" element={<Navigate to={DEFAULT_PAGE} />}/>
 
                 </Routes>
             </BrowserRouter>

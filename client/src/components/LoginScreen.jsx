@@ -3,7 +3,7 @@ import { Button, Form, Input, notification } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { gql, useMutation } from '@apollo/client'
 
-export default function LoginScreen(props) {
+export default function LoginScreen({setToken}) {
 
     const [login, {loading}] = useMutation(gql`
         mutation login($name: String!, $password: String!) {
@@ -15,8 +15,8 @@ export default function LoginScreen(props) {
     const onSubmit = ({name, password}) => {
         login({variables: {name, password}})
         .then(data => {
-            localStorage.setItem('token', data.data.login)
-            navigateTo('/liked-estates')
+            setToken(data.data.login)
+            navigateTo('/flagged-items/liked-estates')
         })
         .catch(error => notification.open({
             message: error.message,
