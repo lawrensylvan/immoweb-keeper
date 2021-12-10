@@ -18,6 +18,7 @@
   "scripts": {
     "routine": "cd server && npm run routine",
     "server": "cd server && npm run dev",
-    "client": "cd client && npm start"
+    "client": "cd client && npm start",
+    "start": "cd server && npm start"
   }
 }
