@@ -5,7 +5,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { gql, useMutation } from '@apollo/client'
 
 const ImageGallery = ({immowebCode, images}) => {
-    const fullURLs = images.map(i => `http://localhost:5000/${immowebCode}/${i}`) // TODO : extract port number in env var
+    const fullURLs = images.map(i => `http://localhost:${process.env.REACT_APP_PORT || 5000}/${immowebCode}/${i}`) // TODO : extract port number in env var
     const firstURL = fullURLs[0]
     const [visible, setVisible] = useState(false)
     
