@@ -27,12 +27,22 @@
     const http = require('http')
     const httpServer = http.createServer(app)
 
-    // Serve static photos
+    // Serve React server if in production
 
     const path = require('path')
+    if(process.env.NODE__ENV === 'production') {
+        app.use(express.static('client/build'))
+        app.get('*', (req, res) => {
+            res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+        })
+    }
+
+    // Serve static photos
+
+    /*const path = require('path')
     const dir = path.join(__dirname, '../routine/images') // TODO : remove absolute path
     app.use(express.static(dir))
-    console.log(`✓ Serving static images at http://localhost:${port}/{immowebCode}/{imageName}`)
+    console.log(`✓ Serving static images at http://localhost:${port}/{immowebCode}/{imageName}`)*/
 
     // Init Apollo server with GraphQL schema and resolvers
     
@@ -70,15 +80,6 @@
             query: req.body.query
         })
     })
-
-    // Serve React server if in production
-
-    if(process.env.NODE__ENV === 'production') {
-        app.use(express.static('client/build'))
-        app.get('*', (req, res) => {
-            res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-        })
-    }
 
     // Start Apollo server with Express as middleware
     
