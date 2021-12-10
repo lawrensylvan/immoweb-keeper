@@ -30,10 +30,11 @@
     // Serve React server if in production
 
     const path = require('path')
+    console.log('Process env NODE__ENV = ' + process.env.NODE__ENV)
     //if(process.env.NODE__ENV === 'production') {
         app.use(express.static('client/build'))
         app.get('*', (req, res) => {
-            res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'))
+            res.sendFile(path.resolve(__dirname, '../..', 'client', 'build', 'index.html'))
         })
     //}
 
