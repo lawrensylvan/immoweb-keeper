@@ -1,9 +1,7 @@
-import { Layout, Result } from 'antd'
+import { Result } from 'antd'
 import moment from 'moment'
 import GridResults from './GridResults'
 import { useQuery, gql } from '@apollo/client'
-import { HeartFilled } from '@ant-design/icons'
-import { Content, Header } from 'antd/lib/layout/layout'
 
 const estateDecorator = estate => ({
     ...estate,
@@ -91,12 +89,6 @@ export default function LikedEstates() {
 
     const estates = data?.estates.map(estateDecorator)
 
-    return (
-        <Layout>
-            <h1>Liked estates</h1>
-            <Content>
-                <GridResults estates={estates} isLoading={loading} />
-            </Content>
-        </Layout>
-    )
+    return <GridResults estates={estates} isLoading={loading} />
+
 }

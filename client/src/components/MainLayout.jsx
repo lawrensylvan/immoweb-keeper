@@ -2,11 +2,15 @@ import React, { useState } from 'react'
 import Sider from 'antd/lib/layout/Sider'
 import SiderMenu from './SiderMenu'
 import { useSearch, SearchContext } from '../hooks/useSearch'
-import { Layout } from 'antd'
+import { Layout, Button } from 'antd'
 import '../styles.css'
 import { Outlet } from 'react-router'
+import { Content, Header } from 'antd/lib/layout/layout'
+import BreadCrumbs from './BreadCrumbs'
+import { LogoutOutlined } from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 
-export default function MainLayout({children}) {
+export default function MainLayout({isAuthenticated, userName}) {
 
     const [collapsed, setCollapsed] = useState(false)
 
@@ -27,7 +31,29 @@ export default function MainLayout({children}) {
                     </div>
                     <SiderMenu collapsed={collapsed} />
                 </Sider>
-                <Outlet/>
+                <Content>
+                    <Layout>
+                        <Header style={{
+                            backgroundColor: '#7d827f', maxHeight: '45px',
+                            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                            }}>
+                                
+                            <BreadCrumbs/>
+                            
+                            <div>
+                                Welcome <b>{userName}</b> !&nbsp;&nbsp; 
+                                <Button size="small">
+                                    <Link to="/logout">
+                                        <LogoutOutlined/> Log out
+                                    </Link>
+                                </Button>
+                            </div>
+                        </Header>
+                    </Layout>
+                    <Content>
+                        <Outlet/>
+                    </Content>
+                </Content>
             </Layout>
         </SearchContext.Provider>
 

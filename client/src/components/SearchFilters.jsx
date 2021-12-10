@@ -29,12 +29,12 @@ export default function SearchFilters({fetchEstates}) {
 
             {/* PRICE RANGE */}
             <Space>
-                <EuroOutlined/>
+                <EuroOutlined />
                 <Slider min={0} max={1010000} step={10000}
                         value={(priceRange || [0, 1010000]).map(n => n === null ? 1010000 : n)}
                         onChange={bounds => setFilter('priceRange', bounds.map(n => n === 1010000 ? null : n))}
                         marks={_.range(0, 1010000, 100000).reduce((acc, n) => ({...acc, [n]: ''}), {})}
-                        range={{draggableTrack:true}} style={{width: '25vw'}} tooltipVisible
+                        range={{draggableTrack:true}} style={{width: '25vw', marginBottom: -21, marginLeft: 15}} tooltipVisible
                         tipFormatter={n => n > 1000000 ? '∞' : n === 1000000 ? Math.ceil(n/1000000) + 'M€' : n < 1000 ? n + '€' : Math.ceil(n/1000) + 'k€'}
                 />
             </Space>
