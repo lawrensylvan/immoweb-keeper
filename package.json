@@ -14,7 +14,6 @@
   ],
   "author": "Laurent Sylvain Vleminckx",
   "license": "GPL-3.0-or-later",
-  "homepage": "https://immoweb-keeper.herokuapp.com/",
   "scripts": {
     "routine": "cd server && npm run routine",
     "server": "cd server && npm run dev",
