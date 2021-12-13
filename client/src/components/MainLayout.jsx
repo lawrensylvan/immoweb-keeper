@@ -27,7 +27,7 @@ export default function MainLayout({isAuthenticated, userName}) {
                         style={{minHeight: '100vh'}}
                         >
                     <div style={{display: 'flex', justifyContent: 'center', padding: '10px 0px 10px 0px'}}>
-                        <img src="logo512.png" alt="Immoweb Keeper" width="70%" style={{maxWidth: '100px'}} />
+                        <img src="/logo512.png" alt="Immoweb Keeper" width="70%" style={{maxWidth: '100px'}} />
                     </div>
                     <SiderMenu collapsed={collapsed} />
                 </Sider>

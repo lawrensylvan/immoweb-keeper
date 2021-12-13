@@ -11,7 +11,7 @@ import Logout from './Logout'
 import useAuth from '../hooks/useAuth'
 
 const httpLink = createHttpLink({
-    uri: `http://localhost:${process.env.REACT_APP_PORT || 5000}/graphql`
+    uri: `/graphql`
 })
 
 // Add user token in request header

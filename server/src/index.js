@@ -27,12 +27,28 @@
     const http = require('http')
     const httpServer = http.createServer(app)
 
-    // Serve static photos
-
     const path = require('path')
-    const dir = path.join(__dirname, '../routine/images') // TODO : remove absolute path
-    app.use(express.static(dir))
-    console.log(`✓ Serving static images at http://localhost:${port}/{immowebCode}/{imageName}`)
+    
+    const isProduction = process.env.NODE__ENV === 'production'
+    
+    // Serve React code (if in production)
+
+    if(isProduction) {
+        const root = path.resolve(__dirname, '../..', 'client', 'build')
+        app.use(express.static(root))
+        app.get('*', (req, res) => {
+            res.sendFile('index.html', root)
+        })
+    }
+
+    // Serve static photos (if in development)
+    
+    if(!isProduction) {
+        const path = require('path')
+        const dir = path.join(__dirname, '../routine/images')
+        app.use(express.static(dir))
+        console.log(`✓ Serving static images at /{immowebCode}/{imageName} on port ${port}`)
+    }
 
     // Init Apollo server with GraphQL schema and resolvers
     
@@ -45,7 +61,7 @@
     const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core')
     
     const jwt = require('jsonwebtoken')
-    const SECRET = process.env.JWT_SECRET // TODO : should be env specific and not pushed to Git
+    const SECRET = process.env.JWT_SECRET
     const addUserMiddleware = async req => {
         const token = req.headers.authentication
         if(token && token != 'null' && token != 'undefined') {
@@ -71,15 +87,6 @@
         })
     })
 
-    // Serve React server if in production
-
-    if(process.env.NODE__ENV === 'production') {
-        app.use(express.static('client/build'))
-        app.get('*', (req, res) => {
-            res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-        })
-    }
-
     // Start Apollo server with Express as middleware
     
     await server.start()
@@ -88,6 +95,6 @@
         path: '/graphql/'
     })
     await new Promise(resolve => httpServer.listen({port}, resolve))
-    console.log(`🚀 GraphQL server ready at http://localhost:${port}${server.graphqlPath}`)
+    console.log(`🚀 GraphQL server ready at ${server.graphqlPath} on port ${port}`)
 
 })()
