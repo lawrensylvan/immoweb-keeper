@@ -4,8 +4,10 @@ import { CopyOutlined, EditOutlined, FontSizeOutlined, HeartOutlined, HeartTwoTo
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { gql, useMutation } from '@apollo/client'
 
+const BASE_IMAGE_URL = process.env.REACT_APP_BASE_IMAGE_URL ?? ''
+
 const ImageGallery = ({immowebCode, images}) => {
-    const fullURLs = images.map(i => `/${immowebCode}/${i}`)
+    const fullURLs = images.map(i => `${BASE_IMAGE_URL}/${immowebCode}/${i}`)
     const firstURL = fullURLs[0]
     const [visible, setVisible] = useState(false)
     
