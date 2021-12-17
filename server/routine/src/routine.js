@@ -1,43 +1,73 @@
 const _  = require('lodash')
 const fs = require('fs')
 const Path = require('path')
+const rq = require('request')
 const https = require('follow-redirects').https
 const moment = require('moment')
 const { JSDOM } = require('jsdom')
 const needle = require('needle')
 const MongoClient = require('mongodb')
 const ObjectId  = MongoClient.ObjectID;
-const config = require('../config.json')
+const input = require('../searches.json')
+const {Storage} = require('@google-cloud/storage')
 require('dotenv').config({ path: 'config.env' })
 
 needle.defaults({follow: 3 })
 
 const RESULTS_PER_PAGE = 30
 
-let imageRepository
+let imageOutputPath
 let db
+let bucket
 const today = moment().format('YYYY-MM-DD')
 const yesterday = moment().add(-1, 'day').format('YYYY-MM-DD')
 
 mainRoutine()
 
-async function initDBAndImageRepository() {
+async function loadConfig() {
 
-    // Create the image repository if it doesnt exist yet
-    if(!config.imageRepository) {
-        console.info('No image repository specified : will use current directory')
-        imageRepository = './images'
-    } else imageRepository = config.imageRepository
-    if(!fs.existsSync(imageRepository)) {
-        console.info('Creating image repository')
-        await fs.promises.mkdir(imageRepository, {recursive: true})
-    }
-
-    // Initialize db connection
+    // Connect to MongoDB to save estate data
     try {
-        db = await connectDB(process.env.MONGODB_URL, process.env.MONGODB_DATABASE)
+        db = await connectDB(process.env.MONGODB_URL, process.env.MONGODB_DATABASE || 'immoweb')
     } catch(error) {
         console.error('Unable to connect to your mongodb database : ' + error)
+        process.exit(1)
+    }
+
+    // Create local image folder if it doesn't exist yet 
+    if(process.env.IMAGE_DESTINATION === 'local') {
+
+        if(!process.env.IMAGE_OUTPUT_PATH) {
+            console.info('No local image output path specified : will use current directory')
+        }
+        imageOutputPath = process.env.GCLOUD_OUTPUT_PATH || './images'
+        if(!fs.existsSync(imageOutputPath)) {
+            console.info('Creating local image folder')
+            await fs.promises.mkdir(imageOutputPath, {recursive: true})
+        }
+    }
+    
+    // Connects to Google Cloud Storage to save images
+    else if(process.env.IMAGE_DESTINATION === 'gcloud') {
+
+        if(!process.env.GCLOUD_KEY_PATH) {
+            console.error('Please provide GCLOUD_KEY_PATH=<path to your gcloud key json file> in config.env')
+            process.exit(1)
+        }
+        if(!process.env.GCLOUD_BUCKET_NAME) {
+            console.error('Please provide GCLOUD_BUCKET_NAME=<gcloud bucket name> in config.env')
+            process.exit(1)
+        }
+        const storage = new Storage({
+            keyFilename: process.env.GCLOUD_KEY_PATH
+        })
+        bucket = storage.bucket(process.env.GCLOUD_BUCKET_NAME)
+        imageOutputPath = process.env.GCLOUD_OUTPUT_PATH || ''
+
+    }
+    
+    else {
+        console.error(`Please provide IMAGE_DESTINATION=<'gcloud' or 'local'> in config.env`)
         process.exit(1)
     }
 
@@ -46,10 +76,10 @@ async function initDBAndImageRepository() {
 // Downloads all Immoweb estates that comply to the search criterias specified in the config
 async function mainRoutine() {
     
-    await initDBAndImageRepository()
+    await loadConfig()
 
     // Parse JSON criterias to search urls and add them to other defined search urls
-    const {searchURLs, searchQueries} = config
+    const {searchURLs, searchQueries} = input
     if((!searchURLs || searchURLs.length === 0) && (!searchQueries || searchQueries.length === 0)) {
         console.error('No search URL or query specified !')
         process.exit(1)
@@ -223,15 +253,13 @@ async function processEstate(immowebCode, lastRunDate, queryId) {
         console.debug(`Skipping estate ${immowebCode} (same modification date as in database)`)
         return {wasPersisted: false, reachedEnd: false}
     }
-    // save the images to the repo (only the new ones, doesn't check for differences inside image file)
+    // save the images to the output destination (only the new ones, doesn't check for differences inside image file)
     const imageURLs = estateData.media.pictures.map(p => p.largeUrl || p.mediumUrl || p.smallUrl)
     const imageNames = []
     for(let imageURL of imageURLs) {
         const fileName = Path.basename(imageURL.replace(/\?[^/]*$/, ''))
-        const outputPath = `${imageRepository}/${immowebCode}/${fileName}`
-        if(!fs.existsSync(outputPath)) {
-            await downloadFile(imageURL, outputPath)
-        }
+        const outputPath = `${imageOutputPath}/${immowebCode}/${fileName}`
+        saveImage(immowebCode, imageURL, outputPath)
         imageNames.push(fileName)
     }
     
@@ -252,6 +280,20 @@ async function processEstate(immowebCode, lastRunDate, queryId) {
     process.stdout.write('.')
 
     return {wasPersisted: true, isUpdate: dbEstate.length > 0, reachedEnd: false}
+}
+
+async function saveImage(immowebCode, imageURL, outputPath) {
+    if(process.env.IMAGE_DESTINATION === 'local') {
+        if(!fs.existsSync(outputPath)) {
+            await downloadFile(imageURL, outputPath)
+        }
+    }
+    else if(process.env.IMAGE_DESTINATION === 'gcloud') {
+        let outputFile = bucket.file(outputPath)
+        const fileWriteStream = outputFile.createWriteStream()
+        let pipe = rq(imageURL).pipe(fileWriteStream)
+        await new Promise(resolve => pipe.on('finish', resolve))
+    }
 }
  
 function buildURLFromQuery(searchQuery) {

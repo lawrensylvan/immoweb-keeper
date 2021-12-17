@@ -1,9 +1,9 @@
 .DS_STORE
 
-# params.json (includes not encrypted credentials)
-config.json
+# json with Google Cloud Storage credentials 
+gcloud_key.json
 
-# folder with downloaded images (if no other 'imageRepositoryPath' specified in config.json)
+# folder with downloaded images (if local)
 images
 
 ### Standard Node gitignores :
@@ -79,8 +79,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
-.env.test
+*.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache

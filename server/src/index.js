@@ -9,7 +9,7 @@
 
     require('dotenv').config({ path: 'config.env' })
     const mongoDbURL = process.env.MONGODB_URL
-    const mongoDbDatabase = process.env.MONGODB_DATABASE
+    const mongoDbDatabase = process.env.MONGODB_DATABASE || 'immoweb'
 
     const mongoose = require('mongoose')
     mongoose.connect(mongoDbURL + '/' + mongoDbDatabase)
@@ -62,6 +62,9 @@
     
     const jwt = require('jsonwebtoken')
     const SECRET = process.env.JWT_SECRET
+    if(!SECRET) {
+        throw new Error('Missing secret in env variables : please add a config.env in /server folder with JWT_SECRET=<random string>')
+    }
     const addUserMiddleware = async req => {
         const token = req.headers.authentication
         if(token && token != 'null' && token != 'undefined') {

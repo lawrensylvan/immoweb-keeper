@@ -7,6 +7,7 @@
     "routine": "node routine/src/routine.js | tee ./routine/logs/$(date '+%Y.%m.%d-%H.%M.%S').log"
   },
   "dependencies": {
+    "@google-cloud/storage": "^5.16.1",
     "@graphql-tools/graphql-file-loader": "^7.3.1",
     "@graphql-tools/load": "^7.4.0",
     "@graphql-tools/schema": "^8.3.0",
@@ -25,7 +26,8 @@
     "lodash": "^4.17.19",
     "moment": "^2.26.0",
     "mongoose": "^6.0.10",
-    "needle": "^3.0.0"
+    "needle": "^3.0.0",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "eslint": "^7.1.0",
