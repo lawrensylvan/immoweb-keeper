@@ -43,9 +43,9 @@
 
     // Serve static photos (if in development)
     
-    if(!isProduction) {
+    if(process.env.SHOULD_SERVE_IMAGES === 'true') {
         const path = require('path')
-        const dir = path.join(__dirname, '../routine/images')
+        const dir = path.join(__dirname, process.env.IMAGE_SOURCE_PATH || '')
         app.use(express.static(dir))
         console.log(`✓ Serving static images at /{immowebCode}/{imageName} on port ${port}`)
     }
