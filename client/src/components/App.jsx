@@ -5,6 +5,7 @@ import MainLayout from './MainLayout'
 import LoginScreen from './LoginScreen'
 import SearchPage from './SearchPage'
 import LikedEstates from './LikedEstates'
+import VisitedEstates from './VisitedEstates'
 import { BrowserRouter, Navigate, Route, Routes, Outlet } from 'react-router-dom'
 import '../styles.css'
 import Logout from './Logout'
@@ -52,6 +53,7 @@ export default function App() {
                         <Route element={<MainLayout userName={userName}/>}>
                             <Route path="explore/advanced-search" element={<SearchPage/>} />
                             <Route path="flagged-items/liked-estates" element={<LikedEstates/>} />
+                            <Route path="flagged-items/visited-estates" element={<VisitedEstates/>} />
                             <Route path="" element={<Navigate to={DEFAULT_PAGE} />} />
                         </Route>
                     </Route>

@@ -13,6 +13,7 @@ type Query {
         freeText:           String
         minBedroomCount:    Int
         onlyLiked:          Boolean
+        onlyVisited:        Boolean
         orderBy:            OrderByInput
     ): [Estate]
 
@@ -72,7 +73,7 @@ type Estate {
     agencyLogo:         String    
     
     isLiked:            Boolean
-
+    isVisited:          Boolean
 }
 
 type PriceHistory {
@@ -94,6 +95,11 @@ type Mutation {
     markAsLiked(
         immowebCode: Int!
         isLiked: Boolean
+    ): Boolean
+
+    markAsVisited(
+        immowebCode: Int!
+        isVisited: Boolean
     ): Boolean
 
 }

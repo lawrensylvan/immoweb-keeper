@@ -4,10 +4,11 @@ import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
 const breadcrumbNameMap = {
-    '/explore':         'Explore',
+    '/explore':                         'Explore',
     '/explore/advanced-search':         'Advanced search',
-    '/flagged-items':   'Flagged items',
-    '/flagged-items/liked-estates':   'Liked estates'
+    '/flagged-items':                   'Flagged items',
+    '/flagged-items/liked-estates':     'Liked estates',
+    '/flagged-items/visited-estates':   'Visited estates'
 }
 
 export default function BreadCrumbs() {

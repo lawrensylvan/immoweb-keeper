@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Card, Avatar, Image, Skeleton, Popover, Tag, Dropdown, Menu, Space } from 'antd'
-import { CopyOutlined, EditOutlined, FontSizeOutlined, HeartOutlined, HeartTwoTone } from '@ant-design/icons'
+import { CopyOutlined, EditOutlined, EyeOutlined, EyeTwoTone, FontSizeOutlined, HeartOutlined, HeartTwoTone } from '@ant-design/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { gql, useMutation } from '@apollo/client'
 
@@ -77,6 +77,23 @@ export default function EstateCard({estate}) {
         }
     })
 
+    const [markAsVisited] = useMutation(gql`
+        mutation markAsVisited($immowebCode: Int!, $isVisited: Boolean) {
+            markAsVisited(immowebCode: $immowebCode, isVisited: $isVisited)
+        }
+    `, {
+        variables: {immowebCode: estate.immowebCode},
+        // TODO: if the mutation returned the id and the isVisited flag directly, this option wouldn't be needed as cache would be auto updated
+        update: (cache, { data }) => {
+            cache.modify({
+                id: cache.identify(estate),
+                fields: {
+                    isVisited: () => data.markAsVisited
+                }
+            })
+        }
+    })
+
     return (
         <div className='EstateCard' >
             <Card hoverable
@@ -96,6 +113,10 @@ export default function EstateCard({estate}) {
                     estate.isLiked
                         ? <HeartTwoTone  onClick={() => markAsLiked({variables: {isLiked: false}})} key="heart" twoToneColor="red"  />
                         : <HeartOutlined onClick={() => markAsLiked({variables: {isLiked: true}})}  key="heart"  />,
+
+                    estate.isVisited
+                        ? <EyeTwoTone onClick={() => markAsVisited({variables: {isVisited: false}})} key="visited" twoToneColor="purple"  />
+                        : <EyeOutlined onClick={() => markAsVisited({variables: {isVisited: true}})}  key="visited"  />,
 
                     <Popover trigger="hover" content={
                             <div style={{maxWidth: '300px', fontSize: '0.8em', fontStyle: 'italic', color: '#3f6ea7'}}>

@@ -3,6 +3,7 @@ import moment from 'moment'
 import GridResults from './GridResults'
 import { useQuery, gql } from '@apollo/client'
 
+// TODO : duplicate code
 const estateDecorator = estate => ({
     ...estate,
     displayPrice: (estate.isAuction ? 'from ' : '') + estate.price.toLocaleString('fr-BE') + ' €',
@@ -12,44 +13,12 @@ const estateDecorator = estate => ({
     displayModificationDate: moment(estate.modificationDate).format('DD MMM YYYY') + ' (' + moment(estate.modificationDate).fromNow() + ')'
 })
 
-export default function LikedEstates() {
-    
-    // Load estates that the current user liked
-    /*const { loading, error, data } = useQuery(gql`
-        query likedEstates {
-            userByName(name: "lawrensylvan") {
-                likedEstates {
-                    immowebCode
-                    price
-                    zipCode
-                    locality
-                    images
-                    modificationDate
-                    hasGarden
-                    gardenArea
-                    agencyLogo
-                    agencyName
-                    geolocation 
-                    street
-                    streetNumber
-                    isAuction
-                    isSold
-                    isUnderOption
-                    description
-                    livingArea
-                    bedroomCount
-                    priceHistory {
-                        price
-                        date
-                    }
-                }
-            }
-        }
-    `)*/
+export default function VisitedEstates() {
 
+    // TODO : duplicate code : should use GraphQL fragment
     const { loading, error, data } = useQuery(gql`
-        query likedEstates {
-            estates(onlyLiked: true) {
+        query visitedEstates {
+            estates(onlyVisited: true) {
                 immowebCode
                 price
                 zipCode
