@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form, Input, notification } from 'antd'
+import { GithubOutlined } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
 import { gql, useMutation } from '@apollo/client'
 
@@ -28,8 +29,8 @@ export default function LoginScreen({setToken}) {
     return (
         <div className="custom" style={{
             height: '100vh',
-            background: 'linear-gradient(90deg, #4b6cb7 0%, #182848 100%)'}
-        }>
+            background: 'linear-gradient(90deg, #4b6cb7 0%, #182848 100%)',
+        }}>
 
             <div style={{padding: 30, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <h1>Immoweb Keeper</h1>
@@ -54,8 +55,15 @@ export default function LoginScreen({setToken}) {
                     <Link to="/register">Sign up</Link>
 
                 </Form>
+
             </div>
 
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+                <a href="https://github.com/lawrensylvan">
+                    <GithubOutlined style={{fontSize: 28, color: 'black'}} />
+                </a>
+            </div>
+            
         </div>
 
     )
