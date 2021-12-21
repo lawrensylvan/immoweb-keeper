@@ -13,8 +13,8 @@ module.exports = {
 
 		// Find all estates applying filters and sorter
 		estates: async (parent, args, context) => {
-            console.dir(context)
-            const estates = await EstateModel
+
+            let estates = await EstateModel
                 .aggregate([
                     // apply filter
                     { $match: {$and: await mapFiltersToMongo(args, context)} },
@@ -27,20 +27,28 @@ module.exports = {
                 ])
                 .exec()
             
-            // lazy load user's liked and selected items if isLiked field is requested
+            // lazy load user's liked/visited items if isLiked/isVisited field is requested
             // TODO : consider if there is a cleaner way of fetching it (from the field resolver but with a single query)
             const query = gql`${context.query}`
             const selectedFields = query.definitions[0].selectionSet.selections[0].selectionSet.selections
             if(selectedFields.some(e => e.name.value === 'isLiked')) {
                 if(!context.user) throw new Error('Cannot fetch liked estates since no user is logged in')
                 const user = await UserModel.findOne({name: context.user.name}).exec()
-                return estates.map(e => ({
+                estates = estates.map(e => ({
                     ...e,
                     isLiked: user.likedEstates.includes(e.immowebCode)
                 }))
-            } else {
-                return estates
             }
+            if(selectedFields.some(e => e.name.value === 'isVisited')) {
+                if(!context.user) throw new Error('Cannot fetch visited estates since no user is logged in')
+                const user = await UserModel.findOne({name: context.user.name}).exec()
+                estates = estates.map(e => ({
+                    ...e,
+                    isVisited: user.visitedEstates.includes(e.immowebCode)
+                }))
+            }
+
+            return estates
         },
 	
 		// Find the most recent version of an estate from its immowebCode
@@ -91,7 +99,18 @@ module.exports = {
                 await UserModel.updateOne({name: user.name}, {$push: {likedEstates: immowebCode}})
             }
             return isLiked
+        },
+
+        markAsVisited: async (parent, {immowebCode, isVisited}, {user}) => {
+            if(isVisited === false) {
+                await UserModel.updateOne({name: user.name}, {$pull: {visitedEstates: immowebCode}})
+            }
+            else {
+                await UserModel.updateOne({name: user.name}, {$push: {visitedEstates: immowebCode}})
+            }
+            return isVisited
         }
+
     },
 
 	/*User: {
@@ -156,7 +175,8 @@ module.exports = {
 			return history.length >= 2 ? history : null
 		},
 
-        isLiked: e => e.isLiked
+        isLiked: e => e.isLiked,
+        isVisited: e => e.isVisited
 
 	},
 
@@ -217,6 +237,12 @@ async function mapFiltersToMongo(f, context) {
         if(!context.user) throw new Error('Cannot fetch liked estates since no user is logged in')
         const user = await UserModel.findOne({name: context.user.name}).exec()
         r.push({immowebCode: {$in: user.likedEstates}})
+    }
+
+    if(f.onlyVisited) {
+        if(!context.user) throw new Error('Cannot fetch visited estates since no user is logged in')
+        const user = await UserModel.findOne({name: context.user.name}).exec()
+        r.push({immowebCode: {$in: user.visitedEstates}})
     }
 
 	return r
