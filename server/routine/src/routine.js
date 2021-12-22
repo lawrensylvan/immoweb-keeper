@@ -10,6 +10,7 @@ const MongoClient = require('mongodb')
 const ObjectId  = MongoClient.ObjectID;
 const input = require('../searches.json')
 const {Storage} = require('@google-cloud/storage')
+const {auth} = require('google-auth-library')
 require('dotenv').config({ path: 'config.env' })
 
 needle.defaults({follow: 3 })
@@ -50,16 +51,19 @@ async function loadConfig() {
     // Connects to Google Cloud Storage to save images
     else if(process.env.IMAGE_DESTINATION === 'gcloud') {
 
-        if(!process.env.GCLOUD_KEY_PATH) {
-            console.error('Please provide GCLOUD_KEY_PATH=<path to your gcloud key json file> in config.env')
+        if(!process.env.GCLOUD_JSON_KEY) {
+            console.error('Please provide GCLOUD_JSON_KEY=\'<json key from google>\' in config.env')
             process.exit(1)
         }
         if(!process.env.GCLOUD_BUCKET_NAME) {
             console.error('Please provide GCLOUD_BUCKET_NAME=<gcloud bucket name> in config.env')
             process.exit(1)
         }
+        const client= auth.fromJSON(JSON.parse(process.env.GCLOUD_JSON_KEY))
+        client.scopes = ['https://www.googleapis.com/auth/cloud-platform']
         const storage = new Storage({
-            keyFilename: process.env.GCLOUD_KEY_PATH
+            authClient: client
+            //keyFilename: process.env.GCLOUD_KEY_PATH
         })
         bucket = storage.bucket(process.env.GCLOUD_BUCKET_NAME)
         imageOutputPath = process.env.GCLOUD_OUTPUT_PATH || ''
