@@ -1,7 +1,9 @@
 {
     "searchURLs": [
-        "https://www.immoweb.be/en/search/house/for-sale/schaerbeek/1000?countries=BE&page=1&orderBy=relevance",
-        "https://www.immoweb.be/en/search/house/for-sale/schaerbeek/1030?countries=BE&page=1&orderBy=relevance",
-        "https://www.immoweb.be/en/search/house/for-sale/schaerbeek/1140?countries=BE&page=1&orderBy=relevance"
+        "https://www.immoweb.be/en/search/house/for-sale/Brussels%20City/1000?countries=BE&page=1&orderBy=relevance",
+        "https://www.immoweb.be/en/search/house/for-sale/Schaerbeek/1030?countries=BE&page=1&orderBy=relevance",
+        "https://www.immoweb.be/en/search/house/for-sale/Evere/1140?countries=BE&page=1&orderBy=relevance",
+        "https://www.immoweb.be/en/search/house/for-sale/St-Josse-Ten-Noode/1210?countries=BE&page=1&orderBy=relevance",
+        "https://www.immoweb.be/en/search/house/for-sale/Etterbeek/1040?countries=BE&page=1&orderBy=relevance"
     ]
 }

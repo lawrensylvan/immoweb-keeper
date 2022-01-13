@@ -49,7 +49,9 @@ export default function SearchFilters({fetchEstates}) {
                             optionLabelProp="label" optionFilterProp={"children"} showArrow allowClear>
                         <Select.Option value={1000} label="1000">1000 · Bruxelles</Select.Option>
                         <Select.Option value={1030} label="1030">1030 · Schaerbeek</Select.Option>
+                        <Select.Option value={1040} label="1040">1040 · Etterbeek</Select.Option>
                         <Select.Option value={1140} label="1140">1140 · Evere</Select.Option>
+                        <Select.Option value={1210} label="1210">1210 · Saint-Josse-Ten-Noode</Select.Option>
                     </Select>
                 </Space>
 
