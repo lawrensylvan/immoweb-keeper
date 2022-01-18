@@ -108,16 +108,17 @@ async function processQuery(queryURL) {
     // Get last time at which this search's results were saved
     let dbQuery = await db.collection('queries').findOne({criteria: normalizedQuery})
     if(!dbQuery) {
-        const id = await db.collection('queries').insertOne({
+        const {insertedId} = await db.collection('queries').insertOne({
             url: normalizedQueryURL,
             criteria: normalizedQuery,
             lastRun: null,
             allRunDates: null
         })
-        dbQuery = await db.collection('queries').findOne({ _id : ObjectId(id) })
+        console.log(JSON.stringify(insertedId))
+        dbQuery = await db.collection('queries').findOne({ _id : ObjectId(insertedId) })
     }
 
-    const lastRunDate = moment(dbQuery.lastRun)
+    const lastRunDate = dbQuery.lastRun ? moment(dbQuery.lastRun) : null
     const nextLastRunDate = new Date()
     console.info(lastRunDate ? `Last run for this query was on ${lastRunDate}` : `This is the first run for this query`)
 
