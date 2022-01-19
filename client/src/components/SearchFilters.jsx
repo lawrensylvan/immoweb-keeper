@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react'
-import { Button, Slider, Space, Switch, Select, Divider, InputNumber, Popover, Typography, Input } from 'antd'
-import { SearchOutlined, AimOutlined, EuroOutlined, ReloadOutlined, DeleteOutlined, FileSearchOutlined, ClearOutlined, CodepenOutlined, ArrowsAltOutlined, NumberOutlined } from '@ant-design/icons'
+import { Button, Slider, Space, Switch, Divider, InputNumber, Popover, Typography, Input } from 'antd'
+import { SearchOutlined, EuroOutlined, ReloadOutlined, DeleteOutlined, FileSearchOutlined, ClearOutlined, CodepenOutlined, ArrowsAltOutlined, NumberOutlined } from '@ant-design/icons'
 import _ from 'lodash'
 import { SearchContext, SearchResultStatus } from '../hooks/useSearch'
+import SelectLocalities from './SelectLocalities'
 
 const { Text } = Typography
 
@@ -42,24 +43,13 @@ export default function SearchFilters({fetchEstates}) {
             <Space style={{display: 'flex', flexDirection: 'column'}}>
 
                 {/* ZIP CODES */}
-                <Space>
-                    <AimOutlined/>
-                    <Select value={zipCodes} onChange={v => setFilter('zipCodes', v)}
-                            mode="multiple" placeholder="Select localities" style={{ width: '230px' }}
-                            optionLabelProp="label" optionFilterProp={"children"} showArrow allowClear>
-                        <Select.Option value={1000} label="1000">1000 · Bruxelles</Select.Option>
-                        <Select.Option value={1030} label="1030">1030 · Schaerbeek</Select.Option>
-                        <Select.Option value={1040} label="1040">1040 · Etterbeek</Select.Option>
-                        <Select.Option value={1140} label="1140">1140 · Evere</Select.Option>
-                        <Select.Option value={1210} label="1210">1210 · Saint-Josse-Ten-Noode</Select.Option>
-                    </Select>
-                </Space>
+                <SelectLocalities value={zipCodes} onChange={v => setFilter('zipCodes', v)} />
 
                 {/* FREE TEXT */}
                 <Space>
                     <FileSearchOutlined/>
                     <Input value={freeText || ''} onChange={e => setFilter('freeText', e.target.value)}
-                            placeholder="free search" style={{ width: '230px' }}
+                            placeholder="free search" style={{ width: '210px' }}
                             allowClear />
                 </Space>
 

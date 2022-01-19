@@ -11,6 +11,13 @@ module.exports = {
 
 	Query: {
 
+        localities: () => EstateModel
+            .aggregate([
+                { $group: { _id: "$rawMetadata.property.location.postalCode", name: { $first: "$rawMetadata.property.location.locality" } } },
+                { $project: { _id: 0, zipCode: "$_id", name: "$name" } },
+                { $sort: {zipCode: 1} }
+            ]).exec(),
+
 		// Find all estates applying filters and sorter
 		estates: async (parent, args, context) => {
 

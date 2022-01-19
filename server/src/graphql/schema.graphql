@@ -26,6 +26,8 @@ type Query {
     userByName(
         name: String
     ): User
+
+    localities: [Locality]
     
 }
 
@@ -85,6 +87,11 @@ type User {
     name:           String!
     likedEstates:   [Estate]
     visitedEstates: [Estate]
+}
+
+type Locality {
+    zipCode: Int
+    name: String
 }
 
 type Mutation {
