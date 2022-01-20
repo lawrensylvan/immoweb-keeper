@@ -30,8 +30,12 @@ module.exports = {
                     { $group: { _id: "$immowebCode", doc: { $first : "$$ROOT"}} },
                     { $replaceRoot: { newRoot: '$doc'} },
                     // apply sorter
-                    { $sort: args.orderBy ? mapSorterToMongo(args) : {price: 1} }
+                    { $sort: args.orderBy ? mapSorterToMongo(args) : {price: 1} },
+                    // apply pagination
+                    { $skip: args.offset || 0 },
+                    { $limit: args.limit || 10 }
                 ])
+                .allowDiskUse(true)
                 .exec()
             
             // lazy load user's liked/visited items if isLiked/isVisited field is requested
