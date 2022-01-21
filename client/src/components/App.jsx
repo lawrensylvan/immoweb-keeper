@@ -1,5 +1,6 @@
 import React from 'react'
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client'
+import { offsetLimitPagination } from "@apollo/client/utilities"
 import { setContext } from '@apollo/client/link/context'
 import MainLayout from './MainLayout'
 import LoginScreen from './LoginScreen'
@@ -27,6 +28,12 @@ const client = new ApolloClient({
     link: authLink.concat(httpLink),
     cache: new InMemoryCache({
         typePolicies: {
+            Query: {
+                fields: {
+                    estates: offsetLimitPagination()
+                }
+            },
+            
             Estate: {
                 keyFields: ['immowebCode']
             }

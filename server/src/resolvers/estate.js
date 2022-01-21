@@ -33,7 +33,7 @@ module.exports = {
                     { $sort: args.orderBy ? mapSorterToMongo(args) : {price: 1} },
                     // apply pagination
                     { $skip: args.offset || 0 },
-                    { $limit: args.limit || 10 }
+                    { $limit: args.limit || 100000 }
                 ])
                 .allowDiskUse(true)
                 .exec()

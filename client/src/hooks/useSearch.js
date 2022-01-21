@@ -13,6 +13,9 @@ export const SearchResultStatus = {
     READY:      'READY'
 }
 
+const PAGE_SIZE = 8
+const AUTOMATIC_UPDATE_DELAY_MS = 0
+
 export const useSearch = () => {
 
     // Maintain state of active filters, active sorter, search results
@@ -33,7 +36,7 @@ export const useSearch = () => {
     const [resultSorter, setResultSorter] = useState({field: 'modificationDate', order: 'descend'})
 
     // Load estates with active filters
-    const [fetch, { loading, error, data }] = useLazyQuery(gql`
+    const [fetch, { loading, error, data, fetchMore }] = useLazyQuery(gql`
         query estates(
             $priceRange: [Int],
             $zipCodes: [Int],
@@ -44,7 +47,9 @@ export const useSearch = () => {
             $minBedroomCount: Int,
             $onlyStillAvailable: Boolean
             $immowebCode: Int,            
-            $orderBy: OrderByInput
+            $orderBy: OrderByInput,
+            $limit: Int,
+            $offset: Int
         ) {
 
             estates(priceRange: $priceRange, 
@@ -56,7 +61,9 @@ export const useSearch = () => {
                     minBedroomCount: $minBedroomCount,
                     onlyStillAvailable: $onlyStillAvailable
                     immowebCode: $immowebCode,
-                    orderBy: $orderBy) {
+                    orderBy: $orderBy,
+                    limit: $limit,
+                    offset: $offset) {
                 immowebCode
                 price
                 zipCode
@@ -114,7 +121,8 @@ export const useSearch = () => {
             minBedroomCount: minBedroomCount > 0 ? minBedroomCount : undefined,
             onlyStillAvailable: onlyStillAvailable || undefined,
             immowebCode: immowebCode || undefined,
-            orderBy: resultSorter
+            orderBy: resultSorter,
+            limit: PAGE_SIZE
         }
 
         notification.open({
@@ -137,7 +145,7 @@ export const useSearch = () => {
         }
         interval.current = setTimeout(() => {
             fetchResults(searchFilters, resultSorter)
-        }, 2000)
+        }, AUTOMATIC_UPDATE_DELAY_MS)
     }
 
     // Set a filter
@@ -171,6 +179,7 @@ export const useSearch = () => {
         resultSorter,
         setSorter,
         fetchResults: (customFilters, customSorter) => fetchResults(customFilters || searchFilters, customSorter || resultSorter),
+        fetchNext: () => fetchMore({variables: {limit: PAGE_SIZE, offset: data?.estates.length || 0}}),
         searchResults: data?.estates,
         searchStatus: loading               ?   SearchResultStatus.LOADING
                     : error                 ?   SearchResultStatus.ERROR

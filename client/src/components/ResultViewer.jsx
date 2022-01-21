@@ -19,7 +19,7 @@ const estateDecorator = estate => ({
 
 export default function ResultViewer() {
     
-    const { searchStatus, searchResults, resultSorter, setSorter, error } = useContext(SearchContext)
+    const { searchStatus, searchResults, resultSorter, setSorter, error, fetchNext } = useContext(SearchContext)
 
     if(searchStatus === SearchResultStatus.ERROR) {
         return <Result
@@ -65,7 +65,7 @@ export default function ResultViewer() {
             <Tabs defaultActiveKey={1} className="resultTab"
                   tabBarExtraContent={{right: <SortSelector field={resultSorter.field} order={resultSorter.order} />}}>
                 <Tabs.TabPane tab="Grid results" key="1">
-                    <GridResults estates={estates} isLoading={isLoading} />
+                    <GridResults estates={estates} isLoading={isLoading} fetchNext={fetchNext} />
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="Map results" key="2">
                     <MapResults estates={estates} isLoading={isLoading} />
