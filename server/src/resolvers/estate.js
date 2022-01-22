@@ -11,6 +11,7 @@ module.exports = {
 
 	Query: {
 
+        // Find all localities present in the whole database (to populate front-end filters)
         localities: () => EstateModel
             .aggregate([
                 { $group: { _id: "$rawMetadata.property.location.postalCode", name: { $first: "$rawMetadata.property.location.locality" } } },
@@ -18,25 +19,30 @@ module.exports = {
                 { $sort: {zipCode: 1} }
             ]).exec(),
 
-		// Find all estates applying filters and sorter
+		// Find estates with filter sorter and pagination
 		estates: async (parent, args, context) => {
 
-            let estates = await EstateModel
+            let aggregation = await EstateModel
                 .aggregate([
-                    // apply filter
+                    // apply filters
                     { $match: {$and: await mapFiltersToMongo(args, context)} },
                     // keep most recent version for each immowebCode
                     { $sort: { immowebCode: 1, lastModificationDate: -1 } },
                     { $group: { _id: "$immowebCode", doc: { $first : "$$ROOT"}} },
                     { $replaceRoot: { newRoot: '$doc'} },
                     // apply sorter
-                    { $sort: args.orderBy ? mapSorterToMongo(args) : {price: 1} },
-                    // apply pagination
-                    { $skip: args.offset || 0 },
-                    { $limit: args.limit || 100000 }
+                    { $sort: args.orderBy ? mapSorterToMongo(args) : {price: 1} },      // TODO : fails if result set is too big
+                    // get total count + page result
+                    { $facet: {
+                        count:  [{ $count: "totalCount" }],
+                        page:   [{ $skip: args.offset || 0 }, { $limit: args.limit || 100000 }]
+                    } }
                 ])
                 .allowDiskUse(true)
                 .exec()
+
+            const totalCount = aggregation[0].count[0] ? aggregation[0].count[0].totalCount : 0 // TODO : find out why the aggregation result has layers of arrays
+            let estates = aggregation[0].page
             
             // lazy load user's liked/visited items if isLiked/isVisited field is requested
             // TODO : consider if there is a cleaner way of fetching it (from the field resolver but with a single query)
@@ -59,7 +65,7 @@ module.exports = {
                 }))
             }
 
-            return estates
+            return { page: estates, totalCount }
         },
 	
 		// Find the most recent version of an estate from its immowebCode

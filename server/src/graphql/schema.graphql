@@ -14,10 +14,11 @@ type Query {
         minBedroomCount:    Int
         onlyLiked:          Boolean
         onlyVisited:        Boolean
+
         orderBy:            OrderByInput
         offset:             Int
         limit:              Int
-    ): [Estate]
+    ): EstateList
 
     estateByImmowebCode(
         immowebCode: Int
@@ -42,6 +43,11 @@ enum SortOrder {
   ascend
   descend
   none
+}
+
+type EstateList {
+    page:       [Estate]
+    totalCount: Int
 }
 
 type Estate {

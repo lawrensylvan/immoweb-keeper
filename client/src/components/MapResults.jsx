@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { MapContainer, TileLayer, CircleMarker } from 'react-leaflet'
 import EstateCard from './EstateCard'
 
+// TODO : pagination was added so that grid results display faster
+// but in map view, all results (or at least those in the currently visible long/lat box) should be displayed
+// (ideally only long/lat and id could be loaded for fast display then the rest fetched if user clicks on an item)
+
 export default function MapResults({estates}) {
     
     const position = [50.85, 4.35]

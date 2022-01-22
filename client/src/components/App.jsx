@@ -1,6 +1,5 @@
 import React from 'react'
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client'
-import { offsetLimitPagination } from "@apollo/client/utilities"
 import { setContext } from '@apollo/client/link/context'
 import MainLayout from './MainLayout'
 import LoginScreen from './LoginScreen'
@@ -30,7 +29,18 @@ const client = new ApolloClient({
         typePolicies: {
             Query: {
                 fields: {
-                    estates: offsetLimitPagination()
+                    estates: {
+                        keyArgs: false,
+                        merge(existing, incoming) {
+                            if(!incoming) return existing
+                            if(!existing) return incoming
+                            const {page, ...rest} = incoming
+                            return {
+                                page: [...existing.page, ...page],
+                                ...rest
+                            }
+                        }
+                    }
                 }
             },
             

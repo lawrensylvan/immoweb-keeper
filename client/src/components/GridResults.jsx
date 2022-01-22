@@ -4,16 +4,16 @@ import { Divider, List } from 'antd'
 import EstateCard from './EstateCard'
 import { LoadingOutlined } from '@ant-design/icons'
 
-export default function GridResults({estates, isLoading, fetchNext}) {
-
+export default function GridResults({estates, totalCount, isLoading, fetchNext}) {
+    
     return (
         <div className='GridResults' >
             <InfiniteScroll
                 dataLength={estates?.length || 0}
                 next={() => fetchNext()}
-                hasMore={estates?.length > 0 && estates?.length < 50}
-                loader={<LoadingOutlined/>}
-                endMessage={estates?.length && <Divider plain>That's the end ! Come back tomorrow 🤐</Divider>}
+                hasMore={totalCount > estates?.length}
+                loader={<Divider plain>Loading {totalCount - estates?.length} more <LoadingOutlined/> awesome estates</Divider>}
+                endMessage={estates?.length && <Divider plain>Nothing more for now... Come back tomorrow 🤞</Divider>}
                 scrollableTarget="scrollableDiv"
                 scrollThreshold={0.65}
                 >

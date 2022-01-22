@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { notification } from 'antd'
-import { useLazyQuery, gql } from '@apollo/client'
+import { useLazyQuery, gql, NetworkStatus } from '@apollo/client'
 import _ from 'lodash'
 
 export const SearchContext = React.createContext()
@@ -14,13 +14,13 @@ export const SearchResultStatus = {
 }
 
 const PAGE_SIZE = 8
-const AUTOMATIC_UPDATE_DELAY_MS = 0
+const AUTOMATIC_UPDATE_DELAY_MS = 100
 
 export const useSearch = () => {
 
     // Maintain state of active filters, active sorter, search results
     
-    const [isFirstSearch, setFirstSearch] = useState(true)
+    const [isFirstSearch, setFirstSearch] = useState(true) // TODO : consider if this could be replaced by the { called } field returned by useLazyQuery
 
     const [searchFilters, setSearchFilters] = useState({
         priceRange: [0, 500000],
@@ -36,7 +36,7 @@ export const useSearch = () => {
     const [resultSorter, setResultSorter] = useState({field: 'modificationDate', order: 'descend'})
 
     // Load estates with active filters
-    const [fetch, { loading, error, data, fetchMore }] = useLazyQuery(gql`
+    const [fetch, { loading, networkStatus, error, data, fetchMore }] = useLazyQuery(gql`
         query estates(
             $priceRange: [Int],
             $zipCodes: [Int],
@@ -64,34 +64,40 @@ export const useSearch = () => {
                     orderBy: $orderBy,
                     limit: $limit,
                     offset: $offset) {
-                immowebCode
-                price
-                zipCode
-                locality
-                images
-                modificationDate
-                hasGarden
-                gardenArea
-                agencyLogo
-                agencyName
-                geolocation
-                street
-                streetNumber
-                isAuction
-                isSold
-                isUnderOption
-                description
-                livingArea
-                bedroomCount
-                isLiked
-                isVisited
-                priceHistory {
+                totalCount
+                page {
+                    immowebCode
                     price
-                    date
+                    zipCode
+                    locality
+                    images
+                    modificationDate
+                    hasGarden
+                    gardenArea
+                    agencyLogo
+                    agencyName
+                    geolocation
+                    street
+                    streetNumber
+                    isAuction
+                    isSold
+                    isUnderOption
+                    description
+                    livingArea
+                    bedroomCount
+                    isLiked
+                    isVisited
+                    priceHistory {
+                        price
+                        date
+                    }
                 }
             }
         }
-    `)
+    `,
+    {
+        notifyOnNetworkStatusChange: true
+    })
 
     // Fetch estates with search filter
     const fetchResults = (searchFilters, resultSorter) => {
@@ -125,12 +131,12 @@ export const useSearch = () => {
             limit: PAGE_SIZE
         }
 
-        notification.open({
+        /*notification.open({
             message: 'Search ongoing...',
             description: <pre>{JSON.stringify(variables, null, 2)}</pre>,
             placement: 'bottomLeft',
             duration: 5
-        })
+        })*/
 
         fetch({ variables })
 
@@ -171,21 +177,31 @@ export const useSearch = () => {
         fetchResults(searchFilters, sorter)
     }
 
+    console.log("Loading = " + loading + " and network status = " + networkStatus)
+
     return {
+        
         isFirstSearch,
+
         searchFilters,
         setFilter,
         clearFilters,
+
         resultSorter,
         setSorter,
+
         fetchResults: (customFilters, customSorter) => fetchResults(customFilters || searchFilters, customSorter || resultSorter),
-        fetchNext: () => fetchMore({variables: {limit: PAGE_SIZE, offset: data?.estates.length || 0}}),
-        searchResults: data?.estates,
-        searchStatus: loading               ?   SearchResultStatus.LOADING
-                    : error                 ?   SearchResultStatus.ERROR
-                    : data?.estates?.length ?   SearchResultStatus.READY
-                    : isFirstSearch         ?   SearchResultStatus.NO_SEARCH
-                    :                           SearchResultStatus.NO_RESULTS,
+        fetchNext: () => fetchMore({variables: {limit: PAGE_SIZE, offset: data?.estates?.page?.length || 0}}),
+        
+        searchResults: data?.estates?.page,
+        resultCount: data?.estates?.totalCount,
+
+        // TODO : consider using directly the different network statuses : https://github.com/apollographql/apollo-client/blob/main/src/core/networkStatus.ts
+        searchStatus: (loading && networkStatus !== NetworkStatus.fetchMore) ?   SearchResultStatus.LOADING
+                    : error                             ?   SearchResultStatus.ERROR
+                    : data?.estates?.estates?.length    ?   SearchResultStatus.READY
+                    : isFirstSearch                     ?   SearchResultStatus.NO_SEARCH
+                    :                                       SearchResultStatus.NO_RESULTS,
         error
     }
 

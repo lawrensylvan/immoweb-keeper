@@ -19,7 +19,7 @@ const estateDecorator = estate => ({
 
 export default function ResultViewer() {
     
-    const { searchStatus, searchResults, resultSorter, setSorter, error, fetchNext } = useContext(SearchContext)
+    const { searchStatus, searchResults, resultCount, resultSorter, setSorter, error, fetchNext } = useContext(SearchContext)
 
     if(searchStatus === SearchResultStatus.ERROR) {
         return <Result
@@ -57,7 +57,7 @@ export default function ResultViewer() {
                     <Option value="disappearanceDate-descend">📅↓ disappeared recently</Option>
                 </OptGroup>
             </Select>
-            {estates && <span style={{fontStyle: 'italic'}}>({estates.length} result{estates.length >= 2 && 's'})</span>}
+            {estates && <span style={{fontStyle: 'italic'}}>({resultCount} result{resultCount >= 2 && 's'})</span>}
         </Space>
     )
 
@@ -65,7 +65,7 @@ export default function ResultViewer() {
             <Tabs defaultActiveKey={1} className="resultTab"
                   tabBarExtraContent={{right: <SortSelector field={resultSorter.field} order={resultSorter.order} />}}>
                 <Tabs.TabPane tab="Grid results" key="1">
-                    <GridResults estates={estates} isLoading={isLoading} fetchNext={fetchNext} />
+                    <GridResults estates={estates} isLoading={isLoading} fetchNext={fetchNext} totalCount={resultCount} />
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="Map results" key="2">
                     <MapResults estates={estates} isLoading={isLoading} />
