@@ -9,9 +9,9 @@ type Query {
         onlyWithGarden:     Boolean
         minGardenArea:      Int
         minLivingArea:      Int
-        onlyStillAvailable: Boolean
-        freeText:           String
         minBedroomCount:    Int
+        freeText:           String
+        onlyStillAvailable: Boolean
         onlyLiked:          Boolean
         onlyVisited:        Boolean
 

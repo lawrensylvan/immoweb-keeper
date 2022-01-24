@@ -3,8 +3,6 @@ import moment from 'moment'
 import GridResults from './GridResults'
 import MapResults from './MapResults'
 import TableResults from './TableResults'
-import { SearchResultStatus, SearchContext } from '../hooks/useSearch'
-import { useContext } from 'react'
 
 const { Option, OptGroup } = Select
 
@@ -17,11 +15,9 @@ const estateDecorator = estate => ({
     displayModificationDate: moment(estate.modificationDate).format('DD MMM YYYY') + ' (' + moment(estate.modificationDate).fromNow() + ')'
 })
 
-export default function ResultViewer() {
+export default function ResultViewer({loading, error, count, results, sort, setSort, fetchNext}) {
     
-    const { searchStatus, searchResults, resultCount, resultSorter, setSorter, error, fetchNext } = useContext(SearchContext)
-
-    if(searchStatus === SearchResultStatus.ERROR) {
+    if(error) {
         return <Result
             title={error.message}
             subTitle={error?.networkError?.result?.errors[0]?.message || error.stack}
@@ -30,9 +26,7 @@ export default function ResultViewer() {
                 : 'error'} />
     }
 
-    const isLoading = searchStatus === SearchResultStatus.LOADING
-
-    const estates = searchResults?.map(estateDecorator)
+    const estates = results?.map(estateDecorator)
 
     const SortSelector = ({field, order}) => (
         <Space style={{marginLeft: '30px'}}>
@@ -41,7 +35,7 @@ export default function ResultViewer() {
                     onChange={v => {
                         if(v === undefined) return
                         const [field, order] = v.split('-')
-                        setSorter({field, order})
+                        setSort({field, order})
                     }} >
                 <OptGroup label="💰 Price">
                     <Option value="price-ascend">💰↑ cheapest</Option>
@@ -57,21 +51,21 @@ export default function ResultViewer() {
                     <Option value="disappearanceDate-descend">📅↓ disappeared recently</Option>
                 </OptGroup>
             </Select>
-            {estates && <span style={{fontStyle: 'italic'}}>({resultCount} result{resultCount >= 2 && 's'})</span>}
+            {estates && <span style={{fontStyle: 'italic'}}>({count} result{count >= 2 && 's'})</span>}
         </Space>
     )
 
     return (
             <Tabs defaultActiveKey={1} className="resultTab"
-                  tabBarExtraContent={{right: <SortSelector field={resultSorter.field} order={resultSorter.order} />}}>
+                  tabBarExtraContent={{right: <SortSelector field={sort.field} order={sort.order} />}}>
                 <Tabs.TabPane tab="Grid results" key="1">
-                    <GridResults estates={estates} isLoading={isLoading} fetchNext={fetchNext} totalCount={resultCount} />
+                    <GridResults estates={estates} isLoading={loading} fetchNext={fetchNext} totalCount={count} />
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="Map results" key="2">
-                    <MapResults estates={estates} isLoading={isLoading} />
+                    <MapResults estates={estates} isLoading={loading} />
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="Table results" key="3">
-                    <TableResults estates={estates} isLoading={isLoading} />
+                    <TableResults estates={estates} isLoading={loading} />
                 </Tabs.TabPane>
             </Tabs>
     )

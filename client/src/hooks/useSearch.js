@@ -1,165 +1,112 @@
-import React, { useRef, useState } from 'react'
-import { notification } from 'antd'
+import { useEffect, useMemo, useState } from 'react'
 import { useLazyQuery, gql, NetworkStatus } from '@apollo/client'
+import { isNetworkRequestInFlight } from '@apollo/client/core/networkStatus'
 import _ from 'lodash'
 
-export const SearchContext = React.createContext()
-
-export const SearchResultStatus = {
-    NO_SEARCH:  'NO_SEARCH',
-    NO_RESULTS: 'NO_RESULTS',
-    ERROR:      'ERROR',
-    LOADING:    'LOADING',
-    READY:      'READY'
-}
-
 const PAGE_SIZE = 8
-const AUTOMATIC_UPDATE_DELAY_MS = 100
 
-export const useSearch = () => {
+const ESTATES_QUERY = gql`
+    query estates(
+        $immowebCode: Int
+        $priceRange: [Int]
+        $zipCodes: [Int]
+        $onlyWithGarden: Boolean
+        $minGardenArea: Int
+        $minLivingArea: Int
+        $minBedroomCount: Int
+        $freeText: String
+        $onlyStillAvailable: Boolean
+        $onlyLiked: Boolean       
+        $onlyVisited: Boolean
+        $orderBy: OrderByInput
+        $limit: Int
+        $offset: Int
+    ) {
 
-    // Maintain state of active filters, active sorter, search results
-    
-    const [isFirstSearch, setFirstSearch] = useState(true) // TODO : consider if this could be replaced by the { called } field returned by useLazyQuery
+        estates(immowebCode: $immowebCode
+                priceRange: $priceRange,
+                zipCodes: $zipCodes
+                onlyWithGarden: $onlyWithGarden
+                minGardenArea: $minGardenArea
+                minLivingArea: $minLivingArea
+                minBedroomCount: $minBedroomCount
+                freeText: $freeText
+                onlyStillAvailable: $onlyStillAvailable
+                onlyLiked: $onlyLiked
+                onlyVisited: $onlyVisited
+                orderBy: $orderBy
+                limit: $limit
+                offset: $offset) {
 
-    const [searchFilters, setSearchFilters] = useState({
-        priceRange: [0, 500000],
-        zipCodes: [1030, 1140],
-        onlyWithGarden: false,
-        minGardenArea: undefined,
-        immowebCode: undefined,
-        freeText: undefined,
-        minLivingArea: 0,
-        minBedroomCount: 0
-    })
-
-    const [resultSorter, setResultSorter] = useState({field: 'modificationDate', order: 'descend'})
-
-    // Load estates with active filters
-    const [fetch, { loading, networkStatus, error, data, fetchMore }] = useLazyQuery(gql`
-        query estates(
-            $priceRange: [Int],
-            $zipCodes: [Int],
-            $freeText: String,
-            $onlyWithGarden: Boolean,
-            $minGardenArea: Int,
-            $minLivingArea: Int,
-            $minBedroomCount: Int,
-            $onlyStillAvailable: Boolean
-            $immowebCode: Int,            
-            $orderBy: OrderByInput,
-            $limit: Int,
-            $offset: Int
-        ) {
-
-            estates(priceRange: $priceRange, 
-                    zipCodes: $zipCodes,
-                    freeText: $freeText,
-                    onlyWithGarden: $onlyWithGarden,
-                    minGardenArea: $minGardenArea,
-                    minLivingArea: $minLivingArea,
-                    minBedroomCount: $minBedroomCount,
-                    onlyStillAvailable: $onlyStillAvailable
-                    immowebCode: $immowebCode,
-                    orderBy: $orderBy,
-                    limit: $limit,
-                    offset: $offset) {
-                totalCount
-                page {
-                    immowebCode
+            totalCount
+            page {
+                immowebCode
+                price
+                zipCode
+                locality
+                images
+                modificationDate
+                hasGarden
+                gardenArea
+                agencyLogo
+                agencyName
+                geolocation
+                street
+                streetNumber
+                isAuction
+                isSold
+                isUnderOption
+                description
+                livingArea
+                bedroomCount
+                isLiked
+                isVisited
+                priceHistory {
                     price
-                    zipCode
-                    locality
-                    images
-                    modificationDate
-                    hasGarden
-                    gardenArea
-                    agencyLogo
-                    agencyName
-                    geolocation
-                    street
-                    streetNumber
-                    isAuction
-                    isSold
-                    isUnderOption
-                    description
-                    livingArea
-                    bedroomCount
-                    isLiked
-                    isVisited
-                    priceHistory {
-                        price
-                        date
-                    }
+                    date
                 }
             }
         }
-    `,
-    {
-        notifyOnNetworkStatusChange: true
-    })
-
-    // Fetch estates with search filter
-    const fetchResults = (searchFilters, resultSorter) => {
-        
-        clearTimeout(interval.current)
-
-        const {
-            priceRange,
-            zipCodes,
-            freeText,
-            onlyWithGarden,
-            minGardenArea,
-            minLivingArea,
-            minBedroomCount,
-            onlyStillAvailable,
-            immowebCode
-        } = searchFilters
-
-        const variables = {
-            ...searchFilters,
-            priceRange: priceRange?.[1] ? priceRange : priceRange?.[0] ? [priceRange[0], 99999999] : [0, 99999999],
-            zipCodes: zipCodes?.length ? zipCodes : undefined,
-            freeText: freeText === "" ? undefined : freeText,
-            onlyWithGarden: onlyWithGarden || undefined,
-            minGardenArea: onlyWithGarden && minGardenArea > 0 ? minGardenArea : undefined,
-            minLivingArea: minLivingArea > 0 ? minLivingArea : undefined,
-            minBedroomCount: minBedroomCount > 0 ? minBedroomCount : undefined,
-            onlyStillAvailable: onlyStillAvailable || undefined,
-            immowebCode: immowebCode || undefined,
-            orderBy: resultSorter,
-            limit: PAGE_SIZE
-        }
-
-        /*notification.open({
-            message: 'Search ongoing...',
-            description: <pre>{JSON.stringify(variables, null, 2)}</pre>,
-            placement: 'bottomLeft',
-            duration: 5
-        })*/
-
-        fetch({ variables })
-
-        setFirstSearch(false)
     }
+`
 
-    // Fetch with a delay
-    const interval = useRef()
-    const fetchResultsLater = (searchFilters, resultSorter) => {
-        if(interval.current) {
-            clearTimeout(interval.current)
+export const useSearch = (initialFilters, initialSort) => {
+
+    const [searchFilters, setSearchFilters] = useState(initialFilters)
+    const [resultSorter, setResultSorter] = useState(initialSort)
+
+    const variables = useMemo(() => {
+        const f = searchFilters
+        return {
+            ...f,
+            priceRange:         f.priceRange?.[1] ? f.priceRange : f.priceRange?.[0] ? [f.priceRange[0], 99999999] : [0, 99999999],
+            zipCodes:           f.zipCodes?.length ? f.zipCodes : undefined,
+            freeText:           f.freeText === "" ? undefined : f.freeText,
+            onlyWithGarden:     f.onlyWithGarden || undefined,
+            minGardenArea:      f.onlyWithGarden && f.minGardenArea > 0 ? f.minGardenArea : undefined,
+            minLivingArea:      f.minLivingArea > 0 ? f.minLivingArea : undefined,
+            minBedroomCount:    f.minBedroomCount > 0 ? f.minBedroomCount : undefined,
+            onlyStillAvailable: f.onlyStillAvailable || undefined,
+            immowebCode:        f.immowebCode || undefined,
+            orderBy:            resultSorter,
+            limit:              PAGE_SIZE
         }
-        interval.current = setTimeout(() => {
-            fetchResults(searchFilters, resultSorter)
-        }, AUTOMATIC_UPDATE_DELAY_MS)
-    }
+    }, [resultSorter, searchFilters])
+
+    console.dir(variables)
+
+    // Load estates with active filters
+    const [fetch, { data, loading, networkStatus, error, fetchMore }] = useLazyQuery(ESTATES_QUERY, {variables, notifyOnNetworkStatusChange: true})
+
+    // Reload results whenever state changes
+    useEffect(() => {
+        fetch(variables)
+    }, [variables])
 
     // Set a filter
     const setFilter = (name, value) => {
         if(!_.isEqual(searchFilters[name], value)) {
-            const newSearchFilters = {...searchFilters, [name]: value}
-            setSearchFilters(newSearchFilters)
-            fetchResultsLater(newSearchFilters, resultSorter)
+            setSearchFilters(current => ({...current, [name]: value}))
         }
     }
 
@@ -167,41 +114,23 @@ export const useSearch = () => {
     const clearFilters = () => {
         if(searchFilters !== {}) {
             setSearchFilters({})
-            fetchResultsLater({}, resultSorter)
         }
     }
 
-    // Set a sorter
-    const setSorter = (sorter) => {
-        setResultSorter(sorter)
-        fetchResults(searchFilters, sorter)
-    }
-
-    console.log("Loading = " + loading + " and network status = " + networkStatus)
-
     return {
-        
-        isFirstSearch,
-
         searchFilters,
         setFilter,
         clearFilters,
 
         resultSorter,
-        setSorter,
+        setResultSorter: (sorter) => {setResultSorter(sorter); fetch()},
 
-        fetchResults: (customFilters, customSorter) => fetchResults(customFilters || searchFilters, customSorter || resultSorter),
         fetchNext: () => fetchMore({variables: {limit: PAGE_SIZE, offset: data?.estates?.page?.length || 0}}),
         
         searchResults: data?.estates?.page,
         resultCount: data?.estates?.totalCount,
 
-        // TODO : consider using directly the different network statuses : https://github.com/apollographql/apollo-client/blob/main/src/core/networkStatus.ts
-        searchStatus: (loading && networkStatus !== NetworkStatus.fetchMore) ?   SearchResultStatus.LOADING
-                    : error                             ?   SearchResultStatus.ERROR
-                    : data?.estates?.estates?.length    ?   SearchResultStatus.READY
-                    : isFirstSearch                     ?   SearchResultStatus.NO_SEARCH
-                    :                                       SearchResultStatus.NO_RESULTS,
+        loading: isNetworkRequestInFlight(networkStatus) && networkStatus !== NetworkStatus.fetchMore,
         error
     }
 

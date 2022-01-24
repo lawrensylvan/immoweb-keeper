@@ -7,10 +7,8 @@ import SelectLocalities from './SelectLocalities'
 
 const { Text } = Typography
 
-export default function SearchFilters({fetchEstates}) {
+export default function SearchFilters({filters, setFilter, clearFilters}) {
 
-    const { searchFilters, setFilter, clearFilters, fetchResults, searchStatus } = useContext(SearchContext)
-    
     const {
         priceRange,
         zipCodes,
@@ -21,7 +19,7 @@ export default function SearchFilters({fetchEstates}) {
         freeText,
         minLivingArea,
         minBedroomCount
-    } = searchFilters
+    } = filters
 
     const [shouldDisplayGardenArea, setShouldDisplayGardenArea] = useState(false)
     
@@ -138,14 +136,15 @@ export default function SearchFilters({fetchEstates}) {
                     <Space>Clear all<ClearOutlined/></Space>
                 </Button>
 
-                {/* SUBMIT */}
+                {/* SUBMIT 
                 <Button onClick={() => fetchResults()} style={{width: '100px'}}>
                     {searchStatus === SearchResultStatus.NO_SEARCH
                         ? <Space>Search <SearchOutlined/></Space>
                         : <Space>Refresh <ReloadOutlined/></Space>
                     }
                 </Button>
-
+                */}
+                
             </Space>
             
         </Space>
