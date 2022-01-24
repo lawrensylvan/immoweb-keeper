@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useLazyQuery, gql, NetworkStatus } from '@apollo/client'
 import { isNetworkRequestInFlight } from '@apollo/client/core/networkStatus'
+import moment from 'moment'
 import _ from 'lodash'
 
 const PAGE_SIZE = 8
@@ -70,7 +71,16 @@ const ESTATES_QUERY = gql`
     }
 `
 
-export const useSearch = (initialFilters, initialSort) => {
+const estateDecorator = estate => ({
+    ...estate,
+    displayPrice: (estate.isAuction ? 'from ' : '') + estate.price.toLocaleString('fr-BE') + ' €',
+    priceHistory: estate.priceHistory?.map(e => ({...e, price: e.price.toLocaleString('fr-BE') + ' €'})),
+    displayStreetAndNumber: estate.street ? estate.street + ' ' + estate.streetNumber : '',
+    displayZipCode: estate.zipCode + ' ' + estate.locality,
+    displayModificationDate: moment(estate.modificationDate).format('DD MMM YYYY') + ' (' + moment(estate.modificationDate).fromNow() + ')'
+})
+
+export const useSearch = (initialFilters = {}, initialSort = {field: 'modificationDate', order: 'descend'}) => {
 
     const [searchFilters, setSearchFilters] = useState(initialFilters)
     const [resultSorter, setResultSorter] = useState(initialSort)
@@ -93,45 +103,40 @@ export const useSearch = (initialFilters, initialSort) => {
         }
     }, [resultSorter, searchFilters])
 
-    console.dir(variables)
-
     // Load estates with active filters
-    const [fetch, { data, loading, networkStatus, error, fetchMore }] = useLazyQuery(ESTATES_QUERY, {variables, notifyOnNetworkStatusChange: true})
+    const [fetch, { data, networkStatus, error, fetchMore }] = useLazyQuery(ESTATES_QUERY, {variables, notifyOnNetworkStatusChange: true})
 
     // Reload results whenever state changes
     useEffect(() => {
         fetch(variables)
     }, [variables])
 
-    // Set a filter
-    const setFilter = (name, value) => {
-        if(!_.isEqual(searchFilters[name], value)) {
-            setSearchFilters(current => ({...current, [name]: value}))
-        }
-    }
-
-    // Clear all filters
-    const clearFilters = () => {
-        if(searchFilters !== {}) {
-            setSearchFilters({})
-        }
-    }
-
     return {
-        searchFilters,
-        setFilter,
-        clearFilters,
+
+        searchResults: data?.estates?.page?.map(estateDecorator),
+        resultCount: data?.estates?.totalCount,
+        loading: isNetworkRequestInFlight(networkStatus) && networkStatus !== NetworkStatus.fetchMore,
+        error,
 
         resultSorter,
-        setResultSorter: (sorter) => {setResultSorter(sorter); fetch()},
+        setResultSorter,
 
-        fetchNext: () => fetchMore({variables: {limit: PAGE_SIZE, offset: data?.estates?.page?.length || 0}}),
-        
-        searchResults: data?.estates?.page,
-        resultCount: data?.estates?.totalCount,
+        searchFilters,
+        setFilter: (name, value) => {
+            if(!_.isEqual(searchFilters[name], value)) {
+                setSearchFilters(current => ({...current, [name]: value}))
+            }
+        },
+        clearFilters: () => {
+            if(searchFilters !== {}) {
+                setSearchFilters({})
+            }
+        },
 
-        loading: isNetworkRequestInFlight(networkStatus) && networkStatus !== NetworkStatus.fetchMore,
-        error
+        fetchNext: () => {
+            fetchMore({variables: {limit: PAGE_SIZE, offset: data?.estates?.page?.length || 0}})
+        }
+
     }
 
 }

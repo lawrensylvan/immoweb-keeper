@@ -1,6 +1,5 @@
 import React from 'react'
-import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client'
-import { setContext } from '@apollo/client/link/context'
+import { ApolloProvider } from '@apollo/client'
 import MainLayout from './MainLayout'
 import LoginScreen from './LoginScreen'
 import SearchPage from './SearchPage'
@@ -10,55 +9,16 @@ import { BrowserRouter, Navigate, Route, Routes, Outlet } from 'react-router-dom
 import '../styles.css'
 import Logout from './Logout'
 import useAuth from '../hooks/useAuth'
+import { apolloClient } from '../apollo/config'
 
-const httpLink = createHttpLink({
-    uri: `/graphql`
-})
-
-// Add user token in request header
-const authLink = setContext((_, { headers }) => ({
-    headers: {
-        ...headers,
-        authentication: localStorage.getItem('token')
-    }
-}))
-
-const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache({
-        typePolicies: {
-            Query: {
-                fields: {
-                    estates: {
-                        keyArgs: false,
-                        merge(existing, incoming) {
-                            if(!incoming) return existing
-                            if(!existing) return incoming
-                            const {page, ...rest} = incoming
-                            return {
-                                page: [...existing.page, ...page],
-                                ...rest
-                            }
-                        }
-                    }
-                }
-            },
-            
-            Estate: {
-                keyFields: ['immowebCode']
-            }
-        }
-    })
-})
-
-const DEFAULT_PAGE = "/explore/advanced-search"
+const DEFAULT_PAGE = '/explore/advanced-search'
 
 export default function App() {
 
     const [{token, userName}, setToken] = useAuth()
 
     return (
-        <ApolloProvider client={client}>
+        <ApolloProvider client={apolloClient}>
             <BrowserRouter>
                 <Routes>
 
