@@ -21,10 +21,44 @@ module.exports = {
 
 		// Find estates with filter sorter and pagination
 		estates: async (parent, args, context, info) => {
-            let aggregation = await EstateModel
+
+            const countAggregation = await EstateModel
                 .aggregate([
                     // apply filters
                     { $match: {$and: await mapFiltersToMongo(args, context)} },
+                    // get total count
+                    { $count: 'totalCount' },
+                ])
+                .exec()
+
+            if(!countAggregation || !countAggregation[0] || countAggregation[0].totalCount === 0) {
+                return {totalCount: 0, page: []}
+            }
+
+            const [{totalCount}] = countAggregation
+
+            const sort = args.orderBy ? mapSorterToMongo(args) : {price: 1}
+
+            let extremeValue = await EstateModel
+                .aggregate([
+                    // apply filters
+                    { $match: {$and: await mapFiltersToMongo(args, context)} },
+                    // only keep field on which sort will be done
+                    { $project: {[sort.field]: 1} },
+                    // apply sorter
+                    { $sort: args.orderBy ? mapSorterToMongo(args) : {price: 1} },
+                    // apply pagination
+                    { $skip: (args.offset || 0) + 1 },
+                    { $limit: 1 },
+                ])
+                .exec()[sort.field]
+
+            let results = await EstateModel
+                .aggregate([
+                    // apply filters
+                    { $match: {$and: await mapFiltersToMongo(args, context)} },
+                    // limit before sort
+                    { $match: {[sort.field]: {[sort.order === 'ascend' ? '$lte' : '$gte']: extremeValue}} },
                     // keep most recent version for each immowebCode
                     { $sort: { immowebCode: 1, lastModificationDate: -1 } },
                     { $group: { _id: "$immowebCode", doc: { $first : "$$ROOT"}} },
@@ -39,9 +73,15 @@ module.exports = {
                 ])
                 .allowDiskUse(true)
                 .exec()
+                .catch(e => {
+                    if(e.codeName === 'QueryExceededMemoryLimitNoDiskUseAllowed') {
+                        throw new Error('↑ Too much to load from database ! Please refine your search criterias ↑')
+                    } else {
+                        throw e
+                    }
+                })
 
-            const totalCount = aggregation[0].count[0] ? aggregation[0].count[0].totalCount : 0 // TODO : find out why the aggregation result has layers of arrays
-            let estates = aggregation[0].page
+            let estates = results[0].page
             
             // lazy load user's liked/visited items if isLiked/isVisited field is requested
             if(queryHasField(info, 'Estate', 'isLiked')) {

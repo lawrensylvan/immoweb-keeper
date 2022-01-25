@@ -99,7 +99,8 @@ export const useSearch = (initialFilters = {}, initialSort = {field: 'modificati
             onlyStillAvailable: f.onlyStillAvailable || undefined,
             immowebCode:        f.immowebCode || undefined,
             orderBy:            resultSorter,
-            limit:              PAGE_SIZE
+            limit:              PAGE_SIZE,
+            offset:             0
         }
     }, [resultSorter, searchFilters])
 
