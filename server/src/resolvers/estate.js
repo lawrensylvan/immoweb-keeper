@@ -1,9 +1,9 @@
 const { EstateModel } = require('../models/estates')
 const { UserModel } = require('../models/users')
-const gql = require('graphql-tag')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { UserInputError } = require('apollo-server-express')
+const { queryHasField } = require('./utils')
 
 /* GraphQL queries and mutations */
 
@@ -20,8 +20,7 @@ module.exports = {
             ]).exec(),
 
 		// Find estates with filter sorter and pagination
-		estates: async (parent, args, context) => {
-
+		estates: async (parent, args, context, info) => {
             let aggregation = await EstateModel
                 .aggregate([
                     // apply filters
@@ -45,10 +44,7 @@ module.exports = {
             let estates = aggregation[0].page
             
             // lazy load user's liked/visited items if isLiked/isVisited field is requested
-            // TODO : consider if there is a cleaner way of fetching it (from the field resolver but with a single query)
-            const query = gql`${context.query}`
-            const selectedFields = query.definitions[0].selectionSet.selections[0].selectionSet.selections
-            if(selectedFields.some(e => e.name.value === 'isLiked')) {
+            if(queryHasField(info, 'Estate', 'isLiked')) {
                 if(!context.user) throw new Error('Cannot fetch liked estates since no user is logged in')
                 const user = await UserModel.findOne({name: context.user.name}).exec()
                 estates = estates.map(e => ({
@@ -56,7 +52,7 @@ module.exports = {
                     isLiked: user.likedEstates.includes(e.immowebCode)
                 }))
             }
-            if(selectedFields.some(e => e.name.value === 'isVisited')) {
+            if(queryHasField(info, 'Estate', 'isVisited')) {
                 if(!context.user) throw new Error('Cannot fetch visited estates since no user is logged in')
                 const user = await UserModel.findOne({name: context.user.name}).exec()
                 estates = estates.map(e => ({
