@@ -1,19 +1,9 @@
 import { Tabs, Result, Space, Select } from 'antd'
-import moment from 'moment'
 import GridResults from './GridResults'
 import MapResults from './MapResults'
 import TableResults from './TableResults'
 
 const { Option, OptGroup } = Select
-
-const estateDecorator = estate => ({
-    ...estate,
-    displayPrice: (estate.isAuction ? 'from ' : '') + estate.price.toLocaleString('fr-BE') + ' €',
-    priceHistory: estate.priceHistory?.map(e => ({...e, price: e.price.toLocaleString('fr-BE') + ' €'})),
-    displayStreetAndNumber: estate.street ? estate.street + ' ' + estate.streetNumber : '',
-    displayZipCode: estate.zipCode + ' ' + estate.locality,
-    displayModificationDate: moment(estate.modificationDate).format('DD MMM YYYY') + ' (' + moment(estate.modificationDate).fromNow() + ')'
-})
 
 export default function ResultViewer({loading, error, count, results, sort, setSort, fetchNext}) {
     
@@ -25,8 +15,6 @@ export default function ResultViewer({loading, error, count, results, sort, setS
                 ? error.networkError.statusCode
                 : 'error'} />
     }
-
-    const estates = results?.map(estateDecorator)
 
     const SortSelector = ({field, order}) => (
         <Space style={{marginLeft: '30px'}}>
@@ -51,22 +39,22 @@ export default function ResultViewer({loading, error, count, results, sort, setS
                     <Option value="disappearanceDate-descend">📅↓ disappeared recently</Option>
                 </OptGroup>
             </Select>
-            {estates && <span style={{fontStyle: 'italic'}}>({count} result{count >= 2 && 's'})</span>}
+            {results && <span style={{fontStyle: 'italic'}}>({count} result{count >= 2 && 's'})</span>}
         </Space>
     )
 
     return (
-            <Tabs defaultActiveKey={1} className="resultTab"
-                  tabBarExtraContent={{right: <SortSelector field={sort.field} order={sort.order} />}}>
-                <Tabs.TabPane tab="Grid results" key="1">
-                    <GridResults estates={estates} isLoading={loading} fetchNext={fetchNext} totalCount={count} />
-                </Tabs.TabPane>
-                <Tabs.TabPane tab="Map results" key="2">
-                    <MapResults estates={estates} isLoading={loading} />
-                </Tabs.TabPane>
-                <Tabs.TabPane tab="Table results" key="3">
-                    <TableResults estates={estates} isLoading={loading} />
-                </Tabs.TabPane>
-            </Tabs>
+        <Tabs defaultActiveKey={1} className="resultTab" destroyInactiveTabPane={true}
+                tabBarExtraContent={{right: <SortSelector field={sort.field} order={sort.order} />}}>
+            <Tabs.TabPane tab="Grid results" key="1">
+                <GridResults estates={results} isLoading={loading} fetchNext={fetchNext} totalCount={count} />
+            </Tabs.TabPane>
+            <Tabs.TabPane tab="Map results" key="2">
+                <MapResults estates={results} isLoading={loading} />
+            </Tabs.TabPane>
+            <Tabs.TabPane tab="Table results" key="3">
+                <TableResults estates={results} isLoading={loading} fetchNext={fetchNext} totalCount={count} sort={sort} setSort={setSort} />
+            </Tabs.TabPane>
+        </Tabs>
     )
 }

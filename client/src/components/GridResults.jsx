@@ -15,7 +15,7 @@ export default function GridResults({estates, totalCount, isLoading, fetchNext})
                 loader={<Divider plain>Loading {totalCount - estates?.length} more <LoadingOutlined/> awesome estates</Divider>}
                 endMessage={estates?.length && <Divider plain>Nothing more for now... Come back tomorrow 🤞</Divider>}
                 scrollableTarget="scrollableDiv"
-                scrollThreshold={0.65}
+                scrollThreshold={0.85}
                 >
 
                 <List size="small" loading={isLoading} grid={{ gutter: 16, column: 4 }}

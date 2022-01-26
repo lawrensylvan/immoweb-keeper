@@ -1,8 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Slider, Space, Switch, Divider, InputNumber, Popover, Typography, Input } from 'antd'
-import { SearchOutlined, EuroOutlined, ReloadOutlined, DeleteOutlined, FileSearchOutlined, ClearOutlined, CodepenOutlined, ArrowsAltOutlined, NumberOutlined } from '@ant-design/icons'
+import { EuroOutlined, DeleteOutlined, FileSearchOutlined, ClearOutlined, CodepenOutlined, ArrowsAltOutlined, NumberOutlined } from '@ant-design/icons'
 import _ from 'lodash'
-import { SearchContext, SearchResultStatus } from '../hooks/useSearch'
 import SelectLocalities from './SelectLocalities'
 
 const { Text } = Typography
