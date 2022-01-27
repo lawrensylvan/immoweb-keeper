@@ -19,13 +19,14 @@ export default function SelectLocalities({ value, onChange }) {
         if(error) return <Select.Option>Could not load zip codes</Select.Option>
         
         return data.localities.map(locality =>
-            <Select.Option value={locality.zipCode} label={locality.zipCode}>
+            <Select.Option value={locality.zipCode} label={locality.zipCode} key={locality.zipCode} >
                 {locality.zipCode} · {locality.name}
             </Select.Option>
         )
     }
     
     const tagRender = ({label}) => {
+        if(!value) return "Error !"
         if(value.length <= 2) return <Tag closable="true">{label}</Tag>
         if(value[0] === label) return <span style={{fontSize: 12, fontStyle: 'italic', marginRight: 4}}>({value.length} localities selected)</span>
         return '' 
@@ -34,7 +35,7 @@ export default function SelectLocalities({ value, onChange }) {
     return (
         <Space>
             <AimOutlined/>
-            <Select placeholder="Select localities" mode="multiple" optionLabelProp="label" optionFilterProp="children" allowClear
+            <Select placeholder="any zip code" mode="multiple" optionLabelProp="label" optionFilterProp="children" allowClear
                     value={value} onChange={onChange}
                     tagRender={tagRender}
                     style={{ width: '210px' }} showArrow>
