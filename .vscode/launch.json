@@ -5,7 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run immoweb search",
+            "name": "Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceRoot}/client/src",
+        },
+        {
+            "name": "Server + React",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Routine",
             "type": "node",
             "request": "launch",
             "skipFiles": [
@@ -19,6 +35,11 @@
                 "--inspect-brk=9229"
             ],
             "port": 9229
-            }
-    ]
+        }
+    ],
+    "compounds": [
+    {
+        "name": "Full stack",
+        "configurations": ["Server + React", "Chrome"]
+    }
 }
