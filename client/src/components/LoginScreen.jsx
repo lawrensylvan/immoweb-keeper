@@ -17,7 +17,7 @@ export default function LoginScreen({setToken}) {
         login({variables: {name, password}})
         .then(data => {
             setToken(data.data.login)
-            navigateTo('/flagged-items/liked-estates')
+            navigateTo('/explore/advanced-search')
         })
         .catch(error => notification.open({
             message: error.message,
