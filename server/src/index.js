@@ -55,7 +55,7 @@
     const { loadSchema } = require('@graphql-tools/load')
     const { GraphQLFileLoader } = require('@graphql-tools/graphql-file-loader')
     const typeDefs = await loadSchema('src/graphql/schema.graphql', { loaders: [new GraphQLFileLoader()] })
-    const resolvers = require('./resolvers/estate')
+    const resolvers = require('./resolvers')
     
     const { ApolloServer } = require('apollo-server-express')
     const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core')

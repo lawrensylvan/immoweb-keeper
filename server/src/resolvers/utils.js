@@ -1,5 +1,9 @@
 const { parseResolveInfo } = require('graphql-parse-resolve-info')
 
+function getRequestTree(queryInfo) {
+    return parseResolveInfo(queryInfo)
+}
+
 function queryHasField(queryInfo, typeName, fieldName) {
     let tree = parseResolveInfo(queryInfo)
     return treeHasField(tree, typeName, fieldName)
@@ -21,4 +25,4 @@ function treeHasField(tree, typeName, fieldName) {
     }
 }
 
-module.exports = { queryHasField }
+module.exports = { queryHasField, getRequestTree }
