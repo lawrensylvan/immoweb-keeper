@@ -4,7 +4,7 @@ import { useSearch } from '../hooks/useSearch'
 
 export default function LikedEstates() {
 
-    const { searchResults, loading, error } = useSearch({onlyLiked: true})
+    const { searchResults, loading, error, fetchNext, resultCount } = useSearch({onlyLiked: true}, {field: 'modificationDate', order: 'descend'})
     
     if(error) {
         return <Result
@@ -15,6 +15,6 @@ export default function LikedEstates() {
                 : 'error'} />
     }
 
-    return <GridResults estates={searchResults} isLoading={loading} />
+    return <GridResults estates={searchResults} isLoading={loading} fetchNext={fetchNext} totalCount={resultCount} />
 
 }
