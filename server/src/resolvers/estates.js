@@ -1,6 +1,5 @@
 const { EstateModel } = require('../models/estates')
 const { queryHasField } = require('./utils')
-const _ = require('lodash')
 
 // Useful building blocks for MongoDB aggregation pipeline
 const filter = (filters) => !filters || !filters.length ? null : filters.length > 1 ? { $match: {$and: filters} } : { $match: filters[0] }
@@ -11,6 +10,7 @@ const count = () => ({ $count: 'totalCount'})
 const limitToValue = (field, treshold, order) => ({ $match: {[field]: {[order ? '$lte' : '$gte']: treshold}} })
 const onlyKeepField = (field) => field ? { $project: {[field]: 1} } : null
 const onlyKeepFields = (fields) => fields && fields.length ? { $project: Object.fromEntries(fields.map(f => [f, 1])) } : null
+const onlyNear = (point, maxMeters) => ({ $geoNear: {near: {type:'Point', coordinates: point }, distanceField: 'distance', maxDistance: maxMeters, spherical: false }})
 
 const pickMostRecentByImmowebCode = () => ([
     { $sort: { immowebCode: 1, lastModificationDate: -1 } },
@@ -54,6 +54,14 @@ function findEstateByImmowebCode(immowebCode) {
     ])[0]
 }
 
+// Finds all estates near a location (only returns the id and location)
+async function findEstatesNear([longitude, latitude], distanceMeters) {
+    return applyPipeline([
+        onlyNear([longitude, latitude], distanceMeters),
+        onlyKeepFields(['immowebCode', 'geolocation'])
+    ])
+}
+
 // Finds all estate ads that match specific criteria (only the most recent version for each immowebCode)
 async function findEstates(filtersInput, orderByInput, fields/*Input*/, offset, limit, user) {
     const filters = await mapFiltersToMongo(filtersInput, user)
@@ -71,7 +79,7 @@ async function findEstates(filtersInput, orderByInput, fields/*Input*/, offset, 
             totalCount: [{$count: 'count'}],
             ids: [
                 onlyKeepField('_id'),   // {_id: abdkfzefh}
-                skip(offset+1),
+                skip(offset) || {$skip: 0},
                 trim(limit)
             ]
         }}
@@ -240,4 +248,4 @@ const fieldDependenciesMapping = {
     bedroomCount:		'rawMetadata.property.bedroomCount',
 }*/
 
-module.exports = {findAllLocalities, findEstates, findEstateByImmowebCode, fetchPriceHistory}
+module.exports = {findAllLocalities, findEstates, findEstateByImmowebCode, findEstatesNear, fetchPriceHistory}

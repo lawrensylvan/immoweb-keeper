@@ -1,5 +1,5 @@
 const { getAuthenticatedUser, registerUser, loginUser, markEstateAsLiked, markEstateAsVisited } = require('./users')
-const { findAllLocalities, findEstateByImmowebCode, findEstates, fetchPriceHistory } = require('./estates')
+const { findAllLocalities, findEstateByImmowebCode, findEstates, findEstatesNear, fetchPriceHistory } = require('./estates')
 
 module.exports = {
 
@@ -8,6 +8,8 @@ module.exports = {
         localities: () => findAllLocalities(),
 
         estateByImmowebCode: (parent, args) => findEstateByImmowebCode(args.immowebCode),
+
+        estatesNear: (parent, args) => findEstatesNear(args.location, args.distanceMeters),
 
         estates: async (parent, args, context, info) => {
             const {orderBy, offset, limit, ...filters} = args

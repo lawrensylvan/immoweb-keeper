@@ -20,6 +20,11 @@ type Query {
         limit:              Int
     ): EstateList
 
+    estatesNear(
+        location:       [Float],
+        distanceMeters: Int
+    ): [Estate]
+
     estateByImmowebCode(
         immowebCode: Int
     ): Estate

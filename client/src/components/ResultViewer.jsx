@@ -5,7 +5,7 @@ import TableResults from './TableResults'
 
 const { Option, OptGroup } = Select
 
-export default function ResultViewer({loading, error, count, results, sort, setSort, fetchNext}) {
+export default function ResultViewer({loading, error, count, results, sort, setSort, fetchNext, searchFilters}) {
     
     if(error) {
         return <Result
@@ -50,7 +50,7 @@ export default function ResultViewer({loading, error, count, results, sort, setS
                 <GridResults estates={results} isLoading={loading} fetchNext={fetchNext} totalCount={count} />
             </Tabs.TabPane>
             <Tabs.TabPane tab="Map results" key="2">
-                <MapResults estates={results} isLoading={loading} />
+                <MapResults isLoading={loading} searchFilters={searchFilters}  />
             </Tabs.TabPane>
             <Tabs.TabPane tab="Table results" key="3">
                 <TableResults estates={results} isLoading={loading} fetchNext={fetchNext} totalCount={count} sort={sort} setSort={setSort} />
