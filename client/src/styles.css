@@ -17,3 +17,15 @@
 .custom .ant-input::placeholder, .custom .ant-input-password::placeholder {
     color: lightgray;
 }
+
+.custom .ant-card-head {
+    padding-right: 3px; /* instead of 24 */
+}
+
+.custom .ant-card-head {
+    line-height: 8px; /* instead of 16 */
+}
+
+.custom .ant-card-body {
+    padding: 18px; /* instead of 16 */
+}

@@ -3,6 +3,7 @@ import { Card, Avatar, Image, Skeleton, Popover, Tag, Dropdown, Menu, Space } fr
 import { CopyOutlined, EditOutlined, EyeOutlined, EyeTwoTone, FontSizeOutlined, HeartOutlined, HeartTwoTone } from '@ant-design/icons'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { gql, useMutation } from '@apollo/client'
+import '../styles.css'
 
 const BASE_IMAGE_URL = process.env.REACT_APP_BASE_IMAGE_URL ?? ''
 
@@ -95,7 +96,7 @@ export default function EstateCard({estate}) {
     })
 
     return (
-        <div className='EstateCard' >
+        <div className='custom EstateCard' >
             <Card hoverable
 
                 title={<PriceInfo/>}
@@ -103,10 +104,8 @@ export default function EstateCard({estate}) {
                 cover={<ImageGallery immowebCode={estate.immowebCode} images={estate.images} />}
 
                 extra={<>
-                    {estate.hasGarden ? <Tag color="lime">✓ 🌳 {estate.gardenArea || '?'}m²</Tag> : null}
-                    {estate.isAuction ? <Tag color="orange">$↥ auction</Tag> : null}
-                    {estate.isSold ? <Tag color="red">😠 sold</Tag> : null}
-                    {estate.isUnderOption ? <Tag color="red">😤 option</Tag> : null}
+                    {estate.livingArea && <Tag color="default">↔{estate.livingArea}m²</Tag>}
+                    {estate.bedroomCount > 0 && <Tag color="geekblue">🛏 {estate.bedroomCount}</Tag>}
                 </>}
                 actions={[
                     
@@ -149,7 +148,7 @@ export default function EstateCard({estate}) {
                     avatar={estate.agencyName ? <Popover content={estate.agencyName}><Avatar src={estate.agencyLogo} /></Popover> : null}
                     title={
                         estate.street 
-                            ? <span>{estate.street} {estate.streetNumber}<br/><small>{estate.zipCode + ' ' + estate.locality}</small></span>
+                            ? <span>{estate.displayStreetAndNumber}<br/><small>{estate.zipCode + ' ' + estate.locality}</small></span>
                             : estate.zipCode + ' ' + estate.locality
                     }
                     description={estate.displayModificationDate}
@@ -158,8 +157,10 @@ export default function EstateCard({estate}) {
                 <Card.Meta style={{paddingTop: '12px'}}
                     description={
                     <>
-                        {estate.livingArea ? <Tag color="default">🏠↔ {estate.livingArea}m²</Tag> : null}
-                        {estate.bedroomCount ? <Tag color="geekblue">🛏 x{estate.bedroomCount}</Tag> : null}
+                        {estate.hasGarden && <Tag color="lime">✓ 🌳 {estate.gardenArea || '?'}m²</Tag>}
+                        {estate.isAuction && <Tag color="orange">$↥ auction</Tag>}
+                        {estate.isSold && <Tag color="red">😠 sold</Tag>}
+                        {estate.isUnderOption && <Tag color="red">😤 option</Tag>}
                     </>}    
                 />
 
