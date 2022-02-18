@@ -4,7 +4,7 @@ import { useSearch } from '../hooks/useSearch'
 
 export default function VisitedEstates() {
 
-    const { searchResults, loading, error } = useSearch({onlyVisited: true})
+    const { searchResults, loading, error, fetchNext, resultCount } = useSearch({onlyVisited: true})
     
     if(error) {
         return <Result
@@ -15,6 +15,6 @@ export default function VisitedEstates() {
                 : 'error'} />
     }
 
-    return <GridResults estates={searchResults} isLoading={loading} />
+    return <GridResults estates={searchResults} isLoading={loading} fetchNext={fetchNext} totalCount={resultCount} />
 
 }
