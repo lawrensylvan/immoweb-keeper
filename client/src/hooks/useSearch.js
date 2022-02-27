@@ -87,6 +87,7 @@ export const useSearch = (initialFilters = {}, initialSort = {field: 'modificati
 
     const variables = useMemo(() => {
         const f = searchFilters
+        if(_.isEmpty(f)) return null
         return {
             ...f,
             priceRange:         f.priceRange?.[1] ? f.priceRange : f.priceRange?.[0] ? [f.priceRange[0], 99999999] : [0, 99999999],
@@ -109,7 +110,7 @@ export const useSearch = (initialFilters = {}, initialSort = {field: 'modificati
 
     // Reload results whenever state changes
     useEffect(() => {
-        fetch(variables)
+        if(variables) fetch(variables)
     }, [variables])
 
     return {

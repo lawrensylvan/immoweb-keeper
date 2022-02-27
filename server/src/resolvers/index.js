@@ -9,7 +9,10 @@ module.exports = {
 
         estateByImmowebCode: (parent, args) => findEstateByImmowebCode(args.immowebCode),
 
-        estatesNear: (parent, args) => findEstatesNear(args.location, args.distanceMeters),
+        estatesNear: async (parent, args) => {
+            const {location, distanceMeters, ...filters} = args
+            return findEstatesNear(location, distanceMeters, filters)
+        },
 
         estates: async (parent, args, context, info) => {
             const {orderBy, offset, limit, ...filters} = args

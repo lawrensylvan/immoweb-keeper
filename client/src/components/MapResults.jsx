@@ -6,10 +6,34 @@ import { gql } from '@apollo/client'
 import { useSearch } from '../hooks/useSearch'
 
 const ESTATES_NEAR_QUERY = gql`
-query estatesNear($location: [Float], $distanceMeters: Int) {
+query estatesNear(
+    $location: [Float]
+    $distanceMeters: Int
+    $immowebCode: Int
+    $priceRange: [Int]
+    $zipCodes: [Int]
+    $onlyWithGarden: Boolean
+    $minGardenArea: Int
+    $minLivingArea: Int
+    $minBedroomCount: Int
+    $freeText: String
+    $onlyStillAvailable: Boolean
+    $onlyLiked: Boolean       
+    $onlyVisited: Boolean) {
     estatesNear(
-        location: $location,
+        location: $location
         distanceMeters: $distanceMeters
+        immowebCode: $immowebCode
+        priceRange: $priceRange
+        zipCodes: $zipCodes
+        onlyWithGarden: $onlyWithGarden
+        minGardenArea: $minGardenArea
+        minLivingArea: $minLivingArea
+        minBedroomCount: $minBedroomCount
+        freeText: $freeText
+        onlyStillAvailable: $onlyStillAvailable
+        onlyLiked: $onlyLiked
+        onlyVisited: $onlyVisited
     )
     {
         immowebCode,
@@ -18,7 +42,7 @@ query estatesNear($location: [Float], $distanceMeters: Int) {
 }
 `
 
-export default function MapResults() {
+export default function MapResults({searchFilters}) {
 
     // State of the map
     const [[longitude, latitude], setCenter] = useState([4.38, 50.86]) // TODO : maintain when map moves (only after some time)
@@ -28,17 +52,17 @@ export default function MapResults() {
     // All locations query
     // (since results from props would be paginated, we run a custom non paginated search but with only id and location as a result to gain perf)
     // TODO: include the filters from props (the main search context)
-    const { data: estatesNearResult } = useQuery(ESTATES_NEAR_QUERY, {variables: {
+    const { data: estatesNearResult, loading, error } = useQuery(ESTATES_NEAR_QUERY, {variables: {
         location: [longitude, latitude],
-        distanceMeters: 2000 // TODO : compute on basis of zoom level
+        distanceMeters: 2000, // TODO : compute on basis of zoom level
+        ...searchFilters
     }})
+    console.log(error)
     
     // Selected item
     const [selectedImmowebCode, setSelectedImmowebCode] = useState(null)
-
-    const { searchResults: selectedEstateResult, setFilter } = useSearch({immowebCode: selectedImmowebCode})
-    useEffect(() => setFilter('immowebCode', selectedImmowebCode), [selectedImmowebCode]) // load full estate data when user clicks on a point
-    
+    const { searchResults: selectedEstateResult, setFilter } = useSearch()
+    useEffect(() => selectedImmowebCode && setFilter('immowebCode', selectedImmowebCode), [selectedImmowebCode]) // load full estate data when user clicks on a point
     const selectedEstate = selectedEstateResult?.[0]
     
     return (

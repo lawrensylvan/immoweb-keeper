@@ -21,8 +21,20 @@ type Query {
     ): EstateList
 
     estatesNear(
-        location:       [Float],
+        location:       [Float]
         distanceMeters: Int
+
+        immowebCode:        Int
+        priceRange:         [Int]
+        zipCodes:           [Int]
+        onlyWithGarden:     Boolean
+        minGardenArea:      Int
+        minLivingArea:      Int
+        minBedroomCount:    Int
+        freeText:           String
+        onlyStillAvailable: Boolean
+        onlyLiked:          Boolean
+        onlyVisited:        Boolean
     ): [Estate]
 
     estateByImmowebCode(

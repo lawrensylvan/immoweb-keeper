@@ -13,7 +13,10 @@ export default function SearchPage() {
         loading, error,
         resultCount, searchResults,
         fetchNext
-    } = useSearch({priceRange: [0, 500000], zipCodes: [1030, 1140]}, {field: 'modificationDate', order: 'descend'})
+    } = useSearch(
+            {priceRange: [0, 500000], zipCodes: [1030, 1140]},
+            {field: 'modificationDate', order: 'descend'}
+        )
 
     // immoweb color theme : blue #3f6ea7 and green #6ad690
     return (
@@ -32,10 +35,10 @@ export default function SearchPage() {
                     loading={loading} error={error}
                     count={resultCount} results={searchResults}
                     sort={resultSorter} setSort={setResultSorter}
-                    fetchNext={fetchNext}
+                    fetchNext={fetchNext} searchFilters={searchFilters}
                 />
             </Layout.Content>
-        </Layout>  
+        </Layout>
     )
 
 }

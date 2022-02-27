@@ -55,15 +55,19 @@ function findEstateByImmowebCode(immowebCode) {
 }
 
 // Finds all estates near a location (only returns the id and location)
-async function findEstatesNear([longitude, latitude], distanceMeters) {
+async function findEstatesNear([longitude, latitude], distanceMeters, filtersInput) {
+    console.log('findEstatesNear')
+    const filters = await mapFiltersToMongo(filtersInput)
     return applyPipeline([
         onlyNear([longitude, latitude], distanceMeters),
+        filter(filters),
         onlyKeepFields(['immowebCode', 'geolocation'])
     ])
 }
 
 // Finds all estate ads that match specific criteria (only the most recent version for each immowebCode)
 async function findEstates(filtersInput, orderByInput, fields/*Input*/, offset, limit, user) {
+    console.log('findEstates')
     const filters = await mapFiltersToMongo(filtersInput, user)
     //const fields = await mapFieldsToMongo(fields)
     const orderBy = mapSorterToMongo(orderByInput)
