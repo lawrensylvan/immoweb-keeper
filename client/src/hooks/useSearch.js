@@ -73,11 +73,17 @@ const ESTATES_QUERY = gql`
 
 const estateDecorator = estate => ({
     ...estate,
-    displayPrice: (estate.isAuction ? 'from ' : '') + estate.price.toLocaleString('fr-BE') + ' €',
-    priceHistory: estate.priceHistory?.map(e => ({...e, price: e.price.toLocaleString('fr-BE') + ' €'})),
-    displayStreetAndNumber: estate.street ? estate.street + ' ' + estate.streetNumber : '',
+    displayPrice: Math.floor(estate.price / 1000).toLocaleString('fr-BE') + 'k€',
+    priceHistory: estate.priceHistory?.map(e => ({...e, price: (e.price / 1000).toLocaleString('fr-BE') + 'k€'})),
+    displayStreetAndNumber: estate.street ? estate.street
+        .replace('rue ', 'r. ').replace('Rue ', 'r. ')
+        .replace('avenue ', 'av.').replace('Avenue ', 'av. ')
+        .replace('docteur ', 'Dr. ').replace('Docteur ', 'Dr. ')
+        .replace('chaussée ', 'ch. ').replace('Chaussée ', 'ch. ').replace('chaussee ', 'ch. ').replace('Chaussee ', 'ch. ')
+        .replace('boulevard ', 'bd. ').replace('Boulevard ', 'bd. ')
+        + ' ' + (estate.streetNumber ?? '') : '',
     displayZipCode: estate.zipCode + ' ' + estate.locality,
-    displayModificationDate: moment(estate.modificationDate).format('DD MMM YYYY') + ' (' + moment(estate.modificationDate).fromNow() + ')'
+    displayModificationDate: moment(estate.modificationDate).format('DD.MM.YY') + ' (' + moment(estate.modificationDate).fromNow() + ')'
 })
 
 export const useSearch = (initialFilters = {}, initialSort = {field: 'modificationDate', order: 'descend'}) => {
@@ -90,7 +96,7 @@ export const useSearch = (initialFilters = {}, initialSort = {field: 'modificati
         if(_.isEmpty(f)) return null
         return {
             ...f,
-            priceRange:         f.priceRange?.[1] ? f.priceRange : f.priceRange?.[0] ? [f.priceRange[0], 99999999] : [0, 99999999],
+            priceRange:         (!f.priceRange?.[0] && !f.priceRange?.[1]) ? undefined : f.priceRange,
             zipCodes:           f.zipCodes?.length ? f.zipCodes : undefined,
             freeText:           f.freeText === "" ? undefined : f.freeText,
             onlyWithGarden:     f.onlyWithGarden || undefined,
