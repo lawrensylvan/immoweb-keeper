@@ -25,9 +25,9 @@ export default function SelectLocalities({ value, onChange }) {
         )
     }
     
-    const tagRender = ({label}) => {
+    const tagRender = ({label, onClose}) => {
         if(!value) return "Error !"
-        if(value.length <= 2) return <Tag closable="true">{label}</Tag>
+        if(value.length <= 2) return <Tag closable="true" onClose={onClose} >{label}</Tag>
         if(value[0] === label) return <span style={{fontSize: 12, fontStyle: 'italic', marginRight: 4}}>({value.length} localities selected)</span>
         return '' 
     }
