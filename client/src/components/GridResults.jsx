@@ -13,7 +13,7 @@ export default function GridResults({estates, totalCount, isLoading, fetchNext})
                 next={() => fetchNext()}
                 hasMore={totalCount > estates?.length}
                 loader={<Divider plain>Loading {totalCount - estates?.length} more <LoadingOutlined/> awesome estates</Divider>}
-                endMessage={estates?.length && <Divider plain>Nothing more for now... Come back tomorrow 🤞</Divider>}
+                endMessage={estates?.length ? <Divider plain>Nothing more for now... Come back tomorrow 🤞</Divider> : null}
                 scrollableTarget="scrollableDiv"
                 scrollThreshold={0.85}
                 >
