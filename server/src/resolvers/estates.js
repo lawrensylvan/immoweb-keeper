@@ -88,7 +88,7 @@ async function findEstates(filtersInput, orderByInput, fields/*Input*/, offset, 
             ]
         }}
     ]))
-    let totalCount = aggregation[0].totalCount[0].count
+    let totalCount = aggregation[0].totalCount[0] ? aggregation[0].totalCount[0].count : 0
     let page = await applyPipeline([
         filter([{_id: {$in: aggregation[0].ids.map(e => e._id)}}]),
         sort(orderBy)
