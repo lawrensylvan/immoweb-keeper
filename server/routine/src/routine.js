@@ -297,10 +297,17 @@ async function saveImage(immowebCode, imageURL, outputPath) {
         let outputFile = bucket.file(outputPath)
         const fileWriteStream = outputFile.createWriteStream()
         let pipe = rq(imageURL).pipe(fileWriteStream)
-        await new Promise(resolve => pipe.on('finish', resolve))
+        try {
+            await new Promise((resolve, reject) => {
+                pipe.on('finish', resolve)
+                pipe.on('error', reject)
+            })
+        } catch(err) {
+            console.error(`Error while downloading image ${imageURL} to Google Cloud Storage : ${err}`)
+        }
     }
 }
- 
+
 function buildURLFromQuery(searchQuery) {
     const criterias = Object.keys(searchQuery).map(c => c + '=' + searchQuery[c])
     return encodeURI(`https://www.immoweb.be/en/search/?${criterias.join('&')}`)
