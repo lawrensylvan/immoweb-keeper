@@ -252,9 +252,13 @@ async function processEstate(immowebCode, lastRunDate, queryId) {
     }
     // at this point, the estate is either still unknown by the db or has been updated since then
     
-    // double check with modification date of what we have in db (in case of just-added estate)
-    const dbEstate = await db.collection('estates').find({immowebCode}).limit(1).toArray()
-    if(dbEstate.length > 0 && moment(dbEstate[0].lastModificationDate).isSame(lastModif) ) {
+    // double check with modification date of what we have in db (in case of just-added estate or error)
+    const dbEstate = await db.collection('estates').find({immowebCode}, {sort: {fetchDate: -1}}).limit(1).toArray()
+    if(dbEstate.length > 0 && (
+        moment(dbEstate[0].lastModificationDate).isSame(lastModif) ||
+        moment(dbEstate[0].lastModificationDate).isSame(lastModif.add(2, 'hours')) ||
+        moment(dbEstate[0].lastModificationDate).isSame(lastModif.add(-2, 'hours')) )
+    ) {
         console.debug(`Skipping estate ${immowebCode} (same modification date as in database)`)
         return {wasPersisted: false, reachedEnd: false}
     }
