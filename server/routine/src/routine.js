@@ -308,6 +308,7 @@ async function saveImage(immowebCode, imageURL, outputPath) {
             })
         } catch(err) {
             console.error(`Error while downloading image ${imageURL} to Google Cloud Storage : ${err}`)
+            throw err
         }
     }
 }
