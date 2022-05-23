@@ -91,7 +91,14 @@ async function mainRoutine() {
     const queriesURLs = (searchURLs || []).concat(searchQueries ? searchQueries.map(q => buildURLFromQuery(q)) : [])
 
     for(let queryURL of queriesURLs) {
-        await processQuery(queryURL)
+        for(let retryCount = 0; retryCount < 3; ++retryCount) {
+            try {
+                await processQuery(queryURL)
+                break
+            } catch(error) {
+                console.error(error)
+            }
+        }
     }
 
     process.exit(0)
