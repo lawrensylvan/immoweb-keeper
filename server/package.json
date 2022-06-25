@@ -23,7 +23,7 @@
     "graphql-iso-date": "^3.6.1",
     "graphql-parse-resolve-info": "^4.12.0",
     "graphql-tag": "^2.12.6",
-    "jsdom": "^16.2.2",
+    "jsdom": "^16.5.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.19",
     "moment": "^2.26.0",
