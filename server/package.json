@@ -27,7 +27,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.19",
     "moment": "^2.26.0",
-    "mongoose": "^6.0.10",
+    "mongoose": "^6.4.6",
     "needle": "^3.0.0",
     "request": "^2.88.2"
   },
