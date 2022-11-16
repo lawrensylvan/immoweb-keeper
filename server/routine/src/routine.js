@@ -83,6 +83,7 @@ async function mainRoutine() {
     await loadConfig()
 
     // Parse JSON criterias to search urls and add them to other defined search urls
+
     const {searchURLs, searchQueries} = input
     if((!searchURLs || searchURLs.length === 0) && (!searchQueries || searchQueries.length === 0)) {
         console.error('No search URL or query specified !')
@@ -121,7 +122,6 @@ async function processQuery(queryURL) {
             lastRun: null,
             allRunDates: null
         })
-        console.log(JSON.stringify(insertedId))
         dbQuery = await db.collection('queries').findOne({ _id : ObjectId(insertedId) })
     }
 
@@ -265,7 +265,7 @@ async function processEstate(immowebCode, lastRunDate, queryId) {
         moment(dbEstate[0].lastModificationDate).isSame(lastModif) ||
         moment(dbEstate[0].lastModificationDate).isSame(lastModif.add(2, 'hours')) ||
         moment(dbEstate[0].lastModificationDate).isSame(lastModif.add(-2, 'hours')) )
-    ) {
+    ) { 
         console.debug(`Skipping estate ${immowebCode} (same modification date as in database)`)
         return {wasPersisted: false, reachedEnd: false}
     }
@@ -275,7 +275,7 @@ async function processEstate(immowebCode, lastRunDate, queryId) {
     for(let imageURL of imageURLs) {
         const fileName = Path.basename(imageURL.replace(/\?[^/]*$/, ''))
         const outputPath = `${imageOutputPath}/${immowebCode}/${fileName}`
-        saveImage(immowebCode, imageURL, outputPath)
+        await saveImage(immowebCode, imageURL, outputPath)
         imageNames.push(fileName)
     }
     
