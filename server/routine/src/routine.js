@@ -11,7 +11,9 @@ const ObjectId  = MongoClient.ObjectID;
 const input = require('../searches.json')
 const {Storage} = require('@google-cloud/storage')
 const {auth} = require('google-auth-library')
-require('dotenv').config({ path: 'config.env' })
+require('dotenv').config({ path: require('find-config')('config.env')})
+
+
 
 needle.defaults({follow: 3 })
 
@@ -238,6 +240,7 @@ async function processPage(url, pageNumber, shouldOnlyCollectImmowebCodes, lastR
             }
             isUpdate ? updatedEstateCount++ : newEstateCount++
         } catch(error) {
+            console.info(error)
             console.error(`Error while processing immoweb code ${immowebCode} !`)
         }
     }
@@ -348,13 +351,29 @@ async function parseResultsPage(searchPageURL) {
 }
 
 async function parseEstatePage(immowebCode) {
-    const estateURL = `https://www.immoweb.be/en/classified/${immowebCode}`
-    const html = await needle('get', estateURL)
-    const dom = new JSDOM(html.body)
-    const scripts = [...dom.window.document.querySelectorAll('script')]
-    const script = scripts.filter(s => s.textContent.includes('window.classified = {"'))[0]
-    return JSON.parse(script.textContent.replace(/window\.classified = ({.*});/gm, '$1'))
-}
+    const estateURL = `https://www.immoweb.be/en/classified/${immowebCode}`;
+    const html = await needle('get', estateURL, { follow_max: 10 });
+    const jsonMatch = /window\.classified\s*=\s*({[\s\S]*?});/.exec(html.body);
+    if (!jsonMatch) {
+      throw new Error('Failed to find JSON data in HTML document.');
+    }
+    const jsonString = jsonMatch[1];
+    const json = JSON.parse(jsonString.replace(/window\.classified = ({.*});/gm, '$1'));
+    return json;
+  }
+  
+
+// async function parseEstatePage(immowebCode) {
+//     const estateURL = `https://www.immoweb.be/en/classified/${immowebCode}`
+//     const html = await needle('get', estateURL, { follow_max: 10 })
+//     const dom = new JSDOM(html.body)
+
+//     const scripts = [...dom.window.document.querySelectorAll('script')]
+//     const script = scripts.filter(s => s.textContent.includes('window.classified = {"'))[0]
+
+//     console.log(dom.window.document)
+//     return JSON.parse(script.textContent.replace(/window\.classified = ({.*});/gm, '$1'))
+// }
 
 /**
  *  MongoDB access (estates)
