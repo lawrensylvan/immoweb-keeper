@@ -1,10 +1,12 @@
+name: immoweb-keeper-dev
+
 services:
   mongodb:
     image: mongo:6.0
     ports:
       - "127.0.0.1:27017:27017"
     volumes:
-      - mongodb_data:/data/db
+      - mongodb_dev_data:/data/db
     healthcheck:
       test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 }).ok"]
       interval: 5s
@@ -13,4 +15,5 @@ services:
       start_period: 5s
 
 volumes:
-  mongodb_data:
+  mongodb_dev_data:
+    name: immoweb_keeper_dev_mongodb

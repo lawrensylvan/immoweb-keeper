@@ -2,6 +2,7 @@ import React from 'react'
 import { ApolloProvider } from '@apollo/client'
 import MainLayout from './MainLayout'
 import LoginScreen from './LoginScreen'
+import RegistrationScreen from './RegistrationScreen'
 import SearchPage from './SearchPage'
 import LikedEstates from './LikedEstates'
 import VisitedEstates from './VisitedEstates'
@@ -23,6 +24,7 @@ export default function App() {
                 <Routes>
 
                     <Route path="login" element={<LoginScreen setToken={setToken} />}/>
+                    <Route path="register" element={<RegistrationScreen />}/>
                     
                     <Route path="logout" element={<Logout/>}/>
 

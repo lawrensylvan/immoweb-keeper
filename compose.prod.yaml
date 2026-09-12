@@ -1,0 +1,78 @@
+name: immoweb-keeper-prod
+
+x-runtime-environment: &runtime-environment
+  MONGODB_URL: mongodb://mongodb:27017
+  MONGODB_DATABASE: immoweb_prod
+  IMAGE_OUTPUT_PATH: /data/images
+
+services:
+  mongodb:
+    image: mongo:6.0
+    volumes:
+      - mongodb_prod_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 }).ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    restart: unless-stopped
+
+  app:
+    image: immoweb-keeper:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      <<: *runtime-environment
+      NODE_ENV: production
+      PORT: 5000
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in deploy/config.prod.env}
+      SHOULD_SERVE_IMAGES: "true"
+      IMAGE_SOURCE_PATH: /data/images
+    ports:
+      - "127.0.0.1:${PROD_APP_PORT:-8080}:5000"
+    volumes:
+      - type: bind
+        source: ${PROD_IMAGES_PATH:?Set PROD_IMAGES_PATH in deploy/config.prod.env}
+        target: /data/images
+        read_only: true
+        bind:
+          create_host_path: false
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:5000/health', response => process.exit(response.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+  routine:
+    image: immoweb-keeper:local
+    profiles: ["tools"]
+    command: ["node", "routine/src/routine.js"]
+    environment:
+      <<: *runtime-environment
+    volumes:
+      - type: bind
+        source: ${PROD_IMAGES_PATH:?Set PROD_IMAGES_PATH in deploy/config.prod.env}
+        target: /data/images
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ./deploy/searches.prod.json
+        target: /app/server/routine/searches.json
+        read_only: true
+        bind:
+          create_host_path: false
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    restart: "no"
+
+volumes:
+  mongodb_prod_data:
+    name: immoweb_keeper_prod_mongodb

@@ -1,7 +1,6 @@
 const _  = require('lodash')
 const fs = require('fs')
 const Path = require('path')
-const rq = require('request')
 const https = require('follow-redirects').https
 const moment = require('moment')
 const { JSDOM } = require('jsdom')
@@ -9,8 +8,6 @@ const needle = require('needle')
 const MongoClient = require('mongodb')
 const ObjectId  = MongoClient.ObjectID;
 const input = require('../searches.json')
-const {Storage} = require('@google-cloud/storage')
-const {auth} = require('google-auth-library')
 require('dotenv').config({ path: require('find-config')('config.env')})
 
 
@@ -21,7 +18,6 @@ const RESULTS_PER_PAGE = 30
 
 let imageOutputPath
 let db
-let bucket
 const today = moment().format('YYYY-MM-DD')
 const yesterday = moment().add(-1, 'day').format('YYYY-MM-DD')
 
@@ -37,44 +33,13 @@ async function loadConfig() {
         process.exit(1)
     }
 
-    // Create local image folder if it doesn't exist yet 
-    if(process.env.IMAGE_DESTINATION === 'local') {
-
-        if(!process.env.IMAGE_OUTPUT_PATH) {
-            console.info('No local image output path specified : will use current directory')
-        }
-        imageOutputPath = process.env.IMAGE_OUTPUT_PATH || './images'
-        if(!fs.existsSync(imageOutputPath)) {
-            console.info('Creating local image folder')
-            await fs.promises.mkdir(imageOutputPath, {recursive: true})
-        }
+    if(!process.env.IMAGE_OUTPUT_PATH) {
+        console.info('No local image output path specified : will use current directory')
     }
-    
-    // Connects to Google Cloud Storage to save images
-    else if(process.env.IMAGE_DESTINATION === 'gcloud') {
-
-        if(!process.env.GCLOUD_JSON_KEY) {
-            console.error('Please provide GCLOUD_JSON_KEY=\'<json key from google>\' in config.env')
-            process.exit(1)
-        }
-        if(!process.env.GCLOUD_BUCKET_NAME) {
-            console.error('Please provide GCLOUD_BUCKET_NAME=<gcloud bucket name> in config.env')
-            process.exit(1)
-        }
-        const client= auth.fromJSON(JSON.parse(process.env.GCLOUD_JSON_KEY))
-        client.scopes = ['https://www.googleapis.com/auth/cloud-platform']
-        const storage = new Storage({
-            authClient: client
-            //keyFilename: process.env.GCLOUD_KEY_PATH
-        })
-        bucket = storage.bucket(process.env.GCLOUD_BUCKET_NAME)
-        imageOutputPath = process.env.GCLOUD_OUTPUT_PATH || ''
-
-    }
-    
-    else {
-        console.error(`Please provide IMAGE_DESTINATION=<'gcloud' or 'local'> in config.env`)
-        process.exit(1)
+    imageOutputPath = process.env.IMAGE_OUTPUT_PATH || './images'
+    if(!fs.existsSync(imageOutputPath)) {
+        console.info('Creating local image folder')
+        await fs.promises.mkdir(imageOutputPath, {recursive: true})
     }
 
 }
@@ -278,7 +243,7 @@ async function processEstate(immowebCode, lastRunDate, queryId) {
     for(let imageURL of imageURLs) {
         const fileName = Path.basename(imageURL.replace(/\?[^/]*$/, ''))
         const outputPath = `${imageOutputPath}/${immowebCode}/${fileName}`
-        await saveImage(immowebCode, imageURL, outputPath)
+        await saveImage(imageURL, outputPath)
         imageNames.push(fileName)
     }
     
@@ -301,25 +266,9 @@ async function processEstate(immowebCode, lastRunDate, queryId) {
     return {wasPersisted: true, isUpdate: dbEstate.length > 0, reachedEnd: false}
 }
 
-async function saveImage(immowebCode, imageURL, outputPath) {
-    if(process.env.IMAGE_DESTINATION === 'local') {
-        if(!fs.existsSync(outputPath)) {
-            await downloadFile(imageURL, outputPath)
-        }
-    }
-    else if(process.env.IMAGE_DESTINATION === 'gcloud') {
-        let outputFile = bucket.file(outputPath)
-        const fileWriteStream = outputFile.createWriteStream()
-        let pipe = rq(imageURL).pipe(fileWriteStream)
-        try {
-            await new Promise((resolve, reject) => {
-                pipe.on('finish', resolve)
-                pipe.on('error', reject)
-            })
-        } catch(err) {
-            console.error(`Error while downloading image ${imageURL} to Google Cloud Storage : ${err}`)
-            throw err
-        }
+async function saveImage(imageURL, outputPath) {
+    if(!fs.existsSync(outputPath)) {
+        await downloadFile(imageURL, outputPath)
     }
 }
 

@@ -4,6 +4,9 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 async function registerUser(name, password) {
+    const existingUser = await UserModel.findOne({name})
+    if(existingUser) throw new UserInputError(`User '${name}' already exists`)
+
     const hash = await bcrypt.hash(password, 12)
     return UserModel.create({name: name, password: hash})
 }

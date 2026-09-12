@@ -25,28 +25,32 @@
     app.use(cors())
     app.use(express.json())
 
+    app.get('/health', (req, res) => {
+        const isMongoConnected = mongoose.connection.readyState === 1
+        res.status(isMongoConnected ? 200 : 503).json({
+            status: isMongoConnected ? 'ok' : 'waiting-for-mongodb'
+        })
+    })
+
     const http = require('http')
     const httpServer = http.createServer(app)
 
     const path = require('path')
     
-    const isProduction = process.env.NODE__ENV === 'production'
+    const isProduction = process.env.NODE_ENV === 'production'
     
     // Serve React code (if in production)
 
     if(isProduction) {
         const root = path.resolve(__dirname, '../..', 'client', 'build')
         app.use(express.static(root))
-        app.get('*', (req, res) => {
-            res.sendFile(path.join(root, 'index.html'))
-        })
     }
 
     // Serve static photos (if in development)
     
     if(process.env.SHOULD_SERVE_IMAGES === 'true') {
         const path = require('path')
-        const dir = path.join(__dirname, process.env.IMAGE_SOURCE_PATH || '')
+        const dir = path.resolve(__dirname, process.env.IMAGE_SOURCE_PATH || '')
         app.use(express.static(dir))
         console.log(`✓ Serving static images at /{immowebCode}/{imageName} on port ${port}`)
     }
@@ -98,6 +102,14 @@
         app,
         path: '/graphql/'
     })
+
+    if(isProduction) {
+        const root = path.resolve(__dirname, '../..', 'client', 'build')
+        app.get('*', (req, res) => {
+            res.sendFile(path.join(root, 'index.html'))
+        })
+    }
+
     await new Promise(resolve => httpServer.listen({port}, resolve))
     console.log(`🚀 GraphQL server ready at ${server.graphqlPath} on port ${port}`)
 

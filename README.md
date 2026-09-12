@@ -1,161 +1,208 @@
 # Immoweb Keeper
 
-Save your favorite Immoweb.be search results forever in your MongoDB database and explore the past !
+Immoweb Keeper downloads Immoweb search results, stores their metadata in MongoDB, saves their pictures, and provides a React interface for exploring the collected data.
 
 ![Screenshot of the front-end](https://user-images.githubusercontent.com/25752900/138572515-7369734a-9727-4450-87e5-fa43db6b8b9c.png)
 
-## Table of contents
+## Environments
 
-* [Context](#context)
-* [How to use](#how-to-use)
-  + [Requirements](#requirements)
-  + [Setup config](#setup-config)
-  + [Run download routine](#run-download-routine)
-  + [Run visualisation page](#run-visualisation-page)
-* [Data model](#data-model)
-  + [Collection `estates`](#collection--estates-)
-    - [Subdocument `rawMetadata`](#subdocument--rawmetadata-)
-* [How does it work ?](#how-does-it-work--)
-* [Work in progress...](#work-in-progress)
+Development and production are intentionally isolated:
 
-## Context
+| | Development | Production |
+|---|---|---|
+| Frontend | Native React development server | Compiled into the application image |
+| Backend | Native Node.js with nodemon | Docker application container |
+| MongoDB | Docker, exposed on loopback | Docker, not exposed to the host |
+| Database | `immoweb_dev` | `immoweb_prod` |
+| MongoDB volume | `immoweb_keeper_dev_mongodb` | `immoweb_keeper_prod_mongodb` |
+| Images | `dev/images` in this repository | Host directory configured with `PROD_IMAGES_PATH` |
+| Web address | `http://localhost:3000` | `http://localhost:8080` |
 
-Immoweb is the leading real estate classified ads website in Belgium. However, items disappear once they are sold or rented. If you want to be able to keep forever all the information about items (including description, photos and structured data such as PEB, bedroom count, price), you've come to the right place ! Immoweb Keeper, provided that you run it on a schedule (such as every day) and that you provide one or more search criteria, will automatically download all the new items matching those criteria and even redownload ones that were updated.
+Production is currently loopback-only. Public exposure, a reverse proxy, scheduled routines, existing-data migration, and backup automation are deliberately outside this setup.
 
-You are then free to analyse the long-term market trends, such as the evolution of price/transaction volume/average bedroom count/surface etc. in specific area over a specific time period. That part is still up to you as of today : you could use MongoDB Compass or MongoDB Charts to quickly analyse the data, use a front-end data vizualization framework to build an interactive webpage or use any other data vizualization tool.
+## Requirements
 
-## How to use
+- Node.js and npm for development
+- Docker Desktop for both MongoDB environments and the production application
+- A persistent host directory for production images, on internal or external storage
 
-### Requirements
+## Install dependencies
 
-- You need to have Node.js and npm installed
-- You need Docker Desktop (recommended for local development), or another MongoDB instance
+From the repository root:
 
-### Setup config
+```sh
+npm install
+npm install --prefix server --legacy-peer-deps
+npm install --prefix client
+```
 
-- Go to the root project directory using terminal & run `npm install`
-- Install the server dependencies with `npm install --prefix server --legacy-peer-deps` and the client dependencies with `npm install --prefix client`
-- Copy `server/config.env.example` to `server/config.env` and replace the `JWT_SECRET` placeholder with a random string
-- Start the local MongoDB container with `npm run db:start`. Its data is persisted in a Docker volume between restarts.
-- The example configuration already points the application at the container through the host port:
-  ```sh
-  MONGODB_URL=mongodb://localhost:27017
-  MONGODB_DATABASE=immoweb
-  ```
-- If you use another MongoDB instance, update those values in `server/config.env` instead.
-- Stop the container with `npm run db:stop`; use `npm run db:logs` to follow its logs.
-- Copy `server/routine/searches.example.json` to `server/routine/searches.json`, then customize one or both of these items:
-  * `searchURLs` : just go to http://www.immoweb.be, choose you criterias and paste the url once you are on the search results page, OR :
-  
-  * `searchQueries` : an alternative, more structured way of storing the search criteria than the search url (the filter names are those from immoweb urls query params) 
+The server uses an older GraphQL dependency tree, which is why its install uses legacy peer-dependency resolution.
 
-  `server/routine/searches.json` contains your active, machine-specific searches and is ignored by Git.
- 
-  ```json
-  {
-    "searchURLs": [
-        "https://www.immoweb.be/en/search/house/for-rent?countries=BE&postalCodes=BE-1140&orderBy=relevance",
-        "https://www.immoweb.be/en/search/apartment/for-rent?countries=BE&minBedroomCount=1&propertySubtypes=KOT%2CFLAT_STUDIO&page=1&orderBy=relevance"
-    ],
-    "searchQueries": [{
-            "propertyTypes": ["HOUSE"],
-            "postalCodes": [1030, 1040, 1140],
-            "maxPrice": 600000,
-            "minBedroomCount": 3
-        }, {
-            "propertyTypes": ["GARAGE"],
-            "postalCodes": [1030, 1040, 1140]
-        }]
-  }
-  ```
+## Development
 
-### Run download routine
+### First-time configuration
 
-Execute `npm run routine` to start the download routine.
+Create the ignored development server configuration:
 
-Ideally, you should setup a cron job to execute the routine daily (there are various ways of achieving this depending on your OS).
+```sh
+cp server/config.env.example server/config.env
+```
 
-All the structured data and the pictures will be respectively stored in your MongoDB database and on your hard drive.
+Replace the `JWT_SECRET` placeholder with a long random value. The defaults connect to the development MongoDB container, use database `immoweb_dev`, and save images under `dev/images`.
 
-Then, it's up to you to decide how you want to xplore : you can use the front-end described in next section to explore the results, or you can setup any data vizualisation tool.
+Create the ignored development searches file:
 
-It is good to know that :
-- The first time you include a search query/url in the config and run Immoweb Keeper, it will browse through all search results matching that criteria
-- The next times, Immoweb Keeper will sort the results from the most recently to the least recently updated item, and stop browsing the results when it reaches an item that has not been updated since the last time you runned Immoweb Keeper
+```sh
+cp server/routine/searches.example.json server/routine/searches.json
+```
 
-### Run visualisation page
+Then replace the examples with the Immoweb searches you want to test.
 
-- Make sure MongoDB is running (`npm run db:start` when using the Docker setup)
-- Execute `npm run dev` to run the server and React client together, or run `npm run server` and `npm run client` separately
-- The server exposes the data from your MongoDB
-  * if you want to use another port than 5000, you can override the default port in ``config.env``
+### Development commands
 
-- The React ImmowebKeeper website will pop up in your default browser and allow you to explore the results !
-  * use the filters on top to dive into your results
-  * currently, the filtering is done on all the results that exist in your database, no distinction is made between the different search queries
-  * lots of improvements and optimizations yet to come !
+```sh
+# Start MongoDB, the backend with nodemon, and the React development server
+npm run dev
+
+# Run the services separately
+npm run dev:db:start
+npm run dev:server
+npm run dev:client
+
+# Run the downloader against development data
+npm run dev:routine
+
+# Inspect or stop development MongoDB
+npm run dev:status
+npm run dev:db:logs
+npm run dev:db:stop
+```
+
+Stopping the MongoDB container does not delete `immoweb_keeper_dev_mongodb`.
+
+## Production
+
+Production builds the React client and Node backend into one application image. MongoDB runs as a separate container with its own named volume. The routine is defined as a one-off service using the same application image.
+
+### First-time configuration
+
+Choose an absolute host path for production images and put it in `deploy/config.prod.env`:
+
+```text
+PROD_IMAGES_PATH=/absolute/path/to/immoweb-keeper/images
+```
+
+The directory must already exist. It is mounted read-only in the web application and read-write in the routine. Deployment fails if the configured path is unavailable, which also prevents Docker from silently creating a replacement directory when an external drive is disconnected.
+
+Create the ignored production environment file:
+
+```sh
+cp deploy/config.prod.env.example deploy/config.prod.env
+```
+
+Replace `JWT_SECRET` with a long random value and set `PROD_IMAGES_PATH` to the absolute image directory on your host. `PROD_APP_PORT` defaults to `8080`.
+
+Create the ignored production search configuration:
+
+```sh
+cp deploy/searches.prod.example.json deploy/searches.prod.json
+```
+
+Customize it before running the production routine. Development and production search files are independent.
+
+### Production commands
+
+```sh
+# Validate Docker, private configuration, searches, and image storage
+npm run prod:check
+
+# Build without starting services
+npm run prod:build
+
+# Validate, build, and start the app and MongoDB
+npm run prod:deploy
+
+# Run the production downloader once
+npm run prod:routine
+
+# Inspect the deployment
+npm run prod:status
+npm run prod:logs
+
+# Restart or stop the application stack
+npm run prod:restart
+npm run prod:stop
+```
+
+After deployment, browse to [http://localhost:8080](http://localhost:8080).
+
+`prod:stop` removes the containers and network but preserves `immoweb_keeper_prod_mongodb`. Do not add `--volumes` unless you explicitly intend to delete the production database.
+
+## Container architecture
+
+The production image is built with the root `Dockerfile`:
+
+1. A build stage installs and compiles the React client.
+2. A dependency stage installs server production dependencies.
+3. The runtime stage combines the server and compiled client and runs as a non-root user.
+
+`compose.prod.yaml` starts MongoDB first and waits for its health check before starting the application. The application is considered healthy only after it can connect to MongoDB. MongoDB has no published production port; the application is published only on `127.0.0.1`.
+
+The production routine is not always running. `npm run prod:routine` creates a temporary routine container, connects it to production MongoDB, writes images to the configured host directory, and removes the container afterward.
+
+## Search configuration
+
+Both environment-specific search files use the same shape:
+
+```json
+{
+  "searchURLs": [
+    "https://www.immoweb.be/en/search/house/for-sale?countries=BE&postalCodes=BE-1000&orderBy=relevance"
+  ],
+  "searchQueries": [
+    {
+      "propertyTypes": ["HOUSE"],
+      "postalCodes": [1000, 1030],
+      "maxPrice": 500000,
+      "minBedroomCount": 2
+    }
+  ]
+}
+```
+
+For `searchURLs`, configure a search on Immoweb and copy its results URL. `searchQueries` is the structured alternative using Immoweb query parameter names.
 
 ## Data model
 
-If the provided front-end is a bit light for your needs, you are free to explore the data with any tool you want. Here is a documentation of how the data is structured in the MongoDB database :
+MongoDB creates the required collections automatically. No migration or seed data is required.
 
-### Collection `estates`
+The `estates` collection contains:
 
-|       Field         |            Source             |                      Description                    |
-| ------------------- | ----------------------------- | --------------------------------------------------- |
-| _id                 | MongoDB                       | unique id generated by mongodb                      |
-| rawMetada           | Immoweb                       | all the raw metadata as it was fetched from Immoweb |
-| fetchDate           | Immoweb Keeper                | datetime of the download                            |
-| images              | Immoweb Keeper                | item's pictures file paths on your hard drive       |
-| lastSeen            | Immoweb Keeper                | date of last run in which that item appeared        |
-| disappearanceDate   | Immoweb Keeper                | date of first run in which it was not there anymore |
-| immowebCode         | rawMetadata                   | unique id within immoweb                            |
-| lastModificationDate| rawMetadata                   | cast to datetime                                    |
-| creationDate        | rawMetadata                   | cast to datetime                                    |
-| expirationDate      | rawMetadata                   | cast to datetime                                    |
-| geolocation         | rawMetadata.property.location | better format for direct display in MongoDB compass |
+| Field | Description |
+|---|---|
+| `_id` | MongoDB document identifier |
+| `immowebCode` | Immoweb listing identifier |
+| `queryId` | Associated document in `queries` |
+| `rawMetadata` | Complete metadata extracted from Immoweb |
+| `fetchDate` | Time this version was downloaded |
+| `lastModificationDate` | Immoweb modification time |
+| `creationDate` | Immoweb creation time |
+| `expirationDate` | Immoweb expiration time |
+| `geolocation` | Normalized longitude and latitude when available |
+| `images` | Locally stored image filenames |
+| `lastSeen` | Last routine date on which the listing appeared |
+| `disappearanceDate` | First routine date on which it no longer appeared |
 
-#### Subdocument `rawMetadata`
+The `queries` collection stores normalized search criteria, the normalized URL, and run dates. The `users` collection stores application accounts and their liked and visited estate identifiers.
 
-Whereas the first level structure is guaranteed by Immoweb Keeper, the *rawMetadata* field structure could change without notice in the case of Immoweb changing things in their data structure. Only a change in the lastModificationDate and id (which holds the immoweb code) would break the Immoweb Keeper routine as it uses them for indexing data and knowing when to stop to browse results. Any other modification in the structure would just make the afterhand data analysis more difficult.
+## Current scope
 
-|       Field path              |  Filter in front-end ?  | Usage in front-end |
-| -------------------           | ----------------------  | ------------------ |
-| immowebCode                   |                         | card, table        |
-| price.mainValue               | v                       | card, table        |
-| property.location.postalCode  | v                       | card, table        |
-| property.location.locality    | v                       | card, table        |
-| property.location.geolocation | v                       | map                |
-| property.location.street      | v                       | card, table        |
-| property.hasGarden            | v                       | card, table        |
-| property.gardenSurface        | v                       | card, table        |
-| customers[0].name             |                         | card               |
-| customers[0].logoUrl          |                         | card               |
-| flags.isPublicSale            |                         | card               |
-| flags.isSoldOrRented          |                         | card               |
-| flags.isUnderOption           |                         | card               |
+This repository setup intentionally does not yet:
 
-## How does it work ?
+- migrate existing production data;
+- configure public DNS, HTTPS, or a reverse proxy;
+- schedule the download routine;
+- deduplicate historical test data or prevent concurrent routines;
+- automate database or image backups.
 
-- All the structured data about real estate items will be stored in your **immoweb** MongoDB database (in collections **estates**)
-- All the item pictures will be downloaded to your image repository folder, in subfolders named after their immoweb codes
-- The details (url, list of criteria, last run date) of the search query will be stored as documents the *queries* collection of the *immoweb* database, along with the last time when it was runned
-
-Here is the overview of how the code is organized. When you run it, the script will :
-
-- Create a database called *immoweb* in your mongodb instance specified in *mongoDBUrl* (if it does not exist already)
-- Create the image output folder configured by `IMAGE_OUTPUT_PATH` (if it does not exist already)
-- For each of your search result's URLs or structured queries, it will then :
-  - Get the last run date from the *queries* collection of the *immoweb* mongodb
-  - Add a filter to sort results from the most to the least recently updated/created
-  - For each page of results, it will extract all the immoweb codes and for each of them, it will :
-    - Get the JSON metadata provided by immoweb in the source code of the item webpage
-    - Get the lastModificationDate from the metadata : if it is older than the last run date of this query, go on with the next query
-    - Get all the item's pictures' urls from the media.pictures item from the metadata
-    - Download all pictures to the path *<IMAGE_OUTPUT_PATH>/<immowebCode>/<pictureName>.jpg*
-    - Create a new document in the *estate* collection of the *immoweb* database with the immoweb metadata wrapped with other data (cf next section)
-  - Save the current date and time as the last run date for that query in the *query* collection of the *immoweb* database
-
-## Work in progress...
-
-The download routine is working fully, but the front-end visualization page, although working, is still under construction : only a few filters exist, the retrieval of items from the database is far from efficient and there is no way to select for which query we want to see the results : the filters work on the basis of the full set of data and their min/max/allowed values (price range, list of zip codes) does not change according to the bounds that we can find in the database.
+Those concerns should be handled before retiring existing production services or enabling a daily production schedule.

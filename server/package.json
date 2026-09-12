@@ -8,7 +8,6 @@
     "biddit-routine": "node routine/src/biddit-routine.js | tee ./routine/logs/$(date '+%Y.%m.%d-%H.%M.%S').log"
   },
   "dependencies": {
-    "@google-cloud/storage": "^5.16.1",
     "@graphql-tools/graphql-file-loader": "^7.3.1",
     "@graphql-tools/load": "^7.4.0",
     "@graphql-tools/schema": "^8.3.0",
@@ -20,7 +19,6 @@
     "express-graphql": "^0.12.0",
     "find-config": "^1.0.0",
     "follow-redirects": "^1.14.8",
-    "google-auth-library": "^7.11.0",
     "graphql": "^15.6.1",
     "graphql-iso-date": "^3.6.1",
     "graphql-parse-resolve-info": "^4.12.0",
@@ -29,13 +27,12 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.19",
     "moment": "^2.26.0",
+    "mongodb": "^3.7.2",
     "mongoose": "^6.0.10",
-    "needle": "^3.0.0",
-    "request": "^2.88.2"
+    "needle": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^7.1.0",
-    "mongodb": "^3.7.2",
     "nodemon": "^3.1.14"
   }
 }

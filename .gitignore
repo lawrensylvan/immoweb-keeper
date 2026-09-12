@@ -1,11 +1,10 @@
 .DS_STORE
 
-# json with Google Cloud Storage credentials 
-gcloud_key.json
-
-# folder with downloaded images (if local)
+# folder with downloaded images
 images
-/photos/
+/dev/images/
+/deploy/config.prod.env
+/deploy/searches.prod.json
 /server/routine/searches.json
 
 ### Standard Node gitignores :

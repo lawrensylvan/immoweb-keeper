@@ -1,0 +1,14 @@
+.git
+.gitignore
+node_modules
+client/node_modules
+server/node_modules
+client/build
+dev/images
+server/config.env
+server/routine/searches.json
+server/routine/logs
+deploy/config.prod.env
+deploy/searches.prod.json
+*.log
+.DS_Store

@@ -4,5 +4,6 @@
     "editor.tabSize": 4,
     "editor.detectIndentation": false,
     "breadcrumbs.enabled": true,
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "search.useIgnoreFiles": false
 }

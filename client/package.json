@@ -11,7 +11,6 @@
     "@testing-library/user-event": "^12.8.3",
     "antd": "^4.16.13",
     "axios": "^0.22.0",
-    "env-cmd": "^10.1.0",
     "graphql": "^15.6.1",
     "jsonwebtoken": "^8.5.1",
     "leaflet": "^1.7.1",
@@ -28,8 +27,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "env-cmd --silent -f config.env react-scripts start",
-    "build": "env-cmd --silent -f config.env react-scripts build",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
