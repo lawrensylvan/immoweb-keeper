@@ -51,9 +51,13 @@ async function mainRoutine() {
 
     // Parse JSON criterias to search urls and add them to other defined search urls
 
-    const {searchURLs, searchQueries} = input
+    const {searchURLs, searchQueries, maxEstatesPerSearch} = input
     if((!searchURLs || searchURLs.length === 0) && (!searchQueries || searchQueries.length === 0)) {
         console.error('No search URL or query specified !')
+        process.exit(1)
+    }
+    if(maxEstatesPerSearch != null && (!Number.isInteger(maxEstatesPerSearch) || maxEstatesPerSearch < 1)) {
+        console.error('maxEstatesPerSearch must be a positive integer or null')
         process.exit(1)
     }
     const queriesURLs = (searchURLs || []).concat(searchQueries ? searchQueries.map(q => buildURLFromQuery(q)) : [])
@@ -61,7 +65,7 @@ async function mainRoutine() {
     for(let queryURL of queriesURLs) {
         for(let retryCount = 0; retryCount < 3; ++retryCount) {
             try {
-                await processQuery(queryURL)
+                await processQuery(queryURL, maxEstatesPerSearch)
                 break
             } catch(error) {
                 console.error(error)
@@ -72,7 +76,7 @@ async function mainRoutine() {
     process.exit(0)
 }
 
-async function processQuery(queryURL) {
+async function processQuery(queryURL, maxEstatesPerSearch) {
     console.info()
     console.info(`****************************************************************`)
     console.info(`Search query : ${queryURL}`)
@@ -96,17 +100,21 @@ async function processQuery(queryURL) {
     const nextLastRunDate = new Date()
     console.info(lastRunDate ? `Last run for this query was on ${lastRunDate}` : `This is the first run for this query`)
 
-    const pageCount = Math.ceil(totalResultCount / RESULTS_PER_PAGE)
+    const resultCountToProcess = maxEstatesPerSearch == null
+        ? totalResultCount
+        : Math.min(totalResultCount, maxEstatesPerSearch)
+    const pageCount = Math.ceil(resultCountToProcess / RESULTS_PER_PAGE)
     const pageNumbers = _.range(1, pageCount + 1)
 
     // Process each page of results
-    console.info(`Will process up to ${totalResultCount} results (${pageCount} pages)`)
+    console.info(`Will process up to ${resultCountToProcess} of ${totalResultCount} results (${pageCount} pages)`)
     let newEstateCount = 0
     let updatedEstateCount = 0
     let shouldOnlyCollectImmowebCodes = false
     let seenImmowebCodes = []
     for(let page of pageNumbers) {
-        const result = await processPage(normalizedQueryURL, page, shouldOnlyCollectImmowebCodes, lastRunDate, dbQuery._id)
+        const remainingEstateCount = resultCountToProcess - seenImmowebCodes.length
+        const result = await processPage(normalizedQueryURL, page, shouldOnlyCollectImmowebCodes, lastRunDate, dbQuery._id, remainingEstateCount)
         seenImmowebCodes.push(...result.immowebCodes)
         newEstateCount += result.newEstateCount
         updatedEstateCount += result.updatedEstateCount
@@ -125,14 +133,19 @@ async function processQuery(queryURL) {
 
     // Check for estates in the db that were not seen in Immoweb anymore to put a disappearanceDate
     
-    const allImmowebCodes = (await db.collection('estates')
-                                     .find({
-                                         queryId: dbQuery._id,
-                                         disappearanceDate: null
-                                     }).toArray())
-                            .map(e => e.immowebCode)
-    
-    const notSeenImmowebCodes = _.difference(allImmowebCodes, seenImmowebCodes)
+    let notSeenImmowebCodes = []
+    if(maxEstatesPerSearch == null) {
+        const allImmowebCodes = (await db.collection('estates')
+                                         .find({
+                                             queryId: dbQuery._id,
+                                             disappearanceDate: null
+                                         }).toArray())
+                                .map(e => e.immowebCode)
+
+        notSeenImmowebCodes = _.difference(allImmowebCodes, seenImmowebCodes)
+    } else {
+        console.info('Skipping disappearance detection because this search run is limited')
+    }
 
     await db.collection('estates').updateMany({ immowebCode: { $in: seenImmowebCodes} }, { $set: { lastSeen: today } })
     await db.collection('estates').updateMany({ immowebCode: { $in: notSeenImmowebCodes} }, { $set: { disappearanceDate: today } })
@@ -173,17 +186,17 @@ function computeNewAllRunDates(allRunDates) {
 }
 
 // Load all estate data of that result page and returns the new and updated estate count + whether we should stop browsing more pages or not
-async function processPage(url, pageNumber, shouldOnlyCollectImmowebCodes, lastRunDate, queryId) {
+async function processPage(url, pageNumber, shouldOnlyCollectImmowebCodes, lastRunDate, queryId, estateLimit) {
     
     // Sort results from newest to oldest to be able to stop as soon as we encounter an estate with no updates
     const queryURL = `${url}&orderBy=newest&page=${pageNumber}`    
     const {results} = await parseResultsPage(queryURL)
     if(!results.length) {
         console.warn(`Page ${pageNumber} is not there anymore : will stop here`)
-        return {newEstateCount: 0, updatedEstateCount: 0, shouldContinue: true}
+        return {newEstateCount: 0, updatedEstateCount: 0, shouldContinue: true, immowebCodes: []}
     }
     
-    const immowebCodes = results.map(r => r.id)
+    const immowebCodes = results.slice(0, estateLimit).map(r => r.id)
     if(shouldOnlyCollectImmowebCodes) {
         return {newEstateCount: 0, updatedEstateCount: 0, shouldContinue: false, immowebCodes}
     }

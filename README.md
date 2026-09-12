@@ -156,6 +156,7 @@ Both environment-specific search files use the same shape:
 
 ```json
 {
+  "maxEstatesPerSearch": null,
   "searchURLs": [
     "https://www.immoweb.be/en/search/house/for-sale?countries=BE&postalCodes=BE-1000&orderBy=relevance"
   ],
@@ -171,6 +172,8 @@ Both environment-specific search files use the same shape:
 ```
 
 For `searchURLs`, configure a search on Immoweb and copy its results URL. `searchQueries` is the structured alternative using Immoweb query parameter names.
+
+Set `maxEstatesPerSearch` to a positive integer to limit how many estates the routine downloads for each configured search. This is useful for development; leave it as `null` for an unlimited production run. Limited runs skip disappearance detection because they do not inspect every result.
 
 ## Data model
 

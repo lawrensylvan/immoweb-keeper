@@ -1,4 +1,5 @@
 {
+  "maxEstatesPerSearch": null,
   "searchURLs": [
     "https://www.immoweb.be/en/search/house/for-sale?countries=BE&postalCodes=BE-1000&orderBy=relevance"
   ],
