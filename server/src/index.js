@@ -3,11 +3,12 @@
 
 (async function() {
 
+    require('dotenv').config({ path: 'config.env' })
+
     const port = process.env.PORT || 5000
-    
+
     // Connect to MongoDB using config
 
-    require('dotenv').config({ path: 'config.env' })
     const mongoDbURL = process.env.MONGODB_URL
     const mongoDbDatabase = process.env.MONGODB_DATABASE || 'immoweb'
 

@@ -43,7 +43,7 @@ async function loadConfig() {
         if(!process.env.IMAGE_OUTPUT_PATH) {
             console.info('No local image output path specified : will use current directory')
         }
-        imageOutputPath = process.env.GCLOUD_OUTPUT_PATH || './images'
+        imageOutputPath = process.env.IMAGE_OUTPUT_PATH || './images'
         if(!fs.existsSync(imageOutputPath)) {
             console.info('Creating local image folder')
             await fs.promises.mkdir(imageOutputPath, {recursive: true})
@@ -426,8 +426,7 @@ async function downloadFile(url, outputPath) {
  * 
  * Features :
  * 
- * - Allow for full search URLs in config.json in addition to broken down search queries 
- * - Test the strategy of image in database directly (and give user the choice in config.json)
+ * - Allow for full search URLs in searches.json in addition to broken down search queries
+ * - Test the strategy of image in database directly (and give user the choice in searches.json)
  * - Encode the date in a native MongoDB format for better analysis ?
  */
- 

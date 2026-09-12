@@ -29,26 +29,30 @@ You are then free to analyse the long-term market trends, such as the evolution 
 ### Requirements
 
 - You need to have Node.js and npm installed
-- You need to have an instance of MongoDb installed on your machine
+- You need Docker Desktop (recommended for local development), or another MongoDB instance
 
 ### Setup config
 
 - Go to the root project directory using terminal & run `npm install`
-- Make sure your MongoDB instance is running (you can run `mongod`)
-- Modify the `config.env` file to match your MongoBD connection string, such as :
+- Install the server dependencies with `npm install --prefix server --legacy-peer-deps` and the client dependencies with `npm install --prefix client`
+- Copy `server/config.env.example` to `server/config.env` and replace the `JWT_SECRET` placeholder with a random string
+- Start the local MongoDB container with `npm run db:start`. Its data is persisted in a Docker volume between restarts.
+- The example configuration already points the application at the container through the host port:
   ```sh
   MONGODB_URL=mongodb://localhost:27017
   MONGODB_DATABASE=immoweb
   ```
-- Create a `config.json` file with the following items :
-  * `imageRepository` : the path on your filesystem where you would like the items' images to be downloaded
+- If you use another MongoDB instance, update those values in `server/config.env` instead.
+- Stop the container with `npm run db:stop`; use `npm run db:logs` to follow its logs.
+- Copy `server/routine/searches.example.json` to `server/routine/searches.json`, then customize one or both of these items:
   * `searchURLs` : just go to http://www.immoweb.be, choose you criterias and paste the url once you are on the search results page, OR :
   
   * `searchQueries` : an alternative, more structured way of storing the search criteria than the search url (the filter names are those from immoweb urls query params) 
+
+  `server/routine/searches.json` contains your active, machine-specific searches and is ignored by Git.
  
   ```json
   {
-    "imageRepository": "~/immoweb/photos",
     "searchURLs": [
         "https://www.immoweb.be/en/search/house/for-rent?countries=BE&postalCodes=BE-1140&orderBy=relevance",
         "https://www.immoweb.be/en/search/apartment/for-rent?countries=BE&minBedroomCount=1&propertySubtypes=KOT%2CFLAT_STUDIO&page=1&orderBy=relevance"
@@ -81,10 +85,12 @@ It is good to know that :
 
 ### Run visualisation page
 
-- Execute ``npm run server`` to setup the server that will expose the data from your MongoDB
+- Make sure MongoDB is running (`npm run db:start` when using the Docker setup)
+- Execute `npm run dev` to run the server and React client together, or run `npm run server` and `npm run client` separately
+- The server exposes the data from your MongoDB
   * if you want to use another port than 5000, you can override the default port in ``config.env``
 
-- Execute ``npm run client`` and the React ImmowebKeeper website will pop up in your default browser and allow you to explore the results !
+- The React ImmowebKeeper website will pop up in your default browser and allow you to explore the results !
   * use the filters on top to dive into your results
   * currently, the filtering is done on all the results that exist in your database, no distinction is made between the different search queries
   * lots of improvements and optimizations yet to come !
@@ -138,7 +144,7 @@ Whereas the first level structure is guaranteed by Immoweb Keeper, the *rawMetad
 Here is the overview of how the code is organized. When you run it, the script will :
 
 - Create a database called *immoweb* in your mongodb instance specified in *mongoDBUrl* (if it does not exist already)
-- Create the folder for the image repository as mentioned in *imageRepository* (if it does not exist already)
+- Create the image output folder configured by `IMAGE_OUTPUT_PATH` (if it does not exist already)
 - For each of your search result's URLs or structured queries, it will then :
   - Get the last run date from the *queries* collection of the *immoweb* mongodb
   - Add a filter to sort results from the most to the least recently updated/created
@@ -146,7 +152,7 @@ Here is the overview of how the code is organized. When you run it, the script w
     - Get the JSON metadata provided by immoweb in the source code of the item webpage
     - Get the lastModificationDate from the metadata : if it is older than the last run date of this query, go on with the next query
     - Get all the item's pictures' urls from the media.pictures item from the metadata
-    - Download all pictures to the path *<imageRepository>/<immowebCode>/<pictureName>.jpg*
+    - Download all pictures to the path *<IMAGE_OUTPUT_PATH>/<immowebCode>/<pictureName>.jpg*
     - Create a new document in the *estate* collection of the *immoweb* database with the immoweb metadata wrapped with other data (cf next section)
   - Save the current date and time as the last run date for that query in the *query* collection of the *immoweb* database
 

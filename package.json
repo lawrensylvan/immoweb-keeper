@@ -15,6 +15,9 @@
   "author": "Laurent Sylvain Vleminckx",
   "license": "GPL-3.0-or-later",
   "scripts": {
+    "db:start": "docker compose up -d --wait mongodb",
+    "db:stop": "docker compose stop mongodb",
+    "db:logs": "docker compose logs -f mongodb",
     "routine": "cd server && npm run routine",
     "biddit-routine": "cd server && npm run biddit-routine",
     "dev": "concurrently \"npm run server\" \"npm run client\" --names \"server,client\" --prefix \"{name} ~>\" --prefix-colors \"green,blue\"",

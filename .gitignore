@@ -5,6 +5,8 @@ gcloud_key.json
 
 # folder with downloaded images (if local)
 images
+/photos/
+/server/routine/searches.json
 
 ### Standard Node gitignores :
 
