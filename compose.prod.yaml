@@ -36,6 +36,11 @@ services:
       - type: bind
         source: ${PROD_IMAGES_PATH:?Set PROD_IMAGES_PATH in deploy/config.prod.env}
         target: /data/images
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ./deploy/searches.prod.json
+        target: /app/server/routine/searches.json
         read_only: true
         bind:
           create_host_path: false

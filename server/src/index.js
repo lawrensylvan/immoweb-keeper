@@ -13,9 +13,8 @@
     const mongoDbDatabase = process.env.MONGODB_DATABASE || 'immoweb'
 
     const mongoose = require('mongoose')
-    mongoose.connect(mongoDbURL + '/' + mongoDbDatabase)
-            .then(() => console.log('✓ Connected to MongoDB'))
-            .catch(err => console.error('ⓧ Unable to connect to mongodb : ' + err))
+    await mongoose.connect(mongoDbURL + '/' + mongoDbDatabase)
+    console.log('✓ Connected to MongoDB')
 
     // Init express server
     
@@ -110,7 +109,17 @@
         })
     }
 
+    const { initializeRoutineScheduler, stopRoutineScheduler } = require('./services/routineScheduler')
+    await initializeRoutineScheduler()
+
     await new Promise(resolve => httpServer.listen({port}, resolve))
     console.log(`🚀 GraphQL server ready at ${server.graphqlPath} on port ${port}`)
+
+    const shutdown = () => {
+        stopRoutineScheduler()
+        httpServer.close(() => process.exit(0))
+    }
+    process.once('SIGTERM', shutdown)
+    process.once('SIGINT', shutdown)
 
 })()

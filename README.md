@@ -18,7 +18,7 @@ Development and production are intentionally isolated:
 | Images | `dev/images` in this repository | Host directory configured with `PROD_IMAGES_PATH` |
 | Web address | `http://localhost:3000` | `http://localhost:8080` |
 
-Production is currently loopback-only. Public exposure, a reverse proxy, scheduled routines, existing-data migration, and backup automation are deliberately outside this setup.
+Production is currently loopback-only. Public exposure, a reverse proxy, existing-data migration, and backup automation are deliberately outside this setup.
 
 ## Requirements
 
@@ -82,7 +82,7 @@ Stopping the MongoDB container does not delete `immoweb_keeper_dev_mongodb`.
 
 ## Production
 
-Production builds the React client and Node backend into one application image. MongoDB runs as a separate container with its own named volume. The routine is defined as a one-off service using the same application image.
+Production builds the React client and Node backend into one application image. MongoDB runs as a separate container with its own named volume. The application schedules routine child processes, while a one-off service remains available for command-line maintenance.
 
 ### First-time configuration
 
@@ -92,7 +92,7 @@ Choose an absolute host path for production images and put it in `deploy/config.
 PROD_IMAGES_PATH=/absolute/path/to/immoweb-keeper/images
 ```
 
-The directory must already exist. It is mounted read-only in the web application and read-write in the routine. Deployment fails if the configured path is unavailable, which also prevents Docker from silently creating a replacement directory when an external drive is disconnected.
+The directory must already exist. It is mounted read-write in the application and routine so scheduled downloads can save images. Deployment fails if the configured path is unavailable, which also prevents Docker from silently creating a replacement directory when an external drive is disconnected.
 
 Create the ignored production environment file:
 
@@ -148,7 +148,7 @@ The production image is built with the root `Dockerfile`:
 
 `compose.prod.yaml` starts MongoDB first and waits for its health check before starting the application. The application is considered healthy only after it can connect to MongoDB. MongoDB has no published production port; the application is published only on `127.0.0.1`.
 
-The production routine is not always running. `npm run prod:routine` creates a temporary routine container, connects it to production MongoDB, writes images to the configured host directory, and removes the container afterward.
+The application server manages the routine schedule and starts the downloader as a child process. The schedule is disabled by default and can be configured from the Routine admin page. `npm run prod:routine` remains available for deliberate command-line maintenance runs; do not use it while an application-managed run is active.
 
 ## Search configuration
 
@@ -198,14 +198,15 @@ The `estates` collection contains:
 
 The `queries` collection stores normalized search criteria, the normalized URL, and run dates. The `users` collection stores application accounts and their liked and visited estate identifiers.
 
+The singleton `routineSchedule` collection stores whether scheduling is enabled and its cron expression. `routineRuns` stores the status, timing, and added/updated/disappeared totals of recent scheduled and manual executions. Historical calendar coverage continues to come from each query's `allRunDates` field.
+
 ## Current scope
 
 This repository setup intentionally does not yet:
 
 - migrate existing production data;
 - configure public DNS, HTTPS, or a reverse proxy;
-- schedule the download routine;
 - deduplicate historical test data or prevent concurrent routines;
 - automate database or image backups.
 
-Those concerns should be handled before retiring existing production services or enabling a daily production schedule.
+Those concerns should be handled before retiring existing production services.

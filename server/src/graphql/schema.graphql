@@ -48,6 +48,10 @@ type Query {
     ): User
 
     localities: [Locality]
+
+    routineStatus: RoutineStatus
+    routineRuns(limit: Int): [RoutineRun]
+    routineHistory: [RoutineQueryHistory]
     
 }
 
@@ -119,6 +123,58 @@ type Locality {
     name: String
 }
 
+type RoutineSchedule {
+    enabled:        Boolean!
+    cronExpression: String!
+    timezone:       String!
+    nextRunAt:      Date
+}
+
+type RoutineRun {
+    id:           ID!
+    trigger:      String!
+    status:       String!
+    startedAt:    Date!
+    finishedAt:   Date
+    errorSummary: String
+    totals:       RoutineRunTotals
+}
+
+type RoutineRunTotals {
+    added:                Int
+    updated:              Int
+    disappeared:          Int
+    disappearanceChecked: Boolean
+}
+
+type RoutineStatus {
+    schedule:          RoutineSchedule!
+    activeRun:         RoutineRun
+    lastRun:           RoutineRun
+    lastSuccessfulRun: RoutineRun
+}
+
+type RoutineHistoryPeriod {
+    start: String!
+    end:   String!
+}
+
+type RoutineQueryHistory {
+    queryId: String!
+    label:   String!
+    periods: [RoutineHistoryPeriod!]!
+}
+
+input RoutineScheduleInput {
+    enabled:        Boolean
+    cronExpression: String
+}
+
+type RoutineTriggerResult {
+    started: Boolean!
+    run:     RoutineRun
+}
+
 type Mutation {
 
     register(name: String!, password: String!): User
@@ -133,5 +189,8 @@ type Mutation {
         immowebCode: Int!
         isVisited: Boolean
     ): Boolean
+
+    updateRoutineSchedule(input: RoutineScheduleInput!): RoutineSchedule
+    triggerRoutine: RoutineTriggerResult!
 
 }

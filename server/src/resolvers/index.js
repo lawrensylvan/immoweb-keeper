@@ -1,11 +1,16 @@
 const { getAuthenticatedUser, registerUser, loginUser, markEstateAsLiked, markEstateAsVisited } = require('./users')
 const { findAllLocalities, findEstateByImmowebCode, findEstates, findEstatesNear, fetchPriceHistory } = require('./estates')
+const { findRoutineStatus, findRoutineRuns, findRoutineHistory, saveRoutineSchedule, triggerRoutine } = require('./routine')
 
 module.exports = {
 
 	Query: {
 
         localities: () => findAllLocalities(),
+
+        routineStatus: (parent, args, {user}) => findRoutineStatus(user),
+        routineRuns: (parent, {limit}, {user}) => findRoutineRuns(user, limit),
+        routineHistory: (parent, args, {user}) => findRoutineHistory(user),
 
         estateByImmowebCode: (parent, args) => findEstateByImmowebCode(args.immowebCode),
 
@@ -31,7 +36,10 @@ module.exports = {
 
         markAsLiked: (parent, {immowebCode, isLiked}, {user}) => markEstateAsLiked(user, immowebCode, isLiked),
 
-        markAsVisited: (parent, {immowebCode, isVisited}, {user}) => markEstateAsVisited(user, immowebCode, isVisited)
+        markAsVisited: (parent, {immowebCode, isVisited}, {user}) => markEstateAsVisited(user, immowebCode, isVisited),
+
+        updateRoutineSchedule: (parent, {input}, {user}) => saveRoutineSchedule(user, input),
+        triggerRoutine: (parent, args, {user}) => triggerRoutine(user)
 
     },
 
@@ -65,5 +73,9 @@ module.exports = {
         isLiked:            e => e.isLiked,
         isVisited:          e => e.isVisited
 	},
+
+    RoutineRun: {
+        id: run => run._id.toString()
+    }
 
 }

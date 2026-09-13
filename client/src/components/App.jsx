@@ -11,6 +11,7 @@ import '../styles.css'
 import Logout from './Logout'
 import useAuth from '../hooks/useAuth'
 import { apolloClient } from '../apollo/config'
+import RoutineAdmin from './RoutineAdmin'
 
 const DEFAULT_PAGE = '/explore/advanced-search'
 
@@ -33,6 +34,7 @@ export default function App() {
                             <Route path="explore/advanced-search" element={<SearchPage/>} />
                             <Route path="flagged-items/liked-estates" element={<LikedEstates/>} />
                             <Route path="flagged-items/visited-estates" element={<VisitedEstates/>} />
+                            <Route path="admin/routine" element={<RoutineAdmin/>} />
                             <Route path="" element={<Navigate to={DEFAULT_PAGE} />} />
                         </Route>
                     </Route>

@@ -62,18 +62,43 @@ async function mainRoutine() {
     }
     const queriesURLs = (searchURLs || []).concat(searchQueries ? searchQueries.map(q => buildURLFromQuery(q)) : [])
 
+    let failedQueryCount = 0
+    const totals = {
+        added: 0,
+        updated: 0,
+        disappeared: 0,
+        disappearanceChecked: maxEstatesPerSearch == null
+    }
     for(let queryURL of queriesURLs) {
+        let succeeded = false
         for(let retryCount = 0; retryCount < 3; ++retryCount) {
             try {
-                await processQuery(queryURL, maxEstatesPerSearch)
+                const queryTotals = await processQuery(queryURL, maxEstatesPerSearch)
+                totals.added += queryTotals.added
+                totals.updated += queryTotals.updated
+                totals.disappeared += queryTotals.disappeared
+                succeeded = true
                 break
             } catch(error) {
                 console.error(error)
             }
         }
+        if(!succeeded) failedQueryCount++
     }
 
+    await saveRoutineTotals(totals)
+
+    if(failedQueryCount > 0) {
+        console.error(`${failedQueryCount} search ${failedQueryCount === 1 ? 'query' : 'queries'} failed after retries.`)
+        process.exit(1)
+    }
     process.exit(0)
+}
+
+async function saveRoutineTotals(totals) {
+    const runId = process.env.ROUTINE_RUN_ID
+    if(!runId || !ObjectId.isValid(runId)) return
+    await db.collection('routineRuns').updateOne({_id: ObjectId(runId)}, {$set: {totals}})
 }
 
 async function processQuery(queryURL, maxEstatesPerSearch) {
@@ -151,6 +176,11 @@ async function processQuery(queryURL, maxEstatesPerSearch) {
     await db.collection('estates').updateMany({ immowebCode: { $in: notSeenImmowebCodes} }, { $set: { disappearanceDate: today } })
 
     console.info(`${newEstateCount} new estates saved, ${updatedEstateCount} estates updated, ${notSeenImmowebCodes.length} estates disappeared`)
+    return {
+        added: newEstateCount,
+        updated: updatedEstateCount,
+        disappeared: notSeenImmowebCodes.length
+    }
 }
 
 function computeNewAllRunDates(allRunDates) {
