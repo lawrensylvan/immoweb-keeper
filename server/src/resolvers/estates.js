@@ -10,7 +10,7 @@ const count = () => ({ $count: 'totalCount'})
 const limitToValue = (field, treshold, order) => ({ $match: {[field]: {[order ? '$lte' : '$gte']: treshold}} })
 const onlyKeepField = (field) => field ? { $project: {[field]: 1} } : null
 const onlyKeepFields = (fields) => fields && fields.length ? { $project: Object.fromEntries(fields.map(f => [f, 1])) } : null
-const onlyNear = (point, maxMeters) => ({ $geoNear: {near: {type:'Point', coordinates: point }, distanceField: 'distance', maxDistance: maxMeters, spherical: false }})
+const onlyNear = (point, maxMeters) => ({ $geoNear: {near: {type:'Point', coordinates: point }, distanceField: 'distance', maxDistance: maxMeters, spherical: true }})
 
 const pickMostRecentByImmowebCode = () => ([
     { $sort: { immowebCode: 1, lastModificationDate: -1 } },

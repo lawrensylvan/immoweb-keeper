@@ -200,6 +200,8 @@ const estateSchema = new mongoose.Schema({
     }
 }, { typeKey: '$type' })
 
+estateSchema.index({geolocation: '2dsphere'})
+
 const EstateModel = mongoose.model('estate', estateSchema)
 
 module.exports = {EstateModel}
