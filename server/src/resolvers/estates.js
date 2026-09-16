@@ -159,6 +159,10 @@ async function mapFiltersToMongo(f, user) {
 		r.push({'rawMetadata.property.location.postalCode': {$in: f.zipCodes.map(e => e.toString())}})
 	}
 
+	if(f.propertyTypes && f.propertyTypes.length) {
+		r.push({'rawMetadata.property.type': {$in: f.propertyTypes}})
+	}
+
 	if(f.onlyWithGarden) {
 		r.push({'rawMetadata.property.hasGarden': f.onlyWithGarden})
 		if(f.minGardenArea) {

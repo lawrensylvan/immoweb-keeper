@@ -10,6 +10,7 @@ const estateSchema = new mongoose.Schema({
     disappearanceDate                           : Date,
     geolocation                                 : [Number],
     images                                      : [String],
+    lastSeen                                   : Date,
 
     rawMetadata: {
 
@@ -201,6 +202,13 @@ const estateSchema = new mongoose.Schema({
 }, { typeKey: '$type' })
 
 estateSchema.index({geolocation: '2dsphere'})
+estateSchema.index({immowebCode: 1})
+estateSchema.index({
+    'rawMetadata.property.location.postalCode': 1,
+    'rawMetadata.property.type': 1,
+    disappearanceDate: 1,
+    immowebCode: 1
+})
 
 const EstateModel = mongoose.model('estate', estateSchema)
 

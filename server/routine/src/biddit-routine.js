@@ -22,12 +22,9 @@ async function fetchBidditCodes(zipCode) {
     return html.body.content.map(e => Number(e.id))
 }
 
-const MongoClient = require('mongodb')
+const {MongoClient} = require('mongodb')
 async function connectDB(uri, database) {
-    const client = await MongoClient.connect(`${uri}/${database}`, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }) // the db included in the url is created if not yet
+    const client = await MongoClient.connect(`${uri}/${database}`) // the db included in the url is created if not yet
     const db = client.db()
     return db
 }

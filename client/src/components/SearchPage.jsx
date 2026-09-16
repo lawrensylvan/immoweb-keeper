@@ -14,7 +14,7 @@ export default function SearchPage() {
         resultCount, searchResults,
         fetchNext
     } = useSearch(
-            {priceRange: [0, 500000], zipCodes: [1030, 1140]},
+            {priceRange: [0, 500000], zipCodes: [1030, 1140], propertyTypes: ['HOUSE']},
             {field: 'modificationDate', order: 'descend'}
         )
 

@@ -1,5 +1,5 @@
 
-import { ClockCircleOutlined, DashboardOutlined, EditOutlined, EyeFilled, HeartFilled, PieChartOutlined, SearchOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
+import { ClockCircleOutlined, EditOutlined, EyeFilled, HeartFilled, PieChartOutlined, SearchOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
 import { Menu } from 'antd'
 import SubMenu from 'antd/lib/menu/SubMenu'
 import { Link } from 'react-router-dom'
@@ -25,12 +25,8 @@ export default function SiderMenu({collapsed}) {
                     <Link to="/flagged-items/visited-estates">Visited</Link></Menu.Item>
             </SubMenu>
 
-            <Menu.Item key="search-queries" icon={<SettingOutlined />}>
-                Search queries
-            </Menu.Item>
-
-            <Menu.Item key="routine-admin" icon={<DashboardOutlined />}>
-                <Link to="/admin/routine">Routine admin</Link>
+            <Menu.Item key="routine-admin" icon={<SettingOutlined />}>
+                <Link to="/admin">Admin schedules</Link>
             </Menu.Item>
 
         </Menu>

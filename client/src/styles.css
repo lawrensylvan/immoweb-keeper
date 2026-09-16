@@ -84,3 +84,44 @@
     .routine-summary-grid { grid-template-columns: 1fr; }
     .routine-admin { padding: 12px; }
 }
+.postal-code-tags {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 2px 0;
+}
+
+.postal-code-tags .ant-tag {
+    margin: 0;
+}
+
+.postal-code-selection-summary {
+    margin: 8px 0 0 24px;
+    max-width: 430px;
+}
+
+.postal-code-select .ant-select-selection-overflow-item-rest > .ant-select-selection-item {
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+
+.postal-code-overflow-count {
+    color: #8c8c8c;
+    font-style: italic;
+}
+
+.postal-code-dropdown .ant-select-item-option-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.postal-code-dropdown .postal-option-selected {
+    background: #e6f7ff;
+    font-weight: 600;
+}
+
+.postal-code-dropdown .postal-option-selected .anticon-check {
+    color: #1890ff;
+}

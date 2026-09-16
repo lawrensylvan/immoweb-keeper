@@ -34,7 +34,7 @@ export default function App() {
                             <Route path="explore/advanced-search" element={<SearchPage/>} />
                             <Route path="flagged-items/liked-estates" element={<LikedEstates/>} />
                             <Route path="flagged-items/visited-estates" element={<VisitedEstates/>} />
-                            <Route path="admin/routine" element={<RoutineAdmin/>} />
+                            <Route path="admin" element={<RoutineAdmin/>} />
                             <Route path="" element={<Navigate to={DEFAULT_PAGE} />} />
                         </Route>
                     </Route>

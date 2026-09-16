@@ -6,6 +6,7 @@ type Query {
         immowebCode:        Int
         priceRange:         [Int]
         zipCodes:           [Int]
+        propertyTypes:      [PropertyType!]
         onlyWithGarden:     Boolean
         minGardenArea:      Int
         minLivingArea:      Int
@@ -27,6 +28,7 @@ type Query {
         immowebCode:        Int
         priceRange:         [Int]
         zipCodes:           [Int]
+        propertyTypes:      [PropertyType!]
         onlyWithGarden:     Boolean
         minGardenArea:      Int
         minLivingArea:      Int
@@ -50,8 +52,9 @@ type Query {
     localities: [Locality]
 
     routineStatus: RoutineStatus
-    routineRuns(limit: Int): [RoutineRun]
-    routineHistory: [RoutineQueryHistory]
+    postalCodes: [PostalCode!]!
+    routineRuns(limit: Int, postalCode: Int, propertyType: PropertyType): [RoutineRun]
+    routineHistory(postalCode: Int!, propertyType: PropertyType!): [RoutineHistoryDay!]!
     
 }
 
@@ -83,6 +86,7 @@ type Estate {
 
     geolocation:        [Float]
     zipCode:            Int
+    propertyType:       PropertyType
     locality:           String
     street:             String
     streetNumber:       String
@@ -128,6 +132,17 @@ type RoutineSchedule {
     cronExpression: String!
     timezone:       String!
     nextRunAt:      Date
+    postalCodes:    [Int!]!
+    propertyTypes:  [PropertyType!]!
+}
+
+enum PropertyType { HOUSE APARTMENT }
+
+type PostalCode {
+    code: Int!
+    localities: [String!]!
+    group: String!
+    groupName: String!
 }
 
 type RoutineRun {
@@ -137,7 +152,20 @@ type RoutineRun {
     startedAt:    Date!
     finishedAt:   Date
     errorSummary: String
+    requestedPostalCodes: [Int!]!
+    requestedPropertyTypes: [PropertyType!]!
+    coverage: [RoutineCoverage!]!
     totals:       RoutineRunTotals
+}
+
+type RoutineCoverage {
+    postalCode: Int!
+    propertyType: PropertyType!
+    status: String!
+    added: Int
+    updated: Int
+    disappeared: Int
+    errorSummary: String
 }
 
 type RoutineRunTotals {
@@ -154,20 +182,16 @@ type RoutineStatus {
     lastSuccessfulRun: RoutineRun
 }
 
-type RoutineHistoryPeriod {
-    start: String!
-    end:   String!
-}
-
-type RoutineQueryHistory {
-    queryId: String!
-    label:   String!
-    periods: [RoutineHistoryPeriod!]!
+type RoutineHistoryDay {
+    date: String!
+    runId: ID!
 }
 
 input RoutineScheduleInput {
     enabled:        Boolean
     cronExpression: String
+    postalCodes:    [Int!]
+    propertyTypes:  [PropertyType!]
 }
 
 type RoutineTriggerResult {

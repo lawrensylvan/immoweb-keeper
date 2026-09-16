@@ -1,7 +1,0 @@
-{
-  "maxEstatesPerSearch": 5,
-  "searchURLs": [
-    "https://www.immoweb.be/en/search/house/for-sale?countries=BE&postalCodes=BE-1030&orderBy=relevance"
-  ],
-  "searchQueries": []
-}

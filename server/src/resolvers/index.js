@@ -1,16 +1,17 @@
 const { getAuthenticatedUser, registerUser, loginUser, markEstateAsLiked, markEstateAsVisited } = require('./users')
 const { findAllLocalities, findEstateByImmowebCode, findEstates, findEstatesNear, fetchPriceHistory } = require('./estates')
-const { findRoutineStatus, findRoutineRuns, findRoutineHistory, saveRoutineSchedule, triggerRoutine } = require('./routine')
+const { findRoutineStatus, findRoutineRuns, findRoutineHistory, saveRoutineSchedule, triggerRoutine, findPostalCodes } = require('./routine')
 
 module.exports = {
 
 	Query: {
 
         localities: () => findAllLocalities(),
+        postalCodes: (parent, args, {user}) => findPostalCodes(user),
 
         routineStatus: (parent, args, {user}) => findRoutineStatus(user),
-        routineRuns: (parent, {limit}, {user}) => findRoutineRuns(user, limit),
-        routineHistory: (parent, args, {user}) => findRoutineHistory(user),
+        routineRuns: (parent, {limit, postalCode, propertyType}, {user}) => findRoutineRuns(user, limit, postalCode, propertyType),
+        routineHistory: (parent, {postalCode, propertyType}, {user}) => findRoutineHistory(user, postalCode, propertyType),
 
         estateByImmowebCode: (parent, args) => findEstateByImmowebCode(args.immowebCode),
 
@@ -47,6 +48,7 @@ module.exports = {
 		immowebCode: 		e => e.immowebCode,
 		price: 				e => e.rawMetadata.price.mainValue,
 		zipCode: 			e => e.rawMetadata.property.location.postalCode,
+		propertyType:		e => e.rawMetadata.property.type,
 		locality: 			e => e.rawMetadata.property.location.locality,
 		images:				e => e.images,
 		creationDate:		e => e.creationDate,

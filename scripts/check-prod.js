@@ -4,7 +4,6 @@ const {spawnSync} = require('child_process')
 
 const projectRoot = path.resolve(__dirname, '..')
 const configPath = path.join(projectRoot, 'deploy', 'config.prod.env')
-const searchesPath = path.join(projectRoot, 'deploy', 'searches.prod.json')
 const errors = []
 
 function parseEnvFile(filePath) {
@@ -53,21 +52,6 @@ if(!imagesPath) {
         }
     } catch(error) {
         errors.push(`Production image directory is not readable and writable: ${error.message}`)
-    }
-}
-
-if(!fs.existsSync(searchesPath)) {
-    errors.push('Missing deploy/searches.prod.json (copy it from searches.prod.example.json).')
-} else {
-    try {
-        const searches = JSON.parse(fs.readFileSync(searchesPath, 'utf8'))
-        const searchURLs = Array.isArray(searches.searchURLs) ? searches.searchURLs : []
-        const searchQueries = Array.isArray(searches.searchQueries) ? searches.searchQueries : []
-        if(searchURLs.length === 0 && searchQueries.length === 0) {
-            errors.push('deploy/searches.prod.json does not contain any searches.')
-        }
-    } catch(error) {
-        errors.push(`deploy/searches.prod.json is invalid JSON: ${error.message}`)
     }
 }
 

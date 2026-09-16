@@ -18,7 +18,7 @@ Development and production are intentionally isolated:
 | Images | `dev/images` in this repository | Host directory configured with `PROD_IMAGES_PATH` |
 | Web address | `http://localhost:3000` | `http://localhost:8080` |
 
-Production is currently loopback-only. Public exposure, a reverse proxy, existing-data migration, and backup automation are deliberately outside this setup.
+Production is currently loopback-only. Public exposure, a reverse proxy, and backup automation are outside this setup.
 
 ## Requirements
 
@@ -50,13 +50,9 @@ cp server/config.env.example server/config.env
 
 Replace the `JWT_SECRET` placeholder with a long random value. The defaults connect to the development MongoDB container, use database `immoweb_dev`, and save images under `dev/images`.
 
-Create the ignored development searches file:
+After signing in, configure the postal codes, property types, and schedule from the Routine administration page.
 
-```sh
-cp server/routine/searches.example.json server/routine/searches.json
-```
-
-Then replace the examples with the Immoweb searches you want to test.
+For quicker development runs, `MAX_ESTATES_PER_SEARCH` can be set to a positive integer in `server/config.env`. The cap applies independently to each postal-code/property-type search and is intentionally not exposed in the frontend. Leave it unset in production.
 
 ### Development commands
 
@@ -102,13 +98,7 @@ cp deploy/config.prod.env.example deploy/config.prod.env
 
 Replace `JWT_SECRET` with a long random value and set `PROD_IMAGES_PATH` to the absolute image directory on your host. `PROD_APP_PORT` defaults to `8080`.
 
-Create the ignored production search configuration:
-
-```sh
-cp deploy/searches.prod.example.json deploy/searches.prod.json
-```
-
-Customize it before running the production routine. Development and production search files are independent.
+After signing in, configure the production postal codes, property types, and schedule from the Routine administration page.
 
 ### Production commands
 
@@ -150,31 +140,6 @@ The production image is built with the root `Dockerfile`:
 
 The application server manages the routine schedule and starts the downloader as a child process. The schedule is disabled by default and can be configured from the Routine admin page. `npm run prod:routine` remains available for deliberate command-line maintenance runs; do not use it while an application-managed run is active.
 
-## Search configuration
-
-Both environment-specific search files use the same shape:
-
-```json
-{
-  "maxEstatesPerSearch": null,
-  "searchURLs": [
-    "https://www.immoweb.be/en/search/house/for-sale?countries=BE&postalCodes=BE-1000&orderBy=relevance"
-  ],
-  "searchQueries": [
-    {
-      "propertyTypes": ["HOUSE"],
-      "postalCodes": [1000, 1030],
-      "maxPrice": 500000,
-      "minBedroomCount": 2
-    }
-  ]
-}
-```
-
-For `searchURLs`, configure a search on Immoweb and copy its results URL. `searchQueries` is the structured alternative using Immoweb query parameter names.
-
-Set `maxEstatesPerSearch` to a positive integer to limit how many estates the routine downloads for each configured search. This is useful for development; leave it as `null` for an unlimited production run. Limited runs skip disappearance detection because they do not inspect every result.
-
 ## Data model
 
 MongoDB creates the required collections automatically. No migration or seed data is required.
@@ -185,7 +150,6 @@ The `estates` collection contains:
 |---|---|
 | `_id` | MongoDB document identifier |
 | `immowebCode` | Immoweb listing identifier |
-| `queryId` | Associated document in `queries` |
 | `rawMetadata` | Complete metadata extracted from Immoweb |
 | `fetchDate` | Time this version was downloaded |
 | `lastModificationDate` | Immoweb modification time |
@@ -196,15 +160,14 @@ The `estates` collection contains:
 | `lastSeen` | Last routine date on which the listing appeared |
 | `disappearanceDate` | First routine date on which it no longer appeared |
 
-The `queries` collection stores normalized search criteria, the normalized URL, and run dates. The `users` collection stores application accounts and their liked and visited estate identifiers.
+The `users` collection stores application accounts and their liked and visited estate identifiers.
 
-The singleton `routineSchedule` collection stores whether scheduling is enabled and its cron expression. `routineRuns` stores the status, timing, and added/updated/disappeared totals of recent scheduled and manual executions. Historical calendar coverage continues to come from each query's `allRunDates` field.
+The singleton `routineSchedule` collection stores the schedule plus its canonical postal-code and property-type target set. Each `routineRuns` document snapshots that target set and records success, failure, and totals for every postal-code/property-type combination. Monitoring history is derived from these coverage entries rather than from Immoweb query URLs.
 
 ## Current scope
 
 This repository setup intentionally does not yet:
 
-- migrate existing production data;
 - configure public DNS, HTTPS, or a reverse proxy;
 - deduplicate historical test data or prevent concurrent routines;
 - automate database or image backups.

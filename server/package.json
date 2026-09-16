@@ -27,8 +27,8 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.19",
     "moment": "^2.26.0",
-    "mongodb": "^3.7.2",
-    "mongoose": "^6.0.10",
+    "mongodb": "^6.21.0",
+    "mongoose": "^8.24.4",
     "needle": "^3.0.0",
     "node-cron": "^4.6.0"
   },

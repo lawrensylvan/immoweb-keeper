@@ -11,6 +11,7 @@ const ESTATES_QUERY = gql`
         $immowebCode: Int
         $priceRange: [Int]
         $zipCodes: [Int]
+        $propertyTypes: [PropertyType!]
         $onlyWithGarden: Boolean
         $minGardenArea: Int
         $minLivingArea: Int
@@ -27,6 +28,7 @@ const ESTATES_QUERY = gql`
         estates(immowebCode: $immowebCode
                 priceRange: $priceRange,
                 zipCodes: $zipCodes
+                propertyTypes: $propertyTypes
                 onlyWithGarden: $onlyWithGarden
                 minGardenArea: $minGardenArea
                 minLivingArea: $minLivingArea
@@ -44,6 +46,7 @@ const ESTATES_QUERY = gql`
                 immowebCode
                 price
                 zipCode
+                propertyType
                 locality
                 images
                 modificationDate
@@ -98,6 +101,7 @@ export const useSearch = (initialFilters = {}, initialSort = {field: 'modificati
             ...f,
             priceRange:         (!f.priceRange?.[0] && !f.priceRange?.[1]) ? undefined : f.priceRange,
             zipCodes:           f.zipCodes?.length ? f.zipCodes : undefined,
+            propertyTypes:      f.propertyTypes?.length ? f.propertyTypes : undefined,
             freeText:           f.freeText === "" ? undefined : f.freeText,
             onlyWithGarden:     f.onlyWithGarden || undefined,
             minGardenArea:      f.onlyWithGarden && f.minGardenArea > 0 ? f.minGardenArea : undefined,
@@ -136,9 +140,7 @@ export const useSearch = (initialFilters = {}, initialSort = {field: 'modificati
             }
         },
         clearFilters: () => {
-            if(searchFilters !== {}) {
-                setSearchFilters({})
-            }
+            setSearchFilters({propertyTypes: ['HOUSE']})
         },
 
         fetchNext: () => {

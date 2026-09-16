@@ -5,9 +5,7 @@ const https = require('follow-redirects').https
 const moment = require('moment')
 const { JSDOM } = require('jsdom')
 const needle = require('needle')
-const MongoClient = require('mongodb')
-const ObjectId  = MongoClient.ObjectID;
-const input = require('../searches.json')
+const {MongoClient, ObjectId} = require('mongodb')
 require('dotenv').config({ path: require('find-config')('config.env')})
 
 
@@ -19,7 +17,7 @@ const RESULTS_PER_PAGE = 30
 let imageOutputPath
 let db
 const today = moment().format('YYYY-MM-DD')
-const yesterday = moment().add(-1, 'day').format('YYYY-MM-DD')
+const todayAsDate = new Date(`${today}T12:00:00.000Z`)
 
 mainRoutine()
 
@@ -49,41 +47,39 @@ async function mainRoutine() {
     
     await loadConfig()
 
-    // Parse JSON criterias to search urls and add them to other defined search urls
-
-    const {searchURLs, searchQueries, maxEstatesPerSearch} = input
-    if((!searchURLs || searchURLs.length === 0) && (!searchQueries || searchQueries.length === 0)) {
-        console.error('No search URL or query specified !')
-        process.exit(1)
-    }
-    if(maxEstatesPerSearch != null && (!Number.isInteger(maxEstatesPerSearch) || maxEstatesPerSearch < 1)) {
-        console.error('maxEstatesPerSearch must be a positive integer or null')
-        process.exit(1)
-    }
-    const queriesURLs = (searchURLs || []).concat(searchQueries ? searchQueries.map(q => buildURLFromQuery(q)) : [])
+    const targets = await loadTargets()
+    const maxEstatesPerSearch = readMaxEstatesPerSearch()
 
     let failedQueryCount = 0
     const totals = {
         added: 0,
         updated: 0,
         disappeared: 0,
-        disappearanceChecked: maxEstatesPerSearch == null
+        disappearanceChecked: true
     }
-    for(let queryURL of queriesURLs) {
+    for(const propertyType of targets.propertyTypes) {
+      for(const postalCode of targets.postalCodes) {
         let succeeded = false
+        let finalError
         for(let retryCount = 0; retryCount < 3; ++retryCount) {
             try {
-                const queryTotals = await processQuery(queryURL, maxEstatesPerSearch)
+                const queryTotals = await processQuery(postalCode, propertyType, maxEstatesPerSearch)
                 totals.added += queryTotals.added
                 totals.updated += queryTotals.updated
                 totals.disappeared += queryTotals.disappeared
+                await saveCoverage({postalCode, propertyType, status: 'success', ...queryTotals})
                 succeeded = true
                 break
             } catch(error) {
+                finalError = error
                 console.error(error)
             }
         }
-        if(!succeeded) failedQueryCount++
+        if(!succeeded) {
+            failedQueryCount++
+            await saveCoverage({postalCode, propertyType, status: 'failed', errorSummary: String(finalError).slice(0, 2000)})
+        }
+      }
     }
 
     await saveRoutineTotals(totals)
@@ -95,39 +91,51 @@ async function mainRoutine() {
     process.exit(0)
 }
 
+function readMaxEstatesPerSearch() {
+    const configured = process.env.MAX_ESTATES_PER_SEARCH
+    if(configured == null || configured.trim() === '') return null
+    const value = Number(configured)
+    if(!Number.isInteger(value) || value < 1) throw new Error('MAX_ESTATES_PER_SEARCH must be a positive integer when set.')
+    console.info(`Development result limit enabled: ${value} estates per search.`)
+    return value
+}
+
+async function loadTargets() {
+    if(process.env.ROUTINE_TARGETS) return JSON.parse(process.env.ROUTINE_TARGETS)
+    const schedule = await db.collection('routineSchedule').findOne({_id: 'routine'})
+    if(!schedule?.postalCodes?.length || !schedule?.propertyTypes?.length) throw new Error('The routine has no configured targets.')
+    return {postalCodes: schedule.postalCodes, propertyTypes: schedule.propertyTypes}
+}
+
+async function saveCoverage(coverage) {
+    const runId = process.env.ROUTINE_RUN_ID
+    if(!runId || !ObjectId.isValid(runId)) return
+    await db.collection('routineRuns').updateOne({_id: new ObjectId(runId)}, {$push: {coverage}})
+}
+
 async function saveRoutineTotals(totals) {
     const runId = process.env.ROUTINE_RUN_ID
     if(!runId || !ObjectId.isValid(runId)) return
-    await db.collection('routineRuns').updateOne({_id: ObjectId(runId)}, {$set: {totals}})
+    await db.collection('routineRuns').updateOne({_id: new ObjectId(runId)}, {$set: {totals}})
 }
 
-async function processQuery(queryURL, maxEstatesPerSearch) {
+async function processQuery(postalCode, propertyType, maxEstatesPerSearch) {
+    const queryURL = buildURLFromQuery({propertyTypes: [propertyType], postalCodes: [postalCode]})
     console.info()
     console.info(`****************************************************************`)
     console.info(`Search query : ${queryURL}`)
 
     // Load first page of results to get page count and normalized url
-    const {normalizedQuery, normalizedQueryURL, totalResultCount} = await parseResultsPage(queryURL)
+    const {normalizedQueryURL, totalResultCount} = await parseResultsPage(queryURL)
     
-    // Get last time at which this search's results were saved
-    let dbQuery = await db.collection('queries').findOne({criteria: normalizedQuery})
-    if(!dbQuery) {
-        const {insertedId} = await db.collection('queries').insertOne({
-            url: normalizedQueryURL,
-            criteria: normalizedQuery,
-            lastRun: null,
-            allRunDates: null
-        })
-        dbQuery = await db.collection('queries').findOne({ _id : ObjectId(insertedId) })
-    }
-
-    const lastRunDate = dbQuery.lastRun ? moment(dbQuery.lastRun) : null
-    const nextLastRunDate = new Date()
+    const previousRun = await db.collection('routineRuns').findOne({
+        status: {$in: ['success', 'partial']},
+        coverage: {$elemMatch: {postalCode, propertyType, status: 'success'}}
+    }, {sort: {finishedAt: -1}})
+    const lastRunDate = previousRun?.finishedAt ? moment(previousRun.finishedAt) : null
     console.info(lastRunDate ? `Last run for this query was on ${lastRunDate}` : `This is the first run for this query`)
 
-    const resultCountToProcess = maxEstatesPerSearch == null
-        ? totalResultCount
-        : Math.min(totalResultCount, maxEstatesPerSearch)
+    const resultCountToProcess = maxEstatesPerSearch == null ? totalResultCount : Math.min(totalResultCount, maxEstatesPerSearch)
     const pageCount = Math.ceil(resultCountToProcess / RESULTS_PER_PAGE)
     const pageNumbers = _.range(1, pageCount + 1)
 
@@ -139,41 +147,29 @@ async function processQuery(queryURL, maxEstatesPerSearch) {
     let seenImmowebCodes = []
     for(let page of pageNumbers) {
         const remainingEstateCount = resultCountToProcess - seenImmowebCodes.length
-        const result = await processPage(normalizedQueryURL, page, shouldOnlyCollectImmowebCodes, lastRunDate, dbQuery._id, remainingEstateCount)
+        const result = await processPage(normalizedQueryURL, page, shouldOnlyCollectImmowebCodes, lastRunDate, remainingEstateCount)
         seenImmowebCodes.push(...result.immowebCodes)
         newEstateCount += result.newEstateCount
         updatedEstateCount += result.updatedEstateCount
         if(!result.shouldContinue) shouldOnlyCollectImmowebCodes = true
     }
     
-    // Update the query last run date + all run dates list (or persist the new query)
-    if(dbQuery) {
-        await db.collection('queries').updateOne({url: dbQuery.url},
-            { $set: {
-                lastRun: nextLastRunDate,
-                allRunDates: computeNewAllRunDates(dbQuery.allRunDates)
-            }
-        })
-    }
-
     // Check for estates in the db that were not seen in Immoweb anymore to put a disappearanceDate
     
     let notSeenImmowebCodes = []
-    if(maxEstatesPerSearch == null) {
-        const allImmowebCodes = (await db.collection('estates')
-                                         .find({
-                                             queryId: dbQuery._id,
+    {
+        const allImmowebCodes = (await db.collection('estates').find({
+                                             'rawMetadata.property.location.postalCode': postalCode.toString(),
+                                             'rawMetadata.property.type': propertyType,
                                              disappearanceDate: null
                                          }).toArray())
                                 .map(e => e.immowebCode)
 
-        notSeenImmowebCodes = _.difference(allImmowebCodes, seenImmowebCodes)
-    } else {
-        console.info('Skipping disappearance detection because this search run is limited')
+        notSeenImmowebCodes = _.difference(_.uniq(allImmowebCodes), seenImmowebCodes)
     }
 
-    await db.collection('estates').updateMany({ immowebCode: { $in: seenImmowebCodes} }, { $set: { lastSeen: today } })
-    await db.collection('estates').updateMany({ immowebCode: { $in: notSeenImmowebCodes} }, { $set: { disappearanceDate: today } })
+    await db.collection('estates').updateMany({ immowebCode: { $in: seenImmowebCodes} }, { $set: { lastSeen: todayAsDate } })
+    await db.collection('estates').updateMany({ immowebCode: { $in: notSeenImmowebCodes} }, { $set: { disappearanceDate: todayAsDate } })
 
     console.info(`${newEstateCount} new estates saved, ${updatedEstateCount} estates updated, ${notSeenImmowebCodes.length} estates disappeared`)
     return {
@@ -183,40 +179,8 @@ async function processQuery(queryURL, maxEstatesPerSearch) {
     }
 }
 
-function computeNewAllRunDates(allRunDates) {
-    // [] or null
-    if(!allRunDates) {
-        return [today]
-    }
-
-    const lastItem = allRunDates[allRunDates.length - 1]
-    
-    // [..., [a day, yesterday]]
-    if(_.isArray(lastItem) && lastItem[1] === yesterday) {
-        return [...allRunDates.slice(0, allRunDates.length - 1), [lastItem[0], today]]
-    }
-
-    // [..., yesterday]
-    if(allRunDates[allRunDates.length - 1] === yesterday) {
-        return [...allRunDates.slice(0, allRunDates.length - 1), [yesterday, today]]
-    }
-
-    // [..., [a day, today]]
-    if(_.isArray(lastItem) && lastItem[1] === today) {
-        return allRunDates
-    }
-
-    // [..., today]
-    if(allRunDates[allRunDates.length - 1] === today) {
-        return allRunDates
-    }
-
-    // [..., a day] or [..., [a day, other day]]
-    return [...allRunDates, today]
-}
-
 // Load all estate data of that result page and returns the new and updated estate count + whether we should stop browsing more pages or not
-async function processPage(url, pageNumber, shouldOnlyCollectImmowebCodes, lastRunDate, queryId, estateLimit) {
+async function processPage(url, pageNumber, shouldOnlyCollectImmowebCodes, lastRunDate, estateLimit) {
     
     // Sort results from newest to oldest to be able to stop as soon as we encounter an estate with no updates
     const queryURL = `${url}&orderBy=newest&page=${pageNumber}`    
@@ -238,7 +202,7 @@ async function processPage(url, pageNumber, shouldOnlyCollectImmowebCodes, lastR
     let shouldContinue = true
     for(let immowebCode of immowebCodes) {
         try {
-            const {wasPersisted, isUpdate, reachedEnd} = await processEstate(immowebCode, lastRunDate, queryId)
+            const {wasPersisted, isUpdate, reachedEnd} = await processEstate(immowebCode, lastRunDate)
             if(reachedEnd) {
                 shouldContinue = false
                 break
@@ -258,7 +222,7 @@ async function processPage(url, pageNumber, shouldOnlyCollectImmowebCodes, lastR
 }
 
 // Load estate data from immoweb (returns if the estate was persisted in db, if it was an update instead of an insert, and if we reached the end of results)
-async function processEstate(immowebCode, lastRunDate, queryId) {
+async function processEstate(immowebCode, lastRunDate) {
     const estateData = await parseEstatePage(immowebCode) // estateData.publication.lastModificationDate => string "2020-05-30T16:35:25.607+0000"
     const fetchDate = new Date()
     // test if the estate last modif date is earlier than the last time this script has runned 
@@ -294,7 +258,6 @@ async function processEstate(immowebCode, lastRunDate, queryId) {
     const [long, lat] = [_.get(estateData, 'property.location.longitude'), _.get(estateData, 'property.location.latitude')]
     await db.collection('estates').insertOne({
         immowebCode,
-        queryId,
         fetchDate,
         lastModificationDate: lastModif.toDate(),
         creationDate: parseImmowebDate(_.get(estateData, 'publication.creationDate')).toDate(),
@@ -372,10 +335,7 @@ async function parseEstatePage(immowebCode) {
  */
 
 async function connectDB(uri, database) {
-    const client = await MongoClient.connect(`${uri}/${database}`, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }) // the db included in the url is created if not yet
+    const client = await MongoClient.connect(`${uri}/${database}`) // the db included in the url is created if not yet
     const db = client.db()
     return db
 }
@@ -418,7 +378,6 @@ async function downloadFile(url, outputPath) {
  * 
  * Features :
  * 
- * - Allow for full search URLs in searches.json in addition to broken down search queries
- * - Test the strategy of image in database directly (and give user the choice in searches.json)
+ * - Test the strategy of storing images in the database directly
  * - Encode the date in a native MongoDB format for better analysis ?
  */

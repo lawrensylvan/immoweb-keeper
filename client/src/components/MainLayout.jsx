@@ -32,7 +32,7 @@ export default function MainLayout({isAuthenticated, userName}) {
             <Content>
                 <Layout>
                     <Header style={{
-                        backgroundColor: '#7d827f', maxHeight: '45px',
+                        backgroundColor: '#eef2ef', maxHeight: '45px',
                         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                         }}>
                             

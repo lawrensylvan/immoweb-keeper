@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
-import { useEffect, useState } from 'react'
-import { MapContainer, TileLayer, CircleMarker } from 'react-leaflet'
+import React, { Component, useEffect, useState } from 'react'
+import { MapContainer, TileLayer, CircleMarker, LayersControl, useMapEvents } from 'react-leaflet'
 import EstateCard from './EstateCard'
 import { gql } from '@apollo/client'
 import { useSearch } from '../hooks/useSearch'
@@ -12,6 +12,7 @@ query estatesNear(
     $immowebCode: Int
     $priceRange: [Int]
     $zipCodes: [Int]
+    $propertyTypes: [PropertyType!]
     $onlyWithGarden: Boolean
     $minGardenArea: Int
     $minLivingArea: Int
@@ -26,6 +27,7 @@ query estatesNear(
         immowebCode: $immowebCode
         priceRange: $priceRange
         zipCodes: $zipCodes
+        propertyTypes: $propertyTypes
         onlyWithGarden: $onlyWithGarden
         minGardenArea: $minGardenArea
         minLivingArea: $minLivingArea
@@ -42,7 +44,29 @@ query estatesNear(
 }
 `
 
-export default function MapResults({searchFilters}) {
+function EstateMarkers({estates, selectedImmowebCode, onSelect}) {
+    const [baseLayer, setBaseLayer] = useState('Street')
+    useMapEvents({baselayerchange: event => setBaseLayer(event.name)})
+    const unselectedColor = baseLayer === 'Street' ? '#69b1ff' : 'pink'
+
+    return estates?.map(estate => {
+        const color = selectedImmowebCode === estate.immowebCode ? '#1677ff' : unselectedColor
+        return <CircleMarker center={[estate.geolocation[1], estate.geolocation[0]]} radius={6}
+            pathOptions={{color, fillColor: color, fillOpacity: 0.8}}
+            eventHandlers={{click: () => onSelect(estate.immowebCode)}} key={estate.immowebCode} />
+    }) || null
+}
+
+class MapErrorBoundary extends Component {
+    state = {error: null}
+    static getDerivedStateFromError(error) { return {error} }
+    render() {
+        if(this.state.error) return <div role="alert">Unable to display map: {this.state.error.message}</div>
+        return this.props.children
+    }
+}
+
+function MapResultsContent({searchFilters}) {
 
     // State of the map
     const [[longitude, latitude], setCenter] = useState([4.38, 50.86]) // TODO : maintain when map moves (only after some time)
@@ -79,33 +103,39 @@ export default function MapResults({searchFilters}) {
                 zoom={13}
                 style={{width: '90%', height: '75vh'}} >
 
-                {/* (for other tile layer providers : https://leaflet-extras.github.io/leaflet-providers/preview/ */}
-                <TileLayer
-                    url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                    attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-                    subdomains='abcd'
-                    maxZoom={19}
-                    ext="png"                    
-                />
-                <TileLayer
-                    url="https://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}{r}.{ext}"
-                    //url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
-                    //url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png"
-                    //url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png"
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-                    subdomains='abcd'
-                    maxZoom={19}
-                    ext="png"
-                    opacity={0.5}
-                />
+                <LayersControl position="topright" collapsed>
+                    <LayersControl.BaseLayer checked name="Street">
+                        <TileLayer
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            maxZoom={19}
+                        />
+                    </LayersControl.BaseLayer>
+                    <LayersControl.BaseLayer name="Light">
+                        <TileLayer
+                            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                            subdomains="abcd"
+                            maxZoom={20}
+                        />
+                    </LayersControl.BaseLayer>
+                    <LayersControl.BaseLayer name="Satellite">
+                        <TileLayer
+                            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                            attribution="Tiles &copy; Esri and its imagery providers"
+                            maxZoom={19}
+                        />
+                    </LayersControl.BaseLayer>
+                </LayersControl>
 
-                {estatesNearResult?.estatesNear?.map(e => 
-                    <CircleMarker center={[e.geolocation[1], e.geolocation[0]]} radius={6}
-                                  pathOptions={{ color: selectedImmowebCode === e.immowebCode ? 'blue' : 'pink' }}
-                                  eventHandlers={{click: (event) => setSelectedImmowebCode(e.immowebCode)}} key={e.immowebCode} />
-                )}
+                <EstateMarkers estates={estatesNearResult?.estatesNear} selectedImmowebCode={selectedImmowebCode}
+                    onSelect={setSelectedImmowebCode} />
 
             </MapContainer>
         </div>
     )
+}
+
+export default function MapResults(props) {
+    return <MapErrorBoundary><MapResultsContent {...props} /></MapErrorBoundary>
 }

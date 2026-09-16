@@ -1,11 +1,8 @@
 // DRAFT
 
-const MongoClient = require('mongodb')
+const {MongoClient} = require('mongodb')
 async function connectDB(uri, database) {
-    const client = await MongoClient.connect(`${uri}/${database}`, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }) // the db included in the url is created if not yet
+    const client = await MongoClient.connect(`${uri}/${database}`) // the db included in the url is created if not yet
     const db = client.db()
     return db
 }
@@ -16,14 +13,9 @@ let db
 (async function () {
     try {
         
-        db = await connectDB('mongodb+srv://heroku:aristote@cluster0.zqf3d.gcp.mongodb.net', process.env.MONGODB_DATABASE || 'immoweb')
+        db = await connectDB(process.env.MONGODB_URL, process.env.MONGODB_DATABASE || 'immoweb')
 
-        const estates = await new Promise(function(resolve, reject) {
-            db.collection('estates').find().limit(10).toArray(function(err, docs) {
-                if (err) return reject(err)
-                return resolve(docs)
-            })
-        })
+        const estates = await db.collection('estates').find().limit(10).toArray()
 
         const object = estates[0]
         console.dir(object)

@@ -8,7 +8,8 @@ const breadcrumbNameMap = {
     '/explore/advanced-search':         'Advanced search',
     '/flagged-items':                   'Flagged items',
     '/flagged-items/liked-estates':     'Liked estates',
-    '/flagged-items/visited-estates':   'Visited estates'
+    '/flagged-items/visited-estates':   'Visited estates',
+    '/admin':                           'Admin schedules'
 }
 
 export default function BreadCrumbs() {

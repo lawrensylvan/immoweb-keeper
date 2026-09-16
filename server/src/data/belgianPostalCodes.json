@@ -1,0 +1,10805 @@
+[
+  {
+    "code": 1000,
+    "localities": [
+      "Bruxelles"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1020,
+    "localities": [
+      "Laeken"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1030,
+    "localities": [
+      "Schaerbeek"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1040,
+    "localities": [
+      "Etterbeek"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1050,
+    "localities": [
+      "Ixelles"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1060,
+    "localities": [
+      "Saint-Gilles"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1070,
+    "localities": [
+      "Anderlecht"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1080,
+    "localities": [
+      "Molenbeek-Saint-Jean"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1081,
+    "localities": [
+      "Koekelberg"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1082,
+    "localities": [
+      "Berchem-Sainte-Agathe"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1083,
+    "localities": [
+      "Ganshoren"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1090,
+    "localities": [
+      "Jette"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1120,
+    "localities": [
+      "Neder-Over-Heembeek"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1130,
+    "localities": [
+      "Haren"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1140,
+    "localities": [
+      "Evere"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1150,
+    "localities": [
+      "Woluwe-Saint-Pierre"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1160,
+    "localities": [
+      "Auderghem"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1170,
+    "localities": [
+      "Watermael-Boitsfort"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1180,
+    "localities": [
+      "Uccle"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1190,
+    "localities": [
+      "Forest"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1200,
+    "localities": [
+      "Woluwe-Saint-Lambert"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1210,
+    "localities": [
+      "Saint-Josse-Ten-Noode"
+    ],
+    "group": "BRU",
+    "groupName": "Brussels"
+  },
+  {
+    "code": 1300,
+    "localities": [
+      "Limal",
+      "Wavre"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1301,
+    "localities": [
+      "Bierges"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1310,
+    "localities": [
+      "La Hulpe"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1315,
+    "localities": [
+      "Glimes",
+      "Incourt",
+      "Opprebais",
+      "Piétrebais",
+      "Roux-Miroir"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1320,
+    "localities": [
+      "Beauvechain",
+      "Hamme-Mille",
+      "L'Ecluse",
+      "Nodebais",
+      "Tourinnes-La-Grosse"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1325,
+    "localities": [
+      "Bonlez",
+      "Chaumont-Gistoux",
+      "Corroy-Le-Grand",
+      "Dion-Valmont",
+      "Longueville"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1330,
+    "localities": [
+      "Rixensart"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1331,
+    "localities": [
+      "Rosières"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1332,
+    "localities": [
+      "Genval"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1340,
+    "localities": [
+      "Ottignies",
+      "Ottignies-Louvain-La-Neuve"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1341,
+    "localities": [
+      "Céroux-Mousty"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1342,
+    "localities": [
+      "Limelette"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1348,
+    "localities": [
+      "Louvain-La-Neuve"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1350,
+    "localities": [
+      "Enines",
+      "Folx-Les-Caves",
+      "Jandrain-Jandrenouille",
+      "Jauche",
+      "Marilles",
+      "Noduwez",
+      "Orp-Jauche",
+      "Orp-Le-Grand"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1357,
+    "localities": [
+      "Hélécine",
+      "Linsmeau",
+      "Neerheylissem",
+      "Opheylissem"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1360,
+    "localities": [
+      "Malèves-Sainte-Marie-Wastinnes",
+      "Orbais",
+      "Perwez",
+      "Thorembais-Les-Béguines",
+      "Thorembais-Saint-Trond"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1367,
+    "localities": [
+      "Autre-Eglise",
+      "Bomal",
+      "Geest-Gérompont-Petit-Rosière",
+      "Gérompont",
+      "Grand-Rosière-Hottomont",
+      "Huppaye",
+      "Mont-Saint-André",
+      "Ramillies"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1370,
+    "localities": [
+      "Dongelberg",
+      "Jauchelette",
+      "Jodoigne",
+      "Jodoigne-Souveraine",
+      "Lathuy",
+      "Mélin",
+      "Piétrain",
+      "Saint-Jean-Geest",
+      "Saint-Remy-Geest",
+      "Zétrud-Lumay"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1380,
+    "localities": [
+      "Couture-Saint-Germain",
+      "Lasne",
+      "Lasne-Chapelle-Saint-Lambert",
+      "Maransart",
+      "Ohain",
+      "Plancenoit"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1390,
+    "localities": [
+      "Archennes",
+      "Biez",
+      "Bossut-Gottechain",
+      "Grez-Doiceau",
+      "Nethen"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1400,
+    "localities": [
+      "Monstreux",
+      "Nivelles"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1401,
+    "localities": [
+      "Baulers"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1402,
+    "localities": [
+      "Thines"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1404,
+    "localities": [
+      "Bornival"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1410,
+    "localities": [
+      "Waterloo"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1420,
+    "localities": [
+      "Braine-L'Alleud"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1421,
+    "localities": [
+      "Ophain-Bois-Seigneur-Isaac"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1428,
+    "localities": [
+      "Lillois-Witterzée"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1430,
+    "localities": [
+      "Bierghes",
+      "Quenast",
+      "Rebecq",
+      "Rebecq-Rognon"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1435,
+    "localities": [
+      "Corbais",
+      "Hévillers",
+      "Mont-Saint-Guibert"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1440,
+    "localities": [
+      "Braine-Le-Château",
+      "Wauthier-Braine"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1450,
+    "localities": [
+      "Chastre",
+      "Chastre-Villeroux-Blanmont",
+      "Cortil-Noirmont",
+      "Gentinnes",
+      "Saint-Géry"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1457,
+    "localities": [
+      "Nil-Saint-Vincent-Saint-Martin",
+      "Tourinnes-Saint-Lambert",
+      "Walhain",
+      "Walhain-Saint-Paul"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1460,
+    "localities": [
+      "Ittre",
+      "Virginal-Samme"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1461,
+    "localities": [
+      "Haut-Ittre"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1470,
+    "localities": [
+      "Baisy-Thy",
+      "Bousval",
+      "Genappe"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1471,
+    "localities": [
+      "Loupoigne"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1472,
+    "localities": [
+      "Vieux-Genappe"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1473,
+    "localities": [
+      "Glabais"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1474,
+    "localities": [
+      "Ways"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1476,
+    "localities": [
+      "Houtain-Le-Val"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1480,
+    "localities": [
+      "Clabecq",
+      "Oisquercq",
+      "Saintes",
+      "Tubize"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1490,
+    "localities": [
+      "Court-Saint-Etienne"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1495,
+    "localities": [
+      "Marbais",
+      "Mellery",
+      "Sart-Dames-Avelines",
+      "Tilly",
+      "Villers-La-Ville"
+    ],
+    "group": "WBR",
+    "groupName": "Walloon Brabant"
+  },
+  {
+    "code": 1500,
+    "localities": [
+      "Halle"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1501,
+    "localities": [
+      "Buizingen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1502,
+    "localities": [
+      "Lembeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1540,
+    "localities": [
+      "Herfelingen",
+      "Herne"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1541,
+    "localities": [
+      "Sint-Pieters-Kapelle"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1547,
+    "localities": [
+      "Biévène"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1560,
+    "localities": [
+      "Hoeilaart"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1570,
+    "localities": [
+      "Galmaarden",
+      "Tollembeek",
+      "Vollezele"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1600,
+    "localities": [
+      "Oudenaken",
+      "Sint-Laureins-Berchem",
+      "Sint-Pieters-Leeuw"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1601,
+    "localities": [
+      "Ruisbroek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1602,
+    "localities": [
+      "Vlezenbeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1620,
+    "localities": [
+      "Drogenbos"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1630,
+    "localities": [
+      "Linkebeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1640,
+    "localities": [
+      "Rhode-Saint-Genèse"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1650,
+    "localities": [
+      "Beersel"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1651,
+    "localities": [
+      "Lot"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1652,
+    "localities": [
+      "Alsemberg"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1653,
+    "localities": [
+      "Dworp"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1654,
+    "localities": [
+      "Huizingen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1670,
+    "localities": [
+      "Bogaarden",
+      "Heikruis",
+      "Pepingen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1671,
+    "localities": [
+      "Elingen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1673,
+    "localities": [
+      "Beert"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1674,
+    "localities": [
+      "Bellingen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1700,
+    "localities": [
+      "Dilbeek",
+      "Sint-Martens-Bodegem",
+      "Sint-Ulriks-Kapelle"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1701,
+    "localities": [
+      "Itterbeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1702,
+    "localities": [
+      "Groot-Bijgaarden"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1703,
+    "localities": [
+      "Schepdaal"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1730,
+    "localities": [
+      "Asse",
+      "Bekkerzeel",
+      "Kobbegem",
+      "Mollem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1731,
+    "localities": [
+      "Relegem",
+      "Zellik"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1740,
+    "localities": [
+      "Ternat"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1741,
+    "localities": [
+      "Wambeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1742,
+    "localities": [
+      "Sint-Katherina-Lombeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1745,
+    "localities": [
+      "Mazenzele",
+      "Opwijk"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1750,
+    "localities": [
+      "Gaasbeek",
+      "Lennik",
+      "Sint-Kwintens-Lennik",
+      "Sint-Martens-Lennik"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1755,
+    "localities": [
+      "Gooik",
+      "Kester",
+      "Leerbeek",
+      "Oetingen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1760,
+    "localities": [
+      "Onze-Lieve-Vrouw-Lombeek",
+      "Pamel",
+      "Roosdaal",
+      "Strijtem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1761,
+    "localities": [
+      "Borchtlombeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1770,
+    "localities": [
+      "Liedekerke"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1780,
+    "localities": [
+      "Wemmel"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1785,
+    "localities": [
+      "Brussegem",
+      "Hamme",
+      "Merchtem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1790,
+    "localities": [
+      "Affligem",
+      "Essene",
+      "Hekelgem",
+      "Teralfene"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1800,
+    "localities": [
+      "Peutie",
+      "Vilvoorde"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1820,
+    "localities": [
+      "Melsbroek",
+      "Perk",
+      "Steenokkerzeel"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1830,
+    "localities": [
+      "Machelen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1831,
+    "localities": [
+      "Diegem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1840,
+    "localities": [
+      "Londerzeel",
+      "Malderen",
+      "Steenhuffel"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1850,
+    "localities": [
+      "Grimbergen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1851,
+    "localities": [
+      "Humbeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1852,
+    "localities": [
+      "Beigem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1853,
+    "localities": [
+      "Strombeek-Bever"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1860,
+    "localities": [
+      "Meise"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1861,
+    "localities": [
+      "Wolvertem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1880,
+    "localities": [
+      "Kapelle-Op-Den-Bos",
+      "Nieuwenrode",
+      "Ramsdonk"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1910,
+    "localities": [
+      "Berg",
+      "Buken",
+      "Kampenhout",
+      "Nederokkerzeel"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1930,
+    "localities": [
+      "Nossegem",
+      "Zaventem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1932,
+    "localities": [
+      "Sint-Stevens-Woluwe"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1933,
+    "localities": [
+      "Sterrebeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1950,
+    "localities": [
+      "Kraainem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1970,
+    "localities": [
+      "Wezembeek-Oppem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1980,
+    "localities": [
+      "Eppegem",
+      "Zemst"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1981,
+    "localities": [
+      "Hofstade"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 1982,
+    "localities": [
+      "Elewijt",
+      "Weerde"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 2000,
+    "localities": [
+      "Antwerpen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2018,
+    "localities": [
+      "Antwerpen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2020,
+    "localities": [
+      "Antwerpen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2030,
+    "localities": [
+      "Antwerpen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2040,
+    "localities": [
+      "Antwerpen",
+      "Berendrecht",
+      "Lillo",
+      "Zandvliet"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2050,
+    "localities": [
+      "Antwerpen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2060,
+    "localities": [
+      "Antwerpen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2070,
+    "localities": [
+      "Burcht",
+      "Zwijndrecht"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2100,
+    "localities": [
+      "Deurne"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2110,
+    "localities": [
+      "Wijnegem"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2140,
+    "localities": [
+      "Borgerhout"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2150,
+    "localities": [
+      "Borsbeek"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2160,
+    "localities": [
+      "Wommelgem"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2170,
+    "localities": [
+      "Merksem"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2180,
+    "localities": [
+      "Ekeren"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2200,
+    "localities": [
+      "Herentals",
+      "Morkhoven",
+      "Noorderwijk"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2220,
+    "localities": [
+      "Hallaar",
+      "Heist-Op-Den-Berg"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2221,
+    "localities": [
+      "Booischot"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2222,
+    "localities": [
+      "Itegem",
+      "Wiekevorst"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2223,
+    "localities": [
+      "Schriek"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2230,
+    "localities": [
+      "Herselt",
+      "Ramsel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2235,
+    "localities": [
+      "Houtvenne",
+      "Hulshout",
+      "Westmeerbeek"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2240,
+    "localities": [
+      "Massenhoven",
+      "Viersel",
+      "Zandhoven"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2242,
+    "localities": [
+      "Pulderbos"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2243,
+    "localities": [
+      "Pulle"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2250,
+    "localities": [
+      "Olen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2260,
+    "localities": [
+      "Oevel",
+      "Tongerlo",
+      "Westerlo",
+      "Zoerle-Parwijs"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2270,
+    "localities": [
+      "Herenthout"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2275,
+    "localities": [
+      "Gierle",
+      "Lille",
+      "Poederlee",
+      "Wechelderzande"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2280,
+    "localities": [
+      "Grobbendonk"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2288,
+    "localities": [
+      "Bouwel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2290,
+    "localities": [
+      "Vorselaar"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2300,
+    "localities": [
+      "Turnhout"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2310,
+    "localities": [
+      "Rijkevorsel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2320,
+    "localities": [
+      "Hoogstraten"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2321,
+    "localities": [
+      "Meer"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2322,
+    "localities": [
+      "Minderhout"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2323,
+    "localities": [
+      "Wortel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2328,
+    "localities": [
+      "Meerle"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2330,
+    "localities": [
+      "Merksplas"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2340,
+    "localities": [
+      "Beerse",
+      "Vlimmeren"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2350,
+    "localities": [
+      "Vosselaar"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2360,
+    "localities": [
+      "Oud-Turnhout"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2370,
+    "localities": [
+      "Arendonk"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2380,
+    "localities": [
+      "Ravels"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2381,
+    "localities": [
+      "Weelde"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2382,
+    "localities": [
+      "Poppel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2387,
+    "localities": [
+      "Baarle-Hertog"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2390,
+    "localities": [
+      "Malle",
+      "Oostmalle",
+      "Westmalle"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2400,
+    "localities": [
+      "Mol"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2430,
+    "localities": [
+      "Eindhout",
+      "Laakdal",
+      "Vorst"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2431,
+    "localities": [
+      "Varendonk",
+      "Veerle"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2440,
+    "localities": [
+      "Geel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2450,
+    "localities": [
+      "Meerhout"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2460,
+    "localities": [
+      "Kasterlee",
+      "Lichtaart",
+      "Tielen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2470,
+    "localities": [
+      "Retie"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2480,
+    "localities": [
+      "Dessel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2490,
+    "localities": [
+      "Balen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2491,
+    "localities": [
+      "Olmen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2500,
+    "localities": [
+      "Koningshooikt",
+      "Lier"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2520,
+    "localities": [
+      "Broechem",
+      "Emblem",
+      "Oelegem",
+      "Ranst"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2530,
+    "localities": [
+      "Boechout"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2531,
+    "localities": [
+      "Vremde"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2540,
+    "localities": [
+      "Hove"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2547,
+    "localities": [
+      "Lint"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2550,
+    "localities": [
+      "Kontich",
+      "Waarloos"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2560,
+    "localities": [
+      "Bevel",
+      "Kessel",
+      "Nijlen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2570,
+    "localities": [
+      "Duffel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2580,
+    "localities": [
+      "Beerzel",
+      "Putte"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2590,
+    "localities": [
+      "Berlaar",
+      "Gestel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2600,
+    "localities": [
+      "Berchem"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2610,
+    "localities": [
+      "Wilrijk"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2620,
+    "localities": [
+      "Hemiksem"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2627,
+    "localities": [
+      "Schelle"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2630,
+    "localities": [
+      "Aartselaar"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2640,
+    "localities": [
+      "Mortsel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2650,
+    "localities": [
+      "Edegem"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2660,
+    "localities": [
+      "Hoboken"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2800,
+    "localities": [
+      "Mechelen",
+      "Walem"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2801,
+    "localities": [
+      "Heffen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2811,
+    "localities": [
+      "Hombeek",
+      "Leest"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2812,
+    "localities": [
+      "Muizen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2820,
+    "localities": [
+      "Bonheiden",
+      "Rijmenam"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2830,
+    "localities": [
+      "Blaasveld",
+      "Heindonk",
+      "Tisselt",
+      "Willebroek"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2840,
+    "localities": [
+      "Reet",
+      "Rumst",
+      "Terhagen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2845,
+    "localities": [
+      "Niel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2850,
+    "localities": [
+      "Boom"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2860,
+    "localities": [
+      "Sint-Katelijne-Waver"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2861,
+    "localities": [
+      "Onze-Lieve-Vrouw-Waver"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2870,
+    "localities": [
+      "Breendonk",
+      "Liezele",
+      "Puurs",
+      "Puurs-Sint-Amands",
+      "Ruisbroek"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2880,
+    "localities": [
+      "Bornem",
+      "Hingene",
+      "Mariekerke",
+      "Weert"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2890,
+    "localities": [
+      "Lippelo",
+      "Oppuurs",
+      "Sint-Amands"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2900,
+    "localities": [
+      "Schoten"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2910,
+    "localities": [
+      "Essen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2920,
+    "localities": [
+      "Kalmthout"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2930,
+    "localities": [
+      "Brasschaat"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2940,
+    "localities": [
+      "Hoevenen",
+      "Stabroek"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2950,
+    "localities": [
+      "Kapellen"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2960,
+    "localities": [
+      "Brecht",
+      "Sint-Job-In-'T-Goor",
+      "Sint-Lenaarts"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2970,
+    "localities": [
+      "'S Gravenwezel",
+      "Schilde"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2980,
+    "localities": [
+      "Halle",
+      "Zoersel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 2990,
+    "localities": [
+      "Loenhout",
+      "Wuustwezel"
+    ],
+    "group": "VAN",
+    "groupName": "Antwerp"
+  },
+  {
+    "code": 3000,
+    "localities": [
+      "Leuven"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3001,
+    "localities": [
+      "Heverlee"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3010,
+    "localities": [
+      "Kessel Lo"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3012,
+    "localities": [
+      "Wilsele"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3018,
+    "localities": [
+      "Wijgmaal"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3020,
+    "localities": [
+      "Herent",
+      "Veltem-Beisem",
+      "Winksele"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3040,
+    "localities": [
+      "Huldenberg",
+      "Loonbeek",
+      "Neerijse",
+      "Ottenburg",
+      "Sint-Agatha-Rode"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3050,
+    "localities": [
+      "Oud-Heverlee"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3051,
+    "localities": [
+      "Sint-Joris-Weert"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3052,
+    "localities": [
+      "Blanden"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3053,
+    "localities": [
+      "Haasrode"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3054,
+    "localities": [
+      "Vaalbeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3060,
+    "localities": [
+      "Bertem",
+      "Korbeek-Dijle"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3061,
+    "localities": [
+      "Leefdaal"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3070,
+    "localities": [
+      "Kortenberg"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3071,
+    "localities": [
+      "Erps-Kwerps"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3078,
+    "localities": [
+      "Everberg",
+      "Meerbeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3080,
+    "localities": [
+      "Duisburg",
+      "Tervuren",
+      "Vossem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3090,
+    "localities": [
+      "Overijse"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3110,
+    "localities": [
+      "Rotselaar"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3111,
+    "localities": [
+      "Wezemaal"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3118,
+    "localities": [
+      "Werchter"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3120,
+    "localities": [
+      "Tremelo"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3128,
+    "localities": [
+      "Baal"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3130,
+    "localities": [
+      "Begijnendijk",
+      "Betekom"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3140,
+    "localities": [
+      "Keerbergen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3150,
+    "localities": [
+      "Haacht",
+      "Tildonk",
+      "Wespelaar"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3190,
+    "localities": [
+      "Boortmeerbeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3191,
+    "localities": [
+      "Hever"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3200,
+    "localities": [
+      "Aarschot",
+      "Gelrode"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3201,
+    "localities": [
+      "Langdorp"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3202,
+    "localities": [
+      "Rillaar"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3210,
+    "localities": [
+      "Linden",
+      "Lubbeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3211,
+    "localities": [
+      "Binkom"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3212,
+    "localities": [
+      "Pellenberg"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3220,
+    "localities": [
+      "Holsbeek",
+      "Kortrijk-Dutsel",
+      "Sint-Pieters-Rode"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3221,
+    "localities": [
+      "Nieuwrode"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3270,
+    "localities": [
+      "Scherpenheuvel",
+      "Scherpenheuvel-Zichem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3271,
+    "localities": [
+      "Averbode",
+      "Zichem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3272,
+    "localities": [
+      "Messelbroek",
+      "Testelt"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3290,
+    "localities": [
+      "Deurne",
+      "Diest",
+      "Schaffen",
+      "Webbekom"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3293,
+    "localities": [
+      "Kaggevinne"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3294,
+    "localities": [
+      "Molenstede"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3300,
+    "localities": [
+      "Bost",
+      "Goetsenhoven",
+      "Hakendover",
+      "Kumtich",
+      "Oorbeek",
+      "Oplinter",
+      "Sint-Margriete-Houtem",
+      "Tienen",
+      "Vissenaken"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3320,
+    "localities": [
+      "Hoegaarden",
+      "Meldert"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3321,
+    "localities": [
+      "Outgaarden"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3350,
+    "localities": [
+      "Drieslinter",
+      "Linter",
+      "Melkwezer",
+      "Neerhespen",
+      "Neerlinter",
+      "Orsmaal-Gussenhoven",
+      "Overhespen",
+      "Wommersom"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3360,
+    "localities": [
+      "Bierbeek",
+      "Korbeek-Lo",
+      "Lovenjoel",
+      "Opvelp"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3370,
+    "localities": [
+      "Boutersem",
+      "Kerkom",
+      "Neervelp",
+      "Roosbeek",
+      "Vertrijk",
+      "Willebringen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3380,
+    "localities": [
+      "Bunsbeek",
+      "Glabbeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3381,
+    "localities": [
+      "Kapellen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3384,
+    "localities": [
+      "Attenrode"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3390,
+    "localities": [
+      "Houwaart",
+      "Sint-Joris-Winge",
+      "Tielt",
+      "Tielt-Winge"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3391,
+    "localities": [
+      "Meensel-Kiezegem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3400,
+    "localities": [
+      "Eliksem",
+      "Ezemaal",
+      "Laar",
+      "Landen",
+      "Neerwinden",
+      "Overwinden",
+      "Rumsdorp",
+      "Wange"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3401,
+    "localities": [
+      "Waasmont",
+      "Walsbets",
+      "Walshoutem",
+      "Wezeren"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3404,
+    "localities": [
+      "Attenhoven",
+      "Neerlanden"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3440,
+    "localities": [
+      "Budingen",
+      "Dormaal",
+      "Halle-Booienhoven",
+      "Helen-Bos",
+      "Zoutleeuw"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3450,
+    "localities": [
+      "Geetbets",
+      "Grazen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3454,
+    "localities": [
+      "Rummen"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3460,
+    "localities": [
+      "Assent",
+      "Bekkevoort"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3461,
+    "localities": [
+      "Molenbeek-Wersbeek"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3470,
+    "localities": [
+      "Kortenaken",
+      "Ransberg",
+      "Sint-Margriete-Houtem"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3471,
+    "localities": [
+      "Hoeleden"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3472,
+    "localities": [
+      "Kersbeek-Miskom"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3473,
+    "localities": [
+      "Waanrode"
+    ],
+    "group": "VBR",
+    "groupName": "Flemish Brabant"
+  },
+  {
+    "code": 3500,
+    "localities": [
+      "Hasselt",
+      "Sint-Lambrechts-Herk"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3501,
+    "localities": [
+      "Wimmertingen"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3510,
+    "localities": [
+      "Kermt",
+      "Spalbeek"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3511,
+    "localities": [
+      "Kuringen",
+      "Stokrooie"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3512,
+    "localities": [
+      "Stevoort"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3520,
+    "localities": [
+      "Zonhoven"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3530,
+    "localities": [
+      "Helchteren",
+      "Houthalen",
+      "Houthalen-Helchteren"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3540,
+    "localities": [
+      "Berbroek",
+      "Donk",
+      "Herk-De-Stad",
+      "Schulen"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3545,
+    "localities": [
+      "Halen",
+      "Loksbergen",
+      "Zelem"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3550,
+    "localities": [
+      "Heusden",
+      "Heusden-Zolder",
+      "Zolder"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3560,
+    "localities": [
+      "Linkhout",
+      "Lummen",
+      "Meldert"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3570,
+    "localities": [
+      "Alken"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3580,
+    "localities": [
+      "Beringen"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3581,
+    "localities": [
+      "Beverlo"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3582,
+    "localities": [
+      "Koersel"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3583,
+    "localities": [
+      "Paal"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3590,
+    "localities": [
+      "Diepenbeek"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3600,
+    "localities": [
+      "Genk"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3620,
+    "localities": [
+      "Gellik",
+      "Lanaken",
+      "Neerharen",
+      "Veldwezelt"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3621,
+    "localities": [
+      "Rekem"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3630,
+    "localities": [
+      "Eisden",
+      "Leut",
+      "Maasmechelen",
+      "Mechelen-Aan-De-Maas",
+      "Meeswijk",
+      "Opgrimbie",
+      "Vucht"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3631,
+    "localities": [
+      "Boorsem",
+      "Uikhoven"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3640,
+    "localities": [
+      "Kessenich",
+      "Kinrooi",
+      "Molenbeersel",
+      "Ophoven"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3650,
+    "localities": [
+      "Dilsen",
+      "Dilsen-Stokkem",
+      "Elen",
+      "Lanklaar",
+      "Rotem",
+      "Stokkem"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3660,
+    "localities": [
+      "Opglabbeek"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3665,
+    "localities": [
+      "As"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3668,
+    "localities": [
+      "Niel-Bij-As"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3670,
+    "localities": [
+      "Ellikom",
+      "Gruitrode",
+      "Meeuwen",
+      "Neerglabbeek",
+      "Oudsbergen",
+      "Wijshagen"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3680,
+    "localities": [
+      "Maaseik",
+      "Neeroeteren",
+      "Opoeteren"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3690,
+    "localities": [
+      "Zutendaal"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3700,
+    "localities": [
+      "'S Herenelderen",
+      "Berg",
+      "Diets-Heur",
+      "Haren",
+      "Henis",
+      "Kolmont",
+      "Koninksem",
+      "Lauw",
+      "Mal",
+      "Neerrepen",
+      "Nerem",
+      "Overrepen",
+      "Piringen",
+      "Riksingen",
+      "Rutten",
+      "Sluizen",
+      "Tongeren",
+      "Vreren",
+      "Widooie"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3717,
+    "localities": [
+      "Herstappe"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3720,
+    "localities": [
+      "Kortessem"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3721,
+    "localities": [
+      "Vliermaalroot"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3722,
+    "localities": [
+      "Wintershoven"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3723,
+    "localities": [
+      "Guigoven"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3724,
+    "localities": [
+      "Vliermaal"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3730,
+    "localities": [
+      "Hoeselt",
+      "Romershoven",
+      "Sint-Huibrechts-Hern",
+      "Werm"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3732,
+    "localities": [
+      "Schalkhoven"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3740,
+    "localities": [
+      "Beverst",
+      "Bilzen",
+      "Eigenbilzen",
+      "Grote-Spouwen",
+      "Hees",
+      "Kleine-Spouwen",
+      "Mopertingen",
+      "Munsterbilzen",
+      "Rijkhoven",
+      "Rosmeer",
+      "Waltwilder"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3742,
+    "localities": [
+      "Martenslinde"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3746,
+    "localities": [
+      "Hoelbeek"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3770,
+    "localities": [
+      "Genoelselderen",
+      "Herderen",
+      "Kanne",
+      "Membruggen",
+      "Millen",
+      "Riemst",
+      "Val-Meer",
+      "Vlijtingen",
+      "Vroenhoven",
+      "Zichen-Zussen-Bolder"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3790,
+    "localities": [
+      "Fouron-Saint-Martin",
+      "Fourons",
+      "Mouland"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3791,
+    "localities": [
+      "Remersdaal"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3792,
+    "localities": [
+      "Fouron-Saint-Pierre"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3793,
+    "localities": [
+      "Teuven"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3798,
+    "localities": [
+      "Fouron-Le-Comte"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3800,
+    "localities": [
+      "Aalst",
+      "Brustem",
+      "Engelmanshoven",
+      "Gelinden",
+      "Groot-Gelmen",
+      "Halmaal",
+      "Kerkom-Bij-Sint-Truiden",
+      "Ordingen",
+      "Sint-Truiden",
+      "Zepperen"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3803,
+    "localities": [
+      "Duras",
+      "Gorsem",
+      "Runkelen",
+      "Wilderen"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3806,
+    "localities": [
+      "Velm"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3830,
+    "localities": [
+      "Berlingen",
+      "Wellen"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3831,
+    "localities": [
+      "Herten"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3832,
+    "localities": [
+      "Ulbeek"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3840,
+    "localities": [
+      "Bommershoven",
+      "Borgloon",
+      "Broekom",
+      "Gors-Opleeuw",
+      "Gotem",
+      "Groot-Loon",
+      "Haren",
+      "Hendrieken",
+      "Hoepertingen",
+      "Jesseren",
+      "Kerniel",
+      "Kolmont",
+      "Kuttekoven",
+      "Rijkel",
+      "Voort"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3850,
+    "localities": [
+      "Binderveld",
+      "Kozen",
+      "Nieuwerkerken",
+      "Wijer"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3870,
+    "localities": [
+      "Batsheers",
+      "Bovelingen",
+      "Gutshoven",
+      "Heers",
+      "Heks",
+      "Horpmaal",
+      "Klein-Gelmen",
+      "Mechelen-Bovelingen",
+      "Mettekoven",
+      "Opheers",
+      "Rukkelingen-Loon",
+      "Vechmaal",
+      "Veulen"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3890,
+    "localities": [
+      "Boekhout",
+      "Gingelom",
+      "Jeuk",
+      "Kortijs",
+      "Montenaken",
+      "Niel-Bij-Sint-Truiden",
+      "Vorsen"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3891,
+    "localities": [
+      "Borlo",
+      "Buvingen",
+      "Mielen-Boven-Aalst",
+      "Muizen"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3900,
+    "localities": [
+      "Overpelt",
+      "Pelt"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3910,
+    "localities": [
+      "Neerpelt",
+      "Sint-Huibrechts-Lille"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3920,
+    "localities": [
+      "Lommel"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3930,
+    "localities": [
+      "Achel",
+      "Hamont",
+      "Hamont-Achel"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3940,
+    "localities": [
+      "Hechtel",
+      "Hechtel-Eksel"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3941,
+    "localities": [
+      "Eksel"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3945,
+    "localities": [
+      "Ham",
+      "Kwaadmechelen",
+      "Oostham"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3950,
+    "localities": [
+      "Bocholt",
+      "Kaulille",
+      "Reppel"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3960,
+    "localities": [
+      "Beek",
+      "Bree",
+      "Gerdingen",
+      "Opitter",
+      "Tongerlo"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3970,
+    "localities": [
+      "Leopoldsburg"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3971,
+    "localities": [
+      "Heppen"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3980,
+    "localities": [
+      "Tessenderlo"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 3990,
+    "localities": [
+      "Grote-Brogel",
+      "Kleine-Brogel",
+      "Peer",
+      "Wijchmaal"
+    ],
+    "group": "VLI",
+    "groupName": "Limburg"
+  },
+  {
+    "code": 4000,
+    "localities": [
+      "Glain",
+      "Liège",
+      "Rocourt"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4020,
+    "localities": [
+      "Bressoux",
+      "Jupille-Sur-Meuse",
+      "Liège",
+      "Wandre"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4030,
+    "localities": [
+      "Grivegnée"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4031,
+    "localities": [
+      "Angleur"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4032,
+    "localities": [
+      "Chênée"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4040,
+    "localities": [
+      "Herstal"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4041,
+    "localities": [
+      "Milmort",
+      "Vottem"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4042,
+    "localities": [
+      "Liers"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4050,
+    "localities": [
+      "Chaudfontaine"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4051,
+    "localities": [
+      "Vaux-Sous-Chèvremont"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4052,
+    "localities": [
+      "Beaufays"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4053,
+    "localities": [
+      "Embourg"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4100,
+    "localities": [
+      "Boncelles",
+      "Seraing"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4101,
+    "localities": [
+      "Jemeppe-Sur-Meuse"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4102,
+    "localities": [
+      "Ougrée"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4120,
+    "localities": [
+      "Ehein",
+      "Neupré",
+      "Rotheux-Rimière"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4121,
+    "localities": [
+      "Neuville-En-Condroz"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4122,
+    "localities": [
+      "Plainevaux"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4130,
+    "localities": [
+      "Esneux",
+      "Tilff"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4140,
+    "localities": [
+      "Dolembreux",
+      "Gomzé-Andoumont",
+      "Rouvreux",
+      "Sprimont"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4141,
+    "localities": [
+      "Louveigné"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4160,
+    "localities": [
+      "Anthisnes"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4161,
+    "localities": [
+      "Villers-Aux-Tours"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4162,
+    "localities": [
+      "Hody"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4163,
+    "localities": [
+      "Tavier"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4170,
+    "localities": [
+      "Comblain-Au-Pont"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4171,
+    "localities": [
+      "Poulseur"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4180,
+    "localities": [
+      "Comblain-Fairon",
+      "Comblain-La-Tour",
+      "Hamoir"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4181,
+    "localities": [
+      "Filot"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4190,
+    "localities": [
+      "Ferrières",
+      "My",
+      "Vieuxville",
+      "Werbomont",
+      "Xhoris"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4210,
+    "localities": [
+      "Burdinne",
+      "Hannêche",
+      "Lamontzée",
+      "Marneffe",
+      "Oteppe"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4217,
+    "localities": [
+      "Héron",
+      "Lavoir",
+      "Waret-L'Evêque"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4218,
+    "localities": [
+      "Couthuin"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4219,
+    "localities": [
+      "Acosse",
+      "Ambresin",
+      "Meeffe",
+      "Wasseiges"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4250,
+    "localities": [
+      "Boëlhe",
+      "Geer",
+      "Hollogne-Sur-Geer",
+      "Lens-Saint-Servais"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4252,
+    "localities": [
+      "Omal"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4253,
+    "localities": [
+      "Darion"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4254,
+    "localities": [
+      "Ligney"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4257,
+    "localities": [
+      "Berloz",
+      "Corswarem",
+      "Rosoux-Crenwick"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4260,
+    "localities": [
+      "Avennes",
+      "Braives",
+      "Ciplet",
+      "Fallais",
+      "Fumal",
+      "Ville-En-Hesbaye"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4261,
+    "localities": [
+      "Latinne"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4263,
+    "localities": [
+      "Tourinne"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4280,
+    "localities": [
+      "Abolens",
+      "Avernas-Le-Bauduin",
+      "Avin",
+      "Bertrée",
+      "Blehen",
+      "Cras-Avernas",
+      "Crehen",
+      "Grand-Hallet",
+      "Hannut",
+      "Lens-Saint-Remy",
+      "Merdorp",
+      "Moxhe",
+      "Petit-Hallet",
+      "Poucet",
+      "Thisnes",
+      "Trognée",
+      "Villers-Le-Peuplier",
+      "Wansin"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4287,
+    "localities": [
+      "Lincent",
+      "Pellaines",
+      "Racour"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4300,
+    "localities": [
+      "Bettincourt",
+      "Bleret",
+      "Bovenistier",
+      "Grand-Axhe",
+      "Lantremange",
+      "Oleye",
+      "Waremme"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4317,
+    "localities": [
+      "Aineffe",
+      "Borlez",
+      "Celles",
+      "Faimes",
+      "Les Waleffes",
+      "Viemme"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4340,
+    "localities": [
+      "Awans",
+      "Fooz",
+      "Othée",
+      "Villers-L'Evêque"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4342,
+    "localities": [
+      "Hognoul"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4347,
+    "localities": [
+      "Fexhe-Le-Haut-Clocher",
+      "Freloux",
+      "Noville",
+      "Roloux",
+      "Voroux-Goreux"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4350,
+    "localities": [
+      "Lamine",
+      "Momalle",
+      "Pousset",
+      "Remicourt"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4351,
+    "localities": [
+      "Hodeige"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4357,
+    "localities": [
+      "Donceel",
+      "Haneffe",
+      "Jeneffe",
+      "Limont"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4360,
+    "localities": [
+      "Bergilers",
+      "Grandville",
+      "Lens-Sur-Geer",
+      "Oreye",
+      "Otrange"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4367,
+    "localities": [
+      "Crisnée",
+      "Fize-Le-Marsal",
+      "Kemexhe",
+      "Odeur",
+      "Thys"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4400,
+    "localities": [
+      "Awirs",
+      "Chokier",
+      "Flémalle",
+      "Flémalle-Grande",
+      "Flémalle-Haute",
+      "Gleixhe",
+      "Ivoz-Ramet",
+      "Mons-Lez-Liège"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4420,
+    "localities": [
+      "Montegnée",
+      "Saint-Nicolas",
+      "Tilleur"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4430,
+    "localities": [
+      "Ans"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4431,
+    "localities": [
+      "Loncin"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4432,
+    "localities": [
+      "Alleur",
+      "Xhendremael"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4450,
+    "localities": [
+      "Juprelle",
+      "Lantin",
+      "Slins"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4451,
+    "localities": [
+      "Voroux-Lez-Liers"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4452,
+    "localities": [
+      "Paifve",
+      "Wihogne"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4453,
+    "localities": [
+      "Villers-Saint-Siméon"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4458,
+    "localities": [
+      "Fexhe-Slins"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4460,
+    "localities": [
+      "Bierset",
+      "Grâce-Berleur",
+      "Grâce-Hollogne",
+      "Hollogne-Aux-Pierres",
+      "Horion-Hozémont",
+      "Velroux"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4470,
+    "localities": [
+      "Saint-Georges-Sur-Meuse"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4480,
+    "localities": [
+      "Clermont-Sous-Huy",
+      "Ehein",
+      "Engis",
+      "Hermalle-Sous-Huy"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4500,
+    "localities": [
+      "Ben-Ahin",
+      "Huy",
+      "Tihange"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4520,
+    "localities": [
+      "Antheit",
+      "Bas-Oha",
+      "Huccorgne",
+      "Moha",
+      "Vinalmont",
+      "Wanze"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4530,
+    "localities": [
+      "Fize-Fontaine",
+      "Vaux-Et-Borset",
+      "Vieux-Waleffe",
+      "Villers-Le-Bouillet",
+      "Warnant-Dreye"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4537,
+    "localities": [
+      "Bodegnée",
+      "Chapon-Seraing",
+      "Seraing-Le-Château",
+      "Verlaine"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4540,
+    "localities": [
+      "Amay",
+      "Ampsin",
+      "Flône",
+      "Jehay",
+      "Ombret"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4550,
+    "localities": [
+      "Nandrin",
+      "Saint-Séverin",
+      "Villers-Le-Temple",
+      "Yernée-Fraineux"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4557,
+    "localities": [
+      "Abée",
+      "Fraiture",
+      "Ramelot",
+      "Seny",
+      "Soheit-Tinlot",
+      "Tinlot"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4560,
+    "localities": [
+      "Bois-Et-Borsu",
+      "Clavier",
+      "Les Avins",
+      "Ocquier",
+      "Pailhe",
+      "Terwagne"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4570,
+    "localities": [
+      "Marchin",
+      "Vyle-Et-Tharoul"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4577,
+    "localities": [
+      "Modave",
+      "Outrelouxhe",
+      "Strée-Lez-Huy",
+      "Vierset-Barse"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4590,
+    "localities": [
+      "Ellemelle",
+      "Ouffet",
+      "Warzée"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4600,
+    "localities": [
+      "Lanaye",
+      "Lixhe",
+      "Richelle",
+      "Visé"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4601,
+    "localities": [
+      "Argenteau"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4602,
+    "localities": [
+      "Cheratte"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4606,
+    "localities": [
+      "Saint-André"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4607,
+    "localities": [
+      "Berneau",
+      "Bombaye",
+      "Dalhem",
+      "Feneur",
+      "Mortroux"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4608,
+    "localities": [
+      "Neufchâteau",
+      "Warsage"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4610,
+    "localities": [
+      "Bellaire",
+      "Beyne-Heusay",
+      "Queue-Du-Bois"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4620,
+    "localities": [
+      "Fléron"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4621,
+    "localities": [
+      "Retinne"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4623,
+    "localities": [
+      "Magnée"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4624,
+    "localities": [
+      "Romsée"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4630,
+    "localities": [
+      "Ayeneux",
+      "Micheroux",
+      "Soumagne",
+      "Tignée"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4631,
+    "localities": [
+      "Evegnée"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4632,
+    "localities": [
+      "Cérexhe-Heuseux"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4633,
+    "localities": [
+      "Melen"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4650,
+    "localities": [
+      "Chaineux",
+      "Grand-Rechain",
+      "Herve",
+      "Julémont"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4651,
+    "localities": [
+      "Battice"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4652,
+    "localities": [
+      "Xhendelesse"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4653,
+    "localities": [
+      "Bolland"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4654,
+    "localities": [
+      "Charneux"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4670,
+    "localities": [
+      "Blégny",
+      "Mortier",
+      "Trembleur"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4671,
+    "localities": [
+      "Barchon",
+      "Housse",
+      "Saive"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4672,
+    "localities": [
+      "Saint-Remy"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4680,
+    "localities": [
+      "Hermée",
+      "Oupeye"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4681,
+    "localities": [
+      "Hermalle-Sous-Argenteau"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4682,
+    "localities": [
+      "Heure-Le-Romain",
+      "Houtain-Saint-Siméon"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4683,
+    "localities": [
+      "Vivegnis"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4684,
+    "localities": [
+      "Haccourt"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4690,
+    "localities": [
+      "Bassenge",
+      "Boirs",
+      "Eben-Emael",
+      "Glons",
+      "Roclenge-Sur-Geer",
+      "Wonck"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4700,
+    "localities": [
+      "Eupen"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4701,
+    "localities": [
+      "Kettenis"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4710,
+    "localities": [
+      "Lontzen"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4711,
+    "localities": [
+      "Walhorn"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4720,
+    "localities": [
+      "La Calamine"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4721,
+    "localities": [
+      "Neu-Moresnet"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4728,
+    "localities": [
+      "Hergenrath"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4730,
+    "localities": [
+      "Hauset",
+      "Raeren"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4731,
+    "localities": [
+      "Eynatten"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4750,
+    "localities": [
+      "Butgenbach",
+      "Elsenborn"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4760,
+    "localities": [
+      "Bullange",
+      "Manderfeld"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4761,
+    "localities": [
+      "Rocherath"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4770,
+    "localities": [
+      "Amblève",
+      "Meyerode"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4771,
+    "localities": [
+      "Heppenbach"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4780,
+    "localities": [
+      "Recht",
+      "Saint-Vith"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4782,
+    "localities": [
+      "Schoenberg"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4783,
+    "localities": [
+      "Lommersweiler"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4784,
+    "localities": [
+      "Crombach"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4790,
+    "localities": [
+      "Burg-Reuland",
+      "Reuland"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4791,
+    "localities": [
+      "Thommen"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4800,
+    "localities": [
+      "Ensival",
+      "Lambermont",
+      "Petit-Rechain",
+      "Polleur",
+      "Verviers"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4801,
+    "localities": [
+      "Stembert"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4802,
+    "localities": [
+      "Heusy"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4820,
+    "localities": [
+      "Dison"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4821,
+    "localities": [
+      "Andrimont"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4830,
+    "localities": [
+      "Limbourg"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4831,
+    "localities": [
+      "Bilstain"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4834,
+    "localities": [
+      "Goé"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4837,
+    "localities": [
+      "Baelen",
+      "Membach"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4840,
+    "localities": [
+      "Welkenraedt"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4841,
+    "localities": [
+      "Henri-Chapelle"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4845,
+    "localities": [
+      "Jalhay",
+      "Sart-Lez-Spa"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4850,
+    "localities": [
+      "Montzen",
+      "Moresnet",
+      "Plombières"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4851,
+    "localities": [
+      "Gemmenich",
+      "Sippenaeken"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4852,
+    "localities": [
+      "Hombourg"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4860,
+    "localities": [
+      "Cornesse",
+      "Pepinster",
+      "Wegnez"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4861,
+    "localities": [
+      "Soiron"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4870,
+    "localities": [
+      "Forêt",
+      "Fraipont",
+      "Nessonvaux",
+      "Trooz"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4877,
+    "localities": [
+      "Olne"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4880,
+    "localities": [
+      "Aubel"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4890,
+    "localities": [
+      "Clermont",
+      "Thimister",
+      "Thimister-Clermont"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4900,
+    "localities": [
+      "Spa"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4910,
+    "localities": [
+      "La Reid",
+      "Polleur",
+      "Theux"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4920,
+    "localities": [
+      "Aywaille",
+      "Ernonheid",
+      "Harzé",
+      "Louveigné",
+      "Sougné-Remouchamps"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4950,
+    "localities": [
+      "Faymonville",
+      "Robertville",
+      "Sourbrodt",
+      "Waimes"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4960,
+    "localities": [
+      "Bellevaux-Ligneuville",
+      "Bevercé",
+      "Malmedy"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4970,
+    "localities": [
+      "Francorchamps",
+      "Stavelot"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4980,
+    "localities": [
+      "Fosse",
+      "Trois-Ponts",
+      "Wanne"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4983,
+    "localities": [
+      "Basse-Bodeux"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4987,
+    "localities": [
+      "Chevron",
+      "La Gleize",
+      "Lorcé",
+      "Rahier",
+      "Stoumont"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 4990,
+    "localities": [
+      "Arbrefontaine",
+      "Bra",
+      "Lierneux"
+    ],
+    "group": "WLG",
+    "groupName": "Liège"
+  },
+  {
+    "code": 5000,
+    "localities": [
+      "Beez",
+      "Namur"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5001,
+    "localities": [
+      "Belgrade"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5002,
+    "localities": [
+      "Saint-Servais"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5003,
+    "localities": [
+      "Saint-Marc"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5004,
+    "localities": [
+      "Bouge"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5020,
+    "localities": [
+      "Champion",
+      "Daussoulx",
+      "Flawinne",
+      "Malonne",
+      "Suarlée",
+      "Temploux",
+      "Vedrin"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5021,
+    "localities": [
+      "Boninne"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5022,
+    "localities": [
+      "Cognelée"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5024,
+    "localities": [
+      "Gelbressée",
+      "Marche-Les-Dames"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5030,
+    "localities": [
+      "Beuzet",
+      "Ernage",
+      "Gembloux",
+      "Grand-Manil",
+      "Lonzée",
+      "Sauvenière"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5031,
+    "localities": [
+      "Grand-Leez"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5032,
+    "localities": [
+      "Bossière",
+      "Bothey",
+      "Corroy-Le-Château",
+      "Isnes",
+      "Mazy"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5060,
+    "localities": [
+      "Arsimont",
+      "Auvelais",
+      "Falisolle",
+      "Keumiée",
+      "Moignelée",
+      "Sambreville",
+      "Tamines",
+      "Velaine-Sur-Sambre"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5070,
+    "localities": [
+      "Aisemont",
+      "Fosses-La-Ville",
+      "Le Roux",
+      "Sart-Eustache",
+      "Sart-Saint-Laurent",
+      "Vitrival"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5080,
+    "localities": [
+      "Emines",
+      "La Bruyère",
+      "Rhisnes",
+      "Villers-Lez-Heest",
+      "Warisoulx"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5081,
+    "localities": [
+      "Bovesse",
+      "Meux",
+      "Saint-Denis-Bovesse"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5100,
+    "localities": [
+      "Dave",
+      "Jambes",
+      "Naninne",
+      "Wépion",
+      "Wierde"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5101,
+    "localities": [
+      "Erpent",
+      "Lives-Sur-Meuse",
+      "Loyers"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5140,
+    "localities": [
+      "Boignée",
+      "Ligny",
+      "Sombreffe",
+      "Tongrinne"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5150,
+    "localities": [
+      "Floreffe",
+      "Floriffoux",
+      "Franière",
+      "Soye"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5170,
+    "localities": [
+      "Arbre",
+      "Bois-De-Villers",
+      "Lesve",
+      "Lustin",
+      "Profondeville",
+      "Rivière"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5190,
+    "localities": [
+      "Balâtre",
+      "Ham-Sur-Sambre",
+      "Jemeppe-Sur-Sambre",
+      "Mornimont",
+      "Moustier-Sur-Sambre",
+      "Onoz",
+      "Saint-Martin",
+      "Spy"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5300,
+    "localities": [
+      "Andenne",
+      "Bonneville",
+      "Coutisse",
+      "Landenne",
+      "Maizeret",
+      "Namêche",
+      "Sclayn",
+      "Seilles",
+      "Thon",
+      "Vezin"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5310,
+    "localities": [
+      "Aische-En-Refail",
+      "Bolinne",
+      "Boneffe",
+      "Branchon",
+      "Dhuy",
+      "Eghezée",
+      "Hanret",
+      "Leuze",
+      "Liernu",
+      "Longchamps",
+      "Mehaigne",
+      "Noville-Sur-Mehaigne",
+      "Saint-Germain",
+      "Taviers",
+      "Upigny",
+      "Waret-La-Chaussée"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5330,
+    "localities": [
+      "Assesse",
+      "Maillen",
+      "Sart-Bernard"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5332,
+    "localities": [
+      "Crupet"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5333,
+    "localities": [
+      "Sorinne-La-Longue"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5334,
+    "localities": [
+      "Florée"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5336,
+    "localities": [
+      "Courrière"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5340,
+    "localities": [
+      "Faulx-Les-Tombes",
+      "Gesves",
+      "Haltinne",
+      "Mozet",
+      "Sorée"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5350,
+    "localities": [
+      "Evelette",
+      "Ohey"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5351,
+    "localities": [
+      "Haillot"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5352,
+    "localities": [
+      "Perwez-Haillot"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5353,
+    "localities": [
+      "Goesnes"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5354,
+    "localities": [
+      "Jallet"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5360,
+    "localities": [
+      "Hamois",
+      "Natoye"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5361,
+    "localities": [
+      "Mohiville",
+      "Scy"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5362,
+    "localities": [
+      "Achet"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5363,
+    "localities": [
+      "Emptinne"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5364,
+    "localities": [
+      "Schaltin"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5370,
+    "localities": [
+      "Barvaux-Condroz",
+      "Flostoy",
+      "Havelange",
+      "Jeneffe",
+      "Porcheresse",
+      "Verlée"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5372,
+    "localities": [
+      "Méan"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5374,
+    "localities": [
+      "Maffe"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5376,
+    "localities": [
+      "Miécret"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5377,
+    "localities": [
+      "Baillonville",
+      "Bonsin",
+      "Heure",
+      "Hogne",
+      "Nettinne",
+      "Noiseux",
+      "Sinsin",
+      "Somme-Leuze",
+      "Waillet"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5380,
+    "localities": [
+      "Bierwart",
+      "Cortil-Wodon",
+      "Fernelmont",
+      "Forville",
+      "Franc-Waret",
+      "Hemptinne",
+      "Hingeon",
+      "Marchovelette",
+      "Noville-Les-Bois",
+      "Pontillas",
+      "Tillier"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5500,
+    "localities": [
+      "Anseremme",
+      "Bouvignes-Sur-Meuse",
+      "Dinant",
+      "Dréhance",
+      "Falmagne",
+      "Falmignoul",
+      "Furfooz"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5501,
+    "localities": [
+      "Lisogne"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5502,
+    "localities": [
+      "Thynes"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5503,
+    "localities": [
+      "Sorinnes"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5504,
+    "localities": [
+      "Foy-Notre-Dame"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5520,
+    "localities": [
+      "Anthée",
+      "Onhaye"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5521,
+    "localities": [
+      "Serville"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5522,
+    "localities": [
+      "Falaën"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5523,
+    "localities": [
+      "Sommière",
+      "Weillen"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5524,
+    "localities": [
+      "Gérin"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5530,
+    "localities": [
+      "Dorinne",
+      "Durnal",
+      "Evrehailles",
+      "Godinne",
+      "Houx",
+      "Mont",
+      "Purnode",
+      "Spontin",
+      "Yvoir"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5537,
+    "localities": [
+      "Anhée",
+      "Annevoie-Rouillon",
+      "Bioul",
+      "Denée",
+      "Haut-Le-Wastia",
+      "Sosoye",
+      "Warnant"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5540,
+    "localities": [
+      "Hastière",
+      "Hastière-Lavaux",
+      "Hermeton-Sur-Meuse",
+      "Waulsort"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5541,
+    "localities": [
+      "Hastière-Par-Delà"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5542,
+    "localities": [
+      "Blaimont"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5543,
+    "localities": [
+      "Heer"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5544,
+    "localities": [
+      "Agimont"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5550,
+    "localities": [
+      "Alle",
+      "Bagimont",
+      "Bohan",
+      "Chairière",
+      "Laforêt",
+      "Membre",
+      "Mouzaive",
+      "Nafraiture",
+      "Orchimont",
+      "Pussemange",
+      "Sugny",
+      "Vresse-Sur-Semois"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5555,
+    "localities": [
+      "Baillamont",
+      "Bellefontaine",
+      "Bièvre",
+      "Cornimont",
+      "Graide",
+      "Gros-Fays",
+      "Monceau-En-Ardenne",
+      "Naomé",
+      "Oizy",
+      "Petit-Fays"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5560,
+    "localities": [
+      "Ciergnon",
+      "Finnevaux",
+      "Houyet",
+      "Hulsonniaux",
+      "Mesnil-Eglise",
+      "Mesnil-Saint-Blaise"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5561,
+    "localities": [
+      "Celles"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5562,
+    "localities": [
+      "Custinne"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5563,
+    "localities": [
+      "Hour"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5564,
+    "localities": [
+      "Wanlin"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5570,
+    "localities": [
+      "Baronville",
+      "Beauraing",
+      "Dion",
+      "Felenne",
+      "Feschaux",
+      "Honnay",
+      "Javingue",
+      "Vonêche",
+      "Wancennes",
+      "Winenne"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5571,
+    "localities": [
+      "Wiesme"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5572,
+    "localities": [
+      "Focant"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5573,
+    "localities": [
+      "Martouzin-Neuville"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5574,
+    "localities": [
+      "Pondrôme"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5575,
+    "localities": [
+      "Bourseigne-Neuve",
+      "Bourseigne-Vieille",
+      "Gedinne",
+      "Houdremont",
+      "Louette-Saint-Denis",
+      "Louette-Saint-Pierre",
+      "Malvoisin",
+      "Patignies",
+      "Rienne",
+      "Sart-Custinne",
+      "Vencimont",
+      "Willerzie"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5576,
+    "localities": [
+      "Froidfontaine"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5580,
+    "localities": [
+      "Ave-Et-Auffe",
+      "Buissonville",
+      "Eprave",
+      "Han-Sur-Lesse",
+      "Jemelle",
+      "Lavaux-Sainte-Anne",
+      "Lessive",
+      "Mont-Gauthier",
+      "Rochefort",
+      "Villers-Sur-Lesse",
+      "Wavreille"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5590,
+    "localities": [
+      "Achêne",
+      "Braibant",
+      "Chevetogne",
+      "Ciney",
+      "Conneux",
+      "Haversin",
+      "Leignon",
+      "Pessoux",
+      "Serinchamps",
+      "Sovet"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5600,
+    "localities": [
+      "Fagnolle",
+      "Franchimont",
+      "Jamagne",
+      "Jamiolle",
+      "Merlemont",
+      "Neuville",
+      "Omezée",
+      "Philippeville",
+      "Roly",
+      "Romedenne",
+      "Samart",
+      "Sart-En-Fagne",
+      "Sautour",
+      "Surice",
+      "Villers-En-Fagne",
+      "Villers-Le-Gambon",
+      "Vodecée"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5620,
+    "localities": [
+      "Corenne",
+      "Flavion",
+      "Florennes",
+      "Hemptinne-Lez-Florennes",
+      "Morville",
+      "Rosée",
+      "Saint-Aubin"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5621,
+    "localities": [
+      "Hanzinelle",
+      "Hanzinne",
+      "Morialmé",
+      "Thy-Le-Baudouin"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5630,
+    "localities": [
+      "Cerfontaine",
+      "Daussois",
+      "Senzeilles",
+      "Silenrieux",
+      "Soumoy",
+      "Villers-Deux-Eglises"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5640,
+    "localities": [
+      "Biesme",
+      "Biesmerée",
+      "Graux",
+      "Mettet",
+      "Oret",
+      "Saint-Gérard"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5641,
+    "localities": [
+      "Furnaux"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5644,
+    "localities": [
+      "Ermeton-Sur-Biert"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5646,
+    "localities": [
+      "Stave"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5650,
+    "localities": [
+      "Castillon",
+      "Chastrès",
+      "Clermont",
+      "Fontenelle",
+      "Fraire",
+      "Pry",
+      "Vogenée",
+      "Walcourt",
+      "Yves-Gomezée"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5651,
+    "localities": [
+      "Berzée",
+      "Gourdinne",
+      "Laneffe",
+      "Rognée",
+      "Somzée",
+      "Tarcienne",
+      "Thy-Le-Château"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5660,
+    "localities": [
+      "Aublain",
+      "Boussu-En-Fagne",
+      "Brûly",
+      "Brûly-De-Pesche",
+      "Couvin",
+      "Cul-Des-Sarts",
+      "Dailly",
+      "Frasnes",
+      "Gonrieux",
+      "Mariembourg",
+      "Pesche",
+      "Pétigny",
+      "Petite-Chapelle",
+      "Presgaux"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5670,
+    "localities": [
+      "Dourbes",
+      "Le Mesnil",
+      "Mazée",
+      "Nismes",
+      "Oignies-En-Thiérache",
+      "Olloy-Sur-Viroin",
+      "Treignes",
+      "Vierves-Sur-Viroin",
+      "Viroinval"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 5680,
+    "localities": [
+      "Doische",
+      "Gimnée",
+      "Gochenée",
+      "Matagne-La-Grande",
+      "Matagne-La-Petite",
+      "Niverlée",
+      "Romerée",
+      "Soulme",
+      "Vaucelles",
+      "Vodelée"
+    ],
+    "group": "WNA",
+    "groupName": "Namur"
+  },
+  {
+    "code": 6000,
+    "localities": [
+      "Charleroi"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6001,
+    "localities": [
+      "Marcinelle"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6010,
+    "localities": [
+      "Couillet"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6020,
+    "localities": [
+      "Dampremy"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6030,
+    "localities": [
+      "Goutroux",
+      "Marchienne-Au-Pont"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6031,
+    "localities": [
+      "Monceau-Sur-Sambre"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6032,
+    "localities": [
+      "Mont-Sur-Marchienne"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6040,
+    "localities": [
+      "Jumet"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6041,
+    "localities": [
+      "Gosselies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6042,
+    "localities": [
+      "Lodelinsart"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6043,
+    "localities": [
+      "Ransart"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6044,
+    "localities": [
+      "Roux"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6060,
+    "localities": [
+      "Gilly"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6061,
+    "localities": [
+      "Montignies-Sur-Sambre"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6110,
+    "localities": [
+      "Montigny-Le-Tilleul"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6111,
+    "localities": [
+      "Landelies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6120,
+    "localities": [
+      "Cour-Sur-Heure",
+      "Ham-Sur-Heure",
+      "Jamioulx",
+      "Marbaix",
+      "Nalinnes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6140,
+    "localities": [
+      "Fontaine-L'Evêque"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6141,
+    "localities": [
+      "Forchies-La-Marche"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6142,
+    "localities": [
+      "Leernes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6150,
+    "localities": [
+      "Anderlues"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6180,
+    "localities": [
+      "Courcelles"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6181,
+    "localities": [
+      "Gouy-Lez-Piéton"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6182,
+    "localities": [
+      "Souvret"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6183,
+    "localities": [
+      "Trazegnies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6200,
+    "localities": [
+      "Bouffioulx",
+      "Châtelet",
+      "Châtelineau"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6210,
+    "localities": [
+      "Frasnes-Lez-Gosselies",
+      "Les Bons Villers",
+      "Rèves",
+      "Villers-Perwin",
+      "Wayaux"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6211,
+    "localities": [
+      "Mellet"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6220,
+    "localities": [
+      "Fleurus",
+      "Heppignies",
+      "Lambusart",
+      "Wangenies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6221,
+    "localities": [
+      "Saint-Amand"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6222,
+    "localities": [
+      "Brye"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6223,
+    "localities": [
+      "Wagnelée"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6224,
+    "localities": [
+      "Wanfercée-Baulet"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6230,
+    "localities": [
+      "Buzet",
+      "Obaix",
+      "Pont-À-Celles",
+      "Thiméon",
+      "Viesville"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6238,
+    "localities": [
+      "Liberchies",
+      "Luttre"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6240,
+    "localities": [
+      "Farciennes",
+      "Pironchamps"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6250,
+    "localities": [
+      "Aiseau",
+      "Aiseau-Presles",
+      "Pont-De-Loup",
+      "Presles",
+      "Roselies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6280,
+    "localities": [
+      "Acoz",
+      "Gerpinnes",
+      "Gougnies",
+      "Joncret",
+      "Loverval",
+      "Villers-Poterie"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6440,
+    "localities": [
+      "Boussu-Lez-Walcourt",
+      "Fourbechies",
+      "Froidchapelle",
+      "Vergnies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6441,
+    "localities": [
+      "Erpion"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6460,
+    "localities": [
+      "Bailièvre",
+      "Chimay",
+      "Robechies",
+      "Saint-Remy",
+      "Salles",
+      "Villers-La-Tour"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6461,
+    "localities": [
+      "Virelles"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6462,
+    "localities": [
+      "Vaulx-Lez-Chimay"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6463,
+    "localities": [
+      "Lompret"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6464,
+    "localities": [
+      "Baileux",
+      "Bourlers",
+      "Forges",
+      "L'Escaillère",
+      "Rièzes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6470,
+    "localities": [
+      "Grandrieu",
+      "Montbliart",
+      "Rance",
+      "Sautin",
+      "Sivry",
+      "Sivry-Rance"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6500,
+    "localities": [
+      "Barbençon",
+      "Beaumont",
+      "Leugnies",
+      "Leval-Chaudeville",
+      "Renlies",
+      "Solre-Saint-Géry",
+      "Thirimont"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6511,
+    "localities": [
+      "Strée"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6530,
+    "localities": [
+      "Leers-Et-Fosteau",
+      "Thuin"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6531,
+    "localities": [
+      "Biesme-Sous-Thuin"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6532,
+    "localities": [
+      "Ragnies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6533,
+    "localities": [
+      "Biercée"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6534,
+    "localities": [
+      "Gozée"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6536,
+    "localities": [
+      "Donstiennes",
+      "Thuillies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6540,
+    "localities": [
+      "Lobbes",
+      "Mont-Sainte-Geneviève"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6542,
+    "localities": [
+      "Sars-La-Buissière"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6543,
+    "localities": [
+      "Bienne-Lez-Happart"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6560,
+    "localities": [
+      "Bersillies-L'Abbaye",
+      "Erquelinnes",
+      "Grand-Reng",
+      "Hantes-Wihéries",
+      "Montignies-Saint-Christophe",
+      "Solre-Sur-Sambre"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6567,
+    "localities": [
+      "Fontaine-Valmont",
+      "Labuissière",
+      "Merbes-Le-Château",
+      "Merbes-Sainte-Marie"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6590,
+    "localities": [
+      "Momignies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6591,
+    "localities": [
+      "Macon"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6592,
+    "localities": [
+      "Monceau-Imbrechies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6593,
+    "localities": [
+      "Macquenoise"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6594,
+    "localities": [
+      "Beauwelz"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6596,
+    "localities": [
+      "Forge-Philippe",
+      "Seloignes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 6600,
+    "localities": [
+      "Bastogne",
+      "Longvilly",
+      "Noville",
+      "Villers-La-Bonne-Eau",
+      "Wardin"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6630,
+    "localities": [
+      "Martelange"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6637,
+    "localities": [
+      "Fauvillers",
+      "Hollange",
+      "Tintange"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6640,
+    "localities": [
+      "Hompré",
+      "Morhet",
+      "Nives",
+      "Sibret",
+      "Vaux-Lez-Rosières",
+      "Vaux-Sur-Sûre"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6642,
+    "localities": [
+      "Juseret"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6660,
+    "localities": [
+      "Houffalize",
+      "Nadrin"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6661,
+    "localities": [
+      "Mont",
+      "Tailles"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6662,
+    "localities": [
+      "Tavigny"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6663,
+    "localities": [
+      "Mabompré"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6666,
+    "localities": [
+      "Wibrin"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6670,
+    "localities": [
+      "Gouvy",
+      "Limerlé"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6671,
+    "localities": [
+      "Bovigny"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6672,
+    "localities": [
+      "Beho"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6673,
+    "localities": [
+      "Cherain"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6674,
+    "localities": [
+      "Montleban"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6680,
+    "localities": [
+      "Amberloup",
+      "Sainte-Ode",
+      "Tillet"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6681,
+    "localities": [
+      "Lavacherie"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6686,
+    "localities": [
+      "Flamierge"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6687,
+    "localities": [
+      "Bertogne"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6688,
+    "localities": [
+      "Longchamps"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6690,
+    "localities": [
+      "Bihain",
+      "Vielsalm"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6692,
+    "localities": [
+      "Petit-Thier"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6698,
+    "localities": [
+      "Grand-Halleux"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6700,
+    "localities": [
+      "Arlon",
+      "Bonnert",
+      "Heinsch",
+      "Toernich"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6704,
+    "localities": [
+      "Guirsch"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6706,
+    "localities": [
+      "Autelbas"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6717,
+    "localities": [
+      "Attert",
+      "Nobressart",
+      "Nothomb",
+      "Thiaumont",
+      "Tontelange"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6720,
+    "localities": [
+      "Habay",
+      "Habay-La-Neuve",
+      "Hachy"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6721,
+    "localities": [
+      "Anlier"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6723,
+    "localities": [
+      "Habay-La-Vieille"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6724,
+    "localities": [
+      "Houdemont",
+      "Rulles"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6730,
+    "localities": [
+      "Bellefontaine",
+      "Rossignol",
+      "Saint-Vincent",
+      "Tintigny"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6740,
+    "localities": [
+      "Etalle",
+      "Sainte-Marie-Sur-Semois",
+      "Villers-Sur-Semois"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6741,
+    "localities": [
+      "Vance"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6742,
+    "localities": [
+      "Chantemelle"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6743,
+    "localities": [
+      "Buzenol"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6747,
+    "localities": [
+      "Châtillon",
+      "Meix-Le-Tige",
+      "Saint-Léger"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6750,
+    "localities": [
+      "Musson",
+      "Mussy-La-Ville",
+      "Signeulx"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6760,
+    "localities": [
+      "Bleid",
+      "Ethe",
+      "Ruette",
+      "Virton"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6761,
+    "localities": [
+      "Latour"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6762,
+    "localities": [
+      "Saint-Mard"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6767,
+    "localities": [
+      "Dampicourt",
+      "Harnoncourt",
+      "Lamorteau",
+      "Rouvroy",
+      "Torgny"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6769,
+    "localities": [
+      "Gérouville",
+      "Meix-Devant-Virton",
+      "Robelmont",
+      "Sommethonne",
+      "Villers-La-Loue"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6780,
+    "localities": [
+      "Hondelange",
+      "Messancy",
+      "Wolkrange"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6781,
+    "localities": [
+      "Sélange"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6782,
+    "localities": [
+      "Habergy"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6790,
+    "localities": [
+      "Aubange"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6791,
+    "localities": [
+      "Athus"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6792,
+    "localities": [
+      "Halanzy",
+      "Rachecourt"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6800,
+    "localities": [
+      "Bras",
+      "Freux",
+      "Libramont-Chevigny",
+      "Moircy",
+      "Recogne",
+      "Remagne",
+      "Saint-Pierre",
+      "Sainte-Marie-Chevigny"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6810,
+    "localities": [
+      "Chiny",
+      "Izel",
+      "Jamoigne"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6811,
+    "localities": [
+      "Les Bulles"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6812,
+    "localities": [
+      "Suxy"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6813,
+    "localities": [
+      "Termes"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6820,
+    "localities": [
+      "Florenville",
+      "Fontenoille",
+      "Muno",
+      "Sainte-Cécile"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6821,
+    "localities": [
+      "Lacuisine"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6823,
+    "localities": [
+      "Villers-Devant-Orval"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6824,
+    "localities": [
+      "Chassepierre"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6830,
+    "localities": [
+      "Bouillon",
+      "Les Hayons",
+      "Poupehan",
+      "Rochehaut"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6831,
+    "localities": [
+      "Noirfontaine"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6832,
+    "localities": [
+      "Sensenruth"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6833,
+    "localities": [
+      "Ucimont",
+      "Vivy"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6834,
+    "localities": [
+      "Bellevaux"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6836,
+    "localities": [
+      "Dohan"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6838,
+    "localities": [
+      "Corbion"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6840,
+    "localities": [
+      "Grandvoir",
+      "Grapfontaine",
+      "Hamipré",
+      "Longlier",
+      "Neufchâteau",
+      "Tournay"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6850,
+    "localities": [
+      "Carlsbourg",
+      "Offagne",
+      "Paliseul"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6851,
+    "localities": [
+      "Nollevaux"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6852,
+    "localities": [
+      "Maissin",
+      "Opont"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6853,
+    "localities": [
+      "Framont"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6856,
+    "localities": [
+      "Fays-Les-Veneurs"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6860,
+    "localities": [
+      "Assenois",
+      "Ebly",
+      "Léglise",
+      "Mellier",
+      "Witry"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6870,
+    "localities": [
+      "Arville",
+      "Awenne",
+      "Hatrival",
+      "Mirwart",
+      "Saint-Hubert",
+      "Vesqueville"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6880,
+    "localities": [
+      "Auby-Sur-Semois",
+      "Bertrix",
+      "Cugnon",
+      "Jehonville",
+      "Orgeo"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6887,
+    "localities": [
+      "Herbeumont",
+      "Saint-Médard",
+      "Straimont"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6890,
+    "localities": [
+      "Anloy",
+      "Libin",
+      "Ochamps",
+      "Redu",
+      "Smuid",
+      "Transinne",
+      "Villance"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6900,
+    "localities": [
+      "Aye",
+      "Hargimont",
+      "Humain",
+      "Marche-En-Famenne",
+      "On",
+      "Roy",
+      "Waha"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6920,
+    "localities": [
+      "Sohier",
+      "Wellin"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6921,
+    "localities": [
+      "Chanly"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6922,
+    "localities": [
+      "Halma"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6924,
+    "localities": [
+      "Lomprez"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6927,
+    "localities": [
+      "Bure",
+      "Grupont",
+      "Resteigne",
+      "Tellin"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6929,
+    "localities": [
+      "Daverdisse",
+      "Gembes",
+      "Haut-Fays",
+      "Porcheresse"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6940,
+    "localities": [
+      "Barvaux-Sur-Ourthe",
+      "Durbuy",
+      "Grandhan",
+      "Septon",
+      "Wéris"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6941,
+    "localities": [
+      "Bende",
+      "Bomal-Sur-Ourthe",
+      "Borlon",
+      "Heyd",
+      "Izier",
+      "Tohogne",
+      "Villers-Sainte-Gertrude"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6950,
+    "localities": [
+      "Harsin",
+      "Nassogne"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6951,
+    "localities": [
+      "Bande"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6952,
+    "localities": [
+      "Grune"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6953,
+    "localities": [
+      "Ambly",
+      "Forrières",
+      "Lesterny",
+      "Masbourg"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6960,
+    "localities": [
+      "Dochamps",
+      "Grandménil",
+      "Harre",
+      "Malempré",
+      "Manhay",
+      "Odeigne",
+      "Vaux-Chavanne"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6970,
+    "localities": [
+      "Tenneville"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6971,
+    "localities": [
+      "Champlon"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6972,
+    "localities": [
+      "Erneuville"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6980,
+    "localities": [
+      "Beausaint",
+      "La Roche-En-Ardenne"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6982,
+    "localities": [
+      "Samrée"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6983,
+    "localities": [
+      "Ortho"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6984,
+    "localities": [
+      "Hives"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6986,
+    "localities": [
+      "Halleux"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6987,
+    "localities": [
+      "Beffe",
+      "Hodister",
+      "Marcourt",
+      "Rendeux"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6990,
+    "localities": [
+      "Fronville",
+      "Hampteau",
+      "Hotton",
+      "Marenne"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 6997,
+    "localities": [
+      "Amonines",
+      "Erezée",
+      "Mormont",
+      "Soy"
+    ],
+    "group": "WLX",
+    "groupName": "Luxembourg"
+  },
+  {
+    "code": 7000,
+    "localities": [
+      "Mons"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7011,
+    "localities": [
+      "Ghlin"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7012,
+    "localities": [
+      "Flénu",
+      "Jemappes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7020,
+    "localities": [
+      "Maisières",
+      "Nimy"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7021,
+    "localities": [
+      "Havré"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7022,
+    "localities": [
+      "Harmignies",
+      "Harveng",
+      "Hyon",
+      "Mesvin",
+      "Nouvelles"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7024,
+    "localities": [
+      "Ciply"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7030,
+    "localities": [
+      "Saint-Symphorien"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7031,
+    "localities": [
+      "Villers-Saint-Ghislain"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7032,
+    "localities": [
+      "Spiennes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7033,
+    "localities": [
+      "Cuesmes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7034,
+    "localities": [
+      "Obourg",
+      "Saint-Denis"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7040,
+    "localities": [
+      "Asquillies",
+      "Aulnois",
+      "Blaregnies",
+      "Bougnies",
+      "Genly",
+      "Goegnies-Chaussée",
+      "Quévy",
+      "Quévy-Le-Grand",
+      "Quévy-Le-Petit"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7041,
+    "localities": [
+      "Givry",
+      "Havay"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7050,
+    "localities": [
+      "Erbaut",
+      "Erbisoeul",
+      "Herchies",
+      "Jurbise",
+      "Masnuy-Saint-Jean",
+      "Masnuy-Saint-Pierre"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7060,
+    "localities": [
+      "Horrues",
+      "Soignies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7061,
+    "localities": [
+      "Casteau",
+      "Thieusies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7062,
+    "localities": [
+      "Naast"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7063,
+    "localities": [
+      "Chaussée-Notre-Dame-Louvignies",
+      "Neufvilles"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7070,
+    "localities": [
+      "Gottignies",
+      "Le Roeulx",
+      "Mignault",
+      "Thieu",
+      "Ville-Sur-Haine"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7080,
+    "localities": [
+      "Eugies",
+      "Frameries",
+      "La Bouverie",
+      "Noirchain",
+      "Sars-La-Bruyère"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7090,
+    "localities": [
+      "Braine-Le-Comte",
+      "Hennuyères",
+      "Henripont",
+      "Petit-Roeulx-Lez-Braine",
+      "Ronquières",
+      "Steenkerque"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7100,
+    "localities": [
+      "Haine-Saint-Paul",
+      "Haine-Saint-Pierre",
+      "La Louvière",
+      "Saint-Vaast",
+      "Trivières"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7110,
+    "localities": [
+      "Boussoit",
+      "Houdeng-Aimeries",
+      "Houdeng-Goegnies",
+      "Maurage",
+      "Strépy-Bracquegnies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7120,
+    "localities": [
+      "Croix-Lez-Rouveroy",
+      "Estinnes",
+      "Estinnes-Au-Mont",
+      "Estinnes-Au-Val",
+      "Fauroeulx",
+      "Haulchin",
+      "Peissant",
+      "Rouveroy",
+      "Vellereille-Le-Sec",
+      "Vellereille-Les-Brayeux"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7130,
+    "localities": [
+      "Battignies",
+      "Binche",
+      "Bray"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7131,
+    "localities": [
+      "Waudrez"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7133,
+    "localities": [
+      "Buvrinnes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7134,
+    "localities": [
+      "Epinois",
+      "Leval-Trahegnies",
+      "Péronnes-Lez-Binche",
+      "Ressaix"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7140,
+    "localities": [
+      "Morlanwelz",
+      "Morlanwelz-Mariemont"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7141,
+    "localities": [
+      "Carnières",
+      "Mont-Sainte-Aldegonde"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7160,
+    "localities": [
+      "Chapelle-Lez-Herlaimont",
+      "Godarville",
+      "Piéton"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7170,
+    "localities": [
+      "Bellecourt",
+      "Bois-D'Haine",
+      "Fayt-Lez-Manage",
+      "La Hestre",
+      "Manage"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7180,
+    "localities": [
+      "Seneffe"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7181,
+    "localities": [
+      "Arquennes",
+      "Familleureux",
+      "Feluy",
+      "Petit-Roeulx-Lez-Nivelles"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7190,
+    "localities": [
+      "Ecaussinnes",
+      "Ecaussinnes-D'Enghien",
+      "Marche-Lez-Ecaussinnes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7191,
+    "localities": [
+      "Ecaussinnes-Lalaing"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7300,
+    "localities": [
+      "Boussu"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7301,
+    "localities": [
+      "Hornu"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7320,
+    "localities": [
+      "Bernissart"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7321,
+    "localities": [
+      "Blaton",
+      "Harchies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7322,
+    "localities": [
+      "Pommeroeul",
+      "Ville-Pommeroeul"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7330,
+    "localities": [
+      "Saint-Ghislain"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7331,
+    "localities": [
+      "Baudour"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7332,
+    "localities": [
+      "Neufmaison",
+      "Sirault"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7333,
+    "localities": [
+      "Tertre"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7334,
+    "localities": [
+      "Hautrage",
+      "Villerot"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7340,
+    "localities": [
+      "Colfontaine",
+      "Pâturages",
+      "Warquignies",
+      "Wasmes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7350,
+    "localities": [
+      "Hainin",
+      "Hensies",
+      "Montroeul-Sur-Haine",
+      "Thulin"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7370,
+    "localities": [
+      "Blaugies",
+      "Dour",
+      "Elouges",
+      "Wihéries"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7380,
+    "localities": [
+      "Baisieux",
+      "Quiévrain"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7382,
+    "localities": [
+      "Audregnies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7387,
+    "localities": [
+      "Angre",
+      "Angreau",
+      "Athis",
+      "Autreppe",
+      "Erquennes",
+      "Fayt-Le-Franc",
+      "Honnelles",
+      "Marchipont",
+      "Montignies-Sur-Roc",
+      "Onnezies",
+      "Roisin"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7390,
+    "localities": [
+      "Quaregnon",
+      "Wasmuel"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7500,
+    "localities": [
+      "Ere",
+      "Saint-Maur",
+      "Tournai"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7501,
+    "localities": [
+      "Orcq"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7502,
+    "localities": [
+      "Esplechin"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7503,
+    "localities": [
+      "Froyennes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7504,
+    "localities": [
+      "Froidmont"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7506,
+    "localities": [
+      "Willemeau"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7520,
+    "localities": [
+      "Ramegnies-Chin",
+      "Templeuve"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7521,
+    "localities": [
+      "Chercq"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7522,
+    "localities": [
+      "Blandain",
+      "Hertain",
+      "Lamain",
+      "Marquain"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7530,
+    "localities": [
+      "Gaurain-Ramecroix"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7531,
+    "localities": [
+      "Havinnes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7532,
+    "localities": [
+      "Béclers"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7533,
+    "localities": [
+      "Thimougies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7534,
+    "localities": [
+      "Barry",
+      "Maulde"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7536,
+    "localities": [
+      "Vaulx"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7538,
+    "localities": [
+      "Vezon"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7540,
+    "localities": [
+      "Kain",
+      "Melles",
+      "Quartes",
+      "Rumillies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7542,
+    "localities": [
+      "Mont-Saint-Aubert"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7543,
+    "localities": [
+      "Mourcourt"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7548,
+    "localities": [
+      "Warchin"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7600,
+    "localities": [
+      "Péruwelz"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7601,
+    "localities": [
+      "Roucourt"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7602,
+    "localities": [
+      "Bury"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7603,
+    "localities": [
+      "Bon-Secours"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7604,
+    "localities": [
+      "Baugnies",
+      "Braffe",
+      "Brasménil",
+      "Callenelle",
+      "Wasmes-Audemez-Briffoeil"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7608,
+    "localities": [
+      "Wiers"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7610,
+    "localities": [
+      "Rumes"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7611,
+    "localities": [
+      "La Glanerie"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7618,
+    "localities": [
+      "Taintignies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7620,
+    "localities": [
+      "Bléharies",
+      "Brunehaut",
+      "Guignies",
+      "Hollain",
+      "Jollain-Merlin",
+      "Wez-Velvain"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7621,
+    "localities": [
+      "Lesdain"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7622,
+    "localities": [
+      "Laplaigne"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7623,
+    "localities": [
+      "Rongy"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7624,
+    "localities": [
+      "Howardries"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7640,
+    "localities": [
+      "Antoing",
+      "Maubray",
+      "Péronnes-Lez-Antoing"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7641,
+    "localities": [
+      "Bruyelle"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7642,
+    "localities": [
+      "Calonne"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7643,
+    "localities": [
+      "Fontenoy"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7700,
+    "localities": [
+      "Luingne",
+      "Mouscron"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7711,
+    "localities": [
+      "Dottignies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7712,
+    "localities": [
+      "Herseaux"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7730,
+    "localities": [
+      "Bailleul",
+      "Estaimbourg",
+      "Estaimpuis",
+      "Evregnies",
+      "Leers-Nord",
+      "Néchin",
+      "Saint-Léger"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7740,
+    "localities": [
+      "Pecq",
+      "Warcoing"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7742,
+    "localities": [
+      "Hérinnes-Lez-Pecq"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7743,
+    "localities": [
+      "Esquelmes",
+      "Obigies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7750,
+    "localities": [
+      "Amougies",
+      "Anseroeul",
+      "Mont-De-L'Enclus",
+      "Orroir",
+      "Russeignies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7760,
+    "localities": [
+      "Celles",
+      "Escanaffles",
+      "Molenbaix",
+      "Popuelles",
+      "Pottes",
+      "Velaines"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7780,
+    "localities": [
+      "Comines",
+      "Comines-Warneton"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7781,
+    "localities": [
+      "Houthem"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7782,
+    "localities": [
+      "Ploegsteert"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7783,
+    "localities": [
+      "Bizet"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7784,
+    "localities": [
+      "Bas-Warneton",
+      "Warneton"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7800,
+    "localities": [
+      "Ath",
+      "Lanquesaint"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7801,
+    "localities": [
+      "Irchonwelz"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7802,
+    "localities": [
+      "Ormeignies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7803,
+    "localities": [
+      "Bouvignies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7804,
+    "localities": [
+      "Ostiches",
+      "Rebaix"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7810,
+    "localities": [
+      "Maffle"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7811,
+    "localities": [
+      "Arbre"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7812,
+    "localities": [
+      "Houtaing",
+      "Ligne",
+      "Mainvault",
+      "Moulbaix",
+      "Villers-Notre-Dame",
+      "Villers-Saint-Amand"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7822,
+    "localities": [
+      "Ghislenghien",
+      "Isières",
+      "Meslin-L'Evêque"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7823,
+    "localities": [
+      "Gibecq"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7830,
+    "localities": [
+      "Bassilly",
+      "Fouleng",
+      "Gondregnies",
+      "Graty",
+      "Hellebecq",
+      "Hoves",
+      "Silly",
+      "Thoricourt"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7850,
+    "localities": [
+      "Enghien",
+      "Marcq",
+      "Petit-Enghien"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7860,
+    "localities": [
+      "Lessines"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7861,
+    "localities": [
+      "Papignies",
+      "Wannebecq"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7862,
+    "localities": [
+      "Ogy"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7863,
+    "localities": [
+      "Ghoy"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7864,
+    "localities": [
+      "Deux-Acren"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7866,
+    "localities": [
+      "Bois-De-Lessines",
+      "Ollignies"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7870,
+    "localities": [
+      "Bauffe",
+      "Cambron-Saint-Vincent",
+      "Lens",
+      "Lombise",
+      "Montignies-Lez-Lens"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7880,
+    "localities": [
+      "Flobecq"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7890,
+    "localities": [
+      "Ellezelles",
+      "Lahamaide",
+      "Wodecq"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7900,
+    "localities": [
+      "Grandmetz",
+      "Leuze-En-Hainaut"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7901,
+    "localities": [
+      "Thieulain"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7903,
+    "localities": [
+      "Blicquy",
+      "Chapelle-À-Oie",
+      "Chapelle-À-Wattines"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7904,
+    "localities": [
+      "Pipaix",
+      "Tourpes",
+      "Willaupuis"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7906,
+    "localities": [
+      "Gallaix"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7910,
+    "localities": [
+      "Anvaing",
+      "Arc-Ainières",
+      "Arc-Wattripont",
+      "Cordes",
+      "Ellignies-Lez-Frasnes",
+      "Forest",
+      "Frasnes-Lez-Anvaing",
+      "Wattripont"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7911,
+    "localities": [
+      "Buissenal",
+      "Frasnes-Lez-Buissenal",
+      "Hacquegnies",
+      "Herquegies",
+      "Montroeul-Au-Bois",
+      "Moustier",
+      "Oeudeghien"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7912,
+    "localities": [
+      "Dergneau",
+      "Saint-Sauveur"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7940,
+    "localities": [
+      "Brugelette",
+      "Cambron-Casteau"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7941,
+    "localities": [
+      "Attre"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7942,
+    "localities": [
+      "Mévergnies-Lez-Lens"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7943,
+    "localities": [
+      "Gages"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7950,
+    "localities": [
+      "Chièvres",
+      "Grosage",
+      "Huissignies",
+      "Ladeuze",
+      "Tongre-Saint-Martin"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7951,
+    "localities": [
+      "Tongre-Notre-Dame"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7970,
+    "localities": [
+      "Beloeil"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7971,
+    "localities": [
+      "Basècles",
+      "Ramegnies",
+      "Thumaide",
+      "Wadelincourt"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7972,
+    "localities": [
+      "Aubechies",
+      "Ellignies-Sainte-Anne",
+      "Quevaucamps"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 7973,
+    "localities": [
+      "Grandglise",
+      "Stambruges"
+    ],
+    "group": "WHT",
+    "groupName": "Hainaut"
+  },
+  {
+    "code": 8000,
+    "localities": [
+      "Brugge",
+      "Koolkerke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8020,
+    "localities": [
+      "Hertsberge",
+      "Oostkamp",
+      "Ruddervoorde",
+      "Waardamme"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8200,
+    "localities": [
+      "Sint-Andries",
+      "Sint-Michiels"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8210,
+    "localities": [
+      "Loppem",
+      "Veldegem",
+      "Zedelgem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8211,
+    "localities": [
+      "Aartrijke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8300,
+    "localities": [
+      "Knokke",
+      "Knokke-Heist",
+      "Westkapelle"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8301,
+    "localities": [
+      "Heist-Aan-Zee",
+      "Ramskapelle"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8310,
+    "localities": [
+      "Assebroek",
+      "Sint-Kruis"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8340,
+    "localities": [
+      "Damme",
+      "Hoeke",
+      "Lapscheure",
+      "Moerkerke",
+      "Oostkerke",
+      "Sijsele"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8370,
+    "localities": [
+      "Blankenberge",
+      "Uitkerke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8377,
+    "localities": [
+      "Houtave",
+      "Meetkerke",
+      "Nieuwmunster",
+      "Zuienkerke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8380,
+    "localities": [
+      "Dudzele",
+      "Lissewege",
+      "Zeebrugge"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8400,
+    "localities": [
+      "Oostende",
+      "Stene",
+      "Zandvoorde"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8420,
+    "localities": [
+      "De Haan",
+      "Klemskerke",
+      "Wenduine"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8421,
+    "localities": [
+      "Vlissegem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8430,
+    "localities": [
+      "Middelkerke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8431,
+    "localities": [
+      "Wilskerke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8432,
+    "localities": [
+      "Leffinge"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8433,
+    "localities": [
+      "Mannekensvere",
+      "Schore",
+      "Sint-Pieters-Kapelle",
+      "Slijpe"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8434,
+    "localities": [
+      "Lombardsijde",
+      "Westende"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8450,
+    "localities": [
+      "Bredene"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8460,
+    "localities": [
+      "Ettelgem",
+      "Oudenburg",
+      "Roksem",
+      "Westkerke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8470,
+    "localities": [
+      "Gistel",
+      "Moere",
+      "Snaaskerke",
+      "Zevekote"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8480,
+    "localities": [
+      "Bekegem",
+      "Eernegem",
+      "Ichtegem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8490,
+    "localities": [
+      "Jabbeke",
+      "Snellegem",
+      "Stalhille",
+      "Varsenare",
+      "Zerkegem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8500,
+    "localities": [
+      "Kortrijk"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8501,
+    "localities": [
+      "Bissegem",
+      "Heule"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8510,
+    "localities": [
+      "Bellegem",
+      "Kooigem",
+      "Marke",
+      "Rollegem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8511,
+    "localities": [
+      "Aalbeke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8520,
+    "localities": [
+      "Kuurne"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8530,
+    "localities": [
+      "Harelbeke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8531,
+    "localities": [
+      "Bavikhove",
+      "Hulste"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8540,
+    "localities": [
+      "Deerlijk"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8550,
+    "localities": [
+      "Zwevegem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8551,
+    "localities": [
+      "Heestert"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8552,
+    "localities": [
+      "Moen"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8553,
+    "localities": [
+      "Otegem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8554,
+    "localities": [
+      "Sint-Denijs"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8560,
+    "localities": [
+      "Gullegem",
+      "Moorsele",
+      "Wevelgem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8570,
+    "localities": [
+      "Anzegem",
+      "Gijzelbrechtegem",
+      "Ingooigem",
+      "Vichte"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8572,
+    "localities": [
+      "Kaster"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8573,
+    "localities": [
+      "Tiegem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8580,
+    "localities": [
+      "Avelgem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8581,
+    "localities": [
+      "Kerkhove",
+      "Waarmaarde"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8582,
+    "localities": [
+      "Outrijve"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8583,
+    "localities": [
+      "Bossuit"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8587,
+    "localities": [
+      "Espierres",
+      "Espierres-Helchin",
+      "Helchin"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8600,
+    "localities": [
+      "Beerst",
+      "Diksmuide",
+      "Driekapellen",
+      "Esen",
+      "Kaaskerke",
+      "Keiem",
+      "Lampernisse",
+      "Leke",
+      "Nieuwkapelle",
+      "Oostkerke",
+      "Oudekapelle",
+      "Pervijze",
+      "Sint-Jacobs-Kapelle",
+      "Stuivekenskerke",
+      "Vladslo",
+      "Woumen"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8610,
+    "localities": [
+      "Handzame",
+      "Kortemark",
+      "Werken",
+      "Zarren"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8620,
+    "localities": [
+      "Nieuwpoort",
+      "Ramskapelle",
+      "Sint-Joris"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8630,
+    "localities": [
+      "Avekapelle",
+      "Booitshoeke",
+      "Bulskamp",
+      "De Moeren",
+      "Eggewaartskapelle",
+      "Houtem",
+      "Steenkerke",
+      "Veurne",
+      "Vinkem",
+      "Wulveringem",
+      "Zoutenaaie"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8640,
+    "localities": [
+      "Oostvleteren",
+      "Vleteren",
+      "Westvleteren",
+      "Woesten"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8647,
+    "localities": [
+      "Lo",
+      "Lo-Reninge",
+      "Noordschote",
+      "Pollinkhove",
+      "Reninge"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8650,
+    "localities": [
+      "Houthulst",
+      "Klerken",
+      "Merkem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8660,
+    "localities": [
+      "Adinkerke",
+      "De Panne"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8670,
+    "localities": [
+      "Koksijde",
+      "Oostduinkerke",
+      "Wulpen"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8680,
+    "localities": [
+      "Bovekerke",
+      "Koekelare",
+      "Zande"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8690,
+    "localities": [
+      "Alveringem",
+      "Hoogstade",
+      "Oeren",
+      "Sint-Rijkers"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8691,
+    "localities": [
+      "Beveren-Aan-De-Ijzer",
+      "Gijverinkhove",
+      "Izenberge",
+      "Leisele",
+      "Stavele"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8700,
+    "localities": [
+      "Aarsele",
+      "Kanegem",
+      "Schuiferskapelle",
+      "Tielt"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8710,
+    "localities": [
+      "Ooigem",
+      "Sint-Baafs-Vijve",
+      "Wielsbeke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8720,
+    "localities": [
+      "Dentergem",
+      "Markegem",
+      "Oeselgem",
+      "Wakken"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8730,
+    "localities": [
+      "Beernem",
+      "Oedelem",
+      "Sint-Joris"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8740,
+    "localities": [
+      "Egem",
+      "Pittem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8750,
+    "localities": [
+      "Wingene",
+      "Zwevezele"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8755,
+    "localities": [
+      "Ruiselede"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8760,
+    "localities": [
+      "Meulebeke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8770,
+    "localities": [
+      "Ingelmunster"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8780,
+    "localities": [
+      "Oostrozebeke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8790,
+    "localities": [
+      "Waregem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8791,
+    "localities": [
+      "Beveren"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8792,
+    "localities": [
+      "Desselgem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8793,
+    "localities": [
+      "Sint-Eloois-Vijve"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8800,
+    "localities": [
+      "Beveren",
+      "Oekene",
+      "Roeselare",
+      "Rumbeke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8810,
+    "localities": [
+      "Lichtervelde"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8820,
+    "localities": [
+      "Torhout"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8830,
+    "localities": [
+      "Gits",
+      "Hooglede"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8840,
+    "localities": [
+      "Oostnieuwkerke",
+      "Staden",
+      "Westrozebeke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8850,
+    "localities": [
+      "Ardooie"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8851,
+    "localities": [
+      "Koolskamp"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8860,
+    "localities": [
+      "Lendelede"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8870,
+    "localities": [
+      "Emelgem",
+      "Izegem",
+      "Kachtem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8880,
+    "localities": [
+      "Ledegem",
+      "Rollegem-Kapelle",
+      "Sint-Eloois-Winkel"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8890,
+    "localities": [
+      "Dadizele",
+      "Moorslede"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8900,
+    "localities": [
+      "Brielen",
+      "Dikkebus",
+      "Ieper",
+      "Sint-Jan"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8902,
+    "localities": [
+      "Hollebeke",
+      "Voormezele",
+      "Zillebeke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8904,
+    "localities": [
+      "Boezinge",
+      "Zuidschote"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8906,
+    "localities": [
+      "Elverdinge"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8908,
+    "localities": [
+      "Vlamertinge"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8920,
+    "localities": [
+      "Bikschote",
+      "Langemark",
+      "Langemark-Poelkapelle",
+      "Poelkapelle"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8930,
+    "localities": [
+      "Lauwe",
+      "Menen",
+      "Rekkem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8940,
+    "localities": [
+      "Geluwe",
+      "Wervik"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8950,
+    "localities": [
+      "Heuvelland",
+      "Nieuwkerke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8951,
+    "localities": [
+      "Dranouter"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8952,
+    "localities": [
+      "Wulvergem"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8953,
+    "localities": [
+      "Wijtschate"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8954,
+    "localities": [
+      "Westouter"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8956,
+    "localities": [
+      "Kemmel"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8957,
+    "localities": [
+      "Messines"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8958,
+    "localities": [
+      "Loker"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8970,
+    "localities": [
+      "Poperinge",
+      "Reningelst"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8972,
+    "localities": [
+      "Krombeke",
+      "Proven",
+      "Roesbrugge-Haringe"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8978,
+    "localities": [
+      "Watou"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 8980,
+    "localities": [
+      "Beselare",
+      "Geluveld",
+      "Passendale",
+      "Zandvoorde",
+      "Zonnebeke"
+    ],
+    "group": "VWV",
+    "groupName": "West Flanders"
+  },
+  {
+    "code": 9000,
+    "localities": [
+      "Gent"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9030,
+    "localities": [
+      "Mariakerke"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9031,
+    "localities": [
+      "Drongen"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9032,
+    "localities": [
+      "Wondelgem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9040,
+    "localities": [
+      "Sint-Amandsberg"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9041,
+    "localities": [
+      "Oostakker"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9042,
+    "localities": [
+      "Desteldonk",
+      "Mendonk",
+      "Sint-Kruis-Winkel"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9050,
+    "localities": [
+      "Gentbrugge",
+      "Ledeberg"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9051,
+    "localities": [
+      "Afsnee",
+      "Sint-Denijs-Westrem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9052,
+    "localities": [
+      "Zwijnaarde"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9060,
+    "localities": [
+      "Zelzate"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9070,
+    "localities": [
+      "Destelbergen",
+      "Heusden"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9080,
+    "localities": [
+      "Beervelde",
+      "Lochristi",
+      "Zaffelare",
+      "Zeveneken"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9090,
+    "localities": [
+      "Gontrode",
+      "Melle"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9100,
+    "localities": [
+      "Nieuwkerken-Waas",
+      "Sint-Niklaas"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9111,
+    "localities": [
+      "Belsele"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9112,
+    "localities": [
+      "Sinaai-Waas"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9120,
+    "localities": [
+      "Beveren-Waas",
+      "Haasdonk",
+      "Kallo",
+      "Melsele",
+      "Vrasene"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9130,
+    "localities": [
+      "Doel",
+      "Kallo",
+      "Kieldrecht",
+      "Verrebroek"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9140,
+    "localities": [
+      "Elversele",
+      "Steendorp",
+      "Temse",
+      "Tielrode"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9150,
+    "localities": [
+      "Bazel",
+      "Kruibeke",
+      "Rupelmonde"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9160,
+    "localities": [
+      "Daknam",
+      "Eksaarde",
+      "Lokeren"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9170,
+    "localities": [
+      "De Klinge",
+      "Meerdonk",
+      "Sint-Gillis-Waas",
+      "Sint-Pauwels"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9180,
+    "localities": [
+      "Moerbeke-Waas"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9185,
+    "localities": [
+      "Wachtebeke"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9190,
+    "localities": [
+      "Kemzeke",
+      "Stekene"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9200,
+    "localities": [
+      "Appels",
+      "Baasrode",
+      "Dendermonde",
+      "Grembergen",
+      "Mespelare",
+      "Oudegem",
+      "Schoonaarde",
+      "Sint-Gillis-Dendermonde"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9220,
+    "localities": [
+      "Hamme",
+      "Moerzeke"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9230,
+    "localities": [
+      "Massemen",
+      "Westrem",
+      "Wetteren"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9240,
+    "localities": [
+      "Zele"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9250,
+    "localities": [
+      "Waasmunster"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9255,
+    "localities": [
+      "Buggenhout",
+      "Opdorp"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9260,
+    "localities": [
+      "Schellebelle",
+      "Serskamp",
+      "Wichelen"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9270,
+    "localities": [
+      "Kalken",
+      "Laarne"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9280,
+    "localities": [
+      "Denderbelle",
+      "Lebbeke",
+      "Wieze"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9290,
+    "localities": [
+      "Berlare",
+      "Overmere",
+      "Uitbergen"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9300,
+    "localities": [
+      "Aalst"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9308,
+    "localities": [
+      "Gijzegem",
+      "Hofstade"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9310,
+    "localities": [
+      "Baardegem",
+      "Herdersem",
+      "Meldert",
+      "Moorsel"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9320,
+    "localities": [
+      "Erembodegem",
+      "Nieuwerkerken"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9340,
+    "localities": [
+      "Impe",
+      "Lede",
+      "Oordegem",
+      "Smetlede",
+      "Wanzele"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9400,
+    "localities": [
+      "Appelterre-Eichem",
+      "Denderwindeke",
+      "Lieferinge",
+      "Nederhasselt",
+      "Ninove",
+      "Okegem",
+      "Voorde"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9401,
+    "localities": [
+      "Pollare"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9402,
+    "localities": [
+      "Meerbeke"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9403,
+    "localities": [
+      "Neigem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9404,
+    "localities": [
+      "Aspelare"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9406,
+    "localities": [
+      "Outer"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9420,
+    "localities": [
+      "Aaigem",
+      "Bambrugge",
+      "Burst",
+      "Erondegem",
+      "Erpe",
+      "Erpe-Mere",
+      "Mere",
+      "Ottergem",
+      "Vlekkem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9450,
+    "localities": [
+      "Denderhoutem",
+      "Haaltert",
+      "Heldergem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9451,
+    "localities": [
+      "Kerksken"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9470,
+    "localities": [
+      "Denderleeuw"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9472,
+    "localities": [
+      "Iddergem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9473,
+    "localities": [
+      "Welle"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9500,
+    "localities": [
+      "Geraardsbergen",
+      "Goeferdinge",
+      "Moerbeke",
+      "Nederboelare",
+      "Onkerzele",
+      "Ophasselt",
+      "Overboelare",
+      "Viane",
+      "Zarlardinge"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9506,
+    "localities": [
+      "Grimminge",
+      "Idegem",
+      "Nieuwenhove",
+      "Schendelbeke",
+      "Smeerebbe-Vloerzegem",
+      "Waarbeke",
+      "Zandbergen"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9520,
+    "localities": [
+      "Bavegem",
+      "Oombergen",
+      "Sint-Lievens-Houtem",
+      "Vlierzele",
+      "Zonnegem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9521,
+    "localities": [
+      "Letterhoutem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9550,
+    "localities": [
+      "Herzele",
+      "Hillegem",
+      "Sint-Antelinks",
+      "Sint-Lievens-Esse",
+      "Steenhuize-Wijnhuize",
+      "Woubrechtegem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9551,
+    "localities": [
+      "Ressegem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9552,
+    "localities": [
+      "Borsbeke"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9570,
+    "localities": [
+      "Deftinge",
+      "Lierde",
+      "Sint-Maria-Lierde"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9571,
+    "localities": [
+      "Hemelveerdegem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9572,
+    "localities": [
+      "Sint-Martens-Lierde"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9600,
+    "localities": [
+      "Renaix"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9620,
+    "localities": [
+      "Elene",
+      "Erwetegem",
+      "Godveerdegem",
+      "Grotenberge",
+      "Leeuwergem",
+      "Oombergen",
+      "Sint-Goriks-Oudenhove",
+      "Sint-Maria-Oudenhove",
+      "Strijpen",
+      "Velzeke-Ruddershove",
+      "Zottegem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9630,
+    "localities": [
+      "Beerlegem",
+      "Dikkele",
+      "Hundelgem",
+      "Meilegem",
+      "Munkzwalm",
+      "Paulatem",
+      "Roborst",
+      "Rozebeke",
+      "Sint-Blasius-Boekel",
+      "Sint-Denijs-Boekel",
+      "Sint-Maria-Latem",
+      "Zwalm"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9636,
+    "localities": [
+      "Nederzwalm-Hermelgem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9660,
+    "localities": [
+      "Brakel",
+      "Elst",
+      "Everbeek",
+      "Michelbeke",
+      "Nederbrakel",
+      "Opbrakel",
+      "Sint-Maria-Oudenhove",
+      "Zegelsem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9661,
+    "localities": [
+      "Parike"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9667,
+    "localities": [
+      "Horebeke",
+      "Sint-Kornelis-Horebeke",
+      "Sint-Maria-Horebeke"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9680,
+    "localities": [
+      "Etikhove",
+      "Maarke-Kerkem",
+      "Maarkedal"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9681,
+    "localities": [
+      "Nukerke"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9688,
+    "localities": [
+      "Schorisse"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9690,
+    "localities": [
+      "Berchem",
+      "Kluisbergen",
+      "Kwaremont",
+      "Ruien",
+      "Zulzeke"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9700,
+    "localities": [
+      "Bevere",
+      "Edelare",
+      "Eine",
+      "Ename",
+      "Heurne",
+      "Leupegem",
+      "Mater",
+      "Melden",
+      "Mullem",
+      "Nederename",
+      "Ooike",
+      "Oudenaarde",
+      "Volkegem",
+      "Welden"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9750,
+    "localities": [
+      "Huise",
+      "Ouwegem",
+      "Zingem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9770,
+    "localities": [
+      "Kruisem",
+      "Kruishoutem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9771,
+    "localities": [
+      "Nokere"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9772,
+    "localities": [
+      "Wannegem-Lede"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9790,
+    "localities": [
+      "Elsegem",
+      "Moregem",
+      "Ooike",
+      "Petegem-Aan-De-Schelde",
+      "Wortegem",
+      "Wortegem-Petegem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9800,
+    "localities": [
+      "Astene",
+      "Bachte-Maria-Leerne",
+      "Deinze",
+      "Gottem",
+      "Grammene",
+      "Meigem",
+      "Petegem-Aan-De-Leie",
+      "Sint-Martens-Leerne",
+      "Vinkt",
+      "Wontergem",
+      "Zeveren"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9810,
+    "localities": [
+      "Eke",
+      "Nazareth"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9820,
+    "localities": [
+      "Bottelare",
+      "Lemberge",
+      "Melsen",
+      "Merelbeke",
+      "Munte",
+      "Schelderode"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9830,
+    "localities": [
+      "Sint-Martens-Latem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9831,
+    "localities": [
+      "Deurle"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9840,
+    "localities": [
+      "De Pinte",
+      "Zevergem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9850,
+    "localities": [
+      "Hansbeke",
+      "Landegem",
+      "Merendree",
+      "Nevele",
+      "Poesele",
+      "Vosselare"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9860,
+    "localities": [
+      "Balegem",
+      "Gijzenzele",
+      "Landskouter",
+      "Moortsele",
+      "Oosterzele",
+      "Scheldewindeke"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9870,
+    "localities": [
+      "Machelen",
+      "Olsene",
+      "Zulte"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9880,
+    "localities": [
+      "Aalter",
+      "Lotenhulle",
+      "Poeke"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9881,
+    "localities": [
+      "Bellem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9890,
+    "localities": [
+      "Asper",
+      "Baaigem",
+      "Dikkelvenne",
+      "Gavere",
+      "Semmerzake",
+      "Vurste"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9900,
+    "localities": [
+      "Eeklo"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9910,
+    "localities": [
+      "Knesselare",
+      "Ursel"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9920,
+    "localities": [
+      "Lovendegem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9921,
+    "localities": [
+      "Vinderhoute"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9930,
+    "localities": [
+      "Lievegem",
+      "Zomergem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9931,
+    "localities": [
+      "Oostwinkel"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9932,
+    "localities": [
+      "Ronsele"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9940,
+    "localities": [
+      "Ertvelde",
+      "Evergem",
+      "Kluizen",
+      "Sleidinge"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9950,
+    "localities": [
+      "Waarschoot"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9960,
+    "localities": [
+      "Assenede"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9961,
+    "localities": [
+      "Boekhoute"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9968,
+    "localities": [
+      "Bassevelde",
+      "Oosteeklo"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9970,
+    "localities": [
+      "Kaprijke"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9971,
+    "localities": [
+      "Lembeke"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9980,
+    "localities": [
+      "Sint-Laureins"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9981,
+    "localities": [
+      "Sint-Margriete"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9982,
+    "localities": [
+      "Sint-Jan-In-Eremo"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9988,
+    "localities": [
+      "Waterland-Oudeman",
+      "Watervliet"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9990,
+    "localities": [
+      "Maldegem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9991,
+    "localities": [
+      "Adegem"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  },
+  {
+    "code": 9992,
+    "localities": [
+      "Middelburg"
+    ],
+    "group": "VOV",
+    "groupName": "East Flanders"
+  }
+]

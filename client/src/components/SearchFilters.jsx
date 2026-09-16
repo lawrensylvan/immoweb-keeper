@@ -11,6 +11,7 @@ export default function SearchFilters({filters, setFilter, clearFilters}) {
     const {
         priceRange,
         zipCodes,
+        propertyTypes,
         onlyWithGarden,
         minGardenArea,
         immowebCode,
@@ -46,13 +47,21 @@ export default function SearchFilters({filters, setFilter, clearFilters}) {
                 <Space>
                     <FileSearchOutlined/>
                     <Input value={freeText || ''} onChange={e => setFilter('freeText', e.target.value)}
-                            placeholder="free search" style={{ width: '210px' }}
+                            placeholder="free search" style={{ width: '320px' }}
                             allowClear />
                 </Space>
 
             </Space>
 
             <Space style={{display: 'flex', flexDirection: 'column' }}>
+
+                {/* PROPERTY TYPE */}
+                <Switch checked={propertyTypes?.[0] !== 'APARTMENT'}
+                        style={{minWidth: '150px'}}
+                        onChange={houses => setFilter('propertyTypes', [houses ? 'HOUSE' : 'APARTMENT'])}
+                        unCheckedChildren={<span><strong>flat</strong> / house</span>}
+                        checkedChildren={<span>flat / <strong>house</strong></span>}
+                />
 
                 {/* GARDEN */}
                 <Popover arrow visible={shouldDisplayGardenArea} content={
