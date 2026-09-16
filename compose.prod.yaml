@@ -4,6 +4,8 @@ x-runtime-environment: &runtime-environment
   MONGODB_URL: mongodb://mongodb:27017
   MONGODB_DATABASE: immoweb_prod
   IMAGE_OUTPUT_PATH: /data/images
+  ROUTINE_LOG_DIR: /data/logs/routine
+  ROUTINE_LOG_RETENTION_DAYS: ${ROUTINE_LOG_RETENTION_DAYS:-90}
 
 services:
   mongodb:
@@ -38,6 +40,11 @@ services:
         target: /data/images
         bind:
           create_host_path: false
+      - type: bind
+        source: ${PROD_LOGS_PATH:?Set PROD_LOGS_PATH in deploy/config.prod.env}
+        target: /data/logs
+        bind:
+          create_host_path: false
     depends_on:
       mongodb:
         condition: service_healthy
@@ -52,13 +59,18 @@ services:
   routine:
     image: immoweb-keeper:local
     profiles: ["tools"]
-    command: ["node", "routine/src/routine.js"]
+    command: ["node", "routine/src/run-with-logging.js"]
     environment:
       <<: *runtime-environment
     volumes:
       - type: bind
         source: ${PROD_IMAGES_PATH:?Set PROD_IMAGES_PATH in deploy/config.prod.env}
         target: /data/images
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${PROD_LOGS_PATH:?Set PROD_LOGS_PATH in deploy/config.prod.env}
+        target: /data/logs
         bind:
           create_host_path: false
     depends_on:

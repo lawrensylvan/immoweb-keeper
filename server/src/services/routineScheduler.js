@@ -110,8 +110,8 @@ async function startRoutine(trigger) {
     })
     activeRun = run
 
-    const routinePath = Path.resolve(__dirname, '../../routine/src/routine.js')
-    const child = spawn(process.execPath, [routinePath], {
+    const routineRunnerPath = Path.resolve(__dirname, '../../routine/src/run-with-logging.js')
+    const child = spawn(process.execPath, [routineRunnerPath], {
         cwd: Path.resolve(__dirname, '../..'),
         env: {
             ...process.env,

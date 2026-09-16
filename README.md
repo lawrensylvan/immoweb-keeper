@@ -98,6 +98,8 @@ cp deploy/config.prod.env.example deploy/config.prod.env
 
 Replace `JWT_SECRET` with a long random value and set `PROD_IMAGES_PATH` to the absolute image directory on your host. `PROD_APP_PORT` defaults to `8080`.
 
+Set `PROD_LOGS_PATH` to an existing writable directory on persistent storage. Every routine execution writes a separate log under its `routine` subdirectory while continuing to stream the same output to Docker. `ROUTINE_LOG_RETENTION_DAYS` defaults to 90; expired routine logs are removed when a new run starts.
+
 After signing in, configure the production postal codes, property types, and schedule from the Routine administration page.
 
 ### Production commands
@@ -114,6 +116,9 @@ npm run prod:deploy
 
 # Run the production downloader once
 npm run prod:routine
+
+# Follow the most recent persistent routine log (Ctrl+C to stop)
+npm run prod:routine:logs
 
 # Inspect the deployment
 npm run prod:status

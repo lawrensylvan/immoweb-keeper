@@ -36,6 +36,7 @@ if(!fs.existsSync(configPath)) {
 }
 
 const imagesPath = config.PROD_IMAGES_PATH
+const logsPath = config.PROD_LOGS_PATH
 
 if(!imagesPath) {
     errors.push('PROD_IMAGES_PATH is missing from deploy/config.prod.env.')
@@ -55,6 +56,24 @@ if(!imagesPath) {
     }
 }
 
+if(!logsPath) {
+    errors.push('PROD_LOGS_PATH is missing from deploy/config.prod.env.')
+} else if(!path.isAbsolute(logsPath)) {
+    errors.push('PROD_LOGS_PATH must be an absolute path.')
+} else if(!fs.existsSync(logsPath)) {
+    errors.push(`Production log directory does not exist: ${logsPath}`)
+} else {
+    try {
+        if(!fs.statSync(logsPath).isDirectory()) {
+            errors.push(`Production log path is not a directory: ${logsPath}`)
+        } else {
+            fs.accessSync(logsPath, fs.constants.R_OK | fs.constants.W_OK)
+        }
+    } catch(error) {
+        errors.push(`Production log directory is not readable and writable: ${error.message}`)
+    }
+}
+
 const dockerInfo = spawnSync('docker', ['info'], {stdio: 'ignore'})
 if(dockerInfo.status !== 0) {
     errors.push('Docker Desktop is not running or is not accessible.')
@@ -68,4 +87,5 @@ if(errors.length > 0) {
 
 console.log('Production preflight passed.')
 console.log(`Images: ${imagesPath}`)
+console.log(`Logs: ${logsPath}`)
 console.log('Application exposure: loopback only')

@@ -38,6 +38,7 @@
     "prod:status": "docker compose --env-file deploy/config.prod.env -f compose.prod.yaml ps",
     "prod:logs": "docker compose --env-file deploy/config.prod.env -f compose.prod.yaml logs -f app mongodb",
     "prod:routine": "npm run prod:check && docker compose --env-file deploy/config.prod.env -f compose.prod.yaml run --rm routine",
+    "prod:routine:logs": "node scripts/tail-routine-log.js",
     "start": "cd server && npm start"
   },
   "devDependencies": {
