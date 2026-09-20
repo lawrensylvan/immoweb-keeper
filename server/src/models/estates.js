@@ -206,6 +206,12 @@ estateSchema.index({immowebCode: 1})
 estateSchema.index({
     'rawMetadata.property.location.postalCode': 1,
     'rawMetadata.property.type': 1,
+    immowebCode: 1,
+    lastModificationDate: -1
+})
+estateSchema.index({
+    'rawMetadata.property.location.postalCode': 1,
+    'rawMetadata.property.type': 1,
     disappearanceDate: 1,
     immowebCode: 1
 })

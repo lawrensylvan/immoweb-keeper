@@ -1,24 +1,26 @@
 import React, {useEffect, useMemo, useState} from 'react'
 import {gql, useMutation, useQuery} from '@apollo/client'
-import {Alert, Button, Card, Form, Layout, Radio, Select, Space, Spin, Switch, Table, Tag, TimePicker, Typography, message} from 'antd'
+import {Alert, Button, Card, Form, Layout, Radio, Select, Space, Spin, Switch, Table, Tag, TimePicker, Tooltip, Typography, message} from 'antd'
 import {PlayCircleOutlined, SaveOutlined} from '@ant-design/icons'
-import SelectLocalities from './SelectLocalities'
+import SelectLocalities, {POSTAL_CODES_QUERY} from './SelectLocalities'
 import moment from 'moment'
 
 const ROUTINE_ADMIN_QUERY = gql`
-    query RoutineAdmin($postalCode: Int!, $propertyType: PropertyType!) {
+    query RoutineAdmin($postalCodes: [Int!]!, $propertyType: PropertyType!, $hasMonitorLocation: Boolean!) {
         routineStatus {
             schedule { enabled cronExpression timezone nextRunAt postalCodes propertyTypes }
             activeRun { id trigger status startedAt finishedAt errorSummary totals { added updated disappeared disappearanceChecked } }
             lastRun { id trigger status startedAt finishedAt errorSummary totals { added updated disappeared disappearanceChecked } }
             lastSuccessfulRun { id trigger status startedAt finishedAt }
         }
-        routineRuns(limit: 10, postalCode: $postalCode, propertyType: $propertyType) {
+        routineRuns(limit: 10, postalCodes: $postalCodes, propertyType: $propertyType) @include(if: $hasMonitorLocation) {
             id trigger status startedAt finishedAt errorSummary
             coverage { postalCode propertyType status added updated disappeared errorSummary }
             totals { added updated disappeared disappearanceChecked }
         }
-        routineHistory(postalCode: $postalCode, propertyType: $propertyType) { date runId }
+        routineHistory(postalCodes: $postalCodes, propertyType: $propertyType) @include(if: $hasMonitorLocation) {
+            date runId postalCodes propertyType added updated disappeared
+        }
     }
 `
 const UPDATE_SCHEDULE = gql`mutation UpdateRoutineSchedule($input: RoutineScheduleInput!) {
@@ -43,17 +45,26 @@ function formatDuration(run) {
 }
 function statusColor(status) { return {success: 'green', failed: 'red', running: 'blue', interrupted: 'orange', partial: 'gold'}[status] || 'default' }
 
-function RunCalendar({history}) {
+function RunCalendar({history, locationLabel}) {
     const years = useMemo(() => [...new Set(history.map(item => Number(item.date.slice(0, 4))))].sort((a, b) => b - a), [history])
-    const days = useMemo(() => new Set(history.map(item => item.date)), [history])
-    if(!years.length) return <Typography.Text type="secondary">No successful coverage recorded for this selection.</Typography.Text>
+    const days = useMemo(() => new Map(history.map(item => [item.date, item])), [history])
+    if(!years.length) return <Typography.Text type="secondary" className="routine-monitor-empty">No successful coverage recorded for this selection.</Typography.Text>
     return <div className="routine-calendars">{years.map(year => {
         const cells = []
         const first = new Date(Date.UTC(year, 0, 1))
         for(let i = 0; i < first.getUTCDay(); i++) cells.push(<span className="run-day empty" key={`empty-${i}`} />)
         for(let current = first; current.getUTCFullYear() === year; current.setUTCDate(current.getUTCDate() + 1)) {
             const key = current.toISOString().slice(0, 10)
-            cells.push(<span className={`run-day level-${days.has(key) ? 4 : 0}`} key={key} title={`${key}: ${days.has(key) ? 'covered' : 'not covered'}`} />)
+            const routine = days.get(key)
+            const day = <span className={`run-day level-${routine ? 4 : 0}`} />
+            cells.push(routine
+                ? <Tooltip key={key} placement="right" title={<div className="routine-day-tooltip">
+                    <strong>{key} · {locationLabel} · {routine.propertyType === 'HOUSE' ? 'Houses' : 'Apartments'}</strong>
+                    <span>New: {routine.added ?? '—'}</span>
+                    <span>Updated: {routine.updated ?? '—'}</span>
+                    <span>Disappeared: {routine.disappeared ?? '—'}</span>
+                </div>}>{day}</Tooltip>
+                : React.cloneElement(day, {key, title: `${key}: not covered`}))
         }
         return <div className="routine-calendar-year" key={year}><Typography.Title level={5}>{year}</Typography.Title>
             <div className="routine-calendar-scroll"><div className="routine-calendar-grid">{cells}</div></div></div>
@@ -61,10 +72,31 @@ function RunCalendar({history}) {
 }
 
 export default function RoutineAdmin() {
-    const [monitorPostalCode, setMonitorPostalCode] = useState(1000)
+    const [monitorLocation, setMonitorLocation] = useState(1000)
     const [monitorPropertyType, setMonitorPropertyType] = useState('HOUSE')
-    const {data, loading, error, refetch} = useQuery(ROUTINE_ADMIN_QUERY, {
-        variables: {postalCode: monitorPostalCode, propertyType: monitorPropertyType}, pollInterval: 10000
+    const {data: postalCodeData} = useQuery(POSTAL_CODES_QUERY)
+    const postalCodeCatalog = useMemo(() => postalCodeData?.postalCodes || [], [postalCodeData])
+    const monitorPostalCodes = useMemo(() => {
+        if(typeof monitorLocation === 'number') return [monitorLocation]
+        if(monitorLocation === 'group:ALL') return postalCodeCatalog.map(item => item.code)
+        if(typeof monitorLocation === 'string' && monitorLocation.startsWith('group:')) {
+            const group = monitorLocation.slice('group:'.length)
+            return postalCodeCatalog.filter(item => item.group === group).map(item => item.code)
+        }
+        return []
+    }, [monitorLocation, postalCodeCatalog])
+    const monitorLocationLabel = useMemo(() => {
+        if(monitorLocation === 'group:ALL') return 'All Belgium'
+        if(typeof monitorLocation === 'string') {
+            const group = monitorLocation.slice('group:'.length)
+            return `All ${postalCodeCatalog.find(item => item.group === group)?.groupName || group}`
+        }
+        const location = postalCodeCatalog.find(item => item.code === monitorLocation)
+        return location ? `${location.code} ${location.localities.join(', ')}` : String(monitorLocation)
+    }, [monitorLocation, postalCodeCatalog])
+    const {data, error, refetch} = useQuery(ROUTINE_ADMIN_QUERY, {
+        variables: {postalCodes: monitorPostalCodes, propertyType: monitorPropertyType, hasMonitorLocation: monitorPostalCodes.length > 0},
+        pollInterval: 10000
     })
     const [updateSchedule, {loading: saving}] = useMutation(UPDATE_SCHEDULE)
     const [triggerRoutine, {loading: triggering}] = useMutation(TRIGGER_ROUTINE)
@@ -87,12 +119,12 @@ export default function RoutineAdmin() {
                 if(match[3] !== '*') setDayOfWeek(Number(match[3]))
             }
             setPostalCodes(schedule.postalCodes); setPropertyTypes(schedule.propertyTypes)
-            if(schedule.postalCodes.length && !schedule.postalCodes.includes(monitorPostalCode)) setMonitorPostalCode(schedule.postalCodes[0])
+            if(schedule.postalCodes.length && typeof monitorLocation === 'number' && !schedule.postalCodes.includes(monitorLocation)) setMonitorLocation(schedule.postalCodes[0])
         }
     }, [schedule]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    if(loading && !data) return <Spin className="routine-loading" />
     if(error) return <Alert type="error" showIcon message="Unable to load routine administration" description={error.message} />
+    if(!data?.routineStatus) return <Spin className="routine-loading" />
     const status = data.routineStatus
     const active = status.activeRun
     const currentStatus = active ? {label: 'RUNNING', color: 'blue'} : {label: status.lastRun?.status === 'failed' ? 'LAST RUN FAILED' : status.lastRun?.status === 'partial' ? 'LAST RUN PARTIAL' : 'IDLE', color: statusColor(status.lastRun?.status || 'success')}
@@ -109,7 +141,18 @@ export default function RoutineAdmin() {
             await refetch()
         } catch(triggerError) { message.error(triggerError.message) }
     }
-    const scopedCoverage = run => run.coverage?.find(item => item.postalCode === monitorPostalCode && item.propertyType === monitorPropertyType)
+    const scopedCoverages = run => run.coverage?.filter(item => monitorPostalCodes.includes(item.postalCode) && item.propertyType === monitorPropertyType) || []
+    const scopedCoverage = run => {
+        const coverage = scopedCoverages(run)
+        if(!monitorPostalCodes.every(postalCode => coverage.some(item => item.postalCode === postalCode))) return null
+        return {
+            status: coverage.every(item => item.status === 'success') ? 'success' : coverage.some(item => item.status === 'success') ? 'partial' : 'failed',
+            added: coverage.reduce((sum, item) => sum + (item.added || 0), 0),
+            updated: coverage.reduce((sum, item) => sum + (item.updated || 0), 0),
+            disappeared: coverage.reduce((sum, item) => sum + (item.disappeared || 0), 0),
+            errorSummary: coverage.map(item => item.errorSummary).filter(Boolean).join('\n')
+        }
+    }
     const columns = [
         {title: 'Started', dataIndex: 'startedAt', render: formatDate},
         {title: 'Trigger', dataIndex: 'trigger', render: value => <span style={{textTransform: 'capitalize'}}>{value}</span>},
@@ -158,13 +201,16 @@ export default function RoutineAdmin() {
         </div>
         <Card title="Coverage monitoring" className="routine-section">
             <Space wrap className="routine-monitor-filters">
-                <SelectLocalities multiple={false} value={monitorPostalCode} onChange={setMonitorPostalCode} />
+                <SelectLocalities multiple={false} allowGroups value={monitorLocation} onChange={setMonitorLocation} />
                 <Select value={monitorPropertyType} onChange={setMonitorPropertyType} style={{width: 160}} options={[{label: 'Houses', value: 'HOUSE'}, {label: 'Apartments', value: 'APARTMENT'}]} />
             </Space>
-            <RunCalendar history={data.routineHistory} />
+            {monitorPostalCodes.length
+                ? <RunCalendar history={data.routineHistory || []} locationLabel={monitorLocationLabel} />
+                : <Typography.Text type="secondary" className="routine-monitor-empty">Select a postal code or area to see coverage.</Typography.Text>}
         </Card>
         <Card title="Recent runs for this coverage" className="routine-section">
-            <Table rowKey="id" columns={columns} dataSource={data.routineRuns} pagination={false}
+            <Table rowKey="id" columns={columns} dataSource={data.routineRuns || []} pagination={false}
+                locale={{emptyText: monitorPostalCodes.length ? 'No recent runs for this coverage.' : 'Select a postal code or area to see recent runs.'}}
                 expandable={{expandedRowRender: run => scopedCoverage(run)?.errorSummary ? <Alert type="error" message={scopedCoverage(run).errorSummary} /> : <Typography.Text type="secondary">No error reported.</Typography.Text>}} />
         </Card>
     </Layout.Content>

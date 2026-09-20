@@ -10,14 +10,15 @@ module.exports = {
         postalCodes: (parent, args, {user}) => findPostalCodes(user),
 
         routineStatus: (parent, args, {user}) => findRoutineStatus(user),
-        routineRuns: (parent, {limit, postalCode, propertyType}, {user}) => findRoutineRuns(user, limit, postalCode, propertyType),
-        routineHistory: (parent, {postalCode, propertyType}, {user}) => findRoutineHistory(user, postalCode, propertyType),
+        routineRuns: (parent, {limit, postalCodes, propertyType}, {user}) => findRoutineRuns(user, limit, postalCodes, propertyType),
+        routineHistory: (parent, {postalCodes, propertyType}, {user}) => findRoutineHistory(user, postalCodes, propertyType),
 
         estateByImmowebCode: (parent, args) => findEstateByImmowebCode(args.immowebCode),
 
-        estatesNear: async (parent, args) => {
-            const {location, distanceMeters, ...filters} = args
-            return findEstatesNear(location, distanceMeters, filters)
+        estatesNear: async (parent, args, context) => {
+            const {bounds, ...filters} = args
+            const user = await getAuthenticatedUser(context.user)
+            return findEstatesNear(bounds, filters, user)
         },
 
         estates: async (parent, args, context, info) => {

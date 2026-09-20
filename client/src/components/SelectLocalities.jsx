@@ -36,7 +36,14 @@ export function describePostalCodes(value = [], catalog = []) {
     return labels.length ? labels.join(', ') : 'No postal codes'
 }
 
-export default function SelectLocalities({value = [], onChange, multiple = true, addOnly = false, style}) {
+export function formatPostalCodeLocation(postalCode, catalog = [], fallbackLocality = '') {
+    const location = catalog.find(item => item.code === Number(postalCode))
+    const locality = location?.localities?.join(', ') || fallbackLocality
+    const postalLabel = [postalCode, locality].filter(Boolean).join(' · ')
+    return location?.groupName ? `${postalLabel} - ${location.groupName}` : postalLabel
+}
+
+export default function SelectLocalities({value = [], onChange, multiple = true, addOnly = false, allowGroups = false, style}) {
     const {loading, error, data} = useQuery(POSTAL_CODES_QUERY)
     const catalog = useMemo(() => data?.postalCodes || [], [data])
     const groups = useMemo(() => [...new Map(catalog.map(item => [item.group, item.groupName])).entries()], [catalog])
@@ -88,7 +95,7 @@ export default function SelectLocalities({value = [], onChange, multiple = true,
                 </Select.Option>
             })}
         </Select.OptGroup>}
-        {multiple && <Select.OptGroup label="Shortcuts">
+        {(multiple || allowGroups) && <Select.OptGroup label="Areas">
             {(addOnly || (!compactValueSet.has('group:ALL') && !selectedGroup('ALL'))) &&
             <Select.Option value="group:ALL" label="All Belgium" searchText="All Belgium" className={addOnly && selectedGroup('ALL') ? 'postal-option-selected' : ''}>
                 <span>All Belgium</span>{addOnly && selectedGroup('ALL') && <CheckOutlined />}

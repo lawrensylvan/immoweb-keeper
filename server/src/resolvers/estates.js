@@ -10,11 +10,41 @@ const count = () => ({ $count: 'totalCount'})
 const limitToValue = (field, treshold, order) => ({ $match: {[field]: {[order ? '$lte' : '$gte']: treshold}} })
 const onlyKeepField = (field) => field ? { $project: {[field]: 1} } : null
 const onlyKeepFields = (fields) => fields && fields.length ? { $project: Object.fromEntries(fields.map(f => [f, 1])) } : null
-const onlyNear = (point, maxMeters) => ({ $geoNear: {near: {type:'Point', coordinates: point }, distanceField: 'distance', maxDistance: maxMeters, spherical: true }})
+const onlyWithinBounds = ([west, south, east, north]) => ({
+    $match: {
+        geolocation: {
+            $geoWithin: {
+                $geometry: {
+                    type: 'Polygon',
+                    coordinates: [[
+                        [west, south],
+                        [east, south],
+                        [east, north],
+                        [west, north],
+                        [west, south]
+                    ]]
+                }
+            }
+        }
+    }
+})
+
+const validBounds = bounds => Array.isArray(bounds)
+    && bounds.length === 4
+    && bounds.every(Number.isFinite)
+    && bounds[0] < bounds[2]
+    && bounds[1] < bounds[3]
+
+const MAX_MAP_POINTS = 2000
+const SEARCH_CACHE_TTL_MS = 30 * 1000
+const SEARCH_CACHE_MAX_ENTRIES = 50
+const searchIdCache = new Map()
 
 const pickMostRecentByImmowebCode = () => ([
-    { $sort: { immowebCode: 1, lastModificationDate: -1 } },
-    { $group: { _id: "$immowebCode", doc: { $first : "$$ROOT"}} },
+    { $group: {
+        _id: '$immowebCode',
+        doc: { $top: {sortBy: {lastModificationDate: -1}, output: '$$ROOT'} }
+    } },
     { $replaceRoot: { newRoot: '$doc'} }
 ])
 const paginatedResult = (offset, limit) => ({ $facet: {
@@ -27,13 +57,29 @@ function applyPipeline(pipeline) {
     console.debug('Performing the following MongoDB aggregation :')
     pipeline.forEach(stage => console.debug('   ' + JSON.stringify(stage, null, 0)))
     console.debug()
-    return EstateModel.aggregate(pipeline.filter(e=>e)).exec().catch(e => {
+    return EstateModel.aggregate(pipeline.filter(e=>e)).allowDiskUse(true).exec().catch(e => {
         if(e.codeName === 'QueryExceededMemoryLimitNoDiskUseAllowed') {
             throw new Error('↑ Too much to load from database ! Please refine your search criterias ↑')
         } else {
             throw e
         }
     })
+}
+
+function searchCacheKey(filtersInput, orderByInput, user) {
+    return JSON.stringify({
+        filtersInput,
+        orderByInput,
+        likedEstates: filtersInput.onlyLiked ? user?.likedEstates : undefined,
+        visitedEstates: filtersInput.onlyVisited ? user?.visitedEstates : undefined
+    })
+}
+
+function cacheSearchIds(key, ids) {
+    searchIdCache.set(key, {ids, expiresAt: Date.now() + SEARCH_CACHE_TTL_MS})
+    while(searchIdCache.size > SEARCH_CACHE_MAX_ENTRIES) {
+        searchIdCache.delete(searchIdCache.keys().next().value)
+    }
 }
 
 // Finds all the localities that exist in the estate collection
@@ -54,15 +100,52 @@ function findEstateByImmowebCode(immowebCode) {
     ])[0]
 }
 
-// Finds all estates near a location (only returns the id and location)
-async function findEstatesNear([longitude, latitude], distanceMeters, filtersInput) {
+// Finds the most recent estates in the visible map bounds (only returns the id and location)
+async function findEstatesNear(bounds, filtersInput, user) {
     console.log('findEstatesNear')
-    const filters = await mapFiltersToMongo(filtersInput)
-    return applyPipeline([
-        onlyNear([longitude, latitude], distanceMeters),
+    if(bounds && !validBounds(bounds)) {
+        throw new Error('Map bounds must contain west, south, east and north coordinates')
+    }
+
+    const filters = await mapFiltersToMongo(filtersInput, user)
+    const points = await applyPipeline([
+        bounds ? onlyWithinBounds(bounds) : null,
         filter(filters),
-        onlyKeepFields(['immowebCode', 'geolocation'])
+        onlyKeepFields([
+            'immowebCode',
+            'geolocation',
+            'rawMetadata.property.type',
+            'lastModificationDate',
+            'disappearanceDate',
+            'rawMetadata.price.mainValue',
+            'rawMetadata.property.netHabitableSurface',
+            'rawMetadata.property.gardenSurface',
+            'rawMetadata.property.hasGarden',
+            'rawMetadata.flags.isSoldOrRented',
+            'rawMetadata.flags.isUnderOption'
+        ]),
+        ...pickMostRecentByImmowebCode(),
+        onlyKeepFields([
+            'immowebCode',
+            'geolocation',
+            'rawMetadata.property.type',
+            'lastModificationDate',
+            'disappearanceDate',
+            'rawMetadata.price.mainValue',
+            'rawMetadata.property.netHabitableSurface',
+            'rawMetadata.property.gardenSurface',
+            'rawMetadata.property.hasGarden',
+            'rawMetadata.flags.isSoldOrRented',
+            'rawMetadata.flags.isUnderOption'
+        ]),
+        trim(MAX_MAP_POINTS + 1)
     ])
+
+    return {
+        points: points.slice(0, MAX_MAP_POINTS),
+        truncated: points.length > MAX_MAP_POINTS,
+        limit: MAX_MAP_POINTS
+    }
 }
 
 // Finds all estate ads that match specific criteria (only the most recent version for each immowebCode)
@@ -73,26 +156,28 @@ async function findEstates(filtersInput, orderByInput, fields/*Input*/, offset, 
     const orderBy = mapSorterToMongo(orderByInput)
     const orderByField = Object.entries(orderBy)[0][0]
 
-    let aggregation = (await applyPipeline([
-        filter(filters), // D A C H G B a E
-        onlyKeepFields(['immowebCode', orderByField, 'lastModificationDate']),
-        ...pickMostRecentByImmowebCode(), // D A C H G B E,
-        onlyKeepFields(['immowebCode', orderByField]),
-        sort(orderBy), // A B C D E G H     {_id: abcf7F4Cba, immowebCode: 3892137, lastModificationDate: 2021_32_1209°}
-        {$facet: {
-            totalCount: [{$count: 'count'}],
-            ids: [
-                onlyKeepField('_id'),   // {_id: abdkfzefh}
-                skip(offset) || {$skip: 0},
-                trim(limit)
-            ]
-        }}
-    ]))
-    let totalCount = aggregation[0].totalCount[0] ? aggregation[0].totalCount[0].count : 0
-    let page = await applyPipeline([
-        filter([{_id: {$in: aggregation[0].ids.map(e => e._id)}}]),
-        sort(orderBy)
+    const cacheKey = searchCacheKey(filtersInput, orderByInput, user)
+    let cachedSearch = searchIdCache.get(cacheKey)
+    if(!cachedSearch || cachedSearch.expiresAt <= Date.now()) {
+        const ids = (await applyPipeline([
+            filter(filters),
+            onlyKeepFields(['immowebCode', orderByField, 'lastModificationDate']),
+            ...pickMostRecentByImmowebCode(),
+            onlyKeepFields(['immowebCode', orderByField]),
+            sort(orderBy),
+            onlyKeepField('_id')
+        ])).map(result => result._id)
+        cacheSearchIds(cacheKey, ids)
+        cachedSearch = searchIdCache.get(cacheKey)
+    }
+
+    const pageIds = cachedSearch.ids.slice(offset || 0, (offset || 0) + limit)
+    const pageDocuments = await applyPipeline([
+        filter([{_id: {$in: pageIds}}])
     ])
+    const documentsById = new Map(pageDocuments.map(document => [document._id.toString(), document]))
+    const page = pageIds.map(id => documentsById.get(id.toString())).filter(Boolean)
+    const totalCount = cachedSearch.ids.length
     
     let results = {totalCount, page}
 
@@ -142,6 +227,11 @@ async function fetchPriceHistory(estate) {
 async function mapFiltersToMongo(f, user) {
 	let r = []
 
+    if(f.bounds) {
+        if(!validBounds(f.bounds)) throw new Error('Map bounds must contain west, south, east and north coordinates')
+        r.push(onlyWithinBounds(f.bounds).$match)
+    }
+
 	if(f.immowebCode) {
 		r.push({immowebCode: f.immowebCode})
 	}
@@ -183,6 +273,24 @@ async function mapFiltersToMongo(f, user) {
 		r.push({'$or': [{'rawMetadata.flags.isSoldOrRented': false}, {'rawMetadata.flags.isSoldOrRented': null}]})
 		r.push({'disappearanceDate': null})
 	}
+
+    if(f.availabilityDateRange?.length === 2) {
+        const [rangeStart, rangeEnd] = f.availabilityDateRange.map(value => new Date(value))
+        if(Number.isNaN(rangeStart.getTime()) || Number.isNaN(rangeEnd.getTime()) || rangeStart > rangeEnd) {
+            throw new Error('Availability date range must contain a valid start and end date')
+        }
+        r.push({creationDate: {$lte: rangeEnd}})
+        r.push({$or: [
+            {disappearanceDate: {$gte: rangeStart}},
+            {
+                disappearanceDate: null,
+                $or: [
+                    {'rawMetadata.flags.isSoldOrRented': false},
+                    {'rawMetadata.flags.isSoldOrRented': null}
+                ]
+            }
+        ]})
+    }
 
 	if(f.freeText) {
 		r.push({$or: [

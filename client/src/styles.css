@@ -1,6 +1,15 @@
-/* Additional content at the right of tabs should be aligned left */
+/* Keep result controls beside the tabs, with the result count at the far right. */
 .resultTab.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap {
     flex: none;
+}
+
+.resultTab.ant-tabs > .ant-tabs-nav > .ant-tabs-extra-content {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.resultTab.ant-tabs > .ant-tabs-nav .ant-tabs-nav-operations {
+    display: none;
 }
 
 .mainLayout.ant-layout {
@@ -30,6 +39,430 @@
     padding: 18px; /* instead of 16 */
 }
 
+.EstateCard > .ant-card {
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.34);
+    transition: box-shadow 0.2s ease;
+}
+
+.EstateCard > .ant-card.ant-card-hoverable:hover {
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.42);
+}
+
+.ant-image-preview-root .ant-image-preview-mask {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+.estate-grid .ant-list-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 300px));
+    grid-auto-rows: 1fr;
+    gap: 16px;
+}
+
+.estate-grid.ant-list .ant-list-item {
+    align-items: stretch;
+    padding: 0;
+}
+
+.estate-grid .EstateCard,
+.estate-grid .EstateCard > .ant-card {
+    width: 100%;
+    height: 100%;
+}
+
+.estate-grid .EstateCard > .ant-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.estate-grid .EstateCard > .ant-card > .ant-card-body {
+    flex: 1;
+}
+
+.estate-grid .ant-card-cover .ant-image {
+    width: 100%;
+}
+
+.marker-size-icon {
+    font-size: 22px;
+    line-height: 1;
+}
+
+.marker-color-icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.result-toolbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 32px;
+    padding-right: 100px;
+}
+
+.result-count {
+    position: absolute;
+    right: 0;
+    font-style: italic;
+    white-space: nowrap;
+}
+
+.marker-mode-select.is-uniform .ant-select-selection-item {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.range-filter-stack {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    width: 100%;
+    min-width: 330px;
+    height: 62px;
+}
+
+.search-filter-bar {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+}
+
+.search-filter-bar > .ant-space-item:first-child {
+    flex: 1 1 auto;
+    min-width: 330px;
+}
+
+.search-filter-bar > .ant-space-item:not(:first-child) {
+    flex: 0 0 auto;
+}
+
+.filter-clear-group {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.filter-clear-group > .ant-divider-vertical {
+    height: 36px;
+    margin-right: 16px;
+}
+
+.map-area-location-filter {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 320px;
+    height: 32px;
+    padding: 0 7px;
+    border: 1px solid #d9d9d9;
+    background: #fff;
+}
+
+.map-area-location-filter em {
+    flex: 1;
+    color: rgba(0, 0, 0, 0.55);
+    white-space: nowrap;
+}
+
+.compact-range-filter {
+    display: grid;
+    grid-template-columns: 16px 58px minmax(160px, 1fr) 74px;
+    align-items: center;
+    column-gap: 7px;
+    height: 28px;
+}
+
+.compact-date-range-filter {
+    grid-template-columns: 16px 64px minmax(145px, 1fr) 82px;
+}
+
+.compact-range-filter .ant-slider {
+    width: calc(100% - 12px);
+    margin: 4px 6px;
+}
+
+.compact-range-filter .ant-slider-mark-text {
+    display: none;
+}
+
+.range-edge-label {
+    overflow: hidden;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.range-edge-label-left { text-align: right; }
+.range-edge-label-right {
+    margin-left: 16px;
+    overflow: visible;
+    text-align: left;
+}
+
+.date-range-loading {
+    grid-column: 2 / -1;
+    color: rgba(0, 0, 0, 0.35);
+    font-size: 11px;
+}
+
+.ant-btn-group.property-type-filter {
+    display: inline-flex;
+    width: 150px;
+    height: 22px;
+    overflow: hidden;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+.ant-btn-group.property-type-filter .ant-btn {
+    flex: 1;
+    min-width: 0;
+    height: 22px;
+    padding: 0;
+    border-radius: 0;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.ant-btn-group.property-type-filter .ant-btn:first-child {
+    border-radius: 100px 0 0 100px !important;
+}
+
+.ant-btn-group.property-type-filter .ant-btn:last-child {
+    border-radius: 0 100px 100px 0 !important;
+}
+
+.ant-btn-group.property-type-filter .ant-btn:not(.ant-btn-primary):focus {
+    color: rgba(0, 0, 0, 0.85);
+    border-color: #d9d9d9;
+    box-shadow: none;
+}
+
+.ant-btn-group.property-type-filter .ant-btn-primary:focus:not(:hover) {
+    background: #1890ff;
+    border-color: #1890ff;
+    box-shadow: none;
+}
+
+.property-type-label {
+    margin-left: 3px;
+    font-size: 11px;
+}
+
+.property-type-filter .ant-btn[aria-pressed="false"] .property-type-label {
+    text-decoration: line-through;
+}
+
+.table-column-title {
+    display: inline-block;
+    width: 100%;
+    cursor: context-menu;
+}
+
+.table-column-selector {
+    width: 210px;
+}
+
+.table-column-selector > strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.table-column-selector .ant-checkbox-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.table-column-selector .ant-checkbox-wrapper {
+    margin: 0;
+    padding: 3px 0;
+}
+
+.estate-property-div-icon {
+    background: transparent;
+    border: none;
+}
+
+.estate-property-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 2px solid;
+    border-radius: 50%;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.map-frame {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 228px);
+    min-height: 480px;
+}
+
+.map-frame > .leaflet-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.map-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 800;
+    pointer-events: none;
+    background:
+        linear-gradient(to right, #f0f2f5, transparent 10px) left / 10px 100% no-repeat,
+        linear-gradient(to left, #f0f2f5, transparent 10px) right / 10px 100% no-repeat,
+        linear-gradient(to bottom, #f0f2f5, transparent 10px) top / 100% 10px no-repeat,
+        linear-gradient(to top, #f0f2f5, transparent 10px) bottom / 100% 10px no-repeat;
+}
+
+.selected-estate-card {
+    position: absolute;
+    top: 84px;
+    right: 10px;
+    z-index: 1000;
+    width: 300px;
+    max-width: calc(100% - 20px);
+}
+
+.map-legend {
+    position: absolute;
+    bottom: 24px;
+    left: 10px;
+    z-index: 1000;
+    min-width: 190px;
+    padding: 8px 10px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+}
+
+.map-legend > span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.map-legend i {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.map-legend-scale {
+    height: 8px;
+    margin-top: 4px;
+    border-radius: 4px;
+}
+
+.map-legend-price .map-legend-scale,
+.map-legend-pricePerSquareMeter .map-legend-scale {
+    background: linear-gradient(to right, hsl(120, 75%, 42%), hsl(60, 75%, 42%), hsl(0, 75%, 42%));
+}
+
+.map-legend-recency .map-legend-scale {
+    background: linear-gradient(to right, rgb(150, 150, 150), rgb(22, 119, 255));
+}
+
+.map-legend-gardenArea .map-legend-scale {
+    background: linear-gradient(to right, rgb(160, 230, 170), rgb(20, 105, 45));
+}
+
+.map-legend-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+}
+
+.map-legend-percentiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 6px;
+}
+
+.map-legend-percentiles span:nth-child(2) {
+    text-align: center;
+}
+
+.map-legend-percentiles span:last-child {
+    text-align: right;
+}
+
+.map-status {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    z-index: 1001;
+    transform: translateX(-50%);
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.map-frame > .map-show-area-button.ant-btn {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    z-index: 1002;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.map-status-below-area-button {
+    top: 52px;
+}
+
+.map-status-error {
+    color: #a8071a;
+}
+
+.leaflet-tooltip.estate-cluster-count {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: white;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+.leaflet-tooltip.estate-cluster-count::before {
+    display: none;
+}
+
+.leaflet-tooltip.estate-marker-tooltip {
+    padding: 6px 8px;
+    line-height: 1.45;
+    white-space: normal;
+}
+
+.estate-marker-tooltip > div {
+    white-space: nowrap;
+}
+
 .routine-admin {
     padding: 24px;
     min-width: 0;
@@ -47,6 +480,10 @@
 
 .routine-section {
     margin-top: 16px;
+}
+
+.routine-monitor-empty {
+    margin-left: 20px;
 }
 
 .routine-calendar-year + .routine-calendar-year {
@@ -79,6 +516,17 @@
 .run-day.level-2 { background: #7bc96f; }
 .run-day.level-3 { background: #239a3b; }
 .run-day.level-4 { background: #196127; }
+
+.routine-day-tooltip {
+    display: flex;
+    flex-direction: column;
+    min-width: 170px;
+}
+
+.routine-day-tooltip strong {
+    margin-bottom: 4px;
+    white-space: nowrap;
+}
 
 @media (max-width: 800px) {
     .routine-summary-grid { grid-template-columns: 1fr; }

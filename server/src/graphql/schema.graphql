@@ -4,6 +4,7 @@ type Query {
 
     estates(
         immowebCode:        Int
+        bounds:             [Float!]
         priceRange:         [Int]
         zipCodes:           [Int]
         propertyTypes:      [PropertyType!]
@@ -13,6 +14,7 @@ type Query {
         minBedroomCount:    Int
         freeText:           String
         onlyStillAvailable: Boolean
+        availabilityDateRange: [Date!]
         onlyLiked:          Boolean
         onlyVisited:        Boolean
 
@@ -22,8 +24,7 @@ type Query {
     ): EstateList
 
     estatesNear(
-        location:       [Float]
-        distanceMeters: Int
+        bounds: [Float!]
 
         immowebCode:        Int
         priceRange:         [Int]
@@ -35,9 +36,10 @@ type Query {
         minBedroomCount:    Int
         freeText:           String
         onlyStillAvailable: Boolean
+        availabilityDateRange: [Date!]
         onlyLiked:          Boolean
         onlyVisited:        Boolean
-    ): [Estate]
+    ): EstateMapResult!
 
     estateByImmowebCode(
         immowebCode: Int
@@ -53,8 +55,8 @@ type Query {
 
     routineStatus: RoutineStatus
     postalCodes: [PostalCode!]!
-    routineRuns(limit: Int, postalCode: Int, propertyType: PropertyType): [RoutineRun]
-    routineHistory(postalCode: Int!, propertyType: PropertyType!): [RoutineHistoryDay!]!
+    routineRuns(limit: Int, postalCodes: [Int!], propertyType: PropertyType): [RoutineRun]
+    routineHistory(postalCodes: [Int!]!, propertyType: PropertyType!): [RoutineHistoryDay!]!
     
 }
 
@@ -72,6 +74,12 @@ enum SortOrder {
 type EstateList {
     page:       [Estate]
     totalCount: Int
+}
+
+type EstateMapResult {
+    points:    [Estate!]!
+    truncated: Boolean!
+    limit:     Int!
 }
 
 type Estate {
@@ -180,11 +188,17 @@ type RoutineStatus {
     activeRun:         RoutineRun
     lastRun:           RoutineRun
     lastSuccessfulRun: RoutineRun
+    firstRunAt:        Date
 }
 
 type RoutineHistoryDay {
-    date: String!
-    runId: ID!
+    date:          String!
+    runId:         ID!
+    postalCodes:   [Int!]!
+    propertyType:  PropertyType!
+    added:         Int
+    updated:       Int
+    disappeared:   Int
 }
 
 input RoutineScheduleInput {

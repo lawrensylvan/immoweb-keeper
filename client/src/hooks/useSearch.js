@@ -1,14 +1,16 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useLazyQuery, gql, NetworkStatus } from '@apollo/client'
 import { isNetworkRequestInFlight } from '@apollo/client/core/networkStatus'
 import moment from 'moment'
 import _ from 'lodash'
+import {formatShortDate} from '../utils/formatDate'
 
 const PAGE_SIZE = 8
 
 const ESTATES_QUERY = gql`
     query estates(
         $immowebCode: Int
+        $bounds: [Float!]
         $priceRange: [Int]
         $zipCodes: [Int]
         $propertyTypes: [PropertyType!]
@@ -18,6 +20,7 @@ const ESTATES_QUERY = gql`
         $minBedroomCount: Int
         $freeText: String
         $onlyStillAvailable: Boolean
+        $availabilityDateRange: [Date!]
         $onlyLiked: Boolean       
         $onlyVisited: Boolean
         $orderBy: OrderByInput
@@ -26,6 +29,7 @@ const ESTATES_QUERY = gql`
     ) {
 
         estates(immowebCode: $immowebCode
+                bounds: $bounds
                 priceRange: $priceRange,
                 zipCodes: $zipCodes
                 propertyTypes: $propertyTypes
@@ -35,6 +39,7 @@ const ESTATES_QUERY = gql`
                 minBedroomCount: $minBedroomCount
                 freeText: $freeText
                 onlyStillAvailable: $onlyStillAvailable
+                availabilityDateRange: $availabilityDateRange
                 onlyLiked: $onlyLiked
                 onlyVisited: $onlyVisited
                 orderBy: $orderBy
@@ -49,7 +54,9 @@ const ESTATES_QUERY = gql`
                 propertyType
                 locality
                 images
+                creationDate
                 modificationDate
+                disappearanceDate
                 hasGarden
                 gardenArea
                 agencyLogo
@@ -86,13 +93,18 @@ const estateDecorator = estate => ({
         .replace('boulevard ', 'bd. ').replace('Boulevard ', 'bd. ')
         + ' ' + (estate.streetNumber ?? '') : '',
     displayZipCode: estate.zipCode + ' ' + estate.locality,
-    displayModificationDate: moment(estate.modificationDate).format('DD.MM.YY') + ' (' + moment(estate.modificationDate).fromNow() + ')'
+    displayCreationDate: formatShortDate(estate.creationDate),
+    displayModificationDate: formatShortDate(estate.modificationDate) + ' (' + moment(estate.modificationDate).fromNow() + ')',
+    displayDisappearanceDate: estate.disappearanceDate
+        ? formatShortDate(estate.disappearanceDate)
+        : null
 })
 
-export const useSearch = (initialFilters = {}, initialSort = {field: 'modificationDate', order: 'descend'}) => {
+export const useSearch = (initialFilters = {}, initialSort = {field: 'modificationDate', order: 'descend'}, queryOptions = {}) => {
 
     const [searchFilters, setSearchFilters] = useState(initialFilters)
     const [resultSorter, setResultSorter] = useState(initialSort)
+    const [paginationError, setPaginationError] = useState(null)
 
     const variables = useMemo(() => {
         const f = searchFilters
@@ -108,6 +120,7 @@ export const useSearch = (initialFilters = {}, initialSort = {field: 'modificati
             minLivingArea:      f.minLivingArea > 0 ? f.minLivingArea : undefined,
             minBedroomCount:    f.minBedroomCount > 0 ? f.minBedroomCount : undefined,
             onlyStillAvailable: f.onlyStillAvailable || undefined,
+            availabilityDateRange: f.availabilityDateRange?.length === 2 ? f.availabilityDateRange : undefined,
             immowebCode:        f.immowebCode || undefined,
             orderBy:            resultSorter,
             limit:              PAGE_SIZE,
@@ -116,35 +129,49 @@ export const useSearch = (initialFilters = {}, initialSort = {field: 'modificati
     }, [resultSorter, searchFilters])
 
     // Load estates with active filters
-    const [fetch, { data, networkStatus, error, fetchMore }] = useLazyQuery(ESTATES_QUERY, {variables, notifyOnNetworkStatusChange: true})
+    const [fetch, { data, networkStatus, error, fetchMore }] = useLazyQuery(ESTATES_QUERY, {
+        ...queryOptions,
+        variables,
+        notifyOnNetworkStatusChange: true
+    })
+
+    const setFilter = useCallback((name, value) => {
+        setSearchFilters(current => _.isEqual(current[name], value)
+            ? current
+            : {...current, [name]: value})
+    }, [])
+
+    const clearFilters = useCallback(() => {
+        setSearchFilters({propertyTypes: ['APARTMENT', 'HOUSE']})
+    }, [])
 
     // Reload results whenever state changes
     useEffect(() => {
+        setPaginationError(null)
         if(variables) fetch(variables)
-    }, [variables])
+    }, [fetch, variables])
 
     return {
 
         searchResults: data?.estates?.page?.map(estateDecorator),
         resultCount: data?.estates?.totalCount,
         loading: isNetworkRequestInFlight(networkStatus) && networkStatus !== NetworkStatus.fetchMore,
-        error,
+        loadingMore: networkStatus === NetworkStatus.fetchMore,
+        error: error || paginationError,
 
         resultSorter,
         setResultSorter,
 
         searchFilters,
-        setFilter: (name, value) => {
-            if(!_.isEqual(searchFilters[name], value)) {
-                setSearchFilters(current => ({...current, [name]: value}))
-            }
-        },
-        clearFilters: () => {
-            setSearchFilters({propertyTypes: ['HOUSE']})
-        },
+        setFilter,
+        clearFilters,
 
-        fetchNext: () => {
-            fetchMore({variables: {limit: PAGE_SIZE, offset: data?.estates?.page?.length || 0}})
+        fetchNext: async () => {
+            try {
+                await fetchMore({variables: {limit: PAGE_SIZE, offset: data?.estates?.page?.length || 0}})
+            } catch(error) {
+                setPaginationError(error)
+            }
         }
 
     }
